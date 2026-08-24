@@ -1,48 +1,53 @@
 // Mobile nav toggle
-const navToggle = document.getElementById('navToggle');
-const mainNav = document.getElementById('mainNav');
+const navToggle = document.getElementById('nav-toggle');
+const mainNav = document.getElementById('main-nav');
 
-navToggle.addEventListener('click', () => {
-  const isOpen = mainNav.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-});
-
-mainNav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mainNav.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
+if (navToggle && mainNav) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
-});
 
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Formspree submission (AJAX so user stays on page)
-const form = document.getElementById('enquiryForm');
-const note = document.getElementById('formNote');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  note.textContent = 'भेजा जा रहा है...';
-  note.className = 'form-note';
-
-  try {
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+  // Close menu after clicking a link (mobile)
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
+  });
+}
 
-    if (response.ok) {
-      note.textContent = 'धन्यवाद! आपका फॉर्म मिल गया है, हमारी टीम जल्द संपर्क करेगी।';
-      note.className = 'form-note success';
-      form.reset();
-    } else {
-      note.textContent = 'कुछ गड़बड़ हुई। कृपया फोन पर संपर्क करें: 9766284669';
-      note.className = 'form-note error';
+// Admission form submit feedback (Formspree AJAX)
+const admissionForm = document.getElementById('admission-enquiry-form');
+if (admissionForm) {
+  admissionForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const submitBtn = admissionForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'भेजा जा रहा है...';
+    submitBtn.disabled = true;
+
+    try {
+      const formData = new FormData(admissionForm);
+      const response = await fetch(admissionForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        submitBtn.textContent = 'Enquiry भेज दी गई ✔';
+        admissionForm.reset();
+      } else {
+        submitBtn.textContent = 'भेजने में समस्या हुई, दोबारा कोशिश करें';
+      }
+    } catch (err) {
+      submitBtn.textContent = 'भेजने में समस्या हुई, दोबारा कोशिश करें';
+    } finally {
+      setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, 3500);
     }
-  } catch (err) {
-    note.textContent = 'कुछ गड़बड़ हुई। कृपया फोन पर संपर्क करें: 9766284669';
-    note.className = 'form-note error';
-  }
-});
+  });
+}
