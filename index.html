@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EkVeera Training Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .top-bar {
+            background-color: #003366;
+            color: #ffffff;
+            padding: 8px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .top-bar-right select {
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 12px;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #003366;
+        }
+
+        .btn-admission {
+            background-color: #c59b27;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-admission:hover {
+            background-color: #a47e1e;
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1534536281715-e28d76757079?auto=format&fit=crop&w=1500&q=80') center center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 20px;
+            max-width: 900px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-content h1 span {
+            font-style: italic;
+            color: #ffd700;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background-color: #003366;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #003366;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #ffffff;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        footer {
+            background-color: #1a1e21;
+            color: #ffffff;
+            padding: 40px 20px 20px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            height: 80px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .footer-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: #888;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            Welcome to EkVeera Training Center
+        </div>
+        <div class="top-bar-right">
+            Language: 
+            <select>
+                <option>EN</option>
+                <option>HI</option>
+            </select>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <img src="EkVeera_Logo_Transparent.png" alt="EkVeera Logo" class="logo-img">
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#prices">Prices</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#admission" class="btn-admission">Admission Form</a></li>
+            </ul>
+        </nav>
+
+        <div class="logo-container">
+            <img src="EkVeera_Logo_Transparent.png" alt="EkVeera Logo" class="logo-img">
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Become a <span>“Call Center Professional”</span> Right From Home</h1>
+            <p>Learn the most professional online call center skills and start working right from home.</p>
+            <div class="hero-buttons">
+                <a href="#apply" class="btn-primary">Get Started Now</a>
+                <a href="#learn-more" class="btn-secondary">Right From Home</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <img src="EkVeera_Logo_Transparent.png" alt="EkVeera Logo" class="footer-logo">
+            <div class="footer-title">EkVeera Training Center</div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 EkVeera Placement & Consulting Services. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
