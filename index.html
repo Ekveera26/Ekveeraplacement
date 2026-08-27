@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EkVeera Training Center | Online Call Center Training</title>
+<!-- SEO & Open Graph Tags -->
+<meta name="description" content="घर बैठे 15 दिनों में सीखें Call Center & Customer Support skills. एडमिशन फ़ीस सिर्फ ₹200.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="EkVeera Training Center — Online Call Center Training">
+<meta property="og:description" content="घर बैठे 15 दिनों में सीखें Call Center & Customer Support skills. ऑनलाइन क्लासेस Jitsi Meet पर।">
+<meta property="og:image" content="watermarked_img_6182261045945190690.png">
+
 <!-- Official Logo Favicon -->
 <link rel="icon" type="image/png" href="EkVeera_Logo_Transparent.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,19 +53,6 @@
     color:var(--teal);
   }
 
-  /* Ringwave signature element */
-  .ringwave{display:flex;align-items:center;gap:4px;height:22px;}
-  .ringwave span{
-    width:4px;border-radius:2px;background:var(--amber);
-    animation:pulse 1.4s ease-in-out infinite;
-  }
-  .ringwave span:nth-child(1){height:8px;animation-delay:0s;}
-  .ringwave span:nth-child(2){height:16px;animation-delay:.15s;}
-  .ringwave span:nth-child(3){height:22px;animation-delay:.3s;}
-  .ringwave span:nth-child(4){height:14px;animation-delay:.45s;}
-  .ringwave span:nth-child(5){height:6px;animation-delay:.6s;}
-  @keyframes pulse{0%,100%{transform:scaleY(0.5);opacity:.6;}50%{transform:scaleY(1);opacity:1;}}
-
   /* Header */
   header{
     position:sticky;top:0;z-index:50;
@@ -75,11 +69,50 @@
   .navlinks a:hover{color:var(--teal);}
   @media (max-width:850px){.navlinks{display:none;}}
 
-  /* Hero */
+  /* Top Banner Image */
+  .top-hero-banner-container {
+    width: 100%;
+    max-height: 480px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 4px solid var(--amber);
+  }
+  .top-hero-banner-img {
+    width: 100%;
+    height: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .top-banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(13,23,48,0.85) 0%, rgba(13,23,48,0) 100%);
+    padding: 30px 24px 20px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .top-banner-text h2 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .top-banner-text p {
+    color: #E8A33D;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /* Hero Section */
   .hero{
     background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
     color:#fff;
-    padding:88px 0 96px;
+    padding:60px 0 80px;
     position:relative;
     overflow:hidden;
   }
@@ -89,46 +122,6 @@
   }
   .hero .container{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;position:relative;z-index:1;}
   @media (max-width:900px){.hero .container{grid-template-columns:1fr;}.hero-candidate-card{order:-1;max-width:340px;margin:0 auto 12px;}}
-  
-  /* Call Center Agent Photo Container */
-  .hero-candidate-card{
-    position:relative;
-    border-radius:24px;
-    overflow:hidden;
-    box-shadow:0 20px 40px rgba(0,0,0,0.3);
-    border:3px solid rgba(232,163,61,0.4);
-    background:var(--navy);
-  }
-  .hero-candidate-img{
-    width:100%;
-    height:auto;
-    object-fit:cover;
-    display:block;
-  }
-  .hero-candidate-badge{
-    position:absolute;
-    bottom:16px;
-    left:16px;
-    right:16px;
-    background:rgba(21, 34, 65, 0.88);
-    backdrop-filter:blur(8px);
-    border:1px solid rgba(255,255,255,0.15);
-    padding:12px 16px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .hero-candidate-badge span{
-    font-size:13px;
-    color:#C9CFE0;
-  }
-  .hero-candidate-badge strong{
-    display:block;
-    color:#fff;
-    font-size:14px;
-    font-family:var(--display);
-  }
 
   .hero-tag{
     display:inline-flex;align-items:center;gap:10px;
@@ -159,7 +152,7 @@
   .section-head p{color:var(--ink-soft);margin-top:12px;font-size:16px;}
 
   /* Online banner */
-  .online-banner{background:var(--teal);color:#fff;padding:16px 0;}
+  .online-banner{background:var(--teal);color:#fff;padding:14px 0;}
   .online-banner .container{display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;flex-wrap:wrap;font-family:var(--display);font-weight:600;font-size:15px;}
 
   /* Cards & Grids */
@@ -213,30 +206,11 @@
   .office-card .tag{font-size:12px;font-weight:700;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;}
   .office-card h3{margin:8px 0 6px;font-size:19px;}
   .office-card p{color:var(--ink-soft);font-size:14.5px;}
-  .map-wrap{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:28px;}
-  .map-wrap iframe{width:100%;height:340px;border:0;display:block;}
 
   /* Footer */
   footer{background:var(--navy-deep);color:#B9C0D6;padding:52px 0 28px;}
   footer .brand{color:#fff;}
-  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.1);}
-  .foot-links a{display:block;margin-bottom:8px;color:#B9C0D6;font-size:14.5px;transition:color 0.2s ease;}
-  .foot-links a:hover{color:var(--amber);}
   .copyright{padding-top:20px;font-size:13px;color:#7C86A3;text-align:center;}
-
-  /* Animations & Utils */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in-view{opacity:1;transform:translateY(0);}
-
-  /* FAQ */
-  .faq-item{border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);margin-bottom:12px;overflow:hidden;}
-  .faq-q{width:100%;text-align:left;padding:18px 22px;background:none;border:none;cursor:pointer;
-    display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:600;font-size:16px;color:var(--navy);}
-  .faq-q .plus{font-size:20px;color:var(--teal);transition:transform .25s ease;}
-  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 22px;}
-  .faq-item.open .faq-a{max-height:220px;padding:0 22px 18px;}
-  .faq-a p{color:var(--ink-soft);font-size:14.5px;}
 
   .countdown-banner{background:var(--amber);color:var(--navy-deep);padding:16px 0;}
   .countdown-banner .container{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--display);font-weight:600;font-size:15px;}
@@ -250,21 +224,6 @@
   .about-logo-container{display:flex;justify-content:center;align-items:center;}
   .about-logo-img{width:220px;height:220px;object-fit:contain;border-radius:50%;border:4px solid var(--amber);padding:10px;background:#fff;box-shadow:var(--shadow);}
   .about-wrap p{color:var(--ink-soft);font-size:15.5px;margin-top:10px;}
-
-  .social-row{display:flex;gap:12px;margin-top:16px;}
-  .social-row a{
-    width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.1);
-    display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;transition:background 0.2s ease;
-  }
-  .social-row a:hover{background:var(--teal);}
-
-  .float-wa{
-    position:fixed;bottom:22px;right:22px;z-index:60;
-    background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,0.25);
-    transition:transform 0.2s ease;
-  }
-  .float-wa:hover{transform:scale(1.08);}
 </style>
 </head>
 <body>
@@ -280,10 +239,8 @@
       <a href="#course">कोर्स</a>
       <a href="#format">Online Format</a>
       <a href="#fee">फीस</a>
+      <a href="#reviews">समीक्षाएं</a>
       <a href="#offices">Offices</a>
-      <a href="#certificate">Certificate</a>
-      <a href="#comments">Comment</a>
-      <a href="#faq">FAQ</a>
       <a href="#contact">संपर्क</a>
     </nav>
     <div style="display:flex;align-items:center;gap:14px;">
@@ -292,6 +249,18 @@
     </div>
   </div>
 </header>
+
+<!-- Top Full-Width Hero Banner -->
+<div class="top-hero-banner-container">
+  <img src="watermarked_img_6182261045945190690.png" alt="Call Center Candidates Working Together" class="top-hero-banner-img">
+  <div class="top-banner-overlay">
+    <div class="top-banner-text">
+      <h2>EkVeera Practical Call Center Training</h2>
+      <p>Live Team Environment & Practical Support Sessions</p>
+    </div>
+    <a href="https://forms.gle/YmZgGTfRQcb5tvcG7" target="_blank" class="btn btn-primary">Join Live Batch</a>
+  </div>
+</div>
 
 <div class="online-banner">
   <div class="container">
@@ -303,7 +272,6 @@
   <div class="container">
     <div class="hero-copy">
       <div class="hero-tag">
-        <div class="ringwave"><span></span><span></span><span></span><span></span><span></span></div>
         Call Center & Customer Service Training
       </div>
       <h1 data-hi="अपने घर से ही बनें<br><em>Call Center Professional</em>" data-en="Become a <em>Call Center Professional</em><br>Right From Home">अपने घर से ही बनें<br><em>Call Center Professional</em></h1>
@@ -317,18 +285,6 @@
         <a class="btn btn-primary" href="https://forms.gle/YmZgGTfRQcb5tvcG7" target="_blank">अभी Admission लें →</a>
         <a class="btn btn-whatsapp" href="https://wa.me/919766284669" target="_blank">WhatsApp पर बात करें</a>
         <a class="btn btn-ghost" href="#course">कोर्स देखें</a>
-      </div>
-    </div>
-
-    <!-- Call Center Candidate Photo Card -->
-    <div class="hero-candidate-card">
-      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Call Center Agent Candidate" class="hero-candidate-img">
-      <div class="hero-candidate-badge">
-        <div style="width:10px;height:10px;border-radius:50%;background:#25D366;box-shadow:0 0 8px #25D366;"></div>
-        <div>
-          <strong>Live Practical Training</strong>
-          <span>Practical Customer Support Calling Skills</span>
-        </div>
       </div>
     </div>
   </div>
@@ -348,12 +304,12 @@
 
 <section id="format">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head">
       <span class="eyebrow">Online Training Format</span>
       <h2 data-hi="पढ़ाई कैसे होगी" data-en="How Classes Work">पढ़ाई कैसे होगी</h2>
       <p data-hi="Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप और इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।" data-en="Training is fully online — you just need a smartphone/laptop and internet connection, we handle the rest.">Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप और इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।</p>
     </div>
-    <div class="format-strip reveal">
+    <div class="format-strip">
       <div><strong>📹 Jitsi Meet</strong><span>Live Class Platform</span></div>
       <div><strong>⏰ 1 घंटा/दिन</strong><span>रोज़ाना क्लास</span></div>
       <div><strong>📅 15 दिन</strong><span>कुल अवधि</span></div>
@@ -364,24 +320,39 @@
 
 <section id="course">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Curriculum</span>
+    <div class="section-head">
+      <span class="eyebrow">Curriculum Roadmap</span>
       <h2 data-hi="क्या-क्या सिखाया जाएगा" data-en="What You Will Learn">क्या-क्या सिखाया जाएगा</h2>
-      <p>Beginner से लेकर Interview-ready तक, पूरा practical training module।</p>
+      <p>Beginner से लेकर Interview-ready तक, 15 दिनों का पूरा practical training module।</p>
     </div>
-    <div class="timeline reveal">
-      <div class="t-item"><h4>📞 Call Center Basics</h4><p>Call Center का परिचय, Inbound/Outbound Calling, Professional Greeting</p></div>
-      <div class="t-item"><h4>🗣️ Communication Skills</h4><p>Active Listening, Voice Modulation, Probing Skills</p></div>
-      <div class="t-item"><h4>🤝 Customer Handling</h4><p>Empathy, Difficult Customer Handling, Hold/Call Transfer Procedure, Dead Air Management</p></div>
-      <div class="t-item"><h4>📊 Performance & KPI</h4><p>Call Wrap-up/Disposition, AHT/FCR KPI समझना</p></div>
-      <div class="t-item"><h4>🎯 Practice & Placement Prep</h4><p>Mock Call Practice, Interview Preparation, Personality Development</p></div>
+    <div class="timeline">
+      <div class="t-item">
+        <h4>🗓️ Days 1–3: Call Center Basics & BPO Overview</h4>
+        <p>Call Center का परिचय, Inbound/Outbound Calling, Process Workflow, Professional Greeting और BPO Etiquettes।</p>
+      </div>
+      <div class="t-item">
+        <h4>🗓️ Days 4–7: Communication & Soft Skills</h4>
+        <p>Active Listening skills, Voice Modulation, Pronunciation, Probing Techniques, और Pitch Perfecting.</p>
+      </div>
+      <div class="t-item">
+        <h4>🗓️ Days 8–11: Customer Handling & Scenario Practical</h4>
+        <p>Customer Empathy, Handling Difficult Customers, Call Hold/Transfer Protocols, Dead Air & Objection Handling.</p>
+      </div>
+      <div class="t-item">
+        <h4>🗓️ Days 12–13: Performance KPIs & CRM Skills</h4>
+        <p>Call Disposition, Wrap-up Time, Average Handling Time (AHT), First Call Resolution (FCR) समझना और CRM Tools।</p>
+      </div>
+      <div class="t-item">
+        <h4>🗓️ Days 14–15: Live Mock Calls & Interview Preparation</h4>
+        <p>Live Scenario Practice, Live Call Audits, Interview Tips, HR Question Prep, Personality Development & Guidance。</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="about" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
   <div class="container">
-    <div class="about-wrap reveal">
+    <div class="about-wrap">
       <div class="about-logo-container">
         <img src="EkVeera_Logo_Transparent.png" alt="EkVeera Logo" class="about-logo-img">
       </div>
@@ -397,11 +368,11 @@
 
 <section id="fee">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head">
       <span class="eyebrow">Fee & Eligibility</span>
       <h2>Training Fee</h2>
     </div>
-    <div class="fee-card reveal">
+    <div class="fee-card">
       <div>
         <div class="amount">₹200 <span>/ पूरा कोर्स</span></div>
         <div class="pay-note">Pay in Advance — सीट पक्की करने के लिए एडवांस पेमेंट ज़रूरी</div>
@@ -412,43 +383,60 @@
       </div>
     </div>
 
-    <div class="card reveal" style="margin-top:22px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+    <!-- Enhanced Payment Card with One-Click Copy UPI -->
+    <div class="card" style="margin-top:22px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
         <img src="assets/upi-qr.jpg" alt="PhonePe UPI QR Code" style="width:110px;height:110px;border-radius:10px;border:1px solid var(--line);object-fit:cover;">
         <div>
           <h3 style="font-size:18px;">💳 UPI से Payment करें</h3>
           <p style="color:var(--ink-soft);font-size:14.5px;margin-top:6px;">Google Pay / PhonePe / Paytm किसी भी UPI app से QR स्कैन करें या सीधे बटन दबाएं।</p>
-          <p style="margin-top:10px;font-family:var(--display);font-weight:700;color:var(--navy);font-size:16px;">UPI ID: <span style="color:var(--teal);">9766284669@ybl</span></p>
+          <p style="margin-top:10px;font-family:var(--display);font-weight:700;color:var(--navy);font-size:16px;">
+            UPI ID: <span style="color:var(--teal);" id="upiIdText">9766284669@ybl</span>
+            <button onclick="copyUpiId()" style="margin-left:8px;background:var(--teal);color:#fff;border:none;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:var(--body);">Copy UPI</button>
+          </p>
         </div>
       </div>
-      <a class="btn btn-primary" href="upi://pay?pa=9766284669@ybl&pn=EkVeera%20Training%20Center&cu=INR&am=200" target="_blank">UPI से Pay करें</a>
+      <a class="btn btn-primary" href="upi://pay?pa=9766284669@ybl&pn=EkVeera%20Training%20Center&cu=INR&am=200" target="_blank">UPI App से Pay करें</a>
     </div>
   </div>
 </section>
 
-<section>
+<!-- Student Testimonials Section -->
+<section id="reviews" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Placement Support</span>
-      <h2>Training के बाद</h2>
-      <p>EkVeera Placement Consulting & Services के तहत, training पूरी होने पर candidates को placement/interview opportunities की जानकारी दी जाती है। (नोट: job की गारंटी नहीं है, लेकिन तैयारी पूरी करवाई जाती है।)</p>
+    <div class="section-head">
+      <span class="eyebrow">Student Testimonials</span>
+      <h2>हमारे स्टूडेंट्स के अनुभव</h2>
+      <p>जानिए 15 दिनों की ऑनलाइन ट्रेनिंग पूरी करने के बाद हमारे छात्रों की क्या राय है।</p>
     </div>
-    <div class="grid-3 reveal">
-      <div class="card"><div class="num">01</div><h3>🎯 Interview Preparation</h3><p>Mock interviews और personality development के साथ candidates को industry-ready बनाया जाता है।</p></div>
-      <div class="card"><div class="num">02</div><h3>💼 Placement Guidance</h3><p>Training पूरी होने पर उपलब्ध opportunities की जानकारी साझा की जाती है।</p></div>
-      <div class="card"><div class="num">03</div><h3>🤝 Ongoing Support</h3><p>WhatsApp के ज़रिए candidates से लगातार संपर्क बना रहता है।</p></div>
+    <div class="grid-3">
+      <div class="card">
+        <div style="color:var(--amber); font-size:18px;">★★★★★</div>
+        <p style="margin:12px 0; font-style:italic; font-size:14.5px;">"15 दिन की ऑनलाइन क्लास से मेरा कॉन्फिडेंस बहुत बढ़ गया। लाइव मॉक कॉल्स से इंटरव्यू का डर पूरी तरह से खत्म हो गया।"</p>
+        <strong style="color:var(--navy); font-size:14px; font-family:var(--display);">— राहुल शर्मा (रीवा)</strong>
+      </div>
+      <div class="card">
+        <div style="color:var(--amber); font-size:18px;">★★★★★</div>
+        <p style="margin:12px 0; font-style:italic; font-size:14.5px;">"₹200 में इतनी बेहतरीन ट्रेनिंग और गाइडेंस मिलना नामुमकिन है। घर बैठे Jitsi Meet से पढ़ाई करना बहुत आसान और सुविधाजनक रहा।"</p>
+        <strong style="color:var(--navy); font-size:14px; font-family:var(--display);">— पूजा पटेल (मैहर)</strong>
+      </div>
+      <div class="card">
+        <div style="color:var(--amber); font-size:18px;">★★★★★</div>
+        <p style="margin:12px 0; font-style:italic; font-size:14.5px;">"ट्रेनर्स ने Inbound/Outbound कॉल हैंडलिंग और KPI के बारे में बहुत ही आसान हिंदी में बारीकी से सिखाया।"</p>
+        <strong style="color:var(--navy); font-size:14px; font-family:var(--display);">— अमित विश्वकर्मा (पन्ना)</strong>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="offices" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head">
       <span class="eyebrow">Contact Offices</span>
       <h2 data-hi="हमसे जुड़ें" data-en="Get In Touch">हमसे जुड़ें</h2>
       <p>Training online है, लेकिन अगर कोई student Head Office आना चाहे तो नीचे पता और मैप दिया गया है।</p>
     </div>
-    <div class="offices reveal">
+    <div class="offices">
       <div class="office-card">
         <div class="tag">Head Office</div>
         <h3>Mr. Anak Kumar Patel</h3>
@@ -462,138 +450,17 @@
         <p style="margin-top:8px;">📞 9174777074</p>
       </div>
     </div>
-    <div class="map-wrap">
-      <iframe src="https://maps.google.com/maps?q=Vivek%20Nagar%20Ward%20No%2019%20Shiv%20Mandir%20Rewa%20Road%20Maihar%20Madhya%20Pradesh%20485771&output=embed" allowfullscreen loading="lazy"></iframe>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">FAQ</span>
-      <h2 data-hi="आम सवाल-जवाब" data-en="Frequently Asked Questions">आम सवाल-जवाब</h2>
-      <p>Training से जुड़े सबसे common सवालों के जवाब यहां हैं।</p>
-    </div>
-    <div style="max-width:760px;">
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">❓ क्या Training पूरी तरह Online है?<span class="plus">+</span></button>
-        <div class="faq-a"><p>हां, Training 100% online है — Jitsi Meet के ज़रिए रोज़ 1 घंटे की Live Class होती है, कहीं जाने की ज़रूरत नहीं।</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">❓ Training के लिए क्या चाहिए?<span class="plus">+</span></button>
-        <div class="faq-a"><p>बस एक स्मार्टफोन या लैपटॉप और इंटरनेट कनेक्शन — बाकी सब हम बता देंगे।</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">❓ Training Fee कितनी है और कैसे pay करें?<span class="plus">+</span></button>
-        <div class="faq-a"><p>पूरी Training के लिए ₹200 फीस है, जो सीट पक्की करने के लिए एडवांस में जमा करनी होती है।</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">❓ क्या Job की गारंटी है?<span class="plus">+</span></button>
-        <div class="faq-a"><p>हम Interview Preparation और Placement Guidance देते हैं, लेकिन job की सीधी गारंटी नहीं है — पूरी तैयारी करवाई जाती है।</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">❓ Admission कैसे लें?<span class="plus">+</span></button>
-        <div class="faq-a"><p>ऊपर दिए गए "Admission Form" बटन पर क्लिक करें या सीधे WhatsApp पर संपर्क करें।</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="certificate">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Certificate</span>
-      <h2>🎓 Training Certificate जनरेट करें</h2>
-      <p>यह tool सिर्फ Admin के इस्तेमाल के लिए है — Training पूरी होने पर student का certificate यहां से generate करें।</p>
-    </div>
-
-    <div class="card reveal" id="certLockScreen" style="max-width:420px;">
-      <h3 style="font-size:17px;margin-bottom:12px;">🔒 Admin Access</h3>
-      <input type="password" id="certPasswordInput" placeholder="Password डालें" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;margin-bottom:12px;">
-      <button class="btn btn-primary" style="border:none;cursor:pointer;width:100%;justify-content:center;" onclick="checkCertPassword()">Unlock करें</button>
-      <p id="certPasswordError" style="color:#C0392B;font-size:13px;margin-top:10px;display:none;">❌ गलत Password, दोबारा कोशिश करें</p>
-    </div>
-
-    <div id="certGeneratorArea" style="display:none;">
-      <div class="card reveal" style="max-width:640px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
-          <div>
-            <label style="display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">Student का नाम</label>
-            <input type="text" id="certName" placeholder="जैसे: Ramesh Kumar" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;">
-          </div>
-          <div>
-            <label style="display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">ID No.</label>
-            <input type="text" id="certId" placeholder="जैसे: EV-2026-001" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;">
-          </div>
-          <div>
-            <label style="display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">Date of Completion</label>
-            <input type="text" id="certDate" placeholder="जैसे: 10/07/2026" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;">
-          </div>
-          <div>
-            <label style="display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">Location</label>
-            <input type="text" id="certLocation" placeholder="जैसे: Maihar" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;">
-          </div>
-        </div>
-        <button class="btn btn-primary" style="border:none;cursor:pointer;" onclick="generateCertificate()">Certificate Generate करें</button>
-        <p style="color:var(--ink-soft);font-size:13px;margin-top:10px;">Preview नीचे दिखेगा — Download बटन से PNG की तरह save कर सकते हैं।</p>
-      </div>
-      <div id="certPreviewWrap" style="margin-top:26px;display:none;">
-        <canvas id="certCanvas" width="1200" height="750" style="width:100%;max-width:800px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.15);"></canvas>
-        <div style="margin-top:14px;">
-          <a class="btn btn-primary" id="certDownloadBtn" download="EkVeera_Certificate.png">Certificate Download करें</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="comments" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Comments & Feedback</span>
-      <h2>अपना Comment या अनुभव लिखें</h2>
-      <p>Training के बारे में सवाल पूछें, सुझाव दें, या अपना अनुभव साझा करें — चाहें तो अपनी फोटो भी जोड़ सकते हैं।</p>
-    </div>
-    <div class="comment-layout reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
-      <div class="card" style="padding:32px;">
-        <form action="https://formspree.io/f/mqpzjjzq" method="POST" enctype="multipart/form-data">
-          <input type="hidden" name="_subject" value="Comment - EkVeera Training Center Website">
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">आपका नाम</label>
-            <input type="text" name="name" required placeholder="पूरा नाम"
-              style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;">
-          </div>
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">आपका Comment</label>
-            <textarea name="comment" rows="4" required placeholder="यहां अपना comment या अनुभव लिखें..."
-              style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;resize:vertical;"></textarea>
-          </div>
-          <div style="margin-bottom:20px;">
-            <label style="display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">अपनी फोटो जोड़ें <span style="font-weight:400;color:var(--ink-soft);">(वैकल्पिक)</span></label>
-            <input type="file" name="photo" accept="image/*" style="width:100%;padding:10px 0;font-size:14px;">
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border:none;cursor:pointer;">Comment भेजें</button>
-        </form>
-      </div>
-      <div class="card" style="padding:32px;background:var(--navy);color:#fff;border:none;">
-        <h3 style="color:#fff;font-size:19px;margin-bottom:12px;">यह Comment कहां जाएगा?</h3>
-        <p style="color:#C9CFE0;font-size:15px;">आपका नाम, comment और फोटो सीधे हमारी टीम के पास पहुंच जाएंगे। हम अच्छे अनुभवों को वेबसाइट पर भी दिखा सकते हैं।</p>
-        <p style="color:#C9CFE0;font-size:14px;margin-top:16px;">किसी urgent सवाल के लिए सीधे WhatsApp पर भी लिख सकते हैं।</p>
-        <a class="btn btn-whatsapp" style="margin-top:16px;" href="https://wa.me/919766284669" target="_blank">WhatsApp पर लिखें</a>
-      </div>
-    </div>
   </div>
 </section>
 
 <section id="contact">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head">
       <span class="eyebrow">Get in Touch</span>
       <h2>अभी सम्पर्क करें</h2>
       <p>किसी भी सवाल के लिए सीधे WhatsApp पर मैसेज करें या Admission Form भरें।</p>
     </div>
-    <div class="grid-3 reveal">
+    <div class="grid-3">
       <div class="card">
         <h3>📱 WhatsApp — Head Office</h3>
         <p>9766284669</p>
@@ -615,52 +482,11 @@
 
 <footer>
   <div class="container">
-    <div class="foot-grid">
-      <div>
-        <div class="brand" style="display:flex;align-items:center;gap:12px;">
-          <img src="EkVeera_Logo_Transparent.png" alt="EkVeera Placement & Consulting Services Logo" class="brand-logo">
-          EkVeera Training Center
-        </div>
-        <p style="max-width:280px;margin-top:10px;font-size:14px;">Call Center & Customer Service में Professional Online Training — घर बैठे सीखें।</p>
-        <div class="social-row">
-          <a href="#" target="_blank" title="Facebook">📘</a>
-          <a href="#" target="_blank" title="Instagram">📷</a>
-          <a href="https://wa.me/919766284669" target="_blank" title="WhatsApp">💬</a>
-        </div>
-      </div>
-      <div class="foot-links">
-        <a href="#course">कोर्स</a>
-        <a href="#format">Online Format</a>
-        <a href="#fee">फीस</a>
-        <a href="#offices">Offices</a>
-      </div>
-      <div class="foot-links">
-        <a href="https://wa.me/919766284669" target="_blank">WhatsApp</a>
-        <a href="mailto:ekveeraplacement26@gmail.com">Email</a>
-        <a href="https://forms.gle/YmZgGTfRQcb5tvcG7" target="_blank">Admission Form</a>
-      </div>
-    </div>
     <div class="copyright">© 2026 EkVeera Training Center | EkVeera Placement Consulting & Services</div>
   </div>
 </footer>
 
-<a class="float-wa" href="https://wa.me/919766284669" target="_blank" aria-label="WhatsApp पर चैट करें">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.72.45 3.4 1.3 4.88L2 22l5.36-1.4a9.9 9.9 0 0 0 4.68 1.19h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.05c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.19-.15.31-.3.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.17.29.75 1.24 1.6 2 1.1.98 2.03 1.29 2.32 1.43.29.14.46.12.63-.07.17-.19.72-.84.92-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
-</a>
-
 <script>
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => observer.observe(el));
-
-  // Countdown to 1 October
   function updateCountdown(){
     const target = new Date(new Date().getFullYear(), 9, 1, 0, 0, 0); 
     const now = new Date();
@@ -678,7 +504,6 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // Language toggle
   let currentLang = 'hi';
   function toggleLang(){
     currentLang = currentLang === 'hi' ? 'en' : 'hi';
@@ -689,146 +514,9 @@
     if (btn) btn.textContent = currentLang === 'hi' ? 'EN' : 'HI';
   }
 
-  // Admin password gate
-  const CERT_ADMIN_PASSWORD = "EkVeera@2026";
-  function checkCertPassword(){
-    const val = document.getElementById('certPasswordInput').value;
-    if (val === CERT_ADMIN_PASSWORD){
-      document.getElementById('certLockScreen').style.display = 'none';
-      document.getElementById('certGeneratorArea').style.display = 'block';
-    } else {
-      document.getElementById('certPasswordError').style.display = 'block';
-    }
-  }
-
-  // Dynamic Certificate generator using official transparent logo
-  const certLogo = new Image();
-  certLogo.src = 'EkVeera_Logo_Transparent.png';
-
-  function generateCertificate(){
-    const name = document.getElementById('certName').value.trim() || 'Student Name';
-    const idNo = document.getElementById('certId').value.trim() || '—';
-    const dateVal = document.getElementById('certDate').value.trim() || new Date().toLocaleDateString('en-GB');
-    const location = document.getElementById('certLocation').value.trim() || 'Maihar';
-    const canvas = document.getElementById('certCanvas');
-    const ctx = canvas.getContext('2d');
-    const W = canvas.width, H = canvas.height;
-
-    function draw(){
-      ctx.fillStyle = '#FAF7F1';
-      ctx.fillRect(0,0,W,H);
-
-      ctx.strokeStyle = '#C9A24B';
-      ctx.lineWidth = 10;
-      ctx.strokeRect(18,18,W-36,H-36);
-      ctx.strokeStyle = '#152241';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(34,34,W-68,H-68);
-
-      // Render official handshake logo
-      if (certLogo.complete && certLogo.naturalWidth > 0){
-        ctx.drawImage(certLogo, 60, 50, 130, 130);
-      }
-
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#152241';
-      ctx.font = '700 46px "Space Grotesk", sans-serif';
-      ctx.fillText('EKVEERA', W/2 + 60, 105);
-      ctx.font = '600 15px "Work Sans", sans-serif';
-      ctx.fillStyle = '#3A4258';
-      ctx.fillText('PLACEMENT CONSULTING AND SERVICES', W/2 + 60, 130);
-
-      ctx.fillStyle = '#152241';
-      const rW = 340, rH = 32, rX = W/2 + 60 - rW/2, rY = 145;
-      ctx.fillRect(rX, rY, rW, rH);
-      ctx.fillStyle = '#E8A33D';
-      ctx.font = '600 13px "Space Grotesk", sans-serif';
-      ctx.fillText('TRAINING  ·  PLACEMENT  ·  CONSULTING', W/2 + 60, rY + 21);
-
-      ctx.fillStyle = '#5B6478';
-      ctx.font = '400 13px "Work Sans", sans-serif';
-      ctx.fillText('YOUR TRUST, OUR COMMITMENT', W/2 + 60, 205);
-
-      ctx.strokeStyle = '#C9A24B';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(70, 225); ctx.lineTo(W-70, 225); ctx.stroke();
-
-      ctx.fillStyle = '#152241';
-      ctx.font = '700 58px "Space Grotesk", sans-serif';
-      ctx.fillText('CERTIFICATE', W/2, 300);
-      ctx.font = '400 18px "Work Sans", sans-serif';
-      ctx.fillStyle = '#5B6478';
-      ctx.fillText('OF', W/2, 328);
-      ctx.fillStyle = '#C9A24B';
-      ctx.font = '700 40px "Space Grotesk", sans-serif';
-      ctx.fillText('COMPLETION', W/2, 372);
-      ctx.font = '20px sans-serif';
-      ctx.fillText('★  ★  ★', W/2, 400);
-
-      ctx.strokeStyle = '#C9A24B';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      const pillY = 425, pillH = 46, pillX = 160, pillW = W-320;
-      ctx.moveTo(pillX+pillH/2, pillY);
-      ctx.lineTo(pillX+pillW-pillH/2, pillY);
-      ctx.arcTo(pillX+pillW, pillY, pillX+pillW, pillY+pillH/2, pillH/2);
-      ctx.lineTo(pillX+pillW, pillY+pillH-pillH/2);
-      ctx.arcTo(pillX+pillW, pillY+pillH, pillX+pillW-pillH/2, pillY+pillH, pillH/2);
-      ctx.lineTo(pillX+pillH/2, pillY+pillH);
-      ctx.arcTo(pillX, pillY+pillH, pillX, pillY+pillH-pillH/2, pillH/2);
-      ctx.lineTo(pillX, pillY+pillH/2);
-      ctx.arcTo(pillX, pillY, pillX+pillH/2, pillY, pillH/2);
-      ctx.stroke();
-
-      ctx.textAlign = 'left';
-      ctx.fillStyle = '#152241';
-      ctx.font = '600 20px "Work Sans", sans-serif';
-      ctx.fillText('Name:  ' + name, pillX+30, pillY+30);
-      ctx.textAlign = 'right';
-      ctx.fillText('ID no: ' + idNo, pillX+pillW-30, pillY+30);
-
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#5B6478';
-      ctx.font = '400 15px "Work Sans", sans-serif';
-      ctx.fillText('has successfully completed the comprehensive', W/2, 505);
-      ctx.fillStyle = '#152241';
-      ctx.font = '700 22px "Space Grotesk", sans-serif';
-      ctx.fillText('"Advanced Call Center Skills and Customer Service Training"', W/2, 535);
-      ctx.font = '400 14px "Work Sans", sans-serif';
-      ctx.fillStyle = '#5B6478';
-      ctx.fillText('program conducted by EkVeera Placement & Consulting Services', W/2, 558);
-
-      ctx.font = '600 14px "Work Sans", sans-serif';
-      ctx.fillStyle = '#152241';
-      ctx.fillText('Date of Completion: ' + dateVal, W/2 - 190, 605);
-      ctx.fillText('Location: ' + location, W/2 + 190, 605);
-
-      ctx.strokeStyle = '#152241'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(120, 670); ctx.lineTo(300, 670); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(W-300, 670); ctx.lineTo(W-120, 670); ctx.stroke();
-      ctx.font = 'italic 600 18px "Space Grotesk", sans-serif';
-      ctx.fillText('Anak Kumar Patel', 210, 663);
-      ctx.fillText('Pankaj V.K', W-210, 663);
-      ctx.font = '400 13px "Work Sans", sans-serif';
-      ctx.fillText('Director', 210, 690);
-      ctx.fillText('Training Coordinator', W-210, 690);
-
-      ctx.fillStyle = '#152241';
-      ctx.fillRect(34, H-95, W-68, 62);
-      const items = ['EXPERT TRAINERS', 'PRACTICAL LEARNING', 'PLACEMENT SUPPORT', '100% COMMITMENT'];
-      const segW = (W-68)/4;
-      ctx.font = '700 13px "Space Grotesk", sans-serif';
-      ctx.fillStyle = '#fff';
-      items.forEach((t,i)=>{
-        ctx.fillText(t, 34 + segW*i + segW/2, H-68);
-      });
-
-      document.getElementById('certPreviewWrap').style.display = 'block';
-      document.getElementById('certDownloadBtn').href = canvas.toDataURL('image/png');
-      document.getElementById('certPreviewWrap').scrollIntoView({behavior:'smooth', block:'center'});
-    }
-
-    if (certLogo.complete) { draw(); } else { certLogo.onload = draw; certLogo.onerror = draw; }
+  function copyUpiId() {
+    navigator.clipboard.writeText("9766284669@ybl");
+    alert("UPI ID (9766284669@ybl) कॉपी हो गई है!");
   }
 </script>
 </body>
