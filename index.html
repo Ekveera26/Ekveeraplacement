@@ -569,7 +569,7 @@
       <div class="card" style="padding:12px;overflow:hidden;">
         <!-- ⚠️ SETUP ज़रूरी: नीचे दिए गए src को अपने Google Form के "embedded" लिंक से बदलें -->
         <iframe
-          src="https://forms.gle/hTancPDQ7wWsD91HA"
+          src="<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd1E1-9PFioqhyYMsCDp90A2G2c2PkCuPM8rQXRo92CgzcB0g/viewform?embedded=true" width="640" height="678" frameborder="0" marginheight="0" marginwidth="0">लोड हो रहा है…</iframe>"
           width="100%" height="520" style="border:0;display:block;" title="Comment Form">
           Loading…
         </iframe>
@@ -587,7 +587,7 @@
 <script>
 (function(){
   // ⚠️ SETUP ज़रूरी: यहां अपनी Google Sheet की ID और Tab का नाम डालें
-  var SHEET_ID = 'https://forms.gle/hTancPDQ7wWsD91HA';
+  var SHEET_ID = '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd1E1-9PFioqhyYMsCDp90A2G2c2PkCuPM8rQXRo92CgzcB0g/viewform?embedded=true" width="640" height="678" frameborder="0" marginheight="0" marginwidth="0">लोड हो रहा है…</iframe>';
   var SHEET_NAME = 'Form Responses 1';
   var wall = document.getElementById('commentWall');
   var status = document.getElementById('commentWallStatus');
@@ -612,12 +612,12 @@
     return d.toLocaleDateString('hi-IN');
   }
 
-  if (SHEET_ID.indexOf('PASTE_') === 0) {
+  if (SHEET_ID.indexOf('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd1E1-9PFioqhyYMsCDp90A2G2c2PkCuPM8rQXRo92CgzcB0g/viewform?embedded=true" width="640" height="678" frameborder="0" marginheight="0" marginwidth="0">लोड हो रहा है…</iframe>') === 0) {
     status.textContent = 'Comments दिखाने के लिए website में Google Sheet जोड़नी बाकी है।';
     return;
   }
 
-  fetch('https://opensheet.elk.sh/' + SHEET_ID + '/' + encodeURIComponent(SHEET_NAME))
+  fetch('https://opensheet.elk.sh/' + SHEET_ID + '/' + encodeURIComponent(Form Responses 1))
     .then(function(res){ return res.json(); })
     .then(function(rows){
       if (!rows || !rows.length){
