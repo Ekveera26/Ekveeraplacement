@@ -1710,34 +1710,77 @@ I am interested in EkVeera Call Center & Customer Service Training.`;
         "https://wa.me/" + whatsappNumber +
         "?text=" + encodeURIComponent(text);
 
-    /* EMAIL ENQUIRY (with Resume attachment) - FormSubmit ke through seedhe email par bhejna */
-    const formData = new FormData();
-    formData.append("_subject", "New Student Enquiry - EkVeera Website");
-    formData.append("Name", name);
-    formData.append("Mobile", phone);
-    formData.append("Qualification", qualification);
-    formData.append("Age", age);
-    formData.append("City", location);
-    formData.append("Enquiry", message);
-    if(resumeFile){
-        formData.append("Resume", resumeFile);
-    }
+    /* EMAIL ENQUIRY - Resume ke saath ho to hidden real form (multipart) se bhejo,
+       taaki FormSubmit file ko attach kare (AJAX endpoint file support nahi karta) */
+    if (resumeFile) {
 
-    fetch("https://formsubmit.co/ajax/ekveeraplacement26@gmail.com", {
-        method: "POST",
-        headers: {
-            "Accept": "application/json"
-        },
-        body: formData
-    }).catch(function(err){
-        console.error("Email enquiry send failed:", err);
-    });
+        const iframe = document.createElement("iframe");
+        iframe.name = "hiddenSubmitFrame";
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+
+        const hiddenForm = document.createElement("form");
+        hiddenForm.action = "https://formsubmit.co/ekveeraplacement26@gmail.com";
+        hiddenForm.method = "POST";
+        hiddenForm.enctype = "multipart/form-data";
+        hiddenForm.target = "hiddenSubmitFrame";
+        hiddenForm.style.display = "none";
+
+        function addField(fieldName, value){
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = fieldName;
+            input.value = value;
+            hiddenForm.appendChild(input);
+        }
+
+        addField("_subject", "New Student Enquiry - EkVeera Website");
+        addField("Name", name);
+        addField("Mobile", phone);
+        addField("Qualification", qualification);
+        addField("Age", age);
+        addField("City", location);
+        addField("Enquiry", message);
+
+        const fileInput = document.createElement("input");
+        fileInput.type = "file";
+        fileInput.name = "Resume";
+        fileInput.style.display = "none";
+
+        const dt = new DataTransfer();
+        dt.items.add(resumeFile);
+        fileInput.files = dt.files;
+
+        hiddenForm.appendChild(fileInput);
+        document.body.appendChild(hiddenForm);
+        hiddenForm.submit();
+
+        setTimeout(function(){
+            hiddenForm.remove();
+            iframe.remove();
+        }, 8000);
+
+    } else {
+
+        const formData = new FormData();
+        formData.append("_subject", "New Student Enquiry - EkVeera Website");
+        formData.append("Name", name);
+        formData.append("Mobile", phone);
+        formData.append("Qualification", qualification);
+        formData.append("Age", age);
+        formData.append("City", location);
+        formData.append("Enquiry", message);
+
+        fetch("https://formsubmit.co/ajax/ekveeraplacement26@gmail.com", {
+            method: "POST",
+            headers: { "Accept": "application/json" },
+            body: formData
+        }).catch(function(err){
+            console.error("Email enquiry send failed:", err);
+        });
+
+    }
 
     window.open(url,"_blank");
 
 });
-
-</script>
-
-</body>
-</html>
