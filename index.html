@@ -1,53 +1,1697 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#4827b8">
-  <title>EkVeera Training Center | Call Center Training</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{--violet:#5230d9;--violet-dark:#2d176e;--purple:#7c59f3;--gold:#ffd56a;--green:#18ad61;--ink:#172033;--muted:#637087;--line:#e7e9f2;--soft:#f7f7fc;--white:#fff;--shadow:0 20px 60px rgba(45,28,127,.12)}
-    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,'Noto Sans Devanagari',sans-serif;color:var(--ink);background:var(--soft);line-height:1.65} a{text-decoration:none;color:inherit} .container{width:min(1120px,90%);margin:auto}
-    .topbar{background:#24115f;color:#fff;text-align:center;padding:9px 16px;font-size:13px;font-weight:600}.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(15px);border-bottom:1px solid rgba(231,233,242,.8)}.nav-inner{height:75px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-weight:800}.brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;color:#fff;background:linear-gradient(135deg,var(--violet),#a073ff);box-shadow:0 8px 20px rgba(82,48,217,.25)}.brand small{display:block;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:1.4px}.nav-links{display:flex;gap:22px;color:#4c576b;font-size:14px;font-weight:600}.nav-links a:hover{color:var(--violet)}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;min-height:49px;padding:0 21px;border-radius:14px;font:700 15px inherit;transition:.25s}.btn:hover{transform:translateY(-3px);box-shadow:0 13px 27px rgba(31,24,71,.2)}.btn-primary{background:var(--gold);color:#392174}.btn-dark{background:var(--violet);color:#fff}.btn-green{background:var(--green);color:#fff}.btn-light{background:#fff;color:var(--violet);border:1px solid #e3dcff}
-    .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 80% 15%,#9e83ff 0,transparent 28%),radial-gradient(circle at 10% 90%,#7050e8 0,transparent 35%),linear-gradient(125deg,#210d62,#512ed4 57%,#6d48e8);color:#fff}.hero:before{content:'';position:absolute;width:420px;height:420px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:-120px;bottom:-190px}.hero-grid{position:relative;min-height:630px;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:60px}.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid rgba(255,255,255,.3);border-radius:100px;background:rgba(255,255,255,.12);font-size:13px;font-weight:700}.hero h1{font-size:clamp(42px,5vw,69px);line-height:1.13;margin:21px 0 18px;letter-spacing:-1.8px}.hero h1 em{color:var(--gold);font-style:normal;display:block}.hero p{max-width:610px;color:#ece9ff;font-size:18px}.cta-row{display:flex;gap:13px;flex-wrap:wrap;margin:31px 0}.quick-points{display:flex;flex-wrap:wrap;gap:17px;color:#eeebff;font-size:13px;font-weight:600}.quick-points span:before{content:'✓';color:var(--gold);margin-right:6px;font-weight:800}.hero-card{padding:31px;border:1px solid rgba(255,255,255,.25);border-radius:28px;background:rgba(255,255,255,.13);backdrop-filter:blur(18px);box-shadow:0 25px 65px rgba(10,3,47,.25);animation:float 4s ease-in-out infinite}.hero-card-icon{width:73px;height:73px;display:grid;place-items:center;border-radius:21px;background:var(--gold);font-size:35px}.hero-card h3{font-size:25px;margin:20px 0 6px}.hero-card p{font-size:14px;margin:0}.progress{height:9px;margin:28px 0 8px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.25)}.progress i{display:block;width:88%;height:100%;background:var(--gold);border-radius:20px}.hero-card small{color:#f2efff}@keyframes float{50%{transform:translateY(-12px)}}
-    .stats{position:relative;margin-top:-42px;z-index:2}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.stat{padding:22px 26px;text-align:center;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat b{display:block;color:var(--violet);font-size:28px}.stat span{font-size:13px;color:var(--muted);font-weight:600}
-    section{padding:84px 0}.eyebrow{display:block;color:var(--violet);font-size:12px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}.section-head{max-width:680px;margin-bottom:42px}.section-head.center{text-align:center;margin-left:auto;margin-right:auto}.section-head h2{font-size:clamp(30px,4vw,46px);line-height:1.2;margin:10px 0 13px;letter-spacing:-1px}.section-head p{margin:0;color:var(--muted)}.features{background:#fff}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.feature{padding:27px 23px;border:1px solid var(--line);border-radius:20px;transition:.25s}.feature:hover{transform:translateY(-7px);border-color:#cfc3ff;box-shadow:var(--shadow)}.icon{width:54px;height:54px;display:grid;place-items:center;border-radius:16px;background:#eeeaff;font-size:26px}.feature h3{font-size:17px;margin:18px 0 7px}.feature p{margin:0;color:var(--muted);font-size:14px}
-    .curriculum{background:linear-gradient(180deg,#f7f6ff,#fff)}.module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.module{display:flex;align-items:flex-start;gap:15px;padding:20px;border:1px solid var(--line);border-radius:17px;background:#fff}.module-num{flex:0 0 36px;height:36px;display:grid;place-items:center;border-radius:12px;background:#eae5ff;color:var(--violet);font-weight:800}.module h3{font-size:16px;margin:0 0 2px}.module p{font-size:13px;color:var(--muted);margin:0}
-    .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.step{position:relative;padding:30px;border-radius:21px;background:#fff;box-shadow:0 10px 32px rgba(44,31,118,.07)}.step-no{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--violet);color:#fff;font-weight:800}.step h3{margin:18px 0 7px;font-size:19px}.step p{color:var(--muted);font-size:14px;margin:0}
-    .admission-wrap{display:grid;grid-template-columns:1fr .88fr;overflow:hidden;border-radius:28px;color:#fff;background:linear-gradient(135deg,#2b146f,#5a35dc);box-shadow:var(--shadow)}.admission-copy{padding:53px}.admission-copy h2{font-size:41px;line-height:1.18;margin:11px 0}.admission-copy p{color:#e5e0ff}.fee{display:inline-flex;align-items:center;gap:9px;margin:18px 0 24px;padding:11px 16px;border-radius:13px;background:rgba(255,255,255,.15);font-size:18px;font-weight:800}.admission-copy li{margin:8px 0;color:#f0edff}.pay-card{padding:42px;background:#fff;color:var(--ink)}.pay-card h3{font-size:24px;margin:0 0 8px}.pay-card p{color:var(--muted);font-size:14px}.upi{padding:14px;margin:19px 0;border:1px dashed #b3a4ff;border-radius:12px;background:#f7f5ff;color:var(--violet);font-weight:800;word-break:break-all}.pay-note{font-size:12px!important}.form-note{display:none;margin-top:16px;padding:13px;border-radius:12px;color:#12683c;background:#e9fff2;font-size:13px;font-weight:600}
-    .placement{background:#fff}.placement-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:52px;align-items:center}.placement-card{padding:36px;border-radius:26px;color:#fff;background:linear-gradient(150deg,#ffba3c,#f17432)}.placement-card .big{font-size:62px;line-height:1}.placement-card h3{font-size:25px;line-height:1.2}.placement-copy p{color:var(--muted)}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}.check{padding:13px;border-radius:12px;background:var(--soft);font-size:14px;font-weight:600}.check:before{content:'✓';margin-right:8px;color:var(--green);font-weight:900}
-    .faq{background:var(--soft)}.faq-list{max-width:830px;margin:auto}.faq-item{margin:12px 0;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}.faq-item summary{padding:19px 21px;cursor:pointer;font-weight:700;list-style:none}.faq-item summary:after{content:'+';float:right;font-size:21px;color:var(--violet)}.faq-item[open] summary:after{content:'−'}.faq-item p{padding:0 21px 19px;margin:0;color:var(--muted);font-size:14px}
-    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.contact{padding:27px;border:1px solid var(--line);border-radius:20px;background:#fff}.contact i{display:grid;place-items:center;width:49px;height:49px;border-radius:15px;background:#eeeaff;font-style:normal;font-size:24px}.contact h3{margin:17px 0 6px;font-size:18px}.contact p{margin:0 0 17px;color:var(--muted);font-size:14px;word-break:break-word}.contact a{color:var(--violet);font-size:14px;font-weight:800}.addresses{margin-top:26px;padding:24px;border-radius:20px;background:#f1edff;color:#392174}.addresses h3{margin-top:0}.addresses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;font-size:14px}.addresses-grid p{margin:6px 0}
-    footer{padding:28px 0 90px;color:#ced0e8;background:#171033;text-align:center;font-size:13px}.floating-wa{position:fixed;right:19px;bottom:20px;z-index:55;width:60px;height:60px;display:grid;place-items:center;border-radius:50%;background:#19b85f;color:#fff;font-size:27px;box-shadow:0 14px 28px rgba(25,184,95,.34);animation:pulse 2s infinite}@keyframes pulse{50%{box-shadow:0 0 0 13px rgba(25,184,95,0)}}
-    @media(max-width:850px){.nav-links{display:none}.hero-grid,.admission-wrap,.placement-grid{grid-template-columns:1fr}.hero-grid{padding:70px 0}.hero-card{max-width:390px}.feature-grid{grid-template-columns:repeat(2,1fr)}.admission-copy{padding:38px}.pay-card{padding:34px}.checklist{grid-template-columns:1fr}}@media(max-width:560px){.nav-inner{height:66px}.brand{font-size:13px}.nav .btn{min-height:41px;padding:0 13px;font-size:12px}.hero h1{font-size:42px}.hero p{font-size:16px}.stats-grid{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}.feature-grid,.module-grid,.how-grid,.contact-grid,.addresses-grid{grid-template-columns:1fr}section{padding:62px 0}.admission-copy h2{font-size:34px}.hero-card{padding:24px}.quick-points{gap:9px}.cta-row .btn{width:100%}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EkVeera Placement Consulting & Services - Call Center & Customer Service Training with Interview and Placement Support.">
+<meta name="keywords" content="EkVeera, Call Center Training, Customer Service Training, Placement Training, Madhya Pradesh">
+<meta name="author" content="EkVeera Placement Consulting & Services">
+
+<title>EkVeera | Call Center Training & Placement Support</title>
+
+<style>
+:root{
+    --primary:#0b2d5c;
+    --primary2:#123f7a;
+    --accent:#f2b84b;
+    --light:#f5f8fc;
+    --white:#ffffff;
+    --dark:#142033;
+    --text:#344054;
+    --muted:#667085;
+    --border:#e4e9f0;
+    --success:#159957;
+    --shadow:0 15px 45px rgba(11,45,92,.12);
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--text);
+    background:#fff;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* TOP BAR */
+.topbar{
+    background:#071d3c;
+    color:#fff;
+    padding:8px 0;
+    font-size:13px;
+}
+
+.topbar-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.topbar span{
+    opacity:.95;
+}
+
+/* NAVBAR */
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    min-height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.logo-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-box img{
+    width:58px;
+    height:58px;
+    object-fit:contain;
+}
+
+.logo-text strong{
+    display:block;
+    color:var(--primary);
+    font-size:20px;
+}
+
+.logo-text small{
+    color:#667085;
+    font-size:11px;
+    letter-spacing:.4px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:var(--primary2);
+}
+
+.nav-btn{
+    background:var(--primary);
+    color:#fff !important;
+    padding:11px 18px;
+    border-radius:9px;
+}
+
+.menu-btn{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero{
+    background:
+    radial-gradient(circle at 80% 20%,rgba(242,184,75,.20),transparent 30%),
+    linear-gradient(135deg,#071d3c 0%,#0b2d5c 55%,#123f7a 100%);
+    color:#fff;
+    padding:78px 0 90px;
+    overflow:hidden;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:55px;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(36px,5vw,60px);
+    line-height:1.08;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:var(--accent);
+}
+
+.hero p{
+    font-size:18px;
+    color:#e6edf7;
+    max-width:650px;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:13px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 22px;
+    border-radius:10px;
+    font-weight:700;
+    border:none;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn-primary{
+    background:var(--accent);
+    color:#17243a;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+
+.btn-outline{
+    border:1px solid rgba(255,255,255,.4);
+    color:#fff;
+    background:rgba(255,255,255,.08);
+}
+
+.btn-outline:hover{
+    background:#fff;
+    color:var(--primary);
+}
+
+.hero-card{
+    background:#fff;
+    color:var(--dark);
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.hero-card img{
+    width:100%;
+    height:270px;
+    object-fit:cover;
+    border-radius:16px;
+    background:#eef2f7;
+}
+
+.hero-card-content{
+    padding-top:18px;
+}
+
+.hero-card h3{
+    color:var(--primary);
+    margin-bottom:8px;
+}
+
+.price-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid var(--border);
+}
+
+.price{
+    font-size:30px;
+    font-weight:800;
+    color:var(--success);
+}
+
+/* SECTION */
+section{
+    padding:78px 0;
+}
+
+.section-head{
+    text-align:center;
+    max-width:750px;
+    margin:0 auto 45px;
+}
+
+.section-head .label{
+    color:var(--primary2);
+    font-weight:800;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:8px;
+}
+
+.section-head h2{
+    color:var(--dark);
+    font-size:clamp(28px,4vw,40px);
+    margin-bottom:12px;
+}
+
+.section-head p{
+    color:var(--muted);
+}
+
+/* STATS */
+.stats{
+    margin-top:-35px;
+    position:relative;
+    z-index:5;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:#fff;
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    overflow:hidden;
+}
+
+.stat{
+    padding:25px 15px;
+    text-align:center;
+    border-right:1px solid var(--border);
+}
+
+.stat:last-child{
+    border-right:none;
+}
+
+.stat strong{
+    display:block;
+    color:var(--primary);
+    font-size:27px;
+}
+
+.stat span{
+    font-size:13px;
+    color:var(--muted);
+}
+
+/* ABOUT */
+.about{
+    background:var(--light);
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.about-box{
+    background:#fff;
+    padding:30px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+}
+
+.about-box h3{
+    color:var(--primary);
+    font-size:27px;
+    margin-bottom:15px;
+}
+
+.check-list{
+    list-style:none;
+    margin-top:20px;
+}
+
+.check-list li{
+    margin:13px 0;
+    padding-left:28px;
+    position:relative;
+    font-weight:600;
+}
+
+.check-list li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    color:var(--success);
+    font-weight:bold;
+}
+
+.process{
+    display:grid;
+    gap:14px;
+}
+
+.process-item{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:#fff;
+}
+
+.process-number{
+    width:42px;
+    height:42px;
+    flex:none;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary);
+    color:#fff;
+    font-weight:bold;
+}
+
+/* TRAINING */
+.training{
+    background:#fff;
+}
+
+.course-card{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:25px;
+    background:#fff;
+    box-shadow:0 10px 30px rgba(20,32,51,.06);
+    margin-bottom:16px;
+    transition:.25s;
+}
+
+.course-card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow);
+}
+
+.day-head{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.day-number{
+    width:48px;
+    height:48px;
+    background:var(--primary);
+    color:#fff;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    flex:none;
+}
+
+.day-head h3{
+    color:var(--dark);
+    font-size:19px;
+}
+
+.topic-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px 30px;
+    margin:17px 0 0 63px;
+}
+
+.topic-list li{
+    list-style:none;
+    position:relative;
+    padding-left:20px;
+    color:#475467;
+    font-size:14px;
+}
+
+.topic-list li::before{
+    content:"•";
+    position:absolute;
+    left:0;
+    color:var(--accent);
+    font-size:20px;
+    line-height:15px;
+}
+
+/* FEATURES */
+.features{
+    background:var(--light);
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:#fff;
+    padding:28px;
+    border-radius:var(--radius);
+    border:1px solid var(--border);
+}
+
+.feature-icon{
+    width:50px;
+    height:50px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eaf1fb;
+    color:var(--primary);
+    font-size:23px;
+    margin-bottom:18px;
+}
+
+.feature h3{
+    color:var(--dark);
+    margin-bottom:8px;
+}
+
+/* QR */
+.qr-section{
+    background:linear-gradient(135deg,#f5f8fc,#fff);
+}
+
+.qr-grid{
+    display:grid;
+    grid-template-columns:1fr 320px;
+    gap:45px;
+    align-items:center;
+}
+
+.qr-box{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:25px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.qr-box img{
+    width:220px;
+    height:220px;
+    object-fit:contain;
+    margin:auto;
+}
+
+.qr-box h3{
+    margin-top:12px;
+    color:var(--primary);
+}
+
+/* FORM */
+.contact{
+    background:var(--primary);
+    color:#fff;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:45px;
+    align-items:start;
+}
+
+.contact h2{
+    font-size:38px;
+    margin-bottom:15px;
+}
+
+.contact-info p{
+    color:#d9e4f2;
+    margin-bottom:22px;
+}
+
+.info-item{
+    margin:17px 0;
+}
+
+.info-item strong{
+    display:block;
+    color:var(--accent);
+    margin-bottom:3px;
+}
+
+.form-card{
+    background:#fff;
+    padding:28px;
+    border-radius:20px;
+}
+
+.form-card h3{
+    color:var(--dark);
+    margin-bottom:18px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.input-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    font-weight:700;
+    color:#344054;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #d8dee8;
+    border-radius:9px;
+    outline:none;
+    font:inherit;
+    color:#1d2939;
+    background:#fff;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:var(--primary2);
+    box-shadow:0 0 0 3px rgba(18,63,122,.08);
+}
+
+textarea{
+    resize:vertical;
+    min-height:100px;
+}
+
+.submit-btn{
+    width:100%;
+    margin-top:15px;
+    background:var(--primary);
+    color:#fff;
+}
+
+/* FAQ */
+.faq{
+    max-width:850px;
+    margin:auto;
+}
+
+.faq-item{
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:12px;
+    overflow:hidden;
+}
+
+.faq-question{
+    width:100%;
+    padding:18px 20px;
+    background:#fff;
+    border:none;
+    text-align:left;
+    font-weight:700;
+    color:var(--dark);
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+}
+
+.faq-answer{
+    display:none;
+    padding:0 20px 18px;
+    color:var(--muted);
+}
+
+.faq-item.active .faq-answer{
+    display:block;
+}
+
+/* FOOTER */
+footer{
+    background:#06172f;
+    color:#b8c5d6;
+    padding:45px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.footer-logo img{
+    width:52px;
+    height:52px;
+    object-fit:contain;
+}
+
+.footer-logo strong{
+    color:#fff;
+    font-size:19px;
+}
+
+footer h4{
+    color:#fff;
+    margin-bottom:13px;
+}
+
+footer a{
+    display:block;
+    margin:8px 0;
+    font-size:14px;
+}
+
+footer a:hover{
+    color:var(--accent);
+}
+
+.copyright{
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.1);
+    margin-top:35px;
+    padding-top:20px;
+    font-size:13px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#25D366;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    z-index:999;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .hero-grid,
+    .about-grid,
+    .contact-grid,
+    .qr-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:55px 0 75px;
+    }
+
+    .hero-card{
+        max-width:600px;
+        margin:auto;
+    }
+
+    .feature-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:720px){
+    .topbar-inner{
+        justify-content:center;
+        text-align:center;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        left:0;
+        right:0;
+        top:76px;
+        background:#fff;
+        flex-direction:column;
+        padding:20px;
+        box-shadow:0 10px 25px rgba(0,0,0,.1);
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat:nth-child(2){
+        border-right:none;
+    }
+
+    .stat:nth-child(-n+2){
+        border-bottom:1px solid var(--border);
+    }
+
+    .topic-list{
+        grid-template-columns:1fr;
+        margin-left:0;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .input-group.full{
+        grid-column:auto;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        padding:60px 0;
+    }
+}
+
+@media(max-width:480px){
+    .logo-text strong{
+        font-size:17px;
+    }
+
+    .logo-text small{
+        font-size:9px;
+    }
+
+    .logo-box img{
+        width:48px;
+        height:48px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat strong{
+        font-size:22px;
+    }
+}
+</style>
 </head>
+
 <body>
-  <div class="topbar">🎓 Live Online Call Center Training &nbsp; | &nbsp; रोज़ सिर्फ 1 घंटे की class</div>
-  <nav class="nav"><div class="container nav-inner"><a href="#home" class="brand"><span class="brand-mark">E</span><span>EkVeera <small>TRAINING CENTER</small></span></a><div class="nav-links"><a href="#course">Course</a><a href="#admission">Admission</a><a href="#faq">FAQs</a><a href="#contact">Contact</a></div><a class="btn btn-dark" href="#admission">Admission लें</a></div></nav>
-  <main>
-    <section class="hero" id="home"><div class="container hero-grid"><div><span class="badge">🚀 Career Launch Program</span><h1>घर बैठे बनें <em>Call Center Professional</em></h1><p>Live online classes, mock call practice और interview preparation के साथ beginner से job-ready बनने का practical training program.</p><div class="cta-row"><a class="btn btn-primary" href="#admission">Admission Form भरें →</a><a class="btn btn-green" href="https://wa.me/919766284669?text=Namaste%2C%20mujhe%20Call%20Center%20Training%20ki%20jankari%20chahiye." target="_blank" rel="noopener">WhatsApp पर बात करें</a></div><div class="quick-points"><span>100% Online</span><span>₹200 Complete Fee</span><span>Interview Guidance</span></div></div><aside class="hero-card"><div class="hero-card-icon">🎧</div><h3>Job-Ready Training</h3><p>Communication, customer handling और professional calling की practical preparation.</p><div class="progress"><i></i></div><small>Beginner to interview-ready journey</small></aside></div></section>
-    <div class="container stats"><div class="stats-grid"><div class="stat"><b>1 Hour</b><span>Daily Live Class</span></div><div class="stat"><b>100%</b><span>Online Learning</span></div><div class="stat"><b>₹200</b><span>Complete Training Fee</span></div></div></div>
-    <section class="features" id="course"><div class="container"><div class="section-head center"><span class="eyebrow">Why EkVeera</span><h2>आपके career की practical तैयारी</h2><p>सिर्फ theory नहीं—real customer conversation और interview situations के लिए confidence बनाने वाली training.</p></div><div class="feature-grid"><article class="feature"><div class="icon">🎥</div><h3>Live Online Class</h3><p>Jitsi Meet के जरिए रोज़ interactive online session.</p></article><article class="feature"><div class="icon">🎧</div><h3>Mock Call Practice</h3><p>Real call center जैसी calling practice और feedback.</p></article><article class="feature"><div class="icon">🗣️</div><h3>Communication Skills</h3><p>Voice modulation, listening और professional greeting.</p></article><article class="feature"><div class="icon">💼</div><h3>Interview Guidance</h3><p>Interview preparation और personality development support.</p></article></div></div></section>
-    <section class="curriculum"><div class="container"><div class="section-head"><span class="eyebrow">Course Modules</span><h2>क्या-क्या सीखेंगे?</h2><p>Beginner-friendly modules जो आपको customer service और call center role के लिए तैयार करेंगे.</p></div><div class="module-grid"><article class="module"><b class="module-num">01</b><div><h3>Call Center Basics</h3><p>Call center introduction, inbound/outbound calling और professional greeting.</p></div></article><article class="module"><b class="module-num">02</b><div><h3>Communication Mastery</h3><p>Active listening, voice modulation और probing skills.</p></div></article><article class="module"><b class="module-num">03</b><div><h3>Customer Handling</h3><p>Empathy, difficult customer handling और dead-air management.</p></div></article><article class="module"><b class="module-num">04</b><div><h3>Call Process Knowledge</h3><p>Hold/transfer procedure, call wrap-up, disposition, AHT और FCR.</p></div></article><article class="module"><b class="module-num">05</b><div><h3>Mock Calls</h3><p>Practical mock call practice के साथ confidence building.</p></div></article><article class="module"><b class="module-num">06</b><div><h3>Interview Ready</h3><p>Interview questions, personality development और career guidance.</p></div></article></div></div></section>
-    <section><div class="container"><div class="section-head center"><span class="eyebrow">Simple Process</span><h2>Admission कैसे लें?</h2></div><div class="how-grid"><article class="step"><b class="step-no">1</b><h3>Form भरें</h3><p>नीचे दिए गए admission form में अपनी basic जानकारी भरें.</p></article><article class="step"><b class="step-no">2</b><h3>Fee जमा करें</h3><p>UPI app से ₹200 training fee जमा करके अपनी सीट confirm करें.</p></article><article class="step"><b class="step-no">3</b><h3>Class Join करें</h3><p>WhatsApp पर training और live class से संबंधित जानकारी प्राप्त करें.</p></article></div></div></section>
-    <section id="admission"><div class="container"><div class="admission-wrap"><div class="admission-copy"><span class="eyebrow" style="color:#ffd56a">Start Today</span><h2>अपनी सीट अभी reserve करें</h2><p>कम fee में practical online training और interview preparation का मौका पाएं.</p><div class="fee">💳 पूरी Training Fee: ₹200</div><ul><li>Eligibility: 12वीं पास या Graduate उम्मीदवार</li><li>Mobile/Laptop और internet connection आवश्यक</li><li>Payment के बाद WhatsApp पर जानकारी भेजें</li></ul><a class="btn btn-primary" href="https://wa.me/919766284669?text=Namaste%2C%20maine%20admission%20ke%20liye%20contact%20kiya%20hai." target="_blank" rel="noopener">WhatsApp से Admission लें</a></div><div class="pay-card"><h3>Payment करें</h3><p>Google Pay, PhonePe या Paytm से नीचे दिए UPI ID पर payment कर सकते हैं.</p><div class="upi">UPI ID: 9766284669@ybl</div><button class="btn btn-dark" id="copyUpi" type="button">UPI ID Copy करें</button><a class="btn btn-green" style="margin-left:8px" href="upi://pay?pa=9766284669@ybl&pn=EkVeera%20Placement%20Consulting%20%26%20Services&am=200&cu=INR">₹200 Pay करें</a><p class="pay-note">Payment करने के बाद screenshot WhatsApp पर भेजें, ताकि admission process आगे बढ़ सके.</p><div class="form-note" id="copyNote">UPI ID copy हो गई है। अब अपने payment app में paste करें।</div></div></div></div></section>
-    <section class="placement"><div class="container placement-grid"><div class="placement-card"><div class="big">+</div><h3>Skills से opportunity तक</h3><p>EkVeera Placement Consulting &amp; Services का उद्देश्य candidates को सही skills और opportunities तक पहुंचाने में सहायता देना है.</p></div><div class="placement-copy"><span class="eyebrow">Career Support</span><h2>Training के बाद भी आपका support</h2><p>Training पूरी होने के बाद available placement या interview opportunities की जानकारी share की जा सकती है। हमारा focus आपकी preparation और confidence को मजबूत बनाना है.</p><div class="checklist"><div class="check">Mock Interviews</div><div class="check">Personality Development</div><div class="check">Interview Preparation</div><div class="check">WhatsApp Updates</div></div><p style="font-size:12px;margin-top:19px">नोट: Placement या job की सीधी गारंटी नहीं दी जाती है। Opportunities उपलब्ध होने पर जानकारी साझा की जाती है.</p></div></div></section>
-    <section class="faq" id="faq"><div class="container"><div class="section-head center"><span class="eyebrow">Common Questions</span><h2>अक्सर पूछे जाने वाले सवाल</h2></div><div class="faq-list"><details class="faq-item"><summary>क्या training पूरी तरह online है?</summary><p>हां, training 100% online है। Jitsi Meet के माध्यम से रोज़ 1 घंटे की live class होती है.</p></details><details class="faq-item"><summary>Training के लिए क्या चाहिए?</summary><p>एक smartphone या laptop और stable internet connection चाहिए। बाकी training guidance में बताया जाएगा.</p></details><details class="faq-item"><summary>पूरी training fee कितनी है?</summary><p>पूरी training की fee ₹200 है, जो admission और सीट confirmation के लिए advance में जमा करनी होती है.</p></details><details class="faq-item"><summary>क्या job की guarantee है?</summary><p>Interview preparation और placement guidance दी जाती है, लेकिन job की सीधी guarantee नहीं है.</p></details><details class="faq-item"><summary>Admission कैसे होगा?</summary><p>ऊपर दिए WhatsApp button से संपर्क करें, payment के बाद screenshot भेजें और आगे की जानकारी प्राप्त करें.</p></details></div></div></section>
-    <section id="contact"><div class="container"><div class="section-head"><span class="eyebrow">Contact Us</span><h2>किसी भी सवाल के लिए संपर्क करें</h2><p>Admission, payment या training से जुड़ी जानकारी के लिए सीधे WhatsApp, call या email करें.</p></div><div class="contact-grid"><article class="contact"><i>💬</i><h3>WhatsApp / Call</h3><p>9766284669</p><a href="https://wa.me/919766284669" target="_blank" rel="noopener">Chat करें →</a></article><article class="contact"><i>📞</i><h3>Branch Contact</h3><p>9174777074</p><a href="tel:+919174777074">Call करें →</a></article><article class="contact"><i>✉️</i><h3>Email</h3><p>ekveeraplacement26@gmail.com</p><a href="mailto:ekveeraplacement26@gmail.com">Email भेजें →</a></article></div><div class="addresses"><h3>📍 Office Address</h3><div class="addresses-grid"><div><b>Maihar Head Office</b><p>Vivek Nagar, Ward No. 19, Shiv Temple के पास, Metro Mirchi के पास, Rewa Road, Maihar, Madhya Pradesh – 485771</p><p><b>फोन:</b> 9766284669</p></div><div><b>Panna Office</b><p>New Meet Market Mohalla, Raniganj, Panna, Madhya Pradesh – 488001</p><p><b>फोन:</b> 9174777074</p></div></div></div></div></section>
-  </main>
-  <a class="floating-wa" href="https://wa.me/919766284669?text=Namaste%2C%20mujhe%20training%20ki%20jankari%20chahiye." target="_blank" rel="noopener" aria-label="WhatsApp पर chat करें">💬</a>
-  <footer><div class="container">© 2026 EkVeera Placement Consulting &amp; Services. All rights reserved.</div></footer>
-  <script>
-    document.getElementById('copyUpi').addEventListener('click', async function(){
-      const upi='9766284669@ybl';
-      try{await navigator.clipboard.writeText(upi)}catch(e){const t=document.createElement('textarea');t.value=upi;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
-      const note=document.getElementById('copyNote'); note.style.display='block'; setTimeout(()=>note.style.display='none',3500);
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="container topbar-inner">
+        <span>🎓 Career-Oriented Call Center & Customer Service Training</span>
+        <span>📍 EkVeera Placement Consulting & Services</span>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container nav-inner">
+
+        <a href="#home" class="logo-box">
+            <!-- अपना Logo इसी नाम से रखें -->
+            <img src="logo.png" alt="EkVeera Logo">
+
+            <div class="logo-text">
+                <strong>EkVeera</strong>
+                <small>PLACEMENT CONSULTING & SERVICES</small>
+            </div>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#training">Training</a>
+            <a href="#process">Process</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact" class="nav-btn">Enquire Now</a>
+        </div>
+
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="container hero-grid">
+
+        <div>
+            <span class="badge">15 Days Professional Training Program</span>
+
+            <h1>
+                Build Your Skills.<br>
+                <span>Build Your Career.</span>
+            </h1>
+
+            <p>
+                Practical Call Center & Customer Service Training designed
+                to help students understand professional communication,
+                customer handling, mock calls, interview preparation and
+                workplace skills.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#training" class="btn btn-primary">View Training Program</a>
+                <a href="#contact" class="btn btn-outline">Register / Enquire</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <!-- Call Center Image -->
+            <img src="call-center.jpg" alt="Call Center Training"
+                 onerror="this.src='https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=80';">
+
+            <div class="hero-card-content">
+                <h3>Call Center & Customer Service Training</h3>
+                <p>Learn the skills required to communicate confidently and work professionally with customers.</p>
+
+                <div class="price-row">
+                    <div>
+                        <small>Training Fee</small>
+                        <div class="price">₹200</div>
+                    </div>
+
+                    <div>
+                        <strong>15 Days</strong><br>
+                        <small>Professional Program</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat">
+                <strong>15 Days</strong>
+                <span>Structured Training</span>
+            </div>
+            <div class="stat">
+                <strong>₹200</strong>
+                <span>Training Fee</span>
+            </div>
+            <div class="stat">
+                <strong>Practical</strong>
+                <span>Mock Call Practice</span>
+            </div>
+            <div class="stat">
+                <strong>Placement</strong>
+                <span>Interview Support</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="container">
+
+        <div class="section-head">
+            <div class="label">Why EkVeera</div>
+            <h2>Training That Prepares You for the Workplace</h2>
+            <p>
+                हमारा उद्देश्य केवल training देना नहीं, बल्कि students को
+                professional customer service environment को समझने और
+                interview के लिए तैयार करने में मदद करना है।
+            </p>
+        </div>
+
+        <div class="about-grid">
+
+            <div class="about-box">
+                <h3>Students को क्या मिलेगा?</h3>
+
+                <ul class="check-list">
+                    <li>Professional Communication Skills</li>
+                    <li>Call Center की basic working की समझ</li>
+                    <li>Customer Handling Techniques</li>
+                    <li>Inbound और Outbound Calling की जानकारी</li>
+                    <li>Mock Call और Practical Practice</li>
+                    <li>Interview & Grooming Preparation</li>
+                    <li>CRM और Call Disposition की basic understanding</li>
+                    <li>Quality, Compliance और Customer Experience की जानकारी</li>
+                </ul>
+            </div>
+
+            <div class="process" id="process">
+
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div>
+                        <strong>Training</strong><br>
+                        <small>15 Days Structured Learning</small>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div>
+                        <strong>Practice</strong><br>
+                        <small>Mock Calls & Communication Practice</small>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div>
+                        <strong>Assessment</strong><br>
+                        <small>Theory & Practical Evaluation</small>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div>
+                        <strong>Interview Preparation</strong><br>
+                        <small>Grooming & Interview Guidance</small>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">05</div>
+                    <div>
+                        <strong>Placement Support</strong><br>
+                        <small>Interview & Placement Assistance</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TRAINING -->
+<section class="training" id="training">
+
+    <div class="container">
+
+        <div class="section-head">
+            <div class="label">15 Days Program</div>
+            <h2>Call Center & Customer Service Training</h2>
+            <p>
+                हर दिन students को job-oriented topics, examples और
+                practical activities के माध्यम से समझाया जाएगा।
+            </p>
+        </div>
+
+        <!-- DAY 1 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">01</div>
+                <h3>Professional Introduction & Call Center Basics</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Call Center क्या है और कैसे काम करता है</li>
+                <li>Inbound और Outbound Process</li>
+                <li>Customer Service का महत्व</li>
+                <li>CCE की भूमिका और जिम्मेदारियाँ</li>
+                <li>Professional Introduction</li>
+                <li>First Impression और First 7 Seconds</li>
+            </ul>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">02</div>
+                <h3>Professional Communication & Greetings</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Professional Greeting कैसे करें</li>
+                <li>Opening और Closing Script</li>
+                <li>Positive और Professional Language</li>
+                <li>Do's & Don'ts of Customer Communication</li>
+                <li>Hindi/English Call Opening Practice</li>
+                <li>Professional Vocabulary</li>
+            </ul>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">03</div>
+                <h3>Effective Communication Skills</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Clear और Simple Communication</li>
+                <li>Active Listening</li>
+                <li>Voice Modulation</li>
+                <li>Tone, Pitch और Speed</li>
+                <li>Confidence के साथ बोलना</li>
+                <li>Communication Practice</li>
+            </ul>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">04</div>
+                <h3>Online Training & Professional Etiquette</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Online Meeting की Basic Etiquette</li>
+                <li>Zoom Meeting Rules</li>
+                <li>Professional Body Language</li>
+                <li>Camera, Mic और Background Etiquette</li>
+                <li>Meeting में Professional Behaviour</li>
+                <li>Time Discipline</li>
+            </ul>
+        </div>
+
+        <!-- DAY 5 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">05</div>
+                <h3>Customer Handling Skills</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Customer की जरूरत समझना</li>
+                <li>Customer Behaviour को समझना</li>
+                <li>Angry Customer को Handle करना</li>
+                <li>Patience और Professional Behaviour</li>
+                <li>Empathy vs Sympathy</li>
+                <li>Positive Response Techniques</li>
+            </ul>
+        </div>
+
+        <!-- DAY 6 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">06</div>
+                <h3>Probing & Questioning Skills</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Customer से सही जानकारी लेना</li>
+                <li>Open और Closed Questions</li>
+                <li>Probing का सही तरीका</li>
+                <li>Relevant Questions पूछना</li>
+                <li>Active Listening के साथ Probing</li>
+                <li>Practical Questioning Exercise</li>
+            </ul>
+        </div>
+
+        <!-- DAY 7 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">07</div>
+                <h3>Hold, Transfer & Dead Air Management</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Customer को Hold पर रखने की सही प्रक्रिया</li>
+                <li>Hold के 4 Golden Rules</li>
+                <li>Cold Transfer और Warm Transfer</li>
+                <li>Transfer से पहले Customer को Inform करना</li>
+                <li>Dead Air क्या है</li>
+                <li>Dead Air को Professional तरीके से Manage करना</li>
+            </ul>
+        </div>
+
+        <!-- DAY 8 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">08</div>
+                <h3>Complaint Handling & Escalation</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Customer Complaint को समझना</li>
+                <li>Complaint Handling Process</li>
+                <li>Apology और Assurance</li>
+                <li>HEAT Model</li>
+                <li>Escalation कब और कैसे करें</li>
+                <li>Escalation Matrix की Basic Understanding</li>
+            </ul>
+        </div>
+
+        <!-- DAY 9 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">09</div>
+                <h3>Call Quality & Professional Standards</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Call Quality क्या है</li>
+                <li>Quality Parameters की Basic Understanding</li>
+                <li>Professional Call Flow</li>
+                <li>Compliance का महत्व</li>
+                <li>PII और Customer Data Protection</li>
+                <li>Fatal Error की Basic Understanding</li>
+            </ul>
+        </div>
+
+        <!-- DAY 10 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">10</div>
+                <h3>Call Center KPIs & Customer Experience</h3>
+            </div>
+            <ul class="topic-list">
+                <li>AHT – Average Handling Time</li>
+                <li>FCR – First Contact Resolution</li>
+                <li>CSAT – Customer Satisfaction</li>
+                <li>NPS – Net Promoter Score</li>
+                <li>Quality Score की Basic Understanding</li>
+                <li>Customer Experience का महत्व</li>
+            </ul>
+        </div>
+
+        <!-- DAY 11 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">11</div>
+                <h3>CRM, Disposition & Call Documentation</h3>
+            </div>
+            <ul class="topic-list">
+                <li>CRM क्या है</li>
+                <li>Customer Information को सही तरीके से Handle करना</li>
+                <li>Call Disposition क्या है</li>
+                <li>Call Notes और Documentation</li>
+                <li>Data Accuracy</li>
+                <li>Basic CRM Workflow</li>
+            </ul>
+        </div>
+
+        <!-- DAY 12 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">12</div>
+                <h3>Mock Call Practice & Role Play</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Inbound Mock Calls</li>
+                <li>Outbound Mock Calls</li>
+                <li>Customer Complaint Scenarios</li>
+                <li>Hold & Transfer Practice</li>
+                <li>Probing Practice</li>
+                <li>Trainer द्वारा Call Feedback</li>
+            </ul>
+        </div>
+
+        <!-- DAY 13 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">13</div>
+                <h3>Final Assessment – Theory & Knowledge Test</h3>
+            </div>
+            <ul class="topic-list">
+                <li>AHT, FCR, CSAT और NPS Revision</li>
+                <li>Quality & Compliance</li>
+                <li>PII और Fatal Error</li>
+                <li>CRM और Disposition</li>
+                <li>Customer Handling</li>
+                <li>Theory Quiz / Assessment</li>
+            </ul>
+        </div>
+
+        <!-- DAY 14 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">14</div>
+                <h3>Personal Feedback, Grooming & Gap Analysis</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Individual Performance Feedback</li>
+                <li>Mock Call Playback</li>
+                <li>Communication Improvement</li>
+                <li>GAP Analysis</li>
+                <li>Professional Grooming</li>
+                <li>Interview Behaviour</li>
+            </ul>
+        </div>
+
+        <!-- DAY 15 -->
+        <div class="course-card">
+            <div class="day-head">
+                <div class="day-number">15</div>
+                <h3>Final Mock Interview & Career Preparation</h3>
+            </div>
+            <ul class="topic-list">
+                <li>Final Mock Call</li>
+                <li>Mock Interview</li>
+                <li>Common Interview Questions</li>
+                <li>Self Introduction Practice</li>
+                <li>Resume & Job Readiness Guidance</li>
+                <li>Interview & Placement Process की जानकारी</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <div class="container">
+
+        <div class="section-head">
+            <div class="label">What You Learn</div>
+            <h2>Job-Oriented Skills</h2>
+            <p>
+                Training में केवल theory नहीं, बल्कि workplace में काम आने वाली
+                practical skills पर भी ध्यान दिया जाएगा।
+            </p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+                <div class="feature-icon">🎧</div>
+                <h3>Call Handling</h3>
+                <p>Professional तरीके से customer calls को handle करना सीखें।</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">💬</div>
+                <h3>Communication</h3>
+                <p>Clear, confident और customer-friendly communication develop करें।</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">👂</div>
+                <h3>Active Listening</h3>
+                <p>Customer की जरूरत को सही तरीके से सुनना और समझना सीखें।</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🤝</div>
+                <h3>Customer Handling</h3>
+                <p>Different customer situations को professional तरीके से manage करें।</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Call Center KPIs</h3>
+                <p>AHT, FCR, CSAT और NPS जैसे important metrics समझें।</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>Interview Ready</h3>
+                <p>Mock interview, grooming और job readiness की practice करें।</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- QR SECTION -->
+<section class="qr-section">
+    <div class="container qr-grid">
+
+        <div>
+            <div class="section-head" style="text-align:left;margin:0 0 20px;">
+                <div class="label">Join EkVeera</div>
+                <h2>Training के लिए Enquire करें</h2>
+            </div>
+
+            <p>
+                Training program की जानकारी, registration या placement-related
+                enquiry के लिए हमसे संपर्क करें।
+            </p>
+
+            <br>
+
+            <a href="#contact" class="btn btn-primary">
+                Enquiry Form भरें
+            </a>
+        </div>
+
+        <div class="qr-box">
+            <!-- अपना QR Code इसी नाम से रखें -->
+            <img src="qr-code.png" alt="EkVeera QR Code">
+
+            <h3>Anak Kumar Patel</h3>
+            <p>Scan to Connect</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container">
+
+        <div class="section-head">
+            <div class="label">FAQ</div>
+            <h2>Frequently Asked Questions</h2>
+            <p>Students के सामान्य questions के आसान answers.</p>
+        </div>
+
+        <div class="faq">
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Training कितने दिनों की है?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Training program 15 दिनों का है।
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Training Fee कितनी है?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Training fee ₹200 है।
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Training में क्या सिखाया जाएगा?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Call Center basics, professional communication, customer handling,
+                    active listening, mock calls, CRM basics, KPIs, quality,
+                    interview preparation और workplace etiquette आदि सिखाया जाएगा।
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    क्या Mock Call Practice होगी?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    हाँ। Training के दौरान inbound, outbound और different customer
+                    situations पर mock call और role-play practice कराई जाएगी।
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    क्या Placement Support मिलेगा?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Training के बाद interview और placement process के लिए guidance
+                    और available opportunities के अनुसार placement assistance दी जाएगी।
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+    <div class="container contact-grid">
+
+        <div class="contact-info">
+            <div class="label" style="color:var(--accent);">Get Started</div>
+
+            <h2>Start Your Career Journey</h2>
+
+            <p>
+                अगर आप Call Center या Customer Service field में career
+                शुरू करना चाहते हैं, तो अपनी basic information भेजें।
+            </p>
+
+            <div class="info-item">
+                <strong>Training</strong>
+                15 Days Call Center & Customer Service Training
+            </div>
+
+            <div class="info-item">
+                <strong>Fee</strong>
+                ₹200
+            </div>
+
+            <div class="info-item">
+                <strong>Support</strong>
+                Interview & Placement Assistance
+            </div>
+        </div>
+
+        <div class="form-card">
+
+            <h3>Student Enquiry Form</h3>
+
+            <!--
+            IMPORTANT:
+            यह form अभी केवल front-end form है।
+            Submit करने के लिए नीचे JavaScript WhatsApp message बनाएगा।
+            -->
+            <form id="enquiryForm">
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="name" required placeholder="Enter your name">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mobile Number *</label>
+                        <input type="tel" id="phone" required placeholder="Enter mobile number">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Qualification</label>
+                        <select id="qualification">
+                            <option value="">Select Qualification</option>
+                            <option>12th Pass</option>
+                            <option>Graduate</option>
+                            <option>Post Graduate</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="age" placeholder="Enter age">
+                    </div>
+
+                    <div class="input-group full">
+                        <label>City / Location</label>
+                        <input type="text" id="location" placeholder="Enter your city">
+                    </div>
+
+                    <div class="input-group full">
+                        <label>Your Enquiry</label>
+                        <textarea id="message" placeholder="What would you like to know?"></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn submit-btn">
+                    Send Enquiry on WhatsApp
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div>
+                <div class="footer-logo">
+                    <img src="logo.png" alt="EkVeera Logo">
+                    <strong>EkVeera</strong>
+                </div>
+
+                <p>
+                    EkVeera Placement Consulting & Services provides
+                    career-oriented training and placement support for
+                    students and job seekers.
+                </p>
+            </div>
+
+            <div>
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#training">Training Program</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Enquiry</a>
+            </div>
+
+            <div>
+                <h4>Training</h4>
+                <a href="#training">Call Center Training</a>
+                <a href="#training">Customer Service</a>
+                <a href="#training">Mock Call Practice</a>
+                <a href="#training">Interview Preparation</a>
+                <a href="#contact">Placement Support</a>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 EkVeera Placement Consulting & Services. All Rights Reserved.
+        </div>
+
+    </div>
+</footer>
+
+<!-- WHATSAPP BUTTON -->
+<a class="whatsapp"
+   href="https://wa.me/919XXXXXXXXX"
+   target="_blank"
+   aria-label="WhatsApp">
+   ☎
+</a>
+
+<script>
+
+/* MOBILE MENU */
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+
+/* CLOSE MENU AFTER CLICK */
+document.querySelectorAll(".nav-links a").forEach(function(link){
+    link.addEventListener("click",function(){
+        document.getElementById("navLinks").classList.remove("show");
     });
-  </script>
+});
+
+/* FAQ */
+document.querySelectorAll(".faq-question").forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+        const item = button.parentElement;
+        const currentlyActive = item.classList.contains("active");
+
+        document.querySelectorAll(".faq-item").forEach(function(faq){
+            faq.classList.remove("active");
+            faq.querySelector(".faq-question span").textContent = "+";
+        });
+
+        if(!currentlyActive){
+            item.classList.add("active");
+            button.querySelector("span").textContent = "−";
+        }
+
+    });
+
+});
+
+/* WHATSAPP ENQUIRY FORM */
+document.getElementById("enquiryForm").addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const qualification = document.getElementById("qualification").value;
+    const age = document.getElementById("age").value;
+    const location = document.getElementById("location").value;
+    const message = document.getElementById("message").value;
+
+    const whatsappNumber = "919XXXXXXXXX";
+
+    const text =
+`*EkVeera Student Enquiry*
+
+Name: ${name}
+Mobile: ${phone}
+Qualification: ${qualification}
+Age: ${age}
+City: ${location}
+
+Enquiry:
+${message}
+
+I am interested in EkVeera Call Center & Customer Service Training.`;
+
+    const url =
+        "https://wa.me/" + whatsappNumber +
+        "?text=" + encodeURIComponent(text);
+
+    window.open(url,"_blank");
+
+});
+
+</script>
+
 </body>
 </html>
