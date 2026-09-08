@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EkVeera Training Center | 15 Days Call Center & Customer Service Training</title>
+    <title>EkVeera Training Center | Premium Call Center Training</title>
     
     <!-- मॉडर्न गूगल फॉन्ट्स और फॉन्ट ऑसम आइकन्स -->
     <link rel="stylesheet" href="https://cloudflare.com">
+    
     <style>
         @import url('https://googleapis.com');
 
         :root {
-            --primary: #0f172a;        /* स्लेट डार्क - प्रीमियम बेस */
-            --accent: #2563eb;         /* इलेक्ट्रिक ब्लू - ब्रांड कलर */
-            --accent-glow: rgba(37, 99, 235, 0.15);
-            --success: #10b981;        /* एमराल्ड ग्रीन - पेमेंट्स और सक्सेस स्टेट्स */
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --bg-light: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.85);
-            --shadow-md: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
-            --shadow-lg: 0 20px 32px -8px rgba(15, 23, 42, 0.12);
-            --radius: 16px;
+            --bg-dark: #090d16;        /* अल्ट्रा मॉडर्न डार्क बैकग्राउंड */
+            --panel-dark: #111827;     /* कार्ड्स के लिए गहरा रंग */
+            --accent: #3b82f6;         /* नियॉन इलेक्ट्रिक ब्लू */
+            --accent-glow: #1d4ed8;
+            --success: #10b981;        /* एमराल्ड ग्रीन */
+            --text-light: #f8fafc;     /* सफेद चमकीला टेक्स्ट */
+            --text-muted: #94a3b8;     /* धीमा टेक्स्ट */
+            --glass: rgba(17, 24, 39, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --radius-lg: 24px;
+            --radius-md: 14px;
         }
 
         * {
@@ -33,9 +34,14 @@
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
+            /* बैकग्राउंड में प्रीमियम ग्लो इफेक्ट्स */
+            background-image: 
+                radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
         }
 
         .container {
@@ -44,34 +50,16 @@
             padding: 0 1.5rem;
         }
 
-        /* प्रीमियम ग्लासमोर्फिज्म सेक्शन्स */
-        section, .premium-card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 2.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        section:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(37, 99, 235, 0.2);
-        }
-
-        /* नेविगेशन बार */
+        /* 🌐 न्यू ऐज नेविगेशन बार */
         nav {
-            background: rgba(15, 23, 42, 0.95);
-            color: white;
-            padding: 1rem 0;
+            background: rgba(9, 13, 22, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 1.2rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(8px);
         }
 
         nav .nav-container {
@@ -80,165 +68,218 @@
             align-items: center;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 1.25rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
 
-        nav a:hover { color: var(--success); }
+        nav .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
 
-        /* हीरो एरिया */
+        nav .nav-links a:hover {
+            color: var(--text-light);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* 🚀 अल्टीमेट हीरो सेक्शन */
         .hero {
             text-align: center;
-            padding: 4rem 1rem;
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 50%);
+            padding: 7rem 1rem 5rem 1rem;
+            position: relative;
+        }
+
+        .badge-online {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 0.4rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.8rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--text-light);
             margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
         }
 
         .hero h1 span {
-            background: linear-gradient(135deg, var(--accent), #1d4ed8);
+            background: linear-gradient(135deg, #3b82f6, #10b981);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* टाइटल्स */
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 3rem auto;
+            font-weight: 400;
+        }
+
+        /* ⚡ सुपर कस्टमाइज्ड ग्लासमोर्फिज्म कार्ड्स */
+        section, .premium-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        section:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 30px 60px -10px rgba(59, 130, 246, 0.15);
+        }
+
+        /* सेक्शन टाइटल्स */
         h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            border-left: 5px solid var(--accent);
-            padding-left: 0.75rem;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        /* टाइमर ग्रिड */
-        .timer-grid {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2::before {
+            content: '';
+            width: 6px;
+            height: 32px;
+            background: linear-gradient(to bottom, var(--accent), var(--success));
+            border-radius: 99px;
+            display: inline-block;
+        }
+
+        /* ⏱️ भविष्य जैसा (Futuristic) काउंटडाउन और स्टैट्स ग्रिड */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
+            margin: 3rem 0;
         }
 
         .timer-box {
-            background: var(--primary);
-            color: white;
-            min-width: 85px;
-            padding: 0.85rem;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer-box::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
         }
 
         .timer-box span {
             display: block;
-            font-size: 1.8rem;
+            font-size: 2.4rem;
             font-weight: 800;
-            color: var(--success);
+            color: var(--text-light);
+            line-height: 1;
+            margin-bottom: 0.3rem;
         }
 
-        .timer-box label { font-size: 0.75rem; opacity: 0.8; }
+        .timer-box label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
 
-        /* ग्रिड सिस्टम */
-        .grid-cards, .grid-3 {
+        /* ग्रिड लेआउट */
+        .grid-3, .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
 
         .feature-card {
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            transition: all 0.3s;
         }
 
-        /* टाइमलाइन */
-        .timeline { position: relative; margin: 2rem 0; }
-        .timeline-item { position: relative; padding-left: 3.5rem; margin-bottom: 2rem; }
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        /* 🗺️ मॉडर्न टाइमलाइन डिज़ाइन */
+        .timeline { position: relative; margin: 3rem 0; }
+        .timeline-item { position: relative; padding-left: 4.5rem; margin-bottom: 2.5rem; }
         .timeline-item::before {
-            content: ''; position: absolute; left: 17px; top: 36px; bottom: -32px; width: 2px;
+            content: ''; position: absolute; left: 22px; top: 44px; bottom: -36px; width: 2px;
             background: linear-gradient(to bottom, var(--accent), transparent);
         }
         .timeline-item:last-child::before { display: none; }
+        
         .t-num {
-            position: absolute; left: 0; top: 0; width: 36px; height: 36px; background: var(--accent);
+            position: absolute; left: 0; top: 0; width: 44px; height: 44px; 
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
             color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.15);
+            font-weight: 800; font-size: 1.1rem; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
         }
 
-        /* इनपुट्स और फॉर्म्स */
-        .form-group { margin-bottom: 1.25rem; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
-        input[type="text"], input[type="tel"], input[type="email"], select, textarea {
-            width: 100%; padding: 0.8rem 1rem; border: 1px solid #cbd5e1; border-radius: 10px;
-            background: white; font-size: 0.95rem; transition: all 0.2s;
+        /* 📋 नया फॉर्म और इनपुट स्टाइल (Dark Dashboard Feel) */
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: #cbd5e1; }
+        
+        input[type="text"], input[type="tel"], input[type="email"], input[type="password"], select, textarea {
+            width: 100%; padding: 0.9rem 1.2rem; background: rgba(0, 0, 0, 0.3); 
+            border: 1px solid var(--border-glass); border-radius: var(--radius-md);
+            color: var(--text-light); font-size: 0.95rem; transition: all 0.3s;
         }
-        input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+        input:focus, select:focus { 
+            outline: none; border-color: var(--accent); 
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.25); 
+        }
 
-        /* बटन्स */
+        /* 🔘 हाई-एंड एनिमेटेड बटन्स */
         .cta-btn, button, input[type="submit"] {
-            background: linear-gradient(135deg, var(--accent), #1d4ed8);
-            color: white; font-weight: 600; padding: 0.8rem 2rem; border-radius: 50px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white; font-weight: 700; padding: 1rem 2.5rem; border-radius: 9999px;
             border: none; cursor: pointer; text-decoration: none; display: inline-flex;
-            align-items: center; gap: 0.5rem; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-            transition: all 0.2s;
+            align-items: center; gap: 0.6rem; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 0.95rem;
         }
-        .cta-btn:hover, button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4); }
-        .pulse { animation: pulseGlow 2s infinite; }
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        
+        .cta-btn:hover, button:hover { 
+            transform: scale(1.04); 
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.5); 
         }
-
-        /* पेमेंट और क्यूआर */
-        .qr-frame { border: 2px dashed rgba(16, 185, 129, 0.4); padding: 1.5rem; border-radius: 12px; background: white; display: inline-block; margin: 1.5rem 0; }
-        .upi-box { background: #f1f5f9; padding: 0.75rem 1rem; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; max-width: 350px; margin: 0 auto 1rem auto; }
-
-        /* एकॉर्डियन पैनल */
-        .accordion-panel { display: none; margin-top: 1.5rem; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* पादलेख (Footer) */
-        footer { background: var(--primary); color: white; padding: 3rem 0; margin-top: 4rem; text-align: center; }
-        footer a { color: #94a3b8; text-decoration: none; margin: 0 0.75rem; font-size: 0.85rem; }
-        footer a:hover { color: white; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            section { padding: 1.5rem; }
-            nav .nav-container { flex-direction: column; gap: 0.5rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- नेविगेशन बार -->
-    <nav>
-        <div class="container nav-container">
-            <strong style="font-size: 1.2rem;">EkVeera</strong>
-            <div>
-                <a href="#about">About</a>
-                <a href="#format">Online Format</a>
-                <a href="#curriculum">कोर्स</a>
-                <a href="#fee">फीस</a>
-                <a href="#id-card">ID Card</a>
+        
+        .pulse { animation: neonPulse 2s infinite; }
+        @keyframes neonPulse {
