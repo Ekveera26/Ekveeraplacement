@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EkVeera Training Center — सिर्फ 15 दिनों में बनें कॉल सेंटर प्रोफेशनल</title>
+    <title>EkVeera Training Center | 15 Days Call Center & Customer Service Training</title>
     
-    <!-- मॉडर्न गूगल फॉन्ट्स और आइकन्स -->
-    @import url('https://googleapis.com');
+    <!-- मॉडर्न गूगल फॉन्ट्स और फॉन्ट ऑसम आइकन्स -->
     <link rel="stylesheet" href="https://cloudflare.com">
-
     <style>
-        /* ==========================================
-           EkVeera Modern Premium UI Framework (2026)
-           ========================================== */
+        @import url('https://googleapis.com');
+
         :root {
             --primary: #0f172a;        /* स्लेट डार्क - प्रीमियम बेस */
             --accent: #2563eb;         /* इलेक्ट्रिक ब्लू - ब्रांड कलर */
@@ -21,8 +18,7 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --bg-light: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.8);
-            --shadow-sm: 0 2px 8px -2px rgba(15, 23, 42, 0.05);
+            --glass: rgba(255, 255, 255, 0.85);
             --shadow-md: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
             --shadow-lg: 0 20px 32px -8px rgba(15, 23, 42, 0.12);
             --radius: 16px;
@@ -40,254 +36,209 @@
             background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 4rem;
         }
 
-        /* कॉमन लेआउट कंटेनर */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
 
-        /* प्रीमियम ग्लासमोर्फिज्म कार्ड्स */
-        .premium-card {
+        /* प्रीमियम ग्लासमोर्फिज्म सेक्शन्स */
+        section, .premium-card {
             background: var(--glass);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 2.5rem;
             box-shadow: var(--shadow-md);
+            margin-bottom: 2.5rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .premium-card:hover {
+        section:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(37, 99, 235, 0.2);
         }
 
-        /* हेडिंग्स स्टाइल */
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+        /* नेविगेशन बार */
+        nav {
+            background: rgba(15, 23, 42, 0.95);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            font-size: 1.05rem;
+        nav .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* 1. हीरो सेक्शन स्टाइल */
-        .hero-section {
-            position: relative;
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.07), transparent 50%),
-                        radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.04), transparent 45%);
-            padding: 5rem 0 4rem 0;
-            text-align: center;
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
         }
 
-        .hero-section h1 {
+        nav a:hover { color: var(--success); }
+
+        /* हीरो एरिया */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 50%);
+        }
+
+        .hero h1 {
             font-size: 3rem;
             font-weight: 800;
             color: var(--primary);
-            line-height: 1.2;
             margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
         }
 
-        .hero-section h1 span {
+        .hero h1 span {
             background: linear-gradient(135deg, var(--accent), #1d4ed8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-section p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 2.5rem auto;
+        /* टाइटल्स */
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 0.75rem;
         }
 
-        /* 2. एनिमेटेड बटन्स (Pulse Effects) */
-        .cta-button {
-            background: linear-gradient(135deg, var(--accent), #1d4ed8);
-            color: #ffffff;
-            font-weight: 600;
-            padding: 0.9rem 2.2rem;
-            border-radius: 9999px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* टाइमर ग्रिड */
+        .timer-grid {
+            display: flex;
             justify-content: center;
-            gap: 0.6rem;
-            font-size: 1.05rem;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
         }
 
-        .cta-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+        .timer-box {
+            background: var(--primary);
+            color: white;
+            min-width: 85px;
+            padding: 0.85rem;
+            border-radius: 12px;
+            text-align: center;
         }
 
-        .pulse-cta {
-            animation: pulseGlow 2s infinite;
+        .timer-box span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--success);
         }
 
+        .timer-box label { font-size: 0.75rem; opacity: 0.8; }
+
+        /* ग्रिड सिस्टम */
+        .grid-cards, .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* टाइमलाइन */
+        .timeline { position: relative; margin: 2rem 0; }
+        .timeline-item { position: relative; padding-left: 3.5rem; margin-bottom: 2rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: 17px; top: 36px; bottom: -32px; width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .t-num {
+            position: absolute; left: 0; top: 0; width: 36px; height: 36px; background: var(--accent);
+            color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.15);
+        }
+
+        /* इनपुट्स और फॉर्म्स */
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
+        input[type="text"], input[type="tel"], input[type="email"], select, textarea {
+            width: 100%; padding: 0.8rem 1rem; border: 1px solid #cbd5e1; border-radius: 10px;
+            background: white; font-size: 0.95rem; transition: all 0.2s;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+
+        /* बटन्स */
+        .cta-btn, button, input[type="submit"] {
+            background: linear-gradient(135deg, var(--accent), #1d4ed8);
+            color: white; font-weight: 600; padding: 0.8rem 2rem; border-radius: 50px;
+            border: none; cursor: pointer; text-decoration: none; display: inline-flex;
+            align-items: center; gap: 0.5rem; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: all 0.2s;
+        }
+        .cta-btn:hover, button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4); }
+        .pulse { animation: pulseGlow 2s infinite; }
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
             70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
 
-        /* 3. लाइव बैच काउंटडाउन टाइमर */
-        .timer-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2.5rem 0;
-        }
+        /* पेमेंट और क्यूआर */
+        .qr-frame { border: 2px dashed rgba(16, 185, 129, 0.4); padding: 1.5rem; border-radius: 12px; background: white; display: inline-block; margin: 1.5rem 0; }
+        .upi-box { background: #f1f5f9; padding: 0.75rem 1rem; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; max-width: 350px; margin: 0 auto 1rem auto; }
 
-        .timer-box {
-            background: var(--primary);
-            color: #ffffff;
-            min-width: 80px;
-            padding: 0.85rem;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-        }
+        /* एकॉर्डियन पैनल */
+        .accordion-panel { display: none; margin-top: 1.5rem; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .timer-box span {
-            display: block;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--success);
-        }
+        /* पादलेख (Footer) */
+        footer { background: var(--primary); color: white; padding: 3rem 0; margin-top: 4rem; text-align: center; }
+        footer a { color: #94a3b8; text-decoration: none; margin: 0 0.75rem; font-size: 0.85rem; }
+        footer a:hover { color: white; }
 
-        .timer-box label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            opacity: 0.8;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 1.5rem; }
+            nav .nav-container { flex-direction: column; gap: 0.5rem; }
         }
+    </style>
+</head>
+<body>
 
-        /* 4. ग्रिड लेआउट्स (स्टैट्स और फीचर्स) */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-        }
-
-        /* 5. लर्निंग जर्नी टाइमलाइन */
-        .journey-section {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto 5rem auto;
-            padding: 1rem;
-        }
-
-        .journey-step {
-            position: relative;
-            padding-left: 3.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .journey-step::before {
-            content: '';
-            position: absolute;
-            left: 17px;
-            top: 36px;
-            bottom: -32px;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
-        }
-
-        .journey-step:last-child::before {
-            display: none;
-        }
-
-        .step-number {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 36px;
-            height: 36px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.15);
-        }
-
-        /* 6. मॉडर्न इनपुट्स और फॉर्म्स */
-        .form-group {
-            margin-bottom: 1.25rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            color: var(--primary);
-        }
-
-        input[type="text"], input[type="tel"], input[type="email"], select, textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            background-color: #ffffff;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-glow);
-        }
-
-        /* 7. डिजिटल पेमेंट और क्यूआर फ्रेम */
-        .qr-payment-frame {
-            border: 2px dashed rgba(16, 185, 129, 0.4);
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            display: inline-block;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .upi-widget {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        /* 8. एडमिनिस्ट्रेशन एकॉर्डियन (Hidden Control Panel) */
-        .admin-accordion {
-            margin-top: 6rem;
+    <!-- नेविगेशन बार -->
+    <nav>
+        <div class="container nav-container">
+            <strong style="font-size: 1.2rem;">EkVeera</strong>
+            <div>
+                <a href="#about">About</a>
+                <a href="#format">Online Format</a>
+                <a href="#curriculum">कोर्स</a>
+                <a href="#fee">फीस</a>
+                <a href="#id-card">ID Card</a>
