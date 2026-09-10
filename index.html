@@ -4,27 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EkVeera Training Center | 15 Days Call Center & Customer Service Training</title>
-<meta name="description" content="EkVeera Training Center — 15 Days Live Online Call Center Training.">
+<meta name="description" content="EkVeera Training Center — 15 Days Live Online Call Center & Customer Service Training. ₹99 course fee, practical learning, mock calls, interview preparation and placement support.">
 <meta name="theme-color" content="#0B1F3A">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EkVeera">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
 <link rel="preconnect" href="https://googleapis.com">
 <link href="https://googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* =========================================================
+     EKVEERA PREMIUM MODERN UI DESIGN (ALL ORIGINAL FUNCTIONS PRESERVED)
+     ========================================================= */
   :root {
     --navy: #0B1F3A;
     --navy-deep: #061326;
     --teal: #1F9D95;
     --teal-dark: #11766F;
     --amber: #E9B44C;
+    --amber-dark: #D49E35;
     --cream: #F6F8FB;
     --paper: #FFFFFF;
     --ink: #172033;
     --ink-soft: #596579;
     --line: #DCE3EC;
     --radius: 20px;
-    --shadow: 0 18px 50px rgba(11,31,58,.10);
+    --shadow: 0 18px 50px rgba(11,31,58,0.08);
     --display: 'Space Grotesk', sans-serif;
     --body: 'Work Sans', sans-serif;
   }
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -37,103 +49,296 @@
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-  h1, h2, h3 { font-family: var(--display); color: var(--navy); }
-  
+  h1, h2, h3, h4 { font-family: var(--display); letter-spacing: -0.01em; color: var(--navy); }
   .eyebrow {
-    font-family: var(--display); font-size: 13px; font-weight: 600;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal);
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-dark);
   }
-  
-  /* Header */
+
+  /* Ringwave Pulse */
+  .ringwave { display: flex; align-items: center; gap: 4px; height: 22px; }
+  .ringwave span {
+    width: 4px; border-radius: 2px; background: var(--amber);
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  .ringwave span:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .ringwave span:nth-child(2) { height: 16px; animation-delay: .15s; }
+  .ringwave span:nth-child(3) { height: 22px; animation-delay: .3s; }
+  .ringwave span:nth-child(4) { height: 14px; animation-delay: .45s; }
+  .ringwave span:nth-child(5) { height: 6px; animation-delay: .6s; }
+  @keyframes pulse { 0%, 100% { transform: scaleY(0.5); opacity: .6; } 50% { transform: scaleY(1); opacity: 1; } }
+
+  /* Premium Header */
   header {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(11,31,58,.09); box-shadow: 0 5px 25px rgba(11,31,58,.05);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(11, 31, 58, 0.09);
+    box-shadow: 0 5px 25px rgba(11, 31, 58, 0.04);
   }
   .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
-  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--navy); }
-  .brand-logo-fallback { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,var(--navy),var(--teal)); color: var(--amber); font-family: var(--display); font-weight: 700; font-size: 11px; }
-  .navlinks { display: flex; gap: 18px; font-weight: 600; font-size: 15px; }
-  .navlinks a { color: #334056; padding: 10px 8px; border-radius: 10px; transition: 0.2s ease; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--navy); }
+  .brand-logo { width: 54px; height: 54px; object-fit: contain; }
+  .brand-logo-fallback { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,var(--navy),var(--teal)); color: var(--amber); font-weight: 700; font-size: 12px; }
+  .navlinks { display: flex; gap: 14px; font-weight: 600; font-size: 15px; }
+  .navlinks a { color: #334056; padding: 10px 12px; border-radius: 10px; transition: 0.2s ease; }
   .navlinks a:hover { background: #EEF8F7; color: var(--teal-dark); }
   
-  /* Hero */
-  .hero {
-    padding: 78px 0 88px; relative; overflow: hidden;
-    background: radial-gradient(circle at 82% 18%,rgba(233,180,76,.20),transparent 27%), radial-gradient(circle at 10% 85%,rgba(31,157,149,.16),transparent 28%), linear-gradient(135deg,#0B1F3A,#061326 75%);
-    color: #fff;
+  /* Modern Button System */
+  .btn {
+    font-family: var(--body); font-weight: 600; font-size: 15px;
+    padding: 14px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.25s ease; border: none; cursor: pointer;
   }
-  .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size: 36px 36px; pointer-events: none; }
-  .hero .container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 58px; align-items: center; position: relative; z-index: 1; }
-  .hero h1 { font-size: clamp(22px, 3vw, 34px); line-height: 1.25; color: #fff; }
-  .hero h1 em { font-style: normal; color: var(--amber); }
-  .hero p.lead { font-size: 16px; line-height: 1.8; color: #D5DDEA; margin-top: 15px; }
-  
-  .hero-candidate-card { border: 1px solid rgba(233,180,76,.45); border-radius: 28px; box-shadow: 0 28px 80px rgba(0,0,0,.38); background: #fff; overflow: hidden; }
-  .hero-candidate-img { width: 100%; height: auto; aspect-ratio: 1/1; object-fit: cover; }
-  
-  .hero-stats { display: flex; gap: 0; margin-top: 34px; }
-  .hero-stats div { padding: 0 28px; border-left: 1px solid rgba(255,255,255,.16); }
-  .hero-stats div:first-child { padding-left: 0; border-left: 0; }
-  .hero-stats div strong { display: block; font-family: var(--display); font-size: 26px; color: var(--amber); }
-  .hero-stats div span { font-size: 13px; color: #9AA3BC; }
-  
-  .cta-row { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
-  .btn { font-family: var(--body); font-weight: 600; font-size: 15px; padding: 14px 22px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; transition: 0.2s ease; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: linear-gradient(135deg,#F0C25E,#E1A33C); color: var(--navy-deep); font-weight: 800; }
-  .btn-ghost { background: rgba(255,255,255,.04); backdrop-filter: blur(6px); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
-  .btn-whatsapp { background: #25D366; color: #fff; font-weight: 800; }
-  
-  /* Banners */
-  .online-banner { background: linear-gradient(90deg,var(--teal-dark),var(--teal)); color: #fff; padding: 16px 0; text-align: center; font-family: var(--display); font-weight: 600; }
-  .countdown-banner { background: linear-gradient(90deg,#E9B44C,#F4D37D); color: var(--navy-deep); padding: 16px 0; font-family: var(--display); font-weight: 600; }
-  .countdown-banner .container { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
-  .countdown-timer { display: flex; gap: 10px; }
-  .countdown-timer div { background: var(--navy-deep); color: #fff; border-radius: 8px; padding: 6px 12px; text-align: center; min-width: 52px; }
-  .countdown-timer div strong { display: block; font-size: 18px; }
-  .countdown-timer div span { font-size: 10px; color: #C9CFE0; }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(11,31,58,0.12); }
+  .btn-primary { background: linear-gradient(135deg, #F0C25E, #E1A33C); color: var(--navy-deep); font-weight: 700; }
+  .btn-ghost { border: 1px solid var(--line); color: var(--navy); background: rgba(255,255,255,0.6); }
+  .btn-ghost:hover { background: #fff; }
+  .btn-whatsapp { background: #25D366; color: #fff; font-weight: 700; }
+  .btn-whatsapp:hover { box-shadow: 0 8px 20px rgba(37,211,102,0.3); }
 
-  /* Section Styles */
+  /* Premium Hero Section */
+  .hero {
+    background: radial-gradient(circle at 82% 18%, rgba(233,180,76,0.15), transparent 30%),
+                radial-gradient(circle at 10% 85%, rgba(31,157,149,0.12), transparent 30%),
+                linear-gradient(135deg, #0B1F3A, #061326 75%);
+    color: #fff; padding: 80px 0 90px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .hero .container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(31, 157, 149, 0.15); border: 1px solid rgba(31, 157, 149, 0.4);
+    color: #8FE3DB; padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 24px;
+  }
+  .hero h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.2; color: #fff; }
+  .hero h1 em { font-style: normal; color: var(--amber); }
+  .hero p.lead { font-size: 17px; line-height: 1.8; color: #D5DDEA; margin-top: 20px; }
+  .hero-stats { display: flex; gap: 0; margin-top: 36px; flex-wrap: wrap; }
+  .hero-stats div { padding: 0 30px; border-left: 1px solid rgba(255,255,255,0.15); }
+  .hero-stats div:first-child { padding-left: 0; border-left: 0; }
+  .hero-stats div strong { display: block; font-family: var(--display); font-size: 28px; color: var(--amber); }
+  .hero-stats div span { font-size: 13px; color: #9AA3BC; }
+  .cta-row { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .hero-candidate-card { border: 1px solid rgba(233,180,76,0.3); border-radius: 28px; overflow: hidden; box-shadow: 0 28px 80px rgba(0,0,0,0.35); }
+  .hero-candidate-img { width: 100%; height: auto; aspect-ratio: 1/1; object-fit: cover; }
+
+  /* Shared Sections Layout */
   section { padding: 88px 0; }
-  .section-head { max-width: 700px; margin-bottom: 42px; }
-  .section-head h2 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.03em; position: relative; padding-bottom: 16px; }
-  .section-head h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 64px; height: 4px; border-radius: 4px; background: var(--navy); }
-  .section-head p { font-size: 16px; color: #667085; margin-top: 12px; }
-  
-  /* Grids and Panels */
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
-  .card, .office-card, .faq-item, .fee-card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow); transition: 0.2s ease; }
-  .card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(11,31,58,.13); }
-  .card .num { font-family: var(--display); color: var(--amber); font-size: 14px; font-weight: 700; }
-  .card h3 { font-size: 19px; margin: 10px 0 8px; }
-  
-  .format-strip { border-radius: 22px; background: linear-gradient(135deg,#0B1F3A,#12345B); padding: 30px; box-shadow: 0 20px 45px rgba(11,31,58,.18); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; color: #fff; text-align: center; }
-  .format-strip strong { display: block; font-family: var(--display); font-size: 21px; color: var(--amber); }
-  .format-strip span { font-size: 13px; color: #B9C0D6; }
-  
+  .section-head { max-width: 700px; margin-bottom: 48px; }
+  .section-head h2 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.02em; position: relative; padding-bottom: 16px; color: var(--navy); }
+  .section-head h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px; border-radius: 4px; background: var(--navy); }
+  .section-head p { color: var(--ink-soft); margin-top: 14px; font-size: 16px; }
+
+  .online-banner { background: linear-gradient(90deg, var(--teal-dark), var(--teal)); color: #fff; padding: 16px 0; font-family: var(--display); text-align: center; font-weight: 600; box-shadow: 0 4px 15px rgba(17,118,111,0.15); }
+  .countdown-banner { background: linear-gradient(90deg, #E9B44C, #F4D37D); color: var(--navy-deep); padding: 16px 0; font-family: var(--display); font-weight: 600; }
+  .countdown-banner .container { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .countdown-timer { display: flex; gap: 10px; }
+  .countdown-timer div { background: var(--navy-deep); color: #fff; border-radius: 10px; padding: 8px 14px; text-align: center; min-width: 58px; }
+  .countdown-timer div strong { display: block; font-size: 20px; color: var(--amber); }
+  .countdown-timer div span { font-size: 11px; color: #C9CFE0; }
+
+  /* Premium Cards & Containers */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .card, .office-card, .faq-item, .fee-card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); transition: all 0.3s ease; }
+  .card { padding: 32px; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(11,31,58,0.12); }
+  .card .num { font-family: var(--display); color: var(--amber-dark); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; }
+  .card h3 { font-size: 20px; margin: 12px 0 10px; color: var(--navy); }
+  .card p { color: var(--ink-soft); font-size: 15px; }
+
+  /* Beautiful Form Style */
+  .card input[type="text"], .card input[type="password"], .card input[type="number"], .card textarea, .card input[type="file"] {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; font-family: var(--body); font-size: 15px; background: #FAFBFD; transition: all 0.2s ease;
+  }
+  .card input:focus, .card textarea:focus { outline: none; border-color: var(--teal); background: #fff; box-shadow: 0 0 0 4px rgba(31,157,149,0.1); }
+  .card label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+
+  /* Curriculum Timeline */
   .timeline { border-left: 2px solid #9DD9D5; margin-left: 8px; padding-left: 12px; }
-  .t-item { position: relative; padding: 0 0 30px 24px; }
-  .t-item::before { content: ""; position: absolute; left: -21px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--teal); border: 4px solid var(--cream); }
-  .t-item h4 { font-family: var(--display); font-size: 18px; color: var(--navy); }
-  
-  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .feature-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow); transition: .25s; }
-  .feature-card:hover { transform: translateY(-5px); border-color: #B6DCD9; }
-  .feature-icon { width: 52px; height: 52px; border-radius: 15px; background: #EDF8F7; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; }
-  
-  .journey-section { background: #0B1F3A; color: #fff; }
-  .journey-section .section-head h2 { color: #fff; }
-  .journey-section .section-head h2::after { background: var(--amber); }
-  .journey-section .section-head p { color: #C6D0E0; }
-  .journey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-  .journey-step { padding: 24px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; background: rgba(255,255,255,.05); backdrop-filter: blur(8px); }
-  .journey-step span { display: inline-flex; width: 38px; height: 38px; border-radius: 50%; align-items: center; justify-content: center; background: var(--amber); color: var(--navy); font-weight: 800; margin-bottom: 18px; }
-  
-  .about-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center; }
-  .about-logo-img { width: 250px; height: 250px; object-fit: contain; border-radius: 50%; box-shadow: 0 22px 55px rgba(11,31,58,.14); background: #fff; margin: 0 auto; }
-  
-  .payment-panel { display: grid; grid-template-columns: 1.3fr .7fr; gap: 28px; align-items: center; margin-top: 22px; padding: 34px; border-radius: 24px; background: linear-gradient(135deg,#E9FBF8,#F7FFFE); border: 1px solid #A9DDD8; box-shadow: var(--shadow); }
-  .upi-id-box { display: flex; align-items: center; gap: 12px; margin: 18px 0 10px; padding: 13px 15px; border-radius: 13px; background: #fff; border: 1px solid var(--line); max-width: 470px; }
-  .upi-id-box button { border: 0; background: #EDF8F7; color: var(--teal-dark); font-weight: 800; padding: 7px 10px; border-radius: 8px; cursor: pointer; }
-  .qr-card { text-align: center; background: #fff; border: 1px solid var(--line); padding: 16px; border-radius: 20px; box-shadow: 0 14px 35px rgba(11,31,58,.10); width: 220px; margin: 0 auto; }
+  .t-item { position: relative; padding: 0 0 32px 24px; }
+  ### 📦 भाग 2 (बैकएंड सिस्टम, फॉर्म्स, और एडवांस्ड फीचर्स)
+*नीचे दिए गए बॉक्स के कोड को पूरा कॉपी करें और भाग 1 के ठीक नीचे बिना किसी रुकावट के पेस्ट करें:*
+
+```html
+<section id="course">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Curriculum</span>
+      <h2>क्या-क्या सिखाया जाएगा</h2>
+      <p>Beginner से लेकर Interview-ready तक, पूरा practical training module।</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item"><h4>📞 Call Center Basics</h4><p>Call Center का परिचय, Inbound/Outbound Calling, Professional Greeting</p></div>
+      <div class="t-item"><h4>🗣️ Communication Skills</h4><p>Active Listening, Voice Modulation, Probing Skills</p></div>
+      <div class="t-item"><h4>🤝 Customer Handling</h4><p>Empathy, Difficult Customer Handling, Hold/Call Transfer Procedure, Dead Air Management</p></div>
+      <div class="t-item"><h4>📊 Performance & KPI</h4><p>Call Wrap-up/Disposition, AHT/FCR KPI समझना</p></div>
+      <div class="t-item"><h4>🎯 Practice & Placement Prep</h4><p>Mock Call Practice, Interview Preparation, Personality Development</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-row reveal">
+      <div><strong>15 Days</strong><span>Structured Training</span></div>
+      <div><strong>Live Classes</strong><span>Daily Online Session</span></div>
+      <div><strong>₹99</strong><span>Affordable Course Fee</span></div>
+      <div><strong>Placement Support</strong><span>Interview Guidance</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why EkVeera</span>
+      <h2>सिर्फ Training नहीं — Career की तैयारी</h2>
+      <p>हमारा focus practical communication, customer handling और interview readiness पर है।</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card reveal"><div class="feature-icon">🎙️</div><h3>Voice & Communication</h3><p>Professional greeting, tone, pronunciation, active listening और confident speaking.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">🎧</div><h3>Live Call Practice</h3><p>Mock calls, probing, hold, transfer, empathy और difficult-customer handling.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">📊</div><h3>Industry KPIs</h3><p>AHT, FCR, CSAT, NPS, disposition और quality basics को आसान तरीके से समझें.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">💼</div><h3>Interview Ready</h3><p>Resume guidance, interview questions, personality grooming और confidence building.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">📱</div><h3>Learn From Home</h3><p>Mobile या laptop और internet से live online classes में जुड़ें.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">🤝</div><h3>Placement Support</h3><p>Training के बाद available interview opportunities की जानकारी और guidance.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="journey-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Training Journey</span>
+      <h2>15 Days में आपका Learning Journey</h2>
+    </div>
+    <div class="journey-grid">
+      <div class="journey-step reveal"><span>01</span><h3>Foundation</h3><p>Call Center basics, role और professional etiquette.</p></div>
+      <div class="journey-step reveal"><span>02</span><h3>Communication</h3><p>Listening, voice modulation, probing ओर speaking practice.</p></div>
+      <div class="journey-step reveal"><span>03</span><h3>Customer Handling</h3><p>Empathy, hold, transfer, escalation और difficult calls.</p></div>
+      <div class="journey-step reveal"><span>04</span><h3>Mock Calls</h3><p>Realistic scenarios के साथ guided practice और feedback.</p></div>
+      <div class="journey-step reveal"><span>05</span><h3>Final Grooming</h3><p>Interview preparation, confidence और placement guidance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="about-wrap reveal">
+      <div class="about-logo-container">
+        <picture>
+          <source srcset="logo.png" type="image/webp">
+          <img src="logo.png" alt="EkVeera Logo" class="about-logo-img" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot; style=&quot;font-size:28px;&quot;>EkVeera</span>');">
+        </picture>
+      </div>
+      <div>
+        <span class="eyebrow">About Us</span>
+        <h2>EkVeera Training Center के बारे में</h2>
+        <p>EkVeera Placement Consulting & Services की शुरुआत इस सोच के साथ की गई कि Call Center और Customer Service में करियर बनाने के लिए candidates को घर बैठे, कम खर्च में, practical और भरोसेमंद training मिल सके — बिना किसी शहर या दफ्तर की भागदौड़ के।</p>
+        <p>हमारा मकसद है — <strong style="color:var(--navy);">"Connecting Talent With Opportunity"</strong> — यानी सही स्किल्स के साथ candidates को सही मौकों तक पहुंचाना।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fee">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Fee & Eligibility</span>
+      <h2>Training Fee</h2>
+    </div>
+    <div class="fee-card reveal">
+      <div>
+        <div class="amount">₹99 <span>/ पूरा कोर्स</span></div>
+        <div class="pay-note">Pay in Advance — सीट पक्की करने के लिए एडवांस पेमेंट ज़रूरी</div>
+      </div>
+      <div style="max-width:320px;">
+        <p style="color:var(--ink-soft);font-size:14.5px;"><strong style="color:var(--navy);">प्रवेश योग्यता:</strong> 12वीं पास या Graduate उम्मीदवार</p>
+        <a class="btn btn-primary" style="margin-top:14px;" href="#apply">Admission Form भरें</a>
+      </div>
+    </div>
+
+    <div class="payment-panel reveal">
+      <div class="payment-copy">
+        <span class="mini-label">SECURE UPI PAYMENT</span>
+        <h3>₹99 Training Fee — Online Payment</h3>
+        <p>QR को किसी भी UPI app से scan करें। Payment के बाद अपना नाम और transaction screenshot WhatsApp पर भेजें।</p>
+        <div class="upi-id-box">
+          <span>UPI ID</span>
+          <strong>9766284669@ybl</strong>
+          <button type="button" onclick="copyUPI()">Copy</button>
+        </div>
+        <div class="payment-note">Payee Name: <strong>Anak Kumar Patel</strong></div>
+        <a class="btn btn-whatsapp" href="https://wa.me." target="_blank">Payment Screenshot WhatsApp करें</a>
+      </div>
+      <div class="qr-card">
+        <div class="qr-top">SCAN & PAY</div>
+        <a href="upi://pay?pa=9766284669@ybl&amp;pn=Anak%20Kumar%20Patel&amp;am=99&amp;cu=INR&amp;tn=EkVeera%20Training%20Fee" style="display:block;">
+          <img src="upi-qr.png" alt="UPI QR Code for Anak Kumar Patel">
+        </a>
+        <strong>Anak Kumar Patel</strong>
+        <span>UPI Payment</span>
+        <span style="display:block;margin-top:4px;font-size:11px;color:var(--teal-dark);">📱 Mobile पर टच करें, अपने आप UPI app खुलेगा</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="idcard" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Student ID Card</span>
+      <h2>🪪 अपना Student ID Card बनाएं</h2>
+      <p>पेमेंट करने के बाद आपको WhatsApp पर एक <strong>Access Code</strong> (जैसे: EKV-001) भेजा जाएगा। वही कोड नीचे डालकर अपनी जानकारी भरें और ID Card डाउनलोड करें। <strong>ध्यान दें:</strong> हर Access Code से सिर्फ एक बार ही ID Card डाउनलोड किया जा सकता है।</p>
+    </div>
+
+    <div class="card reveal" style="max-width:640px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
+        <div style="grid-column:1/-1;">
+          <label>Access Code <span style="color:#C0392B;">*</span></label>
+          <input type="text" id="idAccessCode" placeholder="जैसे: EKV-001 (WhatsApp पर मिलेगा)">
+        </div>
+        <div>
+          <label>Student का नाम <span style="color:#C0392B;">*</span></label>
+          <input type="text" id="idName" placeholder="जैसे: Ramesh Kumar">
+        </div>
+        <div>
+          <label>Mobile Number</label>
+          <input type="text" id="idMobile" placeholder="जैसे: 9876543210">
+        </div>
+        <div>
+          <label>Batch / Start Date</label>
+          <input type="text" id="idBatch" placeholder="जैसे: 01 Oct 2026">
+        </div>
+        <div>
+          <label>अपनी फोटो चुनें</label>
+          <input type="file" id="idPhoto" accept="image/*">
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="generateIdCard()">ID Card Generate करें</button>
+      <p id="idCardError" style="color:#C0392B;font-size:13px;margin-top:10px;display:none;"></p>
+    </div>
+
+    <div id="idCardPreviewWrap" style="margin-top:26px;display:none;">
+      <canvas id="idCardCanvas" width="1000" height="620" style="width:100%;max-width:600px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,0.15);"></canvas>
+      <div style="margin-top:14px;">
+        <a class="btn btn-primary" id="idCardDownloadBtn" download="EkVeera_ID_Card.png" onclick="markIdCardDownloaded()">ID Card Download करें</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Placement Support</span>
+      <h2>Training के बाद</h2>
