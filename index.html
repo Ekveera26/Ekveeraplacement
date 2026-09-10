@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EkVeera Training Center | 15 Days Call Center Training</title>
+<title>EkVeera Training Center | 15 Days Call Center & Customer Service Training</title>
+<meta name="description" content="EkVeera Training Center — 15 Days Live Online Call Center Training.">
+<meta name="theme-color" content="#0B1F3A">
 <link rel="preconnect" href="https://googleapis.com">
 <link href="https://googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -18,204 +20,120 @@
     --ink: #172033;
     --ink-soft: #596579;
     --line: #DCE3EC;
-    --radius: 16px;
+    --radius: 20px;
+    --shadow: 0 18px 50px rgba(11,31,58,.10);
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Work Sans', sans-serif;
   }
-  
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: 'Work Sans', sans-serif;
+    font-family: var(--body);
     background: var(--cream);
     color: var(--ink);
     line-height: 1.6;
+    overflow-x: hidden;
   }
-  .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { font-family: var(--display); color: var(--navy); }
+  
+  .eyebrow {
+    font-family: var(--display); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal);
+  }
   
   /* Header */
   header {
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(11,31,58,.09); box-shadow: 0 5px 25px rgba(11,31,58,.05);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
-  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; color: var(--navy); }
-  .brand-logo-fallback { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,var(--navy),var(--teal)); color: var(--amber); font-weight: 700; font-size: 14px; }
-  .navlinks a { margin-left: 20px; color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
-  .navlinks a:hover { color: var(--teal); }
-
-  /* Hero Section */
+  .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--navy); }
+  .brand-logo-fallback { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,var(--navy),var(--teal)); color: var(--amber); font-family: var(--display); font-weight: 700; font-size: 11px; }
+  .navlinks { display: flex; gap: 18px; font-weight: 600; font-size: 15px; }
+  .navlinks a { color: #334056; padding: 10px 8px; border-radius: 10px; transition: 0.2s ease; }
+  .navlinks a:hover { background: #EEF8F7; color: var(--teal-dark); }
+  
+  /* Hero */
   .hero {
-    background: linear-gradient(135deg, var(--navy), var(--navy-deep));
-    color: #fff; padding: 70px 0; text-align: center; position: relative;
+    padding: 78px 0 88px; relative; overflow: hidden;
+    background: radial-gradient(circle at 82% 18%,rgba(233,180,76,.20),transparent 27%), radial-gradient(circle at 10% 85%,rgba(31,157,149,.16),transparent 28%), linear-gradient(135deg,#0B1F3A,#061326 75%);
+    color: #fff;
   }
-  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: 38px; line-height: 1.3; margin-bottom: 15px; }
-  .hero h1 em { color: var(--amber); font-style: normal; }
-  .hero p { font-size: 16px; color: #C9CFE0; max-width: 650px; margin: 0 auto 30px; }
+  .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size: 36px 36px; pointer-events: none; }
+  .hero .container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 58px; align-items: center; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(22px, 3vw, 34px); line-height: 1.25; color: #fff; }
+  .hero h1 em { font-style: normal; color: var(--amber); }
+  .hero p.lead { font-size: 16px; line-height: 1.8; color: #D5DDEA; margin-top: 15px; }
   
-  /* Buttons */
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;
-    font-size: 15px; border: none; cursor: pointer; margin: 5px; transition: 0.2s;
-  }
-  .btn-primary { background: var(--amber); color: var(--navy-deep); }
-  .btn-primary:hover { transform: translateY(-2px); }
-  .btn-whatsapp { background: #25D366; color: #fff; }
-  .btn-ghost { border: 1px solid rgba(255,255,255,0.3); color: #fff; }
-
-  /* Sections */
-  section { padding: 60px 0; }
-  .section-head { text-align: center; max-width: 700px; margin: 0 auto 40px; }
-  .section-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: 30px; color: var(--navy); margin-bottom: 10px; }
+  .hero-candidate-card { border: 1px solid rgba(233,180,76,.45); border-radius: 28px; box-shadow: 0 28px 80px rgba(0,0,0,.38); background: #fff; overflow: hidden; }
+  .hero-candidate-img { width: 100%; height: auto; aspect-ratio: 1/1; object-fit: cover; }
   
-  /* Grid and Cards */
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-  .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-  .card h3 { font-family: 'Space Grotesk', sans-serif; margin-bottom: 10px; color: var(--navy); }
+  .hero-stats { display: flex; gap: 0; margin-top: 34px; }
+  .hero-stats div { padding: 0 28px; border-left: 1px solid rgba(255,255,255,.16); }
+  .hero-stats div:first-child { padding-left: 0; border-left: 0; }
+  .hero-stats div strong { display: block; font-family: var(--display); font-size: 26px; color: var(--amber); }
+  .hero-stats div span { font-size: 13px; color: #9AA3BC; }
   
-  /* Forms Box */
-  .form-box { background: var(--paper); border: 1px solid var(--line); padding: 30px; border-radius: var(--radius); max-width: 600px; margin: 0 auto; }
-  .form-group { margin-bottom: 15px; }
-  .form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
-  .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 6px; font-family: inherit; }
-
-  /* Footer */
-  footer { background: var(--navy-deep); color: #B9C0D6; padding: 40px 0; text-align: center; font-size: 14px; border-top: 4px solid var(--amber); }
+  .cta-row { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .btn { font-family: var(--body); font-weight: 600; font-size: 15px; padding: 14px 22px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; transition: 0.2s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: linear-gradient(135deg,#F0C25E,#E1A33C); color: var(--navy-deep); font-weight: 800; }
+  .btn-ghost { background: rgba(255,255,255,.04); backdrop-filter: blur(6px); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+  .btn-whatsapp { background: #25D366; color: #fff; font-weight: 800; }
   
-  @media (max-width: 768px) {
-    .navlinks { display: none; }
-    .hero h1 { font-size: 28px; }
-  }
-</style>
-</head>
-<body>
+  /* Banners */
+  .online-banner { background: linear-gradient(90deg,var(--teal-dark),var(--teal)); color: #fff; padding: 16px 0; text-align: center; font-family: var(--display); font-weight: 600; }
+  .countdown-banner { background: linear-gradient(90deg,#E9B44C,#F4D37D); color: var(--navy-deep); padding: 16px 0; font-family: var(--display); font-weight: 600; }
+  .countdown-banner .container { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+  .countdown-timer { display: flex; gap: 10px; }
+  .countdown-timer div { background: var(--navy-deep); color: #fff; border-radius: 8px; padding: 6px 12px; text-align: center; min-width: 52px; }
+  .countdown-timer div strong { display: block; font-size: 18px; }
+  .countdown-timer div span { font-size: 10px; color: #C9CFE0; }
 
-<header>
-  <div class="container nav">
-    <div class="brand">
-      <span class="brand-logo-fallback">EV</span>
-      EkVeera Training Center
-    </div>
-    <nav class="navlinks">
-      <a href="#course">कोर्स</a>
-      <a href="#fee">फीस</a>
-      <a href="#apply">फॉर्म भरें</a>
-      <a href="#search">🔍 खोजें</a>
-      <a href="#idcard">ID Card</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="container">
-    <h1>अपने घर से ही बनें<br><em>Call Center Professional</em></h1>
-    <p>EkVeera Training Center आपको Google Meet के ज़रिए रोज़ सिर्फ 1 घंटे की Live Online Class में Call Center की पूरी Training देता है।</p>
-    <div>
-      <a class="btn btn-primary" href="#apply">अभी Admission लें →</a>
-      <a class="btn btn-whatsapp" href="https://wa.me" target="_blank">WhatsApp चैट करें</a>
-    </div>
-  </div>
-</section>
-
-<section id="course">
-  <div class="container">
-    <div class="section-head">
-      <h2>क्या-क्या सिखाया जाएगा?</h2>
-      <p>15 दिन का पूरा प्रैक्टिकल ट्रेनिंग मॉड्यूल</p>
-    </div>
-    <div class="grid-3">
-      <div class="card"><h3>📞 Call Center Basics</h3><p>Inbound/Outbound Calling और प्रोफेशनल ग्रीटिंग्स सीखें।</p></div>
-      <div class="card"><h3>🗣️ Communication Skills</h3><p>Active Listening, Voice Modulation और बात करने का सही तरीका।</p></div>
-      <div class="card"><h3>🤝 Customer Handling</h3><p>कस्टमर की समस्याओं को सुलझाना और मुश्किल कॉल हैंडल करना।</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="fee" style="background:#fff;">
-  <div class="container">
-    <div class="section-head">
-      <h2>कोर्स की फीस</h2>
-    </div>
-    <div class="form-box" style="text-align:center;">
-      <h3 style="font-size:36px; color:var(--teal);">₹99 <span style="font-size:16px; color:var(--ink-soft);">/ पूरा कोर्स</span></h3>
-      <p style="margin: 15px 0; color:var(--ink-soft);">सीट पक्की करने के लिए एडवांस ऑनलाइन पेमेंट ज़रूरी है।</p>
-      <p>UPI ID: <strong>9766284669@ybl</strong> (Anak Kumar Patel)</p>
-    </div>
-  </div>
-</section>
-
-<section id="apply">
-  <div class="container">
-    <div class="section-head">
-      <h2>📋 सही फॉर्म चुनें</h2>
-      <p>नीचे दिए गए लिंक्स पर क्लिक करके सीधे अपना गूगल फॉर्म भरें।</p>
-    </div>
-    <div class="grid-3">
-      <div class="card" style="text-align:center;">
-        <h3>🎓 Admission Form</h3>
-        <p>ट्रेनिंग में एडमिशन के लिए यहाँ क्लिक करें।</p>
-        <a id="formLinkTraining" class="btn btn-primary" style="margin-top:15px; display:block;" href="https://google.com" target="_blank">फॉर्म खोलें</a>
-      </div>
-      <div class="card" style="text-align:center;">
-        <h3>📄 Resume Upload</h3>
-        <p>अगर जॉब चाहिए तो अपना रिज्यूमे यहाँ अपलोड करें।</p>
-        <a id="formLinkCandidate" class="btn btn-primary" style="margin-top:15px; display:block;" href="https://google.com" target="_blank">फॉर्म खोलें</a>
-      </div>
-      <div class="card" style="text-align:center;">
-        <h3>🏢 Company Info</h3>
-        <p>कंपनियों के लिए स्टाफ की रिक्वायरमेंट भरने का फॉर्म।</p>
-        <a id="formLinkCompany" class="btn btn-primary" style="margin-top:15px; display:block;" href="https://google.com" target="_blank">फॉर्म खोलें</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="idcard" style="background:#fff;">
-  <div class="container">
-    <div class="section-head">
-      <h2>🪪 Student ID Card जेनरेटर</h2>
-      <p>अपना विवरण डालें और आईडी कार्ड जनरेट करें।</p>
-    </div>
-    <div class="form-box">
-      <div class="form-group">
-        <label>Access Code / Reg No *</label>
-        <input type="text" id="idAccessCode" placeholder="जैसे: EKV-001">
-      </div>
-      <div class="form-group">
-        <label>आपका नाम *</label>
-        <input type="text" id="idName" placeholder="जैसे: Ramesh Kumar">
-      </div>
-      <button class="btn btn-primary" style="width:100%;" onclick="alert('Verification Script से कनेक्ट हो रहा है...')">ID Card जनरेट करें</button>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 EkVeera Training Center | EkVeera Placement Consulting & Services</p>
-</footer>
-
-<script>
-  // URL से Staff कोड (Referral Link) ऑटो-टैप करने का सिंपल कोड
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const staff = params.get('staff') || localStorage.getItem('ekveera_staff_ref');
-    
-    if (staff) {
-      localStorage.setItem('ekveera_staff_ref', staff);
-      
-      const links = {
-        formLinkTraining: 'https://google.com',
-        formLinkCandidate: 'https://google.com',
-        formLinkCompany: 'https://google.com'
-      };
-
-      // अगर स्टाफ कोड मौजूद है, तो गूगल फॉर्म के प्री-फिल पैरामीटर के साथ लिंक को बदलें
-      document.getElementById('formLinkTraining').href = links.formLinkTraining + '?entry.1665672028=' + encodeURIComponent(staff);
-      document.getElementById('formLinkCandidate').href = links.formLinkCandidate + '?entry.1377740379=' + encodeURIComponent(staff);
-      document.getElementById('formLinkCompany').href = links.formLinkCompany + '?entry.113592844=' + encodeURIComponent(staff);
-    }
-  })();
-</script>
-
-</body>
-</html>
+  /* Section Styles */
+  section { padding: 88px 0; }
+  .section-head { max-width: 700px; margin-bottom: 42px; }
+  .section-head h2 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.03em; position: relative; padding-bottom: 16px; }
+  .section-head h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 64px; height: 4px; border-radius: 4px; background: var(--navy); }
+  .section-head p { font-size: 16px; color: #667085; margin-top: 12px; }
+  
+  /* Grids and Panels */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+  .card, .office-card, .faq-item, .fee-card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow); transition: 0.2s ease; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(11,31,58,.13); }
+  .card .num { font-family: var(--display); color: var(--amber); font-size: 14px; font-weight: 700; }
+  .card h3 { font-size: 19px; margin: 10px 0 8px; }
+  
+  .format-strip { border-radius: 22px; background: linear-gradient(135deg,#0B1F3A,#12345B); padding: 30px; box-shadow: 0 20px 45px rgba(11,31,58,.18); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; color: #fff; text-align: center; }
+  .format-strip strong { display: block; font-family: var(--display); font-size: 21px; color: var(--amber); }
+  .format-strip span { font-size: 13px; color: #B9C0D6; }
+  
+  .timeline { border-left: 2px solid #9DD9D5; margin-left: 8px; padding-left: 12px; }
+  .t-item { position: relative; padding: 0 0 30px 24px; }
+  .t-item::before { content: ""; position: absolute; left: -21px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--teal); border: 4px solid var(--cream); }
+  .t-item h4 { font-family: var(--display); font-size: 18px; color: var(--navy); }
+  
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .feature-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow); transition: .25s; }
+  .feature-card:hover { transform: translateY(-5px); border-color: #B6DCD9; }
+  .feature-icon { width: 52px; height: 52px; border-radius: 15px; background: #EDF8F7; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; }
+  
+  .journey-section { background: #0B1F3A; color: #fff; }
+  .journey-section .section-head h2 { color: #fff; }
+  .journey-section .section-head h2::after { background: var(--amber); }
+  .journey-section .section-head p { color: #C6D0E0; }
+  .journey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .journey-step { padding: 24px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; background: rgba(255,255,255,.05); backdrop-filter: blur(8px); }
+  .journey-step span { display: inline-flex; width: 38px; height: 38px; border-radius: 50%; align-items: center; justify-content: center; background: var(--amber); color: var(--navy); font-weight: 800; margin-bottom: 18px; }
+  
+  .about-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center; }
+  .about-logo-img { width: 250px; height: 250px; object-fit: contain; border-radius: 50%; box-shadow: 0 22px 55px rgba(11,31,58,.14); background: #fff; margin: 0 auto; }
+  
+  .payment-panel { display: grid; grid-template-columns: 1.3fr .7fr; gap: 28px; align-items: center; margin-top: 22px; padding: 34px; border-radius: 24px; background: linear-gradient(135deg,#E9FBF8,#F7FFFE); border: 1px solid #A9DDD8; box-shadow: var(--shadow); }
+  .upi-id-box { display: flex; align-items: center; gap: 12px; margin: 18px 0 10px; padding: 13px 15px; border-radius: 13px; background: #fff; border: 1px solid var(--line); max-width: 470px; }
+  .upi-id-box button { border: 0; background: #EDF8F7; color: var(--teal-dark); font-weight: 800; padding: 7px 10px; border-radius: 8px; cursor: pointer; }
+  .qr-card { text-align: center; background: #fff; border: 1px solid var(--line); padding: 16px; border-radius: 20px; box-shadow: 0 14px 35px rgba(11,31,58,.10); width: 220px; margin: 0 auto; }
