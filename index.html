@@ -6,37 +6,34 @@
 <title>EkVeera Training Center | 15 Days Call Center & Customer Service Training</title>
 <meta name="description" content="EkVeera Training Center — 15 Days Live Online Call Center & Customer Service Training. ₹99 course fee, practical learning, mock calls, interview preparation and placement support.">
 <meta name="theme-color" content="#0B1F3A">
+<!-- PWA: Add to Home Screen support -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="EkVeera">
+<!-- Official Logo Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
 <link rel="preconnect" href="https://googleapis.com">
 <link href="https://googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* =========================================================
-     EKVEERA PREMIUM MODERN UI DESIGN (ALL ORIGINAL FUNCTIONS PRESERVED)
-     ========================================================= */
   :root {
     --navy: #0B1F3A;
     --navy-deep: #061326;
     --teal: #1F9D95;
     --teal-dark: #11766F;
     --amber: #E9B44C;
-    --amber-dark: #D49E35;
     --cream: #F6F8FB;
     --paper: #FFFFFF;
     --ink: #172033;
     --ink-soft: #596579;
     --line: #DCE3EC;
     --radius: 20px;
-    --shadow: 0 18px 50px rgba(11,31,58,0.08);
+    --shadow: 0 18px 50px rgba(11,31,58,.08);
     --display: 'Space Grotesk', sans-serif;
     --body: 'Work Sans', sans-serif;
   }
-  
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -49,17 +46,15 @@
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-  h1, h2, h3, h4 { font-family: var(--display); letter-spacing: -0.01em; color: var(--navy); }
+  h1, h2, h3 { font-family: var(--display); letter-spacing: -0.01em; color: var(--navy); }
   .eyebrow {
     font-family: var(--display);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--teal-dark);
+    color: var(--teal);
   }
-
-  /* Ringwave Pulse */
   .ringwave { display: flex; align-items: center; gap: 4px; height: 22px; }
   .ringwave span {
     width: 4px; border-radius: 2px; background: var(--amber);
@@ -72,99 +67,86 @@
   .ringwave span:nth-child(5) { height: 6px; animation-delay: .6s; }
   @keyframes pulse { 0%, 100% { transform: scaleY(0.5); opacity: .6; } 50% { transform: scaleY(1); opacity: 1; } }
 
-  /* Premium Header */
   header {
-    position: sticky; top: 0; z-index: 100;
+    position: sticky; top: 0; z-index: 150;
     background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(11, 31, 58, 0.09);
-    box-shadow: 0 5px 25px rgba(11, 31, 58, 0.04);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(11,31,58,.09);
+    box-shadow: 0 5px 25px rgba(11,31,58,.05);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
-  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--navy); }
-  .brand-logo { width: 54px; height: 54px; object-fit: contain; }
-  .brand-logo-fallback { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,var(--navy),var(--teal)); color: var(--amber); font-weight: 700; font-size: 12px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; min-height: 76px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--navy); }
+  .brand-logo { width: 56px; height: 56px; object-fit: contain; }
+  footer .brand-logo { width: 54px; height: 54px; }
+  .brand-logo-fallback { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,var(--navy),var(--teal)); color: var(--amber); font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; }
   .navlinks { display: flex; gap: 14px; font-weight: 600; font-size: 15px; }
-  .navlinks a { color: #334056; padding: 10px 12px; border-radius: 10px; transition: 0.2s ease; }
+  .navlinks a { color: #334056; padding: 8px 10px; border-radius: 10px; transition: all 0.2s ease; }
   .navlinks a:hover { background: #EEF8F7; color: var(--teal-dark); }
-  
-  /* Modern Button System */
-  .btn {
-    font-family: var(--body); font-weight: 600; font-size: 15px;
-    padding: 14px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;
-    transition: all 0.25s ease; border: none; cursor: pointer;
-  }
-  .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(11,31,58,0.12); }
-  .btn-primary { background: linear-gradient(135deg, #F0C25E, #E1A33C); color: var(--navy-deep); font-weight: 700; }
-  .btn-ghost { border: 1px solid var(--line); color: var(--navy); background: rgba(255,255,255,0.6); }
-  .btn-ghost:hover { background: #fff; }
-  .btn-whatsapp { background: #25D366; color: #fff; font-weight: 700; }
-  .btn-whatsapp:hover { box-shadow: 0 8px 20px rgba(37,211,102,0.3); }
+  @media (max-width: 950px) { .navlinks { display: none; } }
 
-  /* Premium Hero Section */
   .hero {
-    background: radial-gradient(circle at 82% 18%, rgba(233,180,76,0.15), transparent 30%),
-                radial-gradient(circle at 10% 85%, rgba(31,157,149,0.12), transparent 30%),
-                linear-gradient(135deg, #0B1F3A, #061326 75%);
-    color: #fff; padding: 80px 0 90px; position: relative; overflow: hidden;
+    padding: 78px 0 88px;
+    background: radial-gradient(circle at 82% 18%,rgba(233,180,76,.15),transparent 27%), radial-gradient(circle at 10% 85%,rgba(31,157,149,.12),transparent 28%), linear-gradient(135deg,#0B1F3A,#061326 75%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
   }
-  .hero::before {
-    content: ""; position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 40px 40px; pointer-events: none;
-  }
-  .hero .container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; position: relative; z-index: 1; }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(31, 157, 149, 0.15); border: 1px solid rgba(31, 157, 149, 0.4);
-    color: #8FE3DB; padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 24px;
-  }
-  .hero h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.2; color: #fff; }
+  .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px); background-size: 36px 36px; pointer-events: none; }
+  .hero .container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 58px; align-items: center; position: relative; z-index: 1; }
+  @media (max-width: 900px) { .hero .container { grid-template-columns: 1fr; } .hero-candidate-card { order: -1; max-width: 520px; margin: auto; } }
+  
+  .hero-candidate-card { position: relative; border-radius: 28px; overflow: hidden; box-shadow: 0 28px 80px rgba(0,0,0,0.38); border: 1px solid rgba(233,180,76,.3); background: #fff; transition: transform .3s ease; }
+  .hero-candidate-card:hover { transform: translateY(-4px); }
+  .hero-candidate-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 10px; background: rgba(31,157,149,.15); border: 1px solid rgba(31,157,149,.4); color: #8FE3DB; padding: 7px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(24px, 3.5vw, 42px); font-weight: 700; line-height: 1.25; color: #fff; }
   .hero h1 em { font-style: normal; color: var(--amber); }
-  .hero p.lead { font-size: 17px; line-height: 1.8; color: #D5DDEA; margin-top: 20px; }
-  .hero-stats { display: flex; gap: 0; margin-top: 36px; flex-wrap: wrap; }
-  .hero-stats div { padding: 0 30px; border-left: 1px solid rgba(255,255,255,0.15); }
+  .hero p.lead { font-size: 16px; line-height: 1.8; color: #D5DDEA; margin-top: 18px; }
+  .hero-stats { display: flex; gap: 0; margin-top: 34px; flex-wrap: wrap; }
+  .hero-stats div { padding: 0 28px; border-left: 1px solid rgba(255,255,255,.16); }
   .hero-stats div:first-child { padding-left: 0; border-left: 0; }
-  .hero-stats div strong { display: block; font-family: var(--display); font-size: 28px; color: var(--amber); }
+  .hero-stats div strong { display: block; font-family: var(--display); font-size: 26px; color: var(--amber); }
   .hero-stats div span { font-size: 13px; color: #9AA3BC; }
+  
   .cta-row { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
-  .hero-candidate-card { border: 1px solid rgba(233,180,76,0.3); border-radius: 28px; overflow: hidden; box-shadow: 0 28px 80px rgba(0,0,0,0.35); }
-  .hero-candidate-img { width: 100%; height: auto; aspect-ratio: 1/1; object-fit: cover; }
+  .btn {
+    font-family: var(--body); font-weight: 700; font-size: 15px; padding: 14px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; transition: transform .2s ease, box-shadow .2s ease; border: none; cursor: pointer; text-align: center; justify-content: center;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+  .btn-primary { background: linear-gradient(135deg,#F0C25E,#E1A33C); color: var(--navy-deep); box-shadow: 0 8px 25px rgba(232,163,61,0.2); }
+  .btn-ghost { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,0.25); color: #fff; backdrop-filter: blur(6px); }
+  .btn-whatsapp { background: #25D366; color: #fff; box-shadow: 0 8px 20px rgba(37,211,102,0.2); }
 
-  /* Shared Sections Layout */
   section { padding: 88px 0; }
-  .section-head { max-width: 700px; margin-bottom: 48px; }
-  .section-head h2 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.02em; position: relative; padding-bottom: 16px; color: var(--navy); }
+  .section-head { max-width: 650px; margin-bottom: 42px; }
+  .section-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; position: relative; padding-bottom: 16px; color: var(--navy); }
   .section-head h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px; border-radius: 4px; background: var(--navy); }
-  .section-head p { color: var(--ink-soft); margin-top: 14px; font-size: 16px; }
+  .journey-section .section-head h2::after { background: var(--amber); }
+  .section-head p { color: #667085; margin-top: 12px; font-size: 16px; }
 
-  .online-banner { background: linear-gradient(90deg, var(--teal-dark), var(--teal)); color: #fff; padding: 16px 0; font-family: var(--display); text-align: center; font-weight: 600; box-shadow: 0 4px 15px rgba(17,118,111,0.15); }
-  .countdown-banner { background: linear-gradient(90deg, #E9B44C, #F4D37D); color: var(--navy-deep); padding: 16px 0; font-family: var(--display); font-weight: 600; }
-  .countdown-banner .container { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
-  .countdown-timer { display: flex; gap: 10px; }
-  .countdown-timer div { background: var(--navy-deep); color: #fff; border-radius: 10px; padding: 8px 14px; text-align: center; min-width: 58px; }
-  .countdown-timer div strong { display: block; font-size: 20px; color: var(--amber); }
-  .countdown-timer div span { font-size: 11px; color: #C9CFE0; }
+  .online-banner { background: linear-gradient(90deg,var(--teal-dark),var(--teal)); color: #fff; padding: 16px 0; box-shadow: 0 5px 18px rgba(17,118,111,.15); }
+  .online-banner .container { display: flex; align-items: center; justify-content: center; gap: 14px; text-align: center; flex-wrap: wrap; font-family: var(--display); font-weight: 600; font-size: 15px; }
 
-  /* Premium Cards & Containers */
   .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-  .card, .office-card, .faq-item, .fee-card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); transition: all 0.3s ease; }
-  .card { padding: 32px; }
-  .card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(11,31,58,0.12); }
-  .card .num { font-family: var(--display); color: var(--amber-dark); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; }
-  .card h3 { font-size: 20px; margin: 12px 0 10px; color: var(--navy); }
+  .card, .office-card, .faq-item, .fee-card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow); transition: transform 0.2s ease, border-color 0.2s ease; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(11,31,58,.12); }
+  .card .num { font-family: var(--display); color: var(--amber); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; }
+  .card h3 { font-size: 20px; margin: 10px 0 8px; color: var(--navy); }
   .card p { color: var(--ink-soft); font-size: 15px; }
 
-  /* Beautiful Form Style */
-  .card input[type="text"], .card input[type="password"], .card input[type="number"], .card textarea, .card input[type="file"] {
-    width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; font-family: var(--body); font-size: 15px; background: #FAFBFD; transition: all 0.2s ease;
-  }
-  .card input:focus, .card textarea:focus { outline: none; border-color: var(--teal); background: #fff; box-shadow: 0 0 0 4px rgba(31,157,149,0.1); }
-  .card label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
-
-  /* Curriculum Timeline */
   .timeline { border-left: 2px solid #9DD9D5; margin-left: 8px; padding-left: 12px; }
-  .t-item { position: relative; padding: 0 0 32px 24px; }
+  .t-item { position: relative; padding: 0 0 30px 24px; }
+  .t-item::before { content: ""; position: absolute; left: -21px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--teal); border: 4px solid var(--cream); }
+  .t-item h4 { font-family: var(--display); font-size: 18px; color: var(--navy); }
+  .t-item p { color: var(--ink-soft); font-size: 15px; margin-top: 4px; }
+
+  .format-strip { background: linear-gradient(135deg,#0B1F3A,#12345B); color: #fff; border-radius: 22px; padding: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; box-shadow: 0 20px 45px rgba(11,31,58,.15); }
+  .format-strip div { text-align: center; }
+  .format-strip strong { display: block; font-family: var(--display); font-size: 21px; color: var(--amber); }
+  .format-strip span { font-size: 13px; color: #B9C0D6; }
+
+  .fee-card { padding: 34px; background: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .fee-card .amount { font-family: var(--display); font-size: 48px; font-weight: 800; color: var(--navy); }
 <div class="countdown-banner" style="display:none;">
   <div class="container">
     <span id="cd-label" data-hi="🎉 नया Batch शुरू हो रहा है" data-en="🎉 New Batch Starting">🎉 नया Batch शुरू हो रहा है</span>
@@ -190,7 +172,7 @@
     <div class="section-head reveal">
       <span class="eyebrow">Online Training Format</span>
       <h2 data-hi="पढ़ाई कैसे होगी" data-en="How Classes Work">पढ़ाई कैसे होगी</h2>
-      <p data-hi="Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप और इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।" data-en="Training is fully online — you just need a smartphone/laptop and internet connection, we handle the rest.">Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप and इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।</p>
+      <p data-hi="Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप और इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।" data-en="Training is fully online — you just need a smartphone/laptop and internet connection, we handle the rest.">Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप और इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।</p>
     </div>
     <div class="format-strip reveal">
       <div><strong>📹 Google Meet</strong><span>Live Class Platform</span></div>
@@ -303,7 +285,7 @@
       <div class="payment-copy">
         <span class="mini-label">SECURE UPI PAYMENT</span>
         <h3>₹99 Training Fee — Online Payment</h3>
-        <p>QR को किसी भी UPI app से scan करें। Payment के बाद अपना नाम और transaction screenshot WhatsApp पर भेजें।</p>
+        <p>QR को किसी भी UPI app से scan करें। Payment के बाद अपना नाम and transaction screenshot WhatsApp पर भेजें।</p>
         <div class="upi-id-box">
           <span>UPI ID</span>
           <strong>9766284669@ybl</strong>
