@@ -165,15 +165,47 @@
   /* Curriculum Timeline */
   .timeline { border-left: 2px solid #9DD9D5; margin-left: 8px; padding-left: 12px; }
   .t-item { position: relative; padding: 0 0 32px 24px; }
-  ### 📦 भाग 2 (बैकएंड सिस्टम, फॉर्म्स, और एडवांस्ड फीचर्स)
-*नीचे दिए गए बॉक्स के कोड को पूरा कॉपी करें और भाग 1 के ठीक नीचे बिना किसी रुकावट के पेस्ट करें:*
+<div class="countdown-banner" style="display:none;">
+  <div class="container">
+    <span id="cd-label" data-hi="🎉 नया Batch शुरू हो रहा है" data-en="🎉 New Batch Starting">🎉 नया Batch शुरू हो रहा है</span>
+    <div class="countdown-timer" id="countdownTimer">
+      <div><strong id="cd-days">--</strong><span>दिन</span></div>
+      <div><strong id="cd-hours">--</strong><span>घंटे</span></div>
+      <div><strong id="cd-mins">--</strong><span>मिनट</span></div>
+      <div><strong id="cd-secs">--</strong><span>सेकंड</span></div>
+    </div>
+  </div>
+</div>
 
-```html
+<div style="background:#fff;border-bottom:1px solid var(--line);padding:24px 0;">
+  <div class="container" style="display:flex;justify-content:center;gap:50px;flex-wrap:wrap;text-align:center;">
+    <div><strong id="statTotalCandidates" style="display:block;font-size:28px;color:var(--navy);font-family:var(--display);">--</strong><span style="font-size:13px;color:var(--ink-soft);">Registered Candidates</span></div>
+    <div><strong id="statTotalPlaced" style="display:block;font-size:28px;color:var(--navy);font-family:var(--display);">--</strong><span style="font-size:13px;color:var(--ink-soft);">Successfully Placed</span></div>
+    <div><strong id="statTotalCompanies" style="display:block;font-size:28px;color:var(--navy);font-family:var(--display);">--</strong><span style="font-size:13px;color:var(--ink-soft);">Partner Companies</span></div>
+  </div>
+</div>
+
+<section id="format">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Online Training Format</span>
+      <h2 data-hi="पढ़ाई कैसे होगी" data-en="How Classes Work">पढ़ाई कैसे होगी</h2>
+      <p data-hi="Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप और इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।" data-en="Training is fully online — you just need a smartphone/laptop and internet connection, we handle the rest.">Training पूरी तरह online है — बस एक स्मार्टफोन/लैपटॉप and इंटरनेट कनेक्शन चाहिए, बाकी सब हम संभाल लेंगे।</p>
+    </div>
+    <div class="format-strip reveal">
+      <div><strong>📹 Google Meet</strong><span>Live Class Platform</span></div>
+      <div><strong>⏰ 1 घंटा/दिन</strong><span>रोज़ाना क्लास</span></div>
+      <div><strong>📅 15 दिन</strong><span>कुल अवधि</span></div>
+      <div><strong>📱 Mobile/Laptop</strong><span>बस Internet चाहिए</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="course">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Curriculum</span>
-      <h2>क्या-क्या सिखाया जाएगा</h2>
+      <h2 data-hi="क्या-क्या सिखाया जाएगा" data-en="What You Will Learn">क्या-क्या सिखाया जाएगा</h2>
       <p>Beginner से लेकर Interview-ready तक, पूरा practical training module।</p>
     </div>
     <div class="timeline reveal">
@@ -223,7 +255,7 @@
     </div>
     <div class="journey-grid">
       <div class="journey-step reveal"><span>01</span><h3>Foundation</h3><p>Call Center basics, role और professional etiquette.</p></div>
-      <div class="journey-step reveal"><span>02</span><h3>Communication</h3><p>Listening, voice modulation, probing ओर speaking practice.</p></div>
+      <div class="journey-step reveal"><span>02</span><h3>Communication</h3><p>Listening, voice modulation, probing और speaking practice.</p></div>
       <div class="journey-step reveal"><span>03</span><h3>Customer Handling</h3><p>Empathy, hold, transfer, escalation और difficult calls.</p></div>
       <div class="journey-step reveal"><span>04</span><h3>Mock Calls</h3><p>Realistic scenarios के साथ guided practice और feedback.</p></div>
       <div class="journey-step reveal"><span>05</span><h3>Final Grooming</h3><p>Interview preparation, confidence और placement guidance.</p></div>
@@ -242,7 +274,7 @@
       </div>
       <div>
         <span class="eyebrow">About Us</span>
-        <h2>EkVeera Training Center के बारे में</h2>
+        <h2 style="font-size:26px;margin-top:8px;" data-hi="EkVeera Training Center के बारे में" data-en="About EkVeera Training Center">EkVeera Training Center के बारे में</h2>
         <p>EkVeera Placement Consulting & Services की शुरुआत इस सोच के साथ की गई कि Call Center और Customer Service में करियर बनाने के लिए candidates को घर बैठे, कम खर्च में, practical और भरोसेमंद training मिल सके — बिना किसी शहर या दफ्तर की भागदौड़ के।</p>
         <p>हमारा मकसद है — <strong style="color:var(--navy);">"Connecting Talent With Opportunity"</strong> — यानी सही स्किल्स के साथ candidates को सही मौकों तक पहुंचाना।</p>
       </div>
@@ -293,52 +325,3 @@
   </div>
 </section>
 
-<section id="idcard" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Student ID Card</span>
-      <h2>🪪 अपना Student ID Card बनाएं</h2>
-      <p>पेमेंट करने के बाद आपको WhatsApp पर एक <strong>Access Code</strong> (जैसे: EKV-001) भेजा जाएगा। वही कोड नीचे डालकर अपनी जानकारी भरें और ID Card डाउनलोड करें। <strong>ध्यान दें:</strong> हर Access Code से सिर्फ एक बार ही ID Card डाउनलोड किया जा सकता है।</p>
-    </div>
-
-    <div class="card reveal" style="max-width:640px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
-        <div style="grid-column:1/-1;">
-          <label>Access Code <span style="color:#C0392B;">*</span></label>
-          <input type="text" id="idAccessCode" placeholder="जैसे: EKV-001 (WhatsApp पर मिलेगा)">
-        </div>
-        <div>
-          <label>Student का नाम <span style="color:#C0392B;">*</span></label>
-          <input type="text" id="idName" placeholder="जैसे: Ramesh Kumar">
-        </div>
-        <div>
-          <label>Mobile Number</label>
-          <input type="text" id="idMobile" placeholder="जैसे: 9876543210">
-        </div>
-        <div>
-          <label>Batch / Start Date</label>
-          <input type="text" id="idBatch" placeholder="जैसे: 01 Oct 2026">
-        </div>
-        <div>
-          <label>अपनी फोटो चुनें</label>
-          <input type="file" id="idPhoto" accept="image/*">
-        </div>
-      </div>
-      <button class="btn btn-primary" onclick="generateIdCard()">ID Card Generate करें</button>
-      <p id="idCardError" style="color:#C0392B;font-size:13px;margin-top:10px;display:none;"></p>
-    </div>
-
-    <div id="idCardPreviewWrap" style="margin-top:26px;display:none;">
-      <canvas id="idCardCanvas" width="1000" height="620" style="width:100%;max-width:600px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,0.15);"></canvas>
-      <div style="margin-top:14px;">
-        <a class="btn btn-primary" id="idCardDownloadBtn" download="EkVeera_ID_Card.png" onclick="markIdCardDownloaded()">ID Card Download करें</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Placement Support</span>
-      <h2>Training के बाद</h2>
