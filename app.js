@@ -56,20 +56,61 @@
   setInterval(loadBatchTimer, 60000); // हर 1 मिनट में दोबारा चेक — ताकि नया Set किया Time भी दिख जाए
 
   // Live Trust Numbers
+  // पहले localStorage में जो पिछली बार का Cache मिला है वही तुरंत दिखा दो (ताकि "--" कभी न दिखे,
+  // न ही Number गायब होकर दोबारा आए) — फिर background में नया, ताज़ा Data लाकर उसकी जगह अपडेट कर दो।
+  const EKVEERA_STATS_CACHE_KEY = 'ekveera_stats_cache_v1';
+  function paintStats(stats) {
+    const cEl = document.getElementById('statTotalCandidates');
+    if (!cEl) return;
+    cEl.textContent = stats.totalCandidates;
+    document.getElementById('statTotalPlaced').textContent = stats.totalPlaced;
+    document.getElementById('statTotalCompanies').textContent = stats.totalCompanies;
+  }
   async function loadStats() {
     const cEl = document.getElementById('statTotalCandidates');
     if (!cEl) return; // इस Page पर Stats Cards नहीं हैं — कुछ न करें
+
+    // Step 1: Cache में जो पहले से सेव है उसे तुरंत दिखाएं (कोई flicker/"--" नहीं)
+    try {
+      const cached = localStorage.getItem(EKVEERA_STATS_CACHE_KEY);
+      if (cached) paintStats(JSON.parse(cached));
+    } catch (err) { /* cache खराब हो तो अनदेखा करें */ }
+
+    // Step 2: पीछे से असली, ताज़ा नंबर लाकर चुपचाप अपडेट कर दें
     try {
       const res = await fetch('https://script.google.com/macros/s/AKfycbycx5J5DMOVq3hpfbVPvyD6yDHXX2C2TEA9HdptFEEmv73g5VeiJ9Ov608hnK15AlpzHA/exec?action=getstats&_=' + Date.now());
       const data = await res.json();
       if (data.status === 'ok') {
-        cEl.textContent = data.totalCandidates;
-        document.getElementById('statTotalPlaced').textContent = data.totalPlaced;
-        document.getElementById('statTotalCompanies').textContent = data.totalCompanies;
+        paintStats(data);
+        localStorage.setItem(EKVEERA_STATS_CACHE_KEY, JSON.stringify(data));
       }
-    } catch (err) { /* चुपचाप छोड़ दें */ }
+    } catch (err) { /* चुपचाप छोड़ दें — Cache वाला नंबर वैसे ही दिख रहा है */ }
   }
   loadStats();
+
+  // ---- Mobile Menu के अंदर Submenu खोलना/बंद करना (जैसे "Call Center Training" के नीचे कोर्स/फीस/ID Card आदि) ----
+  function toggleMobileSubmenu(id, evt) {
+    if (evt) evt.preventDefault();
+    const sub = document.getElementById(id);
+    if (!sub) return;
+    sub.style.display = (sub.style.display === 'block') ? 'none' : 'block';
+  }
+
+  // ---- Nav Dropdown (Desktop पर hover से खुलता है, Mobile/Tap पर click से) ----
+  function toggleNavDropdown(el, evt) {
+    if (window.innerWidth > 850) return; // Desktop पर hover से CSS खुद खुल जाता है
+    if (evt) evt.preventDefault();
+    const dd = el.closest('.nav-dropdown');
+    if (!dd) return;
+    const wasOpen = dd.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!wasOpen) dd.classList.add('open');
+  }
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+  });
 
   // Language toggle
   let currentLang = 'hi';
@@ -611,20 +652,29 @@ window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
   const btn = document.getElementById('pwaInstallBtn');
-  if (btn) btn.style.display = 'flex';
+  if (btn) btn.style.display = 'inline-flex';
+  const mBtn = document.getElementById('pwaInstallBtnMobile');
+  if (mBtn) mBtn.style.display = 'block';
 });
 function installEkVeeraApp(){
-  if (!deferredInstallPrompt) return;
+  if (!deferredInstallPrompt) {
+    alert('App पहले से Install है, या आपका Browser अभी Install Support नहीं करता। Chrome/Edge (Android/Desktop) में सबसे अच्छे से काम करता है।');
+    return;
+  }
   deferredInstallPrompt.prompt();
   deferredInstallPrompt.userChoice.finally(() => {
     deferredInstallPrompt = null;
     const btn = document.getElementById('pwaInstallBtn');
     if (btn) btn.style.display = 'none';
+    const mBtn = document.getElementById('pwaInstallBtnMobile');
+    if (mBtn) mBtn.style.display = 'none';
   });
 }
 window.addEventListener('appinstalled', () => {
   const btn = document.getElementById('pwaInstallBtn');
   if (btn) btn.style.display = 'none';
+  const mBtn = document.getElementById('pwaInstallBtnMobile');
+  if (mBtn) mBtn.style.display = 'none';
 });
 
 // ---- Share App button ----

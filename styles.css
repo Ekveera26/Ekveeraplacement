@@ -257,8 +257,8 @@
   .float-wa:hover{transform:scale(1.08);}
 
   .float-top{
-    position:fixed;bottom:90px;right:22px;z-index:60;
-    background:var(--navy);color:#fff;width:46px;height:46px;border-radius:50%;
+    position:fixed;bottom:72px;right:20px;z-index:60;
+    background:var(--navy);color:#fff;width:42px;height:42px;border-radius:50%;
     display:none;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,0.25);
     border:none;cursor:pointer;font-size:18px;transition:transform 0.2s ease,opacity .2s ease;
   }
@@ -366,9 +366,45 @@ section{padding:88px 0}.section-head{margin-bottom:42px}.section-head h2{font-si
 .final-cta{padding:48px 0}.cta-card{padding:42px;border-radius:26px;background:linear-gradient(135deg,#0B1F3A,#12345B);display:flex;justify-content:space-between;align-items:center;gap:30px;box-shadow:0 25px 70px rgba(11,31,58,.22)}.cta-card h2{color:#fff;font-size:36px;margin:7px 0}.cta-card p{color:#C8D2E1;max-width:650px}.cta-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
 .mobile-menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;width:42px;height:42px;font-size:22px;color:var(--navy);cursor:pointer}
 .mobile-menu{display:none}
-.float-wa{width:62px;height:62px;right:24px;bottom:24px;box-shadow:0 15px 35px rgba(37,211,102,.30);border:4px solid #fff}
+.float-wa{width:44px;height:44px;right:18px;bottom:18px;box-shadow:0 10px 22px rgba(37,211,102,.30);border:3px solid #fff}
+.float-wa svg{width:20px;height:20px}
 @media(max-width:900px){.hero .container{grid-template-columns:1fr}.hero-candidate-card{max-width:520px;margin:auto}.feature-grid{grid-template-columns:1fr 1fr}.journey-grid{grid-template-columns:1fr 1fr}.payment-panel{grid-template-columns:1fr}.qr-card{justify-self:start}.cta-card{flex-direction:column;align-items:flex-start}.cta-actions{justify-content:flex-start}}
 @media(max-width:850px){.navlinks{display:none}.mobile-menu-btn{display:block}.nav>div:last-child{display:none}.mobile-menu{position:absolute;left:0;right:0;top:76px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 20px 30px rgba(11,31,58,.12);padding:12px 24px}.mobile-menu.open{display:block}.mobile-menu a{display:block;padding:13px 4px;font-weight:700;color:var(--navy);border-bottom:1px solid #EEF1F5}}
 @media(max-width:680px){.container{padding:0 18px}.hero{padding:54px 0 66px}.hero h1{font-size:24px}.hero-stats div{padding:0 14px}.hero-stats div strong{font-size:22px}.trust-row{grid-template-columns:1fr 1fr}.trust-row>div:nth-child(2){border-right:0}.trust-row>div:nth-child(-n+2){border-bottom:1px solid var(--line)}.feature-grid,.journey-grid{grid-template-columns:1fr}.payment-panel{padding:24px}.cta-card{padding:30px}.cta-card h2{font-size:30px}.qr-card{width:200px}.qr-card img{width:160px;height:160px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* ===== Nav Dropdown (जैसे बड़ी websites में होता है — hover/click करने पर नीचे options खुलते हैं) ===== */
+.nav-dropdown{position:relative;}
+.nav-dropdown>a{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.nav-dropdown>a::after{content:"▾";font-size:11px;margin-left:2px;transition:transform .2s ease;}
+.nav-dropdown.open>a::after{transform:rotate(180deg);}
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + 10px);left:0;min-width:220px;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 20px 45px rgba(11,31,58,.16);padding:8px;
+  opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .18s ease,transform .18s ease,visibility .18s;
+  z-index:80;
+}
+.nav-dropdown-menu a{display:block;padding:10px 12px;border-radius:9px;font-size:14px;font-weight:600;color:#334056;white-space:nowrap;}
+.nav-dropdown-menu a:hover{background:#EEF8F7;color:var(--teal-dark);}
+@media (min-width:851px){
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0);}
+}
+@media (max-width:850px){
+  .nav-dropdown-menu{position:static;box-shadow:none;border:none;opacity:1;visibility:visible;transform:none;display:none;padding:0 0 0 14px;margin-top:4px;}
+  .nav-dropdown.open .nav-dropdown-menu{display:block;}
+}
+
+/* ===== Mobile Menu में Dropdown-जैसे sub-links ===== */
+.mobile-menu .submenu{display:flex;flex-direction:column;padding-left:14px;border-bottom:1px solid #EEF1F5;}
+.mobile-menu .submenu a{border-bottom:none!important;font-weight:500!important;font-size:14px;padding:9px 4px!important;color:#596579!important;}
+
+/* ===== PWA Install / Share Buttons ===== */
+.pwa-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;font-family:var(--body);display:inline-flex;align-items:center;gap:6px;}
+.pwa-btn:hover{background:#EEF8F7;color:var(--teal-dark);}
+#pwaInstallBtn{display:none;}
+#pwaInstallBtnMobile{display:none;}
+@media (max-width:850px){.header-pwa-actions{display:none;}}
 
