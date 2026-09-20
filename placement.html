@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Services — Candidate & Company — EkVeera</title>
+<meta name="description" content="Candidates के लिए Job Search, Companies के लिए Candidate Search — EkVeera Placement Consulting & Services।">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Placement Services — Candidate & Company — EkVeera">
+<meta property="og:description" content="Candidates के लिए Job Search, Companies के लिए Candidate Search — EkVeera Placement Consulting & Services।">
+<meta property="og:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+<meta property="og:url" content="https://ekveera26.github.io/Ekveeraplacement/placement.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Placement Services — Candidate & Company — EkVeera">
+<meta name="twitter:description" content="Candidates के लिए Job Search, Companies के लिए Candidate Search — EkVeera Placement Consulting & Services।">
+<meta name="twitter:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand" style="text-decoration:none;">
+      <picture>
+        <source srcset="logo.png" type="image/webp">
+        <img src="logo.png" alt="EkVeera Placement & Consulting Services Logo" class="brand-logo" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+      </picture>
+      EkVeera Training Center
+    </a>
+    <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html" style="">Home</a>
+      <div class="nav-dropdown">
+        <a href="training.html" onclick="toggleNavDropdown(this,event)">Call Center Training</a>
+        <div class="nav-dropdown-menu">
+          <a href="training.html#course">📘 कोर्स</a>
+          <a href="training.html#format">🖥️ Online Format</a>
+          <a href="training.html#fee">💰 फीस</a>
+          <a href="training.html#idcard">🪪 ID Card</a>
+          <a href="training.html#apply">📝 Admission Form</a>
+          <a href="training.html#certificate">🎓 Certificate</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="placement.html" style="font-weight:800;text-decoration:underline;" onclick="toggleNavDropdown(this,event)">Placement</a>
+        <div class="nav-dropdown-menu">
+          <a href="#search">🔍 खोजें</a>
+          <a href="#apply">📝 फॉर्म भरें</a>
+          <a href="#help">💬 Help</a>
+        </div>
+      </div>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;" class="header-pwa-actions">
+      <button id="langToggleBtn" onclick="toggleLang()" style="border:1px solid var(--line);background:none;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;font-family:var(--body);">EN</button>
+      <button id="pwaInstallBtn" class="pwa-btn" onclick="installEkVeeraApp()">⬇️ App Install करें</button>
+      <button id="shareAppBtn" class="pwa-btn" onclick="shareEkVeeraApp()">🔗 Share करें</button>
+      <a class="btn btn-primary" style="padding:10px 18px;font-size:14px;" href="training.html#apply">Admission लें</a>
+    </div>
+  </div>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="index.html" onclick="toggleMobileMenu()">🏠 Home</a>
+  <a href="#" onclick="toggleMobileSubmenu('mmTraining',event)">🎓 Call Center Training ▾</a>
+  <div id="mmTraining" class="submenu">
+    <a href="training.html#course" onclick="toggleMobileMenu()">📘 कोर्स</a>
+    <a href="training.html#format" onclick="toggleMobileMenu()">🖥️ Online Format</a>
+    <a href="training.html#fee" onclick="toggleMobileMenu()">💰 फीस</a>
+    <a href="training.html#idcard" onclick="toggleMobileMenu()">🪪 ID Card</a>
+    <a href="training.html#apply" onclick="toggleMobileMenu()">📝 Admission Form</a>
+    <a href="training.html#certificate" onclick="toggleMobileMenu()">🎓 Certificate</a>
+  </div>
+  <a href="#" onclick="toggleMobileSubmenu('mmPlacement',event)">💼 Placement (Candidate/Company) ▾</a>
+  <div id="mmPlacement" class="submenu">
+    <a href="#search" onclick="toggleMobileMenu()">🔍 खोजें</a>
+    <a href="#apply" onclick="toggleMobileMenu()">📝 फॉर्म भरें</a>
+    <a href="#help" onclick="toggleMobileMenu()">💬 Help</a>
+  </div>
+  <a href="#" onclick="installEkVeeraApp();toggleMobileMenu()" id="pwaInstallBtnMobile">⬇️ App Install करें</a>
+  <a href="#" onclick="shareEkVeeraApp();toggleMobileMenu()">🔗 Website Share करें</a>
+</div>
+</header>
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Placement Support</span>
+      <h2>Training के बाद</h2>
+      <p>EkVeera Placement Consulting & Services के तहत, training पूरी होने पर candidates को placement/interview opportunities की जानकारी दी जाती है। (नोट: job की गारंटी नहीं है, लेकिन तैयारी पूरी करवाई जाती है।)</p>
+    </div>
+    <div class="grid-3 reveal">
+      <div class="card"><div class="num">01</div><h3>🎯 Interview Preparation</h3><p>Mock interviews और personality development के साथ candidates को industry-ready बनाया जाता है।</p></div>
+      <div class="card"><div class="num">02</div><h3>💼 Placement Guidance</h3><p>Training पूरी होने पर उपलब्ध opportunities की जानकारी साझा की जाती है।</p></div>
+      <div class="card"><div class="num">03</div><h3>🤝 Ongoing Support</h3><p>WhatsApp के ज़रिए candidates से लगातार संपर्क बना रहता है।</p></div>
+    </div>
+  </div>
+</section>
+<section id="search" style="background:var(--navy);color:#fff;" class="journey-section search-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:#9fd3ff;">Search</span>
+      <h2 style="color:#fff;">खोजें</h2>
+      <p style="color:#c9d6e8;">Company हैं तो Candidate खोजें, Candidate हैं तो Company खोजें — दोनों बिल्कुल मुफ़्त और सबके लिए हैं।</p>
+    </div>
+
+    <div class="search-tabs">
+      <button id="tabSearchCand" class="search-tab is-active" onclick="switchSearchTab('candidate')">👤 मुझे Candidate चाहिए</button>
+      <button id="tabSearchComp" class="search-tab" onclick="switchSearchTab('company')">🏢 मुझे Company चाहिए</button>
+    </div>
+
+    <!-- Search for Candidate (companies के लिए) -->
+    <div id="searchCandBox" class="search-panel">
+      <div class="search-bar">
+        <input id="searchCandInput" type="text" placeholder="जैसे: computer operator, tele caller, Satna...">
+        <button class="btn btn-primary" onclick="runSearchCandidate()">खोजें</button>
+      </div>
+      <div class="search-meta">
+        <p>नतीजों में ID दिखेगी — <strong>आप ID मुझे बताइए ताकि मैं Candidate को आपकी जानकारी भेज सकूं।</strong></p>
+        <button class="search-download" onclick="downloadSearchResults('cand')">⬇ Excel Download</button>
+      </div>
+      <div id="searchCandResults" class="search-results"></div>
+
+      <div class="detail-card">
+        <div class="detail-card-head">
+          <h3>🔒 चुनी हुई ID की पूरी जानकारी चाहिए?</h3>
+          <div class="price-chip">₹99<span>/post</span> + ₹29<span>/candidate</span></div>
+        </div>
+        <p class="detail-example">उदाहरण: 2 Post (Computer Operator + Office Boy) + 20 Candidate चुने → 99+99 + 20×29 = <strong>₹778</strong>। आपने जो Data चुना होगा, वही आपको मिलेगा।</p>
+
+        <div style="background:rgba(232,163,61,.10);border:1.5px solid rgba(232,163,61,.5);border-radius:14px;padding:18px 20px;margin:18px 0 26px;">
+          <p style="color:var(--amber);font-weight:800;font-size:14.5px;margin:0 0 8px;">💳 Company Payment — Online (Razorpay)</p>
+          <p style="color:#c9d6e8;font-size:13.5px;margin:0 0 14px;">ऊपर के उदाहरण जैसा अपना कुल Amount खुद calculate करें (₹99/Post + ₹29/Candidate), फिर नीचे दिए Link को खोलकर वही Amount खुद डालकर Payment करें।</p>
+          <a class="btn btn-primary" style="width:100%;justify-content:center;background:var(--amber);color:#152241;" href="https://razorpay.me/@anakkumarpatel" target="_blank" rel="noopener">Company Payment करें (Razorpay)</a>
+          <p style="font-size:12.5px;color:#ffb4a8;font-weight:700;margin-top:12px;">⚠️ यह Link सिर्फ Company के Placement Payment के लिए है। Training Candidate कृपया इसका उपयोग न करें — Candidate की ₹99 Fee "Training" Page पर अलग से है।</p>
+          <p style="font-size:12.5px;color:#9fd3ff;margin-top:10px;">Payment के बाद नीचे "Request भेजें" ज़रूर दबाएं और Payment Screenshot अपनी Company ID के साथ WhatsApp (9766284669) पर भेजें, तभी Approve होकर Download खुलेगा।</p>
+        </div>
+
+        <div class="detail-grid">
+          <div>
+            <label>आपकी Company ID</label>
+            <input id="reqCompanyId" type="text" placeholder="जैसे COMP001">
+          </div>
+          <div>
+            <label>कितनी अलग-अलग Post हैं?</label>
+            <input id="reqNumPosts" type="number" min="1" value="1" oninput="updateReqPrice()">
+          </div>
+        </div>
+
+        <label>चुनी हुई Candidate ID / Training Candidate ID (कॉमा से अलग करें)</label>
+        <textarea id="reqIds" rows="2" placeholder="जैसे CAND001, TRA-CAND004, CAND009" oninput="updateReqPrice()"></textarea>
+
+        <div class="detail-footer">
+          <span class="detail-total">कुल राशि: ₹<span id="reqPrice">__</span></span>
+          <button class="btn btn-primary" onclick="sendUnlockRequest()">Request भेजें</button>
+        </div>
+        <p class="tc-note">यह Fee और नियम सिर्फ उसी Company के लिए हैं जो यह विशेष Candidate जानकारी मांग रही है — किसी और पर लागू नहीं होते। (T&C)</p>
+        <p id="reqResultMsg" class="detail-msg"></p>
+
+        <div class="status-check">
+          <p class="status-check-label">Payment करने के बाद यहां Status चेक करें — Approved होते ही ठीक नीचे "Download" बटन अपने आप दिख जाएगा</p>
+          <div class="status-check-row">
+            <input id="checkCompanyId" type="text" placeholder="Company ID">
+            <input id="checkRequestId" type="text" placeholder="Request ID (जैसे PAY001)">
+            <button class="btn btn-ghost" onclick="checkUnlockStatus()">Status चेक करें</button>
+          </div>
+          <p id="checkStatusMsg" class="detail-msg"></p>
+          <button id="downloadDetailsBtn" class="btn" style="background:#2ecc71;color:#fff;display:none;margin-top:6px;" onclick="downloadCandidateDetails()">⬇ पूरी जानकारी Excel में Download करें</button>
+        </div>
+
+        <div class="status-check" style="margin-top:14px;border-top:1px dashed var(--line);padding-top:14px;">
+          <p class="status-check-label">🧾 अपनी Payment Receipt / Invoice चाहिए? अपनी Company ID डालें</p>
+          <div class="status-check-row">
+            <input id="invoiceCompanyId" type="text" placeholder="Company ID">
+            <button class="btn btn-ghost" onclick="downloadInvoice()">⬇ Invoice Download करें</button>
+          </div>
+          <p id="invoiceMsg" class="detail-msg"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search for Company (candidates के लिए) -->
+    <div id="searchCompBox" class="search-panel" style="display:none;">
+      <div class="search-bar">
+        <input id="searchCompInput" type="text" placeholder="जैसे: call center, sales, Maihar...">
+        <button class="btn btn-primary" onclick="runSearchCompany()">खोजें</button>
+      </div>
+      <div class="search-meta">
+        <p>नतीजों में ID दिखेगी — <strong>आप ID मुझे बताइए ताकि मैं Company को आपका Resume भेज सकूं।</strong></p>
+        <button class="search-download" onclick="downloadSearchResults('comp')">⬇ Excel Download</button>
+      </div>
+      <div id="searchCompResults" class="search-results"></div>
+    </div>
+  </div>
+</section>
+<section id="apply" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Apply Now</span>
+      <h2>📋 सही फॉर्म चुनें</h2>
+      <p>आप Candidate हैं या Company, उसके हिसाब से नीचे सही फॉर्म चुनें। फॉर्म भरने के बाद आपकी ID आपके दिए गए ईमेल पर भेज दी जाएगी — कृपया ईमेल (Spam/Promotions folder भी) ज़रूर चेक करें।</p>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal">
+        <span class="num">01</span>
+        <h3>📄 Resume For Upload</h3>
+        <p>अगर आप सिर्फ Job की तलाश में हैं और अपना Resume जमा करना चाहते हैं, तो यह फॉर्म भरें। आपकी Candidate ID (जैसे CAND001) ईमेल पर आ जाएगी।</p>
+        <a id="formLinkCandidate" class="btn btn-primary" style="margin-top:16px;width:100%;justify-content:center;" href="https://docs.google.com/forms/d/1Le1qYh9PtveicWWo3aUa3AbBCWgJd6T_qSSn_VmELgE/viewform" onclick="return embedGoogleForm('formLinkCandidate',event)">फॉर्म भरें (यहीं इसी Page पर)</a>
+        <div id="formLinkCandidateEmbed" style="display:none;margin-top:16px;"></div>
+        <p style="font-size:12px;color:var(--ink-soft);font-style:italic;margin-top:10px;">मैं अपनी जानकारी सभी प्रकार की Company को देने के लिए EkVeera Placement & Consulting Services को अनुमति देता/देती हूं।</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">02</span>
+        <h3>🏢 Requirement Of Candidate</h3>
+        <p>अगर आप एक Company हैं और अपने लिए Candidate की तलाश कर रहे हैं, तो अपनी Requirement यहां भरें। आपकी Company ID (जैसे COMP001) ईमेल पर आ जाएगी।</p>
+        <a id="formLinkCompany" class="btn btn-primary" style="margin-top:16px;width:100%;justify-content:center;" href="https://docs.google.com/forms/d/1I1XN4AHYLJ4KISUlOnXlk73JIFw224kGwJBjpUrMI2I/viewform" onclick="return embedGoogleForm('formLinkCompany',event)">फॉर्म भरें (यहीं इसी Page पर)</a>
+        <div id="formLinkCompanyEmbed" style="display:none;margin-top:16px;"></div>
+        <p style="font-size:12px;color:var(--ink-soft);font-style:italic;margin-top:10px;">मैं अपनी जानकारी सभी प्रकार के Candidate को देने के लिए EkVeera Placement & Consulting Services को अनुमति देता/देती हूं।</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="help" style="background:var(--paper);">
+  <div class="container" style="max-width:900px;">
+    <div class="section-head reveal">
+      <span class="eyebrow">Help</span>
+      <h2>🆘 सहायता चाहिए?</h2>
+      <p>नीचे दी गई सुविधाओं से मदद लें, या सीधे हमें अपनी Enquiry भेज दें — हम जल्द जवाब देंगे।</p>
+    </div>
+
+    <div class="enquiry-box" style="margin-bottom:24px;background:#fff;border:1px solid var(--line);color:var(--ink);">
+      <h3 style="color:var(--navy);">🔎 अपनी ID भूल गए? यहां देखें</h3>
+      <p style="color:var(--ink-soft);font-size:14px;margin-bottom:14px;">फॉर्म भरते वक्त दिया गया Mobile Number या Email डालें, आपकी ID तुरंत दिख जाएगी।</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <input id="checkIdContact" type="text" placeholder="Mobile Number या Email" style="flex:1;min-width:220px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-size:14.5px;">
+        <button class="btn btn-primary" onclick="checkMyId()">ID देखें</button>
+      </div>
+      <div id="checkIdResult" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="enquiry-box" style="margin-bottom:24px;background:#fff;border:1px solid var(--line);color:var(--ink);">
+      <h3 style="color:var(--navy);">📅 अपना Batch कब शुरू होगा?</h3>
+      <p style="color:var(--ink-soft);font-size:14px;margin-bottom:14px;">नीचे बटन दबाकर सभी Batch की Date/Time देखें, या पूरी List Excel में Download करें।</p>
+      <button class="btn btn-primary" onclick="loadBatchSchedule()">Batch Schedule देखें</button>
+      <button class="btn" style="background:#2ecc71;color:#fff;margin-left:8px;" onclick="downloadBatchSchedule()">⬇ Excel Download करें</button>
+      <div id="batchScheduleTable" style="margin-top:16px;overflow-x:auto;"></div>
+    </div>
+
+    <div class="enquiry-box">
+      <h3>अपनी बात सीधे हमें बताइए</h3>
+      <div class="enquiry-grid">
+        <input id="enqName" type="text" placeholder="आपका नाम">
+        <input id="enqContact" type="text" placeholder="मोबाइल नंबर या ईमेल">
+      </div>
+      <textarea id="enqMessage" rows="3" placeholder="आपका सवाल/समस्या यहां लिखें..."></textarea>
+      <button class="btn btn-primary" onclick="sendEnquiry()">Enquiry भेजें</button>
+      <p id="enqMsg" class="detail-msg" style="color:#1F9D95;"></p>
+    </div>
+  </div>
+</section>
+<div id="adminPanelSection" style="display:none;background:#152241;padding:40px 0;">
+  <div class="container" style="max-width:480px;">
+    <div id="adminLoginBox" style="background:#fff;border-radius:12px;padding:26px;">
+      <h3 style="margin-top:0;">🔐 Admin Login</h3>
+      <input id="adminLoginPassword" type="password" placeholder="Admin Password" style="width:100%;padding:10px;margin-bottom:10px;border:1px solid var(--line);border-radius:6px;">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="adminLogin()">Login करें</button>
+      <p id="adminLoginMsg" style="font-size:13px;margin-top:8px;"></p>
+    </div>
+
+    <div id="adminControlsBox" style="display:none;background:#fff;border-radius:12px;padding:26px;margin-top:16px;">
+      <div id="adminPendingBanner" style="display:none;background:#E8A33D;color:#152241;padding:10px 14px;border-radius:8px;font-weight:700;margin-bottom:16px;text-align:center;"></div>
+
+      <div style="display:flex;gap:6px;margin-bottom:10px;">
+        <button onclick="enableAdminAlerts()" style="width:100%;font-size:13px;border:1px solid var(--line);background:#f5f5f5;border-radius:6px;padding:8px 10px;cursor:pointer;">🔔 इस डिवाइस पर Live Alert चालू करें</button>
+      </div>
+      <p id="alertEnableMsg" style="font-size:12px;margin:0 0 16px;"></p>
+
+      <hr>
+      <p style="font-size:14px;font-weight:700;margin:16px 0 8px;">💰 Payment Request Approve करें</p>
+      <input id="adminReqId" type="text" placeholder="Request ID" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;">
+      <input id="adminCompanyId" type="text" placeholder="Company ID" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="approveUnlockRequest()">Approve करें</button>
+      <p id="adminApproveMsg" style="font-size:13px;margin-top:8px;"></p>
+
+      <hr style="margin:16px 0;">
+      <p style="font-size:14px;font-weight:700;margin-bottom:8px;">⏱️ Batch Timer Set करें</p>
+      <input id="timerLabel" type="text" placeholder="बैनर टेक्स्ट (जैसे 🎉 नया Batch शुरू हो रहा है)" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;">
+      <input id="timerDateTime" type="datetime-local" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="setBatchTimer()">Timer Set करें</button>
+      <p id="timerSetMsg" style="font-size:13px;margin-top:8px;"></p>
+
+      <hr style="margin:16px 0;">
+      <p style="font-size:14px;font-weight:700;margin-bottom:8px;">📅 Batch Schedule Set करें</p>
+      <input id="schedBatchNo" type="text" placeholder="Batch No. (जैसे Batch 1)" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;">
+      <input id="schedDate" type="date" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;">
+      <input id="schedTime" type="time" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px;">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="setBatchSchedule()">Set/Update करें</button>
+      <p id="schedSetMsg" style="font-size:13px;margin-top:8px;"></p>
+
+      <hr style="margin:16px 0;">
+      <p style="font-size:14px;font-weight:700;margin-bottom:8px;">👤 Staff Performance</p>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="loadStaffPerformance()">देखें / Refresh करें</button>
+      <div id="staffPerfTable" style="overflow-x:auto;margin-top:12px;font-size:13px;"></div>
+      <button id="staffPerfDownloadBtn" class="btn" style="background:#2ecc71;color:#fff;width:100%;justify-content:center;margin-top:10px;display:none;" onclick="downloadStaffPerformance()">⬇️ Excel Download करें</button>
+    </div>
+  </div>
+</div>
+<div id="staffPanelSection" style="display:none;background:#1e3a5f;padding:40px 0;">
+  <div class="container" style="max-width:480px;">
+    <div id="staffLoginBox" style="background:#fff;border-radius:12px;padding:26px;">
+      <h3 style="margin-top:0;">🔐 Staff Login — <span id="staffLoginName"></span></h3>
+      <input id="staffLoginPassword" type="password" placeholder="Staff Password" style="width:100%;padding:10px;margin-bottom:10px;border:1px solid var(--line);border-radius:6px;">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="staffLogin()">Login करें</button>
+      <p id="staffLoginMsg" style="font-size:13px;margin-top:8px;"></p>
+    </div>
+
+    <div id="staffDataBox" style="display:none;background:#fff;border-radius:12px;padding:26px;margin-top:16px;">
+      <h3 style="margin-top:0;">📊 <span id="staffDataName"></span> का Performance</h3>
+      <div id="staffDataTable" style="font-size:14px;"></div>
+      <button id="staffDataDownloadBtn" class="btn" style="background:#2ecc71;color:#fff;width:100%;justify-content:center;margin-top:14px;" onclick="downloadMyPerformance()">⬇️ Excel Download करें</button>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="display:flex;align-items:center;gap:12px;">
+          <picture>
+            <source srcset="logo.png" type="image/webp">
+            <img src="logo.png" alt="EkVeera Placement & Consulting Services Logo" class="brand-logo" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+          </picture>
+          EkVeera Training Center
+        </div>
+        <p style="max-width:280px;margin-top:10px;font-size:14px;">Call Center & Customer Service में Professional Online Training — घर बैठे सीखें।</p>
+        <div class="social-row">
+          <a href="https://www.facebook.com/share/19CHLq93iD/" target="_blank" title="Facebook">📘</a>
+          <a href="#" target="_blank" title="Instagram">📷</a>
+          <a href="https://wa.me/919766284669" target="_blank" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="#course">कोर्स</a>
+        <a href="#format">Online Format</a>
+        <a href="#fee">फीस</a>
+        <a href="#offices">Offices</a>
+      </div>
+      <div class="foot-links">
+        <a href="https://wa.me/919766284669" target="_blank">WhatsApp</a>
+        <a href="mailto:ekveeraplacement26@gmail.com">Email</a>
+        <a href="#apply">Admission Form</a>
+        <a href="#terms">Terms & Refund Policy</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 EkVeera Training Center | EkVeera Placement Consulting & Services</div>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/919766284669" target="_blank" aria-label="WhatsApp पर चैट करें">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.72.45 3.4 1.3 4.88L2 22l5.36-1.4a9.9 9.9 0 0 0 4.68 1.19h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.05c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.19-.15.31-.3.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.17.29.75 1.24 1.6 2 1.1.98 2.03 1.29 2.32 1.43.29.14.46.12.63-.07.17-.19.72-.84.92-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+
+<button id="backToTopBtn" class="float-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="ऊपर जाएं">↑</button>
+
+
+<script src="app.js"></script>
+</body>
+</html>
