@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Profile — EkVeera</title>
+<meta name="description" content="EkVeera Staff के लिए Profile, ID Card और शिकायत। सिर्फ़ EkVeera के Staff के लिए।">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+<script src="staff-ref.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand" style="text-decoration:none;" title="EkVeera Placement Consulting Services">
+      <picture>
+        <source srcset="logo.png" type="image/webp">
+        <img src="logo.png" alt="EkVeera Placement & Consulting Services Logo" class="brand-logo" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+      </picture>
+      <span class="brand-name">EkVeera</span>
+    </a>
+    <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="training.html" onclick="toggleNavDropdown(this,event)">Call Center Training</a>
+        <div class="nav-dropdown-menu">
+          <a href="training.html#course">📘 कोर्स</a>
+          <a href="training.html#apply">📝 Admission Form</a>
+          <a href="training.html#fee">💰 फीस</a>
+          <a href="training.html#idcard">🪪 ID Card</a>
+          <a href="training.html#attendance">✅ Attendance &amp; Material</a>
+          <a href="training.html#certificate">🎓 Certificate</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="placement.html" onclick="toggleNavDropdown(this,event)">Placement</a>
+        <div class="nav-dropdown-menu">
+          <a href="placement.html#search">🔍 खोजें</a>
+          <a href="placement.html#apply">📝 फॉर्म भरें</a>
+          <a href="placement.html#companyinfo">📋 Company Benefits Form</a>
+        </div>
+      </div>
+      <a href="resume-builder.html">📄 Resume</a>
+      <a href="help.html">💬 Help</a>
+      <a href="staff-profile.html" style="font-weight:800;text-decoration:underline;">👤 Staff Profile</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;" class="header-pwa-actions">
+      <div class="lang-switch notranslate" role="group" aria-label="Language / भाषा"><button type="button" data-lang="hi" onclick="setLang('hi')">हिं</button><button type="button" data-lang="en" onclick="setLang('en')">EN</button></div>
+    </div>
+  </div>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="index.html" onclick="toggleMobileMenu()">🏠 Home</a>
+  <a href="#" onclick="toggleMobileSubmenu('mmTraining',event)">🎓 Call Center Training ▾</a>
+  <div id="mmTraining" class="submenu">
+    <a href="training.html#course" onclick="toggleMobileMenu()">📘 कोर्स</a>
+    <a href="training.html#apply" onclick="toggleMobileMenu()">📝 Admission Form</a>
+    <a href="training.html#fee" onclick="toggleMobileMenu()">💰 फीस</a>
+    <a href="training.html#idcard" onclick="toggleMobileMenu()">🪪 ID Card</a>
+    <a href="training.html#attendance" onclick="toggleMobileMenu()">✅ Attendance &amp; Material</a>
+    <a href="training.html#certificate" onclick="toggleMobileMenu()">🎓 Certificate</a>
+  </div>
+  <a href="#" onclick="toggleMobileSubmenu('mmPlacement',event)">💼 Placement (Candidate/Company) ▾</a>
+  <div id="mmPlacement" class="submenu">
+    <a href="placement.html#search" onclick="toggleMobileMenu()">🔍 खोजें</a>
+    <a href="placement.html#apply" onclick="toggleMobileMenu()">📝 फॉर्म भरें</a>
+    <a href="placement.html#companyinfo" onclick="toggleMobileMenu()">📋 Company Benefits Form</a>
+  </div>
+  <a href="resume-builder.html" onclick="toggleMobileMenu()">📄 Resume</a>
+  <a href="help.html" onclick="toggleMobileMenu()">💬 Help</a>
+  <a href="staff-profile.html" onclick="toggleMobileMenu()">👤 Staff Profile</a>
+</div>
+</header>
+<section style="background:linear-gradient(135deg,#0B1F3A,#17406b);color:#fff;padding:40px 0 26px;">
+  <div class="container" style="max-width:900px;text-align:center;">
+    <span class="eyebrow" style="color:#9fd3ff;">Staff Profile</span>
+    <h1 style="color:#fff;margin:6px 0 8px;font-size:clamp(26px,5vw,38px);">👤 EkVeera Staff Profile &amp; ID Card</h1>
+    <p style="color:#c9d6e8;max-width:660px;margin:0 auto;">Profile, Documents, ID Card, Commission और शिकायत — सब एक जगह। यह सिर्फ़ EkVeera के Staff के लिए है।</p>
+  </div>
+</section>
+
+<section style="background:var(--paper);padding-top:26px;">
+  <div class="container" style="max-width:900px;">
+
+    <div class="sf-note" id="sfNote">
+      <p>ℹ️ <strong>ज़रूरी सूचना:</strong> इस Profile में सभी Candidate और Company को Registered होने की ज़रूरत नहीं है। यह सिर्फ़ <strong>EkVeera के Staff</strong> के लिए है।</p>
+      <p>जो Candidate नौकरी चाहते हैं वे <a href="placement.html#apply">Placement</a> में जाकर अपना Resume और अपनी Detail भरें, और जो Company अपने लिए Candidate चाहती हैं वे <a href="placement.html#apply">Placement</a> में जाकर Requirement of Candidate का Form भरें। (Profile बनाने की ज़रूरत नहीं है।)</p>
+      <p>👷 EkVeera का Staff वही माना जाएगा जिसे <strong>Admin Approve</strong> करे। Approve न होने तक वह सामान्य Candidate / Company की तरह ही माना जाएगा।</p>
+    </div>
+
+    <!-- ===== होम ===== -->
+    <div id="sfHome">
+      <div class="sf-actions">
+        <button type="button" class="btn btn-primary" onclick="sfShow('login')">🔐 Login करें</button>
+        <button type="button" class="btn" style="background:#fff;border:1.5px solid #cfd6e0;color:#0B1F3A;" onclick="sfShow('register')">📝 अपनी Profile बनाएँ</button>
+      </div>
+      <p class="sf-link"><a href="#" onclick="sfShow('recover');return false;">📱 Mobile खो गया / बदला · 🔑 Password भूल गए</a></p>
+
+      <div class="card sf-box" id="verify">
+        <h3>✅ क्या यह Staff असली है? जाँचें</h3>
+        <p class="sf-small">अगर कोई खुद को EkVeera का Staff बताए, तो उसके ID Card पर लिखी <strong>Staff ID और Card Code</strong> यहाँ डालें। असली Staff मिलने पर नाम का पहला हिस्सा और पद दिखेगा।</p>
+        <div class="sf-grid"><input id="vfId" class="ap-i" type="text" placeholder="Staff ID (जैसे anak01)" autocomplete="off" autocapitalize="none"><input id="vfCode" class="ap-i" type="text" placeholder="Card Code (8 अक्षर)" autocomplete="off" autocapitalize="characters" maxlength="12"><button type="button" class="btn btn-primary" onclick="sfVerify()">जाँचें</button></div>
+        <p id="vfMsg" class="sf-msg"></p>
+      </div>
+
+      <div class="card sf-box" id="complaint">
+        <h3>🚨 Staff की शिकायत करें</h3>
+        <p class="sf-small">अगर EkVeera के किसी Staff ने पैसे माँगे, बदतमीज़ी की या कोई गलत व्यवहार किया हो, तो यहाँ बताएँ। <strong>यह शिकायत सिर्फ़ Admin को दिखती है</strong> — Staff या किसी और को नहीं।</p>
+        <div class="sf-grid2">
+          <label class="sf-l">आप कौन हैं?<select id="cmType" class="ap-i"><option value="Candidate">Candidate</option><option value="Company">Company</option><option value="Staff">EkVeera Staff</option><option value="Other">अन्य</option></select></label>
+          <label class="sf-l">आपका नाम (वैकल्पिक)<input id="cmName" class="ap-i" type="text" maxlength="60" autocomplete="off"></label>
+          <label class="sf-l">आपका Mobile (वैकल्पिक)<input id="cmMob" class="ap-i" type="tel" inputmode="numeric" maxlength="15" autocomplete="off"></label>
+          <label class="sf-l">किस Staff की शिकायत? (ID / नाम)<input id="cmAgainst" class="ap-i" type="text" maxlength="80" autocomplete="off"></label>
+        </div>
+        <label class="sf-l">क्या हुआ? विस्तार से लिखें<textarea id="cmText" class="ap-i" rows="4" maxlength="900" placeholder="कब, कहाँ, क्या माँगा गया / क्या हुआ..."></textarea></label>
+        <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Website<input type="text" id="cmWeb" tabindex="-1" autocomplete="off"></label></div>
+        <button type="button" id="cmBtn" class="btn btn-primary" onclick="sfComplaint()">🚨 शिकायत भेजें</button>
+        <p id="cmMsg" class="sf-msg"></p>
+      </div>
+    </div>
+
+    <!-- ===== Login ===== -->
+    <div id="sfLogin" class="card sf-box" style="display:none;">
+      <h3>🔐 Staff Login</h3>
+      <label class="sf-l">Staff ID<input id="lgId" class="ap-i" type="text" placeholder="जैसे anak01" autocomplete="username" autocapitalize="none"></label>
+      <label class="sf-l">Password<input id="lgPw" class="ap-i" type="password" autocomplete="current-password"></label>
+      <p class="sf-small">🔒 आपकी Profile सिर्फ़ उसी Mobile पर खुलती है जिससे बनी थी। दूसरे Mobile पर यह नहीं खुलेगी।</p>
+      <div class="sf-actions"><button type="button" id="lgBtn" class="btn btn-primary" onclick="sfLogin()">Login</button><button type="button" class="btn" style="background:#fff;border:1.5px solid #cfd6e0;color:#0B1F3A;" onclick="sfShow('home')">वापस</button></div>
+      <p id="lgMsg" class="sf-msg"></p>
+      <p class="sf-link"><a href="#" onclick="sfShow('recover');return false;">📱 Mobile खो गया / बदला · 🔑 Password भूल गए</a></p>
+    </div>
+
+    <!-- ===== Register ===== -->
+    <div id="sfRegister" class="card sf-box" style="display:none;">
+      <h3>📝 Staff Profile बनाएँ</h3>
+      <p class="sf-small">Staff ID आपको EkVeera Office से मिली होती है और Admin की Staff List में होनी चाहिए। List में न होने पर Profile नहीं बनेगी।</p>
+      <div class="sf-grid2">
+        <label class="sf-l">Staff ID *<input id="rgId" class="ap-i" type="text" placeholder="जैसे anak01" autocapitalize="none" autocomplete="off"></label>
+        <label class="sf-l">पूरा नाम *<input id="rgName" class="ap-i" type="text" maxlength="60" autocomplete="off"></label>
+        <label class="sf-l">आपका Mobile Number * <small>(इसी Mobile पर Profile चलेगी)</small><input id="rgMob" class="ap-i" type="tel" inputmode="numeric" maxlength="15" autocomplete="off"></label>
+        <label class="sf-l">Recovery Mobile * <small>(घर के किसी भरोसेमंद सदस्य का — अलग नंबर)</small><input id="rgAlt" class="ap-i" type="tel" inputmode="numeric" maxlength="15" autocomplete="off"></label>
+        <label class="sf-l">Email *<input id="rgMail" class="ap-i" type="email" maxlength="120" autocomplete="off"></label>
+        <label class="sf-l">जन्म तारीख *<input id="rgDob" class="ap-i" type="date" autocomplete="off"></label>
+        <label class="sf-l" style="grid-column:1/-1;">पूरा पता *<input id="rgAddr" class="ap-i" type="text" maxlength="200" autocomplete="off"></label>
+        <label class="sf-l">शहर *<input id="rgCity" class="ap-i" type="text" maxlength="60" autocomplete="off"></label>
+        <label class="sf-l">UPI ID / Bank जानकारी <small>(Commission के लिए)</small><input id="rgUpi" class="ap-i" type="text" maxlength="80" autocomplete="off"></label>
+        <label class="sf-l">ID Proof का प्रकार *<select id="rgIdType" class="ap-i"><option value="Aadhaar">Aadhaar</option><option value="PAN">PAN</option><option value="Voter ID">Voter ID</option><option value="Driving Licence">Driving Licence</option></select></label>
+        <label class="sf-l">ID Proof के आख़िरी 4 अंक *<input id="rgLast4" class="ap-i" type="tel" inputmode="numeric" maxlength="4" autocomplete="off"></label>
+        <label class="sf-l">नया Password * <small>(कम-से-कम 6 अक्षर/अंक)</small><input id="rgPw" class="ap-i" type="password" autocomplete="new-password"></label>
+        <label class="sf-l">Password दोबारा *<input id="rgPw2" class="ap-i" type="password" autocomplete="new-password"></label>
+      </div>
+
+      <div class="sf-rules" id="sfRulesBox"></div>
+      <label class="sf-c"><input type="checkbox" id="rgC1"><span id="rgC1t"></span></label>
+      <label class="sf-c"><input type="checkbox" id="rgC2"><span id="rgC2t"></span></label>
+      <label class="sf-c"><input type="checkbox" id="rgC3"><span id="rgC3t"></span></label>
+      <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Website<input type="text" id="rgWeb" tabindex="-1" autocomplete="off"></label></div>
+      <div class="sf-actions"><button type="button" id="rgBtn" class="btn btn-primary" onclick="sfRegister()">✅ Profile बनाएँ</button><button type="button" class="btn" style="background:#fff;border:1.5px solid #cfd6e0;color:#0B1F3A;" onclick="sfShow('home')">वापस</button></div>
+      <p id="rgMsg" class="sf-msg"></p>
+    </div>
+
+    <!-- ===== Recover ===== -->
+    <div id="sfRecover" class="card sf-box" style="display:none;">
+      <h3>📱 Mobile खो गया / बदला · 🔑 Password भूल गए</h3>
+      <p class="sf-small">सुरक्षा के लिए नए Mobile पर Profile तभी खुलेगी जब <strong>Admin मंज़ूरी</strong> दे। मंज़ूरी से पहले Admin आपको फोन करके पक्का करेंगे। मंज़ूरी 48 घंटे चलती है और सिर्फ़ इसी Mobile के लिए, एक बार के लिए होती है।</p>
+      <div id="rcStep1">
+        <div class="sf-grid2">
+          <label class="sf-l">Staff ID *<input id="rcId" class="ap-i" type="text" autocapitalize="none" autocomplete="off"></label>
+          <label class="sf-l">Profile में दिया पुराना Mobile *<input id="rcMob" class="ap-i" type="tel" inputmode="numeric" maxlength="15" autocomplete="off"></label>
+          <label class="sf-l">जन्म तारीख *<input id="rcDob" class="ap-i" type="date" autocomplete="off"></label>
+          <label class="sf-l">Recovery Mobile *<input id="rcAlt" class="ap-i" type="tel" inputmode="numeric" maxlength="15" autocomplete="off"></label>
+          <label class="sf-l">कारण<select id="rcType" class="ap-i"><option value="lost">Mobile खो गया / बदल गया</option><option value="forgot">Password भूल गए</option></select></label>
+          <label class="sf-l">एक लाइन (वैकल्पिक)<input id="rcNote" class="ap-i" type="text" maxlength="200" autocomplete="off"></label>
+        </div>
+        <div class="sf-actions"><button type="button" id="rcBtn" class="btn btn-primary" onclick="sfRecoverReq()">📨 Admin से मंज़ूरी माँगें</button><button type="button" class="btn" style="background:#fff;border:1.5px solid #cfd6e0;color:#0B1F3A;" onclick="sfShow('home')">वापस</button></div>
+      </div>
+      <div id="rcStep2" style="display:none;">
+        <div class="sf-ok">📨 Request बन गई: <strong id="rcReqId"></strong></div>
+        <p id="rcState" class="sf-msg"></p>
+        <div class="sf-actions"><button type="button" class="btn btn-primary" onclick="sfRecoverStatus(true)">🔄 स्थिति देखें</button></div>
+        <div id="rcFinish" style="display:none;margin-top:12px;">
+          <p class="sf-msg" style="color:#1b7f3b;">✅ Admin ने मंज़ूरी दे दी है। अब नया Password बनाएँ।</p>
+          <div class="sf-grid2">
+            <label class="sf-l">जन्म तारीख *<input id="rfDob" class="ap-i" type="date"></label>
+            <label class="sf-l">नया Password *<input id="rfPw" class="ap-i" type="password" autocomplete="new-password"></label>
+          </div>
+          <button type="button" id="rfBtn" class="btn btn-primary" onclick="sfRecoverFinish()">✅ नया Password लगाएँ और Profile खोलें</button>
+        </div>
+      </div>
+      <p id="rcMsg" class="sf-msg"></p>
+    </div>
+
+    <!-- ===== Dashboard ===== -->
+    <div id="sfDash" style="display:none;">
+      <div id="dsBanner"></div>
+      <div class="sf-tabs" id="dsTabs"></div>
+      <div id="dsBody" class="card sf-box"></div>
+      <p class="sf-link"><a href="#" onclick="sfLogout();return false;">🚪 Logout (इस Mobile से Profile बंद करें)</a></p>
+    </div>
+
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="display:flex;align-items:center;gap:12px;">
+          <picture>
+            <source srcset="logo.png" type="image/webp">
+            <img src="logo.png" alt="EkVeera Placement & Consulting Services Logo" class="brand-logo" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+          </picture>
+          EkVeera Training Center
+        </div>
+        <p style="max-width:280px;margin-top:10px;font-size:14px;">Call Center & Customer Service में Professional Online Training — घर बैठे सीखें।</p>
+        <div class="social-row">
+          <a href="https://www.facebook.com/share/19CHLq93iD/" target="_blank" rel="noopener" title="Facebook">📘</a>
+          <a href="#" target="_blank" rel="noopener" title="Instagram">📷</a>
+          <a href="https://wa.me/919766284669" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="training.html#course">कोर्स</a>
+        <a href="training.html#fee">फीस</a>
+        <a href="index.html#offices">Offices</a>
+      </div>
+      <div class="foot-links">
+        <a href="https://wa.me/919766284669" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:ekveeraplacement26@gmail.com">Email</a>
+        <a href="training.html#apply">Admission Form</a>
+        <a href="training.html#terms">Terms & Refund Policy</a>
+        <a href="staff-profile.html">Staff Profile</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 EkVeera Training Center | EkVeera Placement Consulting & Services</div>
+  </div>
+</footer>
+
+<div class="float-tools">
+  <button id="pwaInstallBtn" class="pwa-btn" onclick="installEkVeeraApp()">⬇️ App Install करें</button>
+  <button id="shareAppBtn" class="pwa-btn" onclick="shareEkVeeraApp()">🔗 Share करें</button>
+</div>
+<a class="float-wa" href="https://wa.me/919766284669" target="_blank" rel="noopener" aria-label="WhatsApp पर चैट करें">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.72.45 3.4 1.3 4.88L2 22l5.36-1.4a9.9 9.9 0 0 0 4.68 1.19h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.05c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.19-.15.31-.3.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.17.29.75 1.24 1.6 2 1.1.98 2.03 1.29 2.32 1.43.29.14.46.12.63-.07.17-.19.72-.84.92-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+
+<button id="backToTopBtn" class="float-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="ऊपर जाएं">↑</button>
+
+
+<script src="app.js"></script>
+<script src="staff-profile.js"></script>
+</body>
+</html>
