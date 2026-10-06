@@ -1,0 +1,30 @@
+{
+  "made": "2026-10-05T13:57:39.470251Z",
+  "files": {
+    "index.html": "102d3bb99b9426881beff220966419fafd1d82c94e028d1c2a648941ab9573dd",
+    "training.html": "148616778f0bcf654b88e3c0af3cc9e94409feb3ae5baac9628f61a80c0f2d7d",
+    "placement.html": "6bc86a324138d839e254d58d6432fc31f1dfdabb373a208fde86d56f189d34ba",
+    "help.html": "564acf0a67598d87b97bf47c332feae997143aff4e1fa7fddb28ca75859069b3",
+    "resume-builder.html": "49a4c8ab28e0a2761e4c9f7bb12ce927eeb58df803c5cc5b4a07c9c3eb86be2f",
+    "styles.css": "a0a6e53e973ded87e8b3a35368a51871eb3b9b0e3e14c7da3809de9ac9dc0ec3",
+    "app.js": "2a068462f487d841ed845fb450367002c56d600b475e01d69d8b7517e3f9e6c9",
+    "i18n.js": "01893029baf9535f4f428bab2f925d12246139dbecde5739763fd8e541fe509e",
+    "i18n-en.js": "f7073e783a2a03f0a60aeff1236329dce18248df787164d228b543b342c255c4",
+    "staff-ref.js": "071d929f66c12205946277b6e5c43465e5f100da458270d69142010dbd7e0d60",
+    "company-form.js": "685aff52ccae06e2466c5e9ecc8bc6ef156ce43a4d542f3f9fea83ee10e095e5",
+    "registration-forms.js": "44cf92267c8cd773eb6804173567fd81fcad69271c4df8a2d26ee4c800ebe055",
+    "apply-job.js": "a0e3fe38b1bbfb68a88e5e1f0715e0a8bf62e72d0f84004a120d3dd03e5df367",
+    "company-details.js": "7f476f5023dc333c08dec9c08a78a8390096cee4a7e588242b1500e7a036eb9d",
+    "reviews.js": "06e048d5f01f579b85d10c754c1f509e9d709ccd492ec42f0e2c2e68fd4bc9ad",
+    "payment-log.js": "03c0888ee06e79eaadd8ced673becb52efcc52a77b83b3250dd056a891e0abdc",
+    "receipt.js": "ce72bb1f4f05bb6796a4a83e3c191f7412e41b7206c35486f8c75e66cca4a416",
+    "staff-pay.js": "d90c6d7ce60e5789030a1758930824c3d16b477bc06523f396be31ee50322a38",
+    "training-attendance.js": "2e7cb6e05c59ba43c661cdc2a8a6197c7aedaba12843ca05b6411b996434ceae",
+    "help-center.js": "3a19fe3fd6761fc3b0a3efe4a4e8a56b0e2d009535611376715dcbf3b81bf63a",
+    "resume-builder.js": "3b2e923f152ce85b8cdb77f16198ee83b7b763b77bbdb4b7f641cd1e125e33d7",
+    "ekv-scan.js": "346faf3d0afeb284749e56c5190bfe7a89b752d3605f17cc46147498c4a72045",
+    "service-worker.js": "19caa2e1457e92bc82fd3cd248544496b41ca3af852d7cf483e0c2bd9463cdd0",
+    "manifest.json": "cb66be668c6b9da613445589d80727ad34282b2d4bd72ad88c5d4998c1e27e66",
+    "docx.min.js": "ecef72931c98461fc327aa6e95867820aced5db4c3d971ac5ad38ccda21dd360"
+  }
+}
