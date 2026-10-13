@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EkVeera For Rent — सामान किराए पर दें या लें</title>
+<meta name="description" content="अपना सामान किराए पर दें (Giver ₹49 / साल) या ज़रूरत का सामान किराए पर लें (Taker ₹29 / Order) — EkVeera For Rent।">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="EkVeera For Rent — सामान किराए पर दें या लें">
+<meta property="og:description" content="अपना सामान किराए पर दें (Giver ₹49 / साल) या ज़रूरत का सामान किराए पर लें (Taker ₹29 / Order) — EkVeera For Rent।">
+<meta property="og:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+<meta property="og:url" content="https://ekveera26.github.io/Ekveeraplacement/for-rent.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EkVeera For Rent — सामान किराए पर दें या लें">
+<meta name="twitter:description" content="अपना सामान किराए पर दें (Giver ₹49 / साल) या ज़रूरत का सामान किराए पर लें (Taker ₹29 / Order) — EkVeera For Rent।">
+<meta name="twitter:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+<script src="staff-ref.js"></script>
+<style>
+.rent-wrap{padding:34px 0 10px}
+.rent-intro{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:26px}
+@media(max-width:760px){.rent-intro{grid-template-columns:1fr}}
+.rent-box{background:#fff;border:1px solid var(--line,#dfe5ee);border-radius:16px;padding:20px 22px;box-shadow:0 6px 22px rgba(11,31,58,.06)}
+.rent-box h3{margin:0 0 6px;color:var(--navy);font-size:20px}
+.rent-box p{margin:6px 0;color:var(--ink-soft,#596579);font-size:14.5px;line-height:1.6}
+.rent-price{display:inline-block;background:#E4F4EA;color:#11766F;font-weight:800;border-radius:999px;padding:4px 14px;font-size:15px;margin:4px 0 8px}
+.rent-sec{margin:34px 0}
+.rent-sec>h2{margin:0 0 6px;color:var(--navy);font-size:26px}
+.rent-sec>.sub{margin:0 0 16px;color:var(--ink-soft,#596579);font-size:14.5px}
+.rent-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.rent-form{grid-template-columns:1fr}}
+.rent-form .full{grid-column:1/-1}
+.rent-form label,.rent-lbl{display:block;font-weight:700;font-size:13.5px;color:var(--navy);margin-bottom:4px}
+.rent-form input,.rent-form select,.rent-form textarea,.rent-in{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--line,#cfd6e0);border-radius:10px;font-size:14.5px;font-family:inherit;background:#fff}
+.rent-form textarea{min-height:70px;resize:vertical}
+.rent-note{background:#fff8e6;border:1px solid #f0d9a0;border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.65;color:#172033}
+.rent-warn{background:#fdecea;border:1px solid #f1b0a8;border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.65;color:#7a1f14;font-weight:600}
+.rent-chk{display:flex;gap:10px;align-items:flex-start;font-size:13.8px;line-height:1.6;font-weight:600;color:#172033;cursor:pointer}
+.rent-chk input{width:20px;height:20px;margin-top:2px;flex:none}
+.rent-msg{min-height:20px;font-weight:700;font-size:14px;margin:10px 0 0}
+.rent-msg.err{color:#C0392B}.rent-msg.ok{color:#11766F}
+.rent-done{display:none;margin-top:16px;background:#E4F4EA;border:2px solid #8fd6a8;border-radius:14px;padding:18px;text-align:center}
+.rent-id{display:inline-block;margin:4px 6px;padding:8px 18px;font-size:22px;font-weight:800;color:var(--navy);background:#fff;border:2px solid #8fd6a8;border-radius:12px}
+.rent-res{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:14px}
+.rent-card{background:#fff;border:1px solid var(--line,#dfe5ee);border-radius:14px;padding:14px 16px}
+.rent-card b{font-size:18px;color:var(--navy)}
+.rent-card .loc{margin:4px 0 10px;color:#4a5568;font-size:14px}
+.rent-pay{display:inline-block;margin-top:10px}
+.rent-detail{background:#fff;border:2px solid #8fd6a8;border-radius:14px;padding:18px 20px;margin-top:14px}
+.rent-detail h3{margin:0 0 8px;color:#11766F}
+.rent-detail table{border-collapse:collapse;width:100%;font-size:14.5px}
+.rent-detail td{padding:6px 8px;border-bottom:1px solid #eef1f5;vertical-align:top}
+.rent-detail td:first-child{font-weight:700;color:var(--navy);width:38%}
+.rent-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.rent-tabs button{border:1px solid var(--line,#cfd6e0);background:#fff;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;color:var(--navy);font-family:inherit}
+.rent-tabs button.is-on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.rent-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand" style="text-decoration:none;" title="EkVeera Placement & Services">
+      <picture>
+        <source srcset="logo.png" type="image/webp">
+        <img src="logo.png" alt="EkVeera Placement & Services Logo" class="brand-logo" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+      </picture>
+      <span class="brand-name">EkVeera</span>
+    </a>
+    <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="training.html" onclick="toggleNavDropdown(this,event)">Call Center Training</a>
+        <div class="nav-dropdown-menu">
+          <a href="training.html#course">📘 कोर्स</a>
+          <a href="training.html#apply">📝 Admission Form</a>
+          <a href="training.html#fee">💰 फीस</a>
+          <a href="training.html#idcard">🪪 ID Card</a>
+          <a href="training.html#attendance">✅ Attendance &amp; Material</a>
+          <a href="training.html#certificate">🎓 Certificate</a>
+          <a href="training.html#address">🏢 Company Address</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="placement.html" onclick="toggleNavDropdown(this,event)">Placement</a>
+        <div class="nav-dropdown-menu">
+          <a href="placement.html#search">🔍 खोजें</a>
+          <a href="placement.html#apply">📝 फॉर्म भरें</a>
+          <a href="placement.html#companyinfo">📋 Company Benefits Form</a>
+        </div>
+      </div>
+      <a href="for-rent.html" style="font-weight:800;text-decoration:underline;">🏍️ For Rent</a>
+      <a href="home-service.html">🏠 Home Service</a>
+      <a href="resume-builder.html">📄 Resume</a>
+      <a href="help.html">💬 Help</a>
+      <a href="staff-profile.html">👤 Staff Profile</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;" class="header-pwa-actions">
+      <div class="lang-switch notranslate" role="group" aria-label="Language / भाषा"><button type="button" data-lang="hi" onclick="setLang('hi')">हिं</button><button type="button" data-lang="en" onclick="setLang('en')">EN</button></div>
+    </div>
+  </div>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="index.html" onclick="toggleMobileMenu()">🏠 Home</a>
+  <a href="#" onclick="toggleMobileSubmenu('mmTraining',event)">🎓 Call Center Training ▾</a>
+  <div id="mmTraining" class="submenu">
+    <a href="training.html#course" onclick="toggleMobileMenu()">📘 कोर्स</a>
+    <a href="training.html#apply" onclick="toggleMobileMenu()">📝 Admission Form</a>
+    <a href="training.html#fee" onclick="toggleMobileMenu()">💰 फीस</a>
+    <a href="training.html#idcard" onclick="toggleMobileMenu()">🪪 ID Card</a>
+    <a href="training.html#attendance" onclick="toggleMobileMenu()">✅ Attendance &amp; Material</a>
+    <a href="training.html#certificate" onclick="toggleMobileMenu()">🎓 Certificate</a>
+    <a href="training.html#address" onclick="toggleMobileMenu()">🏢 Company Address</a>
+  </div>
+  <a href="#" onclick="toggleMobileSubmenu('mmPlacement',event)">💼 Placement (Candidate/Company) ▾</a>
+  <div id="mmPlacement" class="submenu">
+    <a href="placement.html#search" onclick="toggleMobileMenu()">🔍 खोजें</a>
+    <a href="placement.html#apply" onclick="toggleMobileMenu()">📝 फॉर्म भरें</a>
+    <a href="placement.html#companyinfo" onclick="toggleMobileMenu()">📋 Company Benefits Form</a>
+  </div>
+  <a href="for-rent.html" onclick="toggleMobileMenu()">🏍️ For Rent</a>
+  <a href="home-service.html" onclick="toggleMobileMenu()">🏠 Home Service</a>
+  <a href="resume-builder.html" onclick="toggleMobileMenu()">📄 Resume</a>
+  <a href="help.html" onclick="toggleMobileMenu()">💬 Help</a>
+  <a href="staff-profile.html" onclick="toggleMobileMenu()">👤 Staff Profile</a>
+</div>
+</header>
+<div class="page-heading">EkVeera For Rent<small>सामान किराए पर दें या लें</small></div>
+
+<main class="container rent-wrap">
+
+  <div class="rent-intro">
+    <div class="rent-box">
+      <h3>📦 सामान किराए पर देना है? (Giver)</h3>
+      <span class="rent-price">₹49 — पूरे 1 साल के लिए</span>
+      <p>अपना सामान (बाइक, कैमरा, टेंट आदि) और किराया दर्ज करें। Payment के बाद आपका सामान 1 साल तक लोगों को दिखेगा, बीच में कोई और शुल्क नहीं।</p>
+      <a class="btn btn-primary" href="#giver">सामान दर्ज करें</a>
+    </div>
+    <div class="rent-box">
+      <h3>🔎 सामान किराए पर चाहिए? (Taker)</h3>
+      <span class="rent-price">₹29 — हर Order के लिए</span>
+      <p>सामान का प्रकार चुनकर खोजें। Order की Payment के बाद ही सामान देने वाले का नाम, Mobile और Location दिखेगा। किराया आप सामान वाले से सीधे तय करें।</p>
+      <a class="btn btn-primary" href="#taker">सामान खोजें</a>
+    </div>
+  </div>
+
+  <div class="myids" id="myIds" data-myids="rent" style="background:#E4F4EA;border:1.5px solid #8fd6a8;border-radius:14px;padding:20px 22px;margin:0 0 22px;">
+      <h3 style="color:var(--navy);margin:0 0 6px;">अपनी ID यहीं तुरंत देखें</h3>
+      <p style="color:var(--ink-soft);font-size:14px;margin:0 0 14px;">Register करते समय दिया Mobile Number या Email नीचे डालें — For Rent से जुड़ी आपकी सारी ID (Giver ID, सामान की Item ID, और Taker Order ID) तुरंत यहीं दिख जाएँगी।</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <input class="mi-in" type="text" maxlength="80" placeholder="Mobile Number या Email" autocomplete="off" style="flex:1;min-width:220px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-size:14.5px;">
+        <button type="button" class="btn btn-primary mi-btn">ID देखें</button>
+      </div>
+      <div class="mi-out" style="margin-top:14px;"></div>
+    </div>
+
+  <!-- ===================== GIVER ===================== -->
+  <section class="rent-sec" id="giver">
+    <h2>📦 सामान दर्ज करें (Giver)</h2>
+    <p class="sub">पूरी जानकारी सही भरें। Payment होते ही आपका सामान खोज में दिखने लगेगा।</p>
+    <div class="rent-box">
+      <div class="rent-form">
+        <div><label for="gName">आपका पूरा नाम</label><input id="gName" type="text" maxlength="60" autocomplete="name"></div>
+        <div><label for="gMobile">Mobile Number</label><input id="gMobile" type="tel" inputmode="numeric" maxlength="15" placeholder="10 अंकों का नंबर" autocomplete="tel"></div>
+        <div><label for="gEmail">Email (ज़रूरी नहीं)</label><input id="gEmail" type="email" maxlength="80" autocomplete="email"></div>
+        <div><label for="gLoc">सामान की Location (शहर / इलाका)</label><input id="gLoc" type="text" maxlength="80" placeholder="जैसे: मैहर, रीवा रोड"></div>
+        <div class="full"><label for="gAddr">पूरा पता (ज़रूरी नहीं — सिर्फ़ Payment करने वाले को दिखेगा)</label><input id="gAddr" type="text" maxlength="200"></div>
+        <div><label for="gCat">सामान का प्रकार</label><select id="gCat"><option value="">— चुनें —</option><option value="Bike / Scooter">Bike / Scooter</option><option value="Cycle">Cycle</option><option value="Car">Car</option><option value="E-Rickshaw / Auto">E-Rickshaw / Auto</option><option value="Tractor / Kheti ka Saman">Tractor / Kheti ka Saman</option><option value="Camera / Video">Camera / Video</option><option value="Laptop / Computer">Laptop / Computer</option><option value="Mobile / Tablet">Mobile / Tablet</option><option value="Tent / Pandal / Shamiyana">Tent / Pandal / Shamiyana</option><option value="Chair / Table / Furniture">Chair / Table / Furniture</option><option value="Sound System / DJ / Speaker">Sound System / DJ / Speaker</option><option value="Generator">Generator</option><option value="Power Tools / Drill / Machine">Power Tools / Drill / Machine</option><option value="Ladder / Seedhi">Ladder / Seedhi</option><option value="Wheelchair / Medical Saman">Wheelchair / Medical Saman</option><option value="Bartan / Catering Saman">Bartan / Catering Saman</option><option value="Cooler / Fan / AC">Cooler / Fan / AC</option><option value="Shaadi / Function ka Saman">Shaadi / Function ka Saman</option><option value="Kitaabein / Study Material">Kitaabein / Study Material</option><option value="Kapde / Costume">Kapde / Costume</option><option value="Other">Other</option></select></div>
+        <div><label for="gItem">सामान का नाम (लिस्ट में न हो तो यहाँ लिखें)</label><input id="gItem" type="text" maxlength="80" placeholder="जैसे: Royal Enfield 350"></div>
+        <div class="full"><label for="gDetails">सामान की जानकारी (मॉडल, साल, खासियत)</label><textarea id="gDetails" maxlength="300"></textarea></div>
+        <div><label for="gRent">किराया (₹)</label><input id="gRent" type="number" inputmode="decimal" min="1" max="10000000"></div>
+        <div><label for="gPer">किराया किस हिसाब से</label><select id="gPer"><option value="Day">प्रति दिन</option><option value="Week">प्रति हफ़्ता</option><option value="Month">प्रति महीना</option><option value="Event">एक Event / Function के लिए</option></select></div>
+        <div class="full"><label for="gCond">सामान की हालत</label><select id="gCond"><option value="">— चुनें —</option><option value="New like">नया जैसा</option><option value="Good">अच्छी हालत</option><option value="Average">ठीक-ठाक</option></select></div>
+        <div class="rent-hp" aria-hidden="true"><label>Website<input type="text" id="gWebsite" tabindex="-1" autocomplete="off"></label></div>
+        <div class="full rent-warn">⏰ आप 1 घंटे में Payment नहीं करते हैं तो आपकी Entry छुपा (Hide) दी जाएगी।</div>
+        <div class="full rent-note">ℹ️ ₹49 में आपका सामान 1 साल तक दिखेगा और इस बीच कोई और शुल्क नहीं लगेगा। 1 साल बाद दोबारा Register करने पर शर्तें (Terms &amp; Conditions) अलग होंगी।</div>
+        <div class="full"><label class="rent-chk"><input type="checkbox" id="gTerms"><span>मैं ऊपर की शर्तें समझता/समझती हूँ और अपने सामान की सही जानकारी दे रहा/रही हूँ।</span></label></div>
+      </div>
+      <p id="gMsg" class="rent-msg" role="status"></p>
+      <button type="button" id="gBtn" class="btn btn-primary" onclick="rentRegister()">💳 सामान दर्ज करें और ₹49 Pay करें</button>
+
+      <div id="gDone" class="rent-done">
+        <div style="font-size:42px">✅</div>
+        <h3 style="margin:4px 0;color:#11766F">आपकी Entry दर्ज हो गई</h3>
+        <div><span class="rent-id" id="gDoneGid"></span><span class="rent-id" id="gDoneIid"></span></div>
+        <p style="margin:8px 0">इन ID को संभालकर रखें (Screenshot ले लें)।</p>
+        <div id="gDonePay"></div>
+        <p id="gDoneTxt" style="font-size:14px;color:#4a5568;margin:8px 0 0"></p>
+      </div>
+    </div>
+
+    <h3 style="margin:26px 0 6px;color:var(--navy)">मेरी Listing देखें / और सामान जोड़ें</h3>
+    <div class="rent-box">
+      <div class="rent-form">
+        <div><label for="mGid">आपकी Giver ID</label><input id="mGid" type="text" maxlength="20" placeholder="जैसे GIV001" autocapitalize="characters" autocomplete="off"></div>
+        <div><label for="mMob">Mobile Number</label><input id="mMob" type="tel" inputmode="numeric" maxlength="15" autocomplete="off"></div>
+      </div>
+      <p id="mMsg" class="rent-msg" role="status"></p>
+      <button type="button" class="btn btn-primary" onclick="rentMyListing()">देखें</button>
+      <div id="mOut" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <!-- ===================== TAKER ===================== -->
+  <section class="rent-sec" id="taker">
+    <h2>🔎 सामान खोजें (Taker)</h2>
+    <p class="sub">सामान का प्रकार चुनें। खोज में सिर्फ़ सामान की ID और Location दिखेगी — बाक़ी जानकारी ₹29 की Payment के बाद।</p>
+    <div class="rent-box">
+      <div class="rent-form">
+        <div><label for="sCat">सामान का प्रकार</label><select id="sCat"><option value="">— चुनें —</option><option value="Bike / Scooter">Bike / Scooter</option><option value="Cycle">Cycle</option><option value="Car">Car</option><option value="E-Rickshaw / Auto">E-Rickshaw / Auto</option><option value="Tractor / Kheti ka Saman">Tractor / Kheti ka Saman</option><option value="Camera / Video">Camera / Video</option><option value="Laptop / Computer">Laptop / Computer</option><option value="Mobile / Tablet">Mobile / Tablet</option><option value="Tent / Pandal / Shamiyana">Tent / Pandal / Shamiyana</option><option value="Chair / Table / Furniture">Chair / Table / Furniture</option><option value="Sound System / DJ / Speaker">Sound System / DJ / Speaker</option><option value="Generator">Generator</option><option value="Power Tools / Drill / Machine">Power Tools / Drill / Machine</option><option value="Ladder / Seedhi">Ladder / Seedhi</option><option value="Wheelchair / Medical Saman">Wheelchair / Medical Saman</option><option value="Bartan / Catering Saman">Bartan / Catering Saman</option><option value="Cooler / Fan / AC">Cooler / Fan / AC</option><option value="Shaadi / Function ka Saman">Shaadi / Function ka Saman</option><option value="Kitaabein / Study Material">Kitaabein / Study Material</option><option value="Kapde / Costume">Kapde / Costume</option><option value="Other">Other</option></select></div>
+        <div><label for="sLoc">शहर / इलाका (ज़रूरी नहीं)</label><input id="sLoc" type="text" maxlength="60"></div>
+        <div class="full"><label for="sQ">या सामान का नाम लिखें (ज़रूरी नहीं)</label><input id="sQ" type="text" maxlength="60" placeholder="जैसे: Splendor"></div>
+      </div>
+      <p id="sMsg" class="rent-msg" role="status"></p>
+      <button type="button" class="btn btn-primary" onclick="rentSearch()">🔎 खोजें</button>
+      <div id="sOut" class="rent-res"></div>
+      <div id="sMoreBox" style="text-align:center;margin-top:14px"></div>
+    </div>
+
+    <div id="oBox" class="rent-box" style="display:none;margin-top:16px">
+      <h3 style="margin:0 0 4px;color:var(--navy)" id="oTitle"></h3>
+      <div class="rent-form" style="margin-top:10px">
+        <div><label for="oName">आपका पूरा नाम</label><input id="oName" type="text" maxlength="60" autocomplete="name"></div>
+        <div><label for="oMobile">Mobile Number</label><input id="oMobile" type="tel" inputmode="numeric" maxlength="15" autocomplete="tel"></div>
+        <div class="full"><label for="oEmail">Email (ज़रूरी नहीं)</label><input id="oEmail" type="email" maxlength="80" autocomplete="email"></div>
+        <div class="full rent-warn">⚠️ आप जिस हालत (Condition) में सामान ले जा रहे हैं, आपको उसी हालत में सामान वापस भी करना है। सामान ख़राब होने पर Extra शुल्क लिया जाएगा।</div>
+        <div class="full"><label class="rent-chk"><input type="checkbox" id="oTerms"><span>मैंने ऊपर की शर्त पढ़ ली है और मुझे मंज़ूर है।</span></label></div>
+      </div>
+      <p id="oMsg" class="rent-msg" role="status"></p>
+      <button type="button" id="oBtn" class="btn btn-primary" onclick="rentOrder()">💳 ₹29 Pay करें और Details पाएँ</button>
+      <div id="oPay" style="margin-top:12px"></div>
+    </div>
+    <div id="oDetail"></div>
+
+    <h3 style="margin:26px 0 6px;color:var(--navy)">मेरा Order देखें</h3>
+    <div class="rent-box">
+      <div class="rent-form">
+        <div><label for="qOid">Order ID</label><input id="qOid" type="text" maxlength="20" placeholder="जैसे TKR001" autocapitalize="characters" autocomplete="off"></div>
+        <div><label for="qMob">Order में दिया Mobile Number</label><input id="qMob" type="tel" inputmode="numeric" maxlength="15" autocomplete="off"></div>
+      </div>
+      <p id="qMsg" class="rent-msg" role="status"></p>
+      <button type="button" class="btn btn-primary" onclick="rentGetOrder()">देखें</button>
+      <div id="qOut"></div>
+    </div>
+  </section>
+
+  <section class="rent-sec" id="terms">
+    <h2>📜 नियम और शर्तें</h2>
+    <div class="rent-box">
+      <p>• Giver: ₹49 एक बार, पूरे 1 साल के लिए। इस बीच जितना चाहें सामान जोड़ सकते हैं, कोई और शुल्क नहीं।</p>
+      <p>• 1 घंटे में Payment न होने पर Entry छुपा दी जाती है। बाद में Payment हो जाए तो Entry फिर से दिखने लगती है।</p>
+      <p>• 1 साल पूरा होने पर दोबारा Register करना होगा, तब की शर्तें अलग होंगी।</p>
+      <p>• Taker: ₹29 प्रति Order। Payment के बाद ही सामान देने वाले की जानकारी मिलती है।</p>
+      <p>• सामान का किराया और लेन-देन Giver और Taker आपस में तय करते हैं — EkVeera केवल दोनों को मिलाने का काम करता है।</p>
+      <p>• सामान जिस हालत में लिया जाए, उसी हालत में वापस करना होगा। ख़राब होने पर Extra शुल्क लग सकता है।</p>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="display:flex;align-items:center;gap:12px;">
+          <picture>
+            <source srcset="logo.png" type="image/webp">
+            <img src="logo.png" alt="EkVeera Placement & Services Logo" class="brand-logo" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+          </picture>
+          EkVeera Training Center
+        </div>
+        <p style="max-width:280px;margin-top:10px;font-size:14px;">Call Center & Customer Service में Professional Online Training — घर बैठे सीखें।</p>
+        <div class="social-row">
+          <a href="https://www.facebook.com/share/19CHLq93iD/" target="_blank" rel="noopener" title="Facebook">📘</a>
+          <a href="#" target="_blank" rel="noopener" title="Instagram">📷</a>
+          <a href="https://wa.me/919766284669" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="resume-builder.html">📄 Resume</a>
+        <a href="for-rent.html">🏍️ For Rent</a>
+        <a href="home-service.html">🏠 Home Service</a>
+        <a href="help.html">💬 Help</a>
+        <a href="training.html#course">कोर्स</a>
+        <a href="training.html#fee">फीस</a>
+        <a href="index.html#offices">Offices</a>
+      </div>
+      <div class="foot-links">
+        <a href="https://wa.me/919766284669" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:ekveeraplacement26@gmail.com">Email</a>
+        <a href="training.html#apply">Admission Form</a>
+        <a href="training.html#terms">Terms & Refund Policy</a>
+        <a href="staff-profile.html">Staff Profile</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 EkVeera Training Center | EkVeera Placement & Services</div>
+  </div>
+</footer>
+<script src="app.js"></script>
+<script src="for-rent.js"></script>
+<script src="my-ids.js"></script>
+</body>
+</html>

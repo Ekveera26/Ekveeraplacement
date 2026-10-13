@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>काम की रेटिंग दें — EkVeera Home Service</title>
+<meta name="description" content="काम पूरा होने के बाद कारीगर को रेटिंग दें — EkVeera Home Service।">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="काम की रेटिंग दें — EkVeera Home Service">
+<meta property="og:description" content="काम पूरा होने के बाद कारीगर को रेटिंग दें — EkVeera Home Service।">
+<meta property="og:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+<meta property="og:url" content="https://ekveera26.github.io/Ekveeraplacement/feedback.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="काम की रेटिंग दें — EkVeera Home Service">
+<meta name="twitter:description" content="काम पूरा होने के बाद कारीगर को रेटिंग दें — EkVeera Home Service।">
+<meta name="twitter:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+<script src="staff-ref.js"></script>
+<link rel="stylesheet" href="home-service.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand" style="text-decoration:none;" title="EkVeera Placement & Services">
+      <picture>
+        <source srcset="logo.png" type="image/webp">
+        <img src="logo.png" alt="EkVeera Placement & Services Logo" class="brand-logo" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+      </picture>
+      <span class="brand-name">EkVeera</span>
+    </a>
+    <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="training.html" onclick="toggleNavDropdown(this,event)">Call Center Training</a>
+        <div class="nav-dropdown-menu">
+          <a href="training.html#course">📘 कोर्स</a>
+          <a href="training.html#apply">📝 Admission Form</a>
+          <a href="training.html#fee">💰 फीस</a>
+          <a href="training.html#idcard">🪪 ID Card</a>
+          <a href="training.html#attendance">✅ Attendance &amp; Material</a>
+          <a href="training.html#certificate">🎓 Certificate</a>
+          <a href="training.html#address">🏢 Company Address</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="placement.html" onclick="toggleNavDropdown(this,event)">Placement</a>
+        <div class="nav-dropdown-menu">
+          <a href="placement.html#search">🔍 खोजें</a>
+          <a href="placement.html#apply">📝 फॉर्म भरें</a>
+          <a href="placement.html#companyinfo">📋 Company Benefits Form</a>
+        </div>
+      </div>
+      <a href="for-rent.html">🏍️ For Rent</a>
+      <a href="home-service.html" style="font-weight:800;text-decoration:underline;">🏠 Home Service</a>
+      <a href="resume-builder.html">📄 Resume</a>
+      <a href="help.html">💬 Help</a>
+      <a href="staff-profile.html">👤 Staff Profile</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;" class="header-pwa-actions">
+      <div class="lang-switch notranslate" role="group" aria-label="Language / भाषा"><button type="button" data-lang="hi" onclick="setLang('hi')">हिं</button><button type="button" data-lang="en" onclick="setLang('en')">EN</button></div>
+    </div>
+  </div>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="index.html" onclick="toggleMobileMenu()">🏠 Home</a>
+  <a href="#" onclick="toggleMobileSubmenu('mmTraining',event)">🎓 Call Center Training ▾</a>
+  <div id="mmTraining" class="submenu">
+    <a href="training.html#course" onclick="toggleMobileMenu()">📘 कोर्स</a>
+    <a href="training.html#apply" onclick="toggleMobileMenu()">📝 Admission Form</a>
+    <a href="training.html#fee" onclick="toggleMobileMenu()">💰 फीस</a>
+    <a href="training.html#idcard" onclick="toggleMobileMenu()">🪪 ID Card</a>
+    <a href="training.html#attendance" onclick="toggleMobileMenu()">✅ Attendance &amp; Material</a>
+    <a href="training.html#certificate" onclick="toggleMobileMenu()">🎓 Certificate</a>
+    <a href="training.html#address" onclick="toggleMobileMenu()">🏢 Company Address</a>
+  </div>
+  <a href="#" onclick="toggleMobileSubmenu('mmPlacement',event)">💼 Placement (Candidate/Company) ▾</a>
+  <div id="mmPlacement" class="submenu">
+    <a href="placement.html#search" onclick="toggleMobileMenu()">🔍 खोजें</a>
+    <a href="placement.html#apply" onclick="toggleMobileMenu()">📝 फॉर्म भरें</a>
+    <a href="placement.html#companyinfo" onclick="toggleMobileMenu()">📋 Company Benefits Form</a>
+  </div>
+  <a href="for-rent.html" onclick="toggleMobileMenu()">🏍️ For Rent</a>
+  <a href="home-service.html" onclick="toggleMobileMenu()">🏠 Home Service</a>
+  <a href="resume-builder.html" onclick="toggleMobileMenu()">📄 Resume</a>
+  <a href="help.html" onclick="toggleMobileMenu()">💬 Help</a>
+  <a href="staff-profile.html" onclick="toggleMobileMenu()">👤 Staff Profile</a>
+</div>
+</header>
+<div class="page-heading">EkVeera Home Service<small>काम की रेटिंग दें</small></div>
+<div class="hs">
+ <div class="w">
+  <p id="hsDemo" class="demo" style="display:none">⚠️ डेमो मोड — अभी Home Service का Apps Script जुड़ा नहीं है। नीचे के नाम नकली हैं और कुछ भी सेव नहीं होता।</p>
+  <div class="box rate-card" id="hsFb"><p class="msg">लिंक जाँच रहे हैं…</p></div>
+ </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="display:flex;align-items:center;gap:12px;">
+          <picture>
+            <source srcset="logo.png" type="image/webp">
+            <img src="logo.png" alt="EkVeera Placement & Services Logo" class="brand-logo" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+          </picture>
+          EkVeera Training Center
+        </div>
+        <p style="max-width:280px;margin-top:10px;font-size:14px;">Call Center & Customer Service में Professional Online Training — घर बैठे सीखें।</p>
+        <div class="social-row">
+          <a href="https://www.facebook.com/share/19CHLq93iD/" target="_blank" rel="noopener" title="Facebook">📘</a>
+          <a href="#" target="_blank" rel="noopener" title="Instagram">📷</a>
+          <a href="https://wa.me/919766284669" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="resume-builder.html">📄 Resume</a>
+        <a href="for-rent.html">🏍️ For Rent</a>
+        <a href="home-service.html">🏠 Home Service</a>
+        <a href="help.html">💬 Help</a>
+        <a href="training.html#course">कोर्स</a>
+        <a href="training.html#fee">फीस</a>
+        <a href="index.html#offices">Offices</a>
+      </div>
+      <div class="foot-links">
+        <a href="https://wa.me/919766284669" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:ekveeraplacement26@gmail.com">Email</a>
+        <a href="training.html#apply">Admission Form</a>
+        <a href="training.html#terms">Terms & Refund Policy</a>
+        <a href="staff-profile.html">Staff Profile</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 EkVeera Training Center | EkVeera Placement & Services</div>
+  </div>
+</footer>
+<script src="app.js"></script>
+<script src="hs-config.js"></script>
+<script src="hs-data.js"></script>
+<script src="feedback.js"></script>
+</body>
+</html>
