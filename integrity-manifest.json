@@ -1,5 +1,5 @@
 {
-  "made": "2026-10-12T04:52:30.483384+00:00",
+  "made": "2026-10-13T10:45:28.305Z",
   "files": {
     "index.html": "6a5dc7e0a4d13df118dbdb465f2adc0ce91a19b36fd9db7835650fea14230e8c",
     "training.html": "640549dfa12d51968fcc20f93bdcf27375856d99b86b0927fd39b80d4e3f6555",
@@ -25,16 +25,11 @@
     "training-attendance.js": "2e7cb6e05c59ba43c661cdc2a8a6197c7aedaba12843ca05b6411b996434ceae",
     "help-center.js": "0b4579ffe80e757e9ce9cb3fdc2fe3ed2ee0477c46d525960f06dacd390f0e60",
     "resume-builder.js": "bd1fa42751735ba365563c23e352f520efcec9ce15922db2309e6f5b4dc4b02b",
-    "ekv-scan.js": "cc28cacc39e0932e288e53ba181594da73ff1106d3ced70340d1a5890f8dfad1",
-    "service-worker.js": "9119824f19108a36a31c62764020ef9ea6aa89c47ae6ce4887e6770919b50118",
-    "manifest.json": "f0b9688576f30636ecb457041c015457353dc1c03b829684fb1d1f6d92ada50d",
-    "docx.min.js": "ecef72931c98461fc327aa6e95867820aced5db4c3d971ac5ad38ccda21dd360",
-    "ekv-files.js": "5eadd33770640039023317188b4501183eb3a513764641586394f584df7b04f3",
-    "logo.png": "178c7854b1849ea1cf79572b069fe6209a64626a38dc1f1d6d5381077a2845b5",
-    "icon-192.png": "65da3c43e2012d2793e570278504127e02990d00b8bb200c8932878ac2a846e3",
-    "icon-512.png": "178c7854b1849ea1cf79572b069fe6209a64626a38dc1f1d6d5381077a2845b5",
     "for-rent.html": "7cfb7c0b7d8c1ec4243c60021acd38c35c1d8b28801931dbe5fbf4b0ffbd452a",
     "for-rent.js": "2c12fe2ae5f9ce3c485af93b541a6eb231e619dcf242427c2a1a3082043d80a3",
+    "training-address.js": "2bdaa61fb9ef211721063ac7cfa32a0b46eb39633d91c24b45ea62c5b08bdca5",
+    "my-ids.js": "424b59022a6766f479ff07231ff04284ff4d685639ca44447cf2e0548cb2605a",
+    "address-admin.js": "4f4392d67e65398c0c6283220d4510ed7dee548f3567889fb5f092b94a757e33",
     "home-service.html": "65c22de788ca71c305169b14478fe2024d84952f22c63e199dc31a9ccf6a5374",
     "karigar-registration.html": "e0007301544bb85064b24e1f67fa0bef21c5b7d53a6b7f0ae9ea4e8305cf0977",
     "feedback.html": "533de8336d43f842a098eef75812ec2602b3de18a47bd94c459932cd88914f61",
@@ -44,8 +39,9 @@
     "home-service.js": "597d8e7d86bca91fb89b631bddd868d45e5a03795a09ffa07bbe1e1a6b4737e6",
     "karigar-registration.js": "4667bcf6dc3d930e16e6717940a9f8a2e40ba4c9f87da9a62aa45d97532dd6b1",
     "feedback.js": "b79de6d3dd35f70a0eacdab5a400d73fe8d130942ff04f0d0960fca9f51d33ac",
-    "training-address.js": "2bdaa61fb9ef211721063ac7cfa32a0b46eb39633d91c24b45ea62c5b08bdca5",
-    "address-admin.js": "4f4392d67e65398c0c6283220d4510ed7dee548f3567889fb5f092b94a757e33",
-    "my-ids.js": "424b59022a6766f479ff07231ff04284ff4d685639ca44447cf2e0548cb2605a"
+    "ekv-scan.js": "cc28cacc39e0932e288e53ba181594da73ff1106d3ced70340d1a5890f8dfad1",
+    "service-worker.js": "9119824f19108a36a31c62764020ef9ea6aa89c47ae6ce4887e6770919b50118",
+    "manifest.json": "f0b9688576f30636ecb457041c015457353dc1c03b829684fb1d1f6d92ada50d",
+    "docx.min.js": "ecef72931c98461fc327aa6e95867820aced5db4c3d971ac5ad38ccda21dd360"
   }
 }
