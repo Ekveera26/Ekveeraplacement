@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://fcm.googleapis.com https://fcmregistrations.googleapis.com https://firebaseinstallations.googleapis.com https://www.gstatic.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EkVeera — Delete My Data</title>
+<meta name="description" content="EkVeera Placement &amp; Services की Privacy Policy: कौन-सी जानकारी ली जाती है, कैसे इस्तेमाल होती है, किसे दिखती है, कितने समय रखी जाती है और अपनी Details कैसे हटवाएँ।">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="EkVeera Privacy Policy">
+<meta property="og:description" content="EkVeera की Privacy Policy">
+<meta property="og:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+<meta property="og:url" content="https://ekveera26.github.io/Ekveeraplacement/delete-data.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EkVeera Privacy Policy">
+<meta name="twitter:description" content="EkVeera की Privacy Policy">
+<meta name="twitter:image" content="https://ekveera26.github.io/Ekveeraplacement/logo.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@500;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+<script src="staff-ref.js"></script>
+<script src="swipe-nav.js" defer></script>
+<script src="help-note.js" defer></script>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand" style="text-decoration:none;" title="EkVeera Placement & Services">
+      <picture>
+        <source srcset="logo.png" type="image/webp">
+        <img src="logo.png" alt="EkVeera Placement & Services Logo" class="brand-logo" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+      </picture>
+      <span class="brand-name">EkVeera</span>
+    </a>
+    <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="training.html" onclick="toggleNavDropdown(this,event)">Call Center Training</a>
+        <div class="nav-dropdown-menu">
+          <a href="training.html#course">📘 कोर्स</a>
+          <a href="training.html#apply">📝 Admission Form</a>
+          <a href="training.html#fee">💰 फीस</a>
+          <a href="training.html#idcard">🪪 ID Card</a>
+          <a href="training.html#attendance">✅ Attendance &amp; Material</a>
+          <a href="training.html#certificate">🎓 Certificate</a>
+          <a href="training.html#address">🏢 Company Address</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="placement.html" onclick="toggleNavDropdown(this,event)">Placement</a>
+        <div class="nav-dropdown-menu">
+          <a href="placement.html#search">🔍 खोजें</a>
+          <a href="placement.html#apply">📝 फॉर्म भरें</a>
+          <a href="placement.html#companyinfo">📋 Company Benefits Form</a>
+        </div>
+      </div>
+      <a href="for-rent.html" style="font-weight:800;text-decoration:underline;">🏍️ For Rent</a>
+      <a href="home-service.html">🏠 Home Service</a>
+      <a href="tution.html">🎓 Ekveera Tution</a>
+      <a href="register.html">📝 Register</a>
+      <a href="contractor.html">🤝 Contractor</a>
+      <a href="resume-builder.html">📄 Resume</a>
+      <a href="help.html">💬 Help</a>
+      <a href="staff-profile.html">👤 Staff Profile</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;" class="header-pwa-actions">
+      <div class="lang-switch notranslate" role="group" aria-label="Language / भाषा"><button type="button" data-lang="hi" onclick="setLang('hi')">हिं</button><button type="button" data-lang="en" onclick="setLang('en')">EN</button></div>
+    </div>
+  </div>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="index.html" onclick="toggleMobileMenu()">🏠 Home</a>
+  <a href="#" onclick="toggleMobileSubmenu('mmTraining',event)">🎓 Call Center Training ▾</a>
+  <div id="mmTraining" class="submenu">
+    <a href="training.html#course" onclick="toggleMobileMenu()">📘 कोर्स</a>
+    <a href="training.html#apply" onclick="toggleMobileMenu()">📝 Admission Form</a>
+    <a href="training.html#fee" onclick="toggleMobileMenu()">💰 फीस</a>
+    <a href="training.html#idcard" onclick="toggleMobileMenu()">🪪 ID Card</a>
+    <a href="training.html#attendance" onclick="toggleMobileMenu()">✅ Attendance &amp; Material</a>
+    <a href="training.html#certificate" onclick="toggleMobileMenu()">🎓 Certificate</a>
+    <a href="training.html#address" onclick="toggleMobileMenu()">🏢 Company Address</a>
+  </div>
+  <a href="#" onclick="toggleMobileSubmenu('mmPlacement',event)">💼 Placement (Candidate/Company) ▾</a>
+  <div id="mmPlacement" class="submenu">
+    <a href="placement.html#search" onclick="toggleMobileMenu()">🔍 खोजें</a>
+    <a href="placement.html#apply" onclick="toggleMobileMenu()">📝 फॉर्म भरें</a>
+    <a href="placement.html#companyinfo" onclick="toggleMobileMenu()">📋 Company Benefits Form</a>
+  </div>
+  <a href="for-rent.html" onclick="toggleMobileMenu()">🏍️ For Rent</a>
+  <a href="home-service.html" onclick="toggleMobileMenu()">🏠 Home Service</a>
+      <a href="tution.html">🎓 Ekveera Tution</a>
+      <a href="register.html">📝 Register</a>
+      <a href="contractor.html">🤝 Contractor</a>
+  <a href="resume-builder.html" onclick="toggleMobileMenu()">📄 Resume</a>
+  <a href="help.html" onclick="toggleMobileMenu()">💬 Help</a>
+  <a href="staff-profile.html" onclick="toggleMobileMenu()">👤 Staff Profile</a>
+</div>
+</header>
+<div class="page-heading">🗑️ Delete My Data<small>अपनी Details हटवाएँ</small></div>
+<main class="container pv-wrap">
+<div id="pvHI" class="pv-lang notranslate" translate="no"><h1 class="pv-h1">🗑️ अपनी Details / Account हटवाएँ</h1>
+<p class="pv-sub">EkVeera में आपकी Registration ID और Mobile से चलती है। आप कभी भी अपनी Details हटवा सकते हैं — यह <b>मुफ़्त</b> है।</p>
+<section class="pv-sec"><h2>कैसे हटवाएँ</h2><ol><li>WhatsApp करें: <b>9766284669</b> (Head Office) या <b>9174777074</b> (Sub Office), या Email करें: <b>ekveeraplacement26@gmail.com</b></li><li>लिखें: "मेरी Details हटाएँ" + अपनी <b>ID</b> (जैसे CAND001, GIV001, KAR001, TCH001) + <b>Registered Mobile</b>।</li><li>पहचान की पुष्टि के बाद हम आम तौर पर 7 कार्य-दिवस में हटाकर आपको बता देते हैं।</li></ol>
+<p><a class="btn btn-primary" href="https://wa.me/919766284669?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20EkVeera%2C%20%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A5%80%20Details%20%E0%A4%B9%E0%A4%9F%E0%A4%BE%E0%A4%8F%E0%A4%81%E0%A5%A4%20ID%3A%20____%20Mobile%3A%20____" target="_blank" rel="noopener">💬 WhatsApp पर अनुरोध भेजें</a></p></section>
+<section class="pv-sec"><h2>क्या हटेगा / क्या रहेगा</h2><p><b>हटेगा:</b> नाम, Mobile, Email, पता, Resume, फोटो, Documents, Listing और Notification Token।</p><p><b>क़ानून / हिसाब के लिए रहेगा:</b> Payment और Invoice के रिकॉर्ड (रकम, तारीख़, Payment ID) और धोखाधड़ी रोकने की न्यूनतम जानकारी। देखें <a href="privacy.html">Privacy Policy</a>।</p></section></div>
+<div id="pvEN" class="pv-lang notranslate" translate="no" style="display:none"><h1 class="pv-h1">🗑️ Delete your details / account</h1>
+<p class="pv-sub">Your EkVeera registration works with your ID and mobile. You can have your details deleted at any time — it is <b>free</b>.</p>
+<section class="pv-sec"><h2>How to request deletion</h2><ol><li>WhatsApp <b>9766284669</b> (Head Office) or <b>9174777074</b> (Sub Office), or email <b>ekveeraplacement26@gmail.com</b></li><li>Write: "Delete my details" + your <b>ID</b> (e.g. CAND001, GIV001, KAR001, TCH001) + your <b>registered mobile</b>.</li><li>After verifying your identity we usually delete the data within 7 working days and confirm to you.</li></ol>
+<p><a class="btn btn-primary" href="https://wa.me/919766284669?text=Hello%20EkVeera%2C%20please%20delete%20my%20details.%20ID%3A%20____%20Mobile%3A%20____" target="_blank" rel="noopener">💬 Send request on WhatsApp</a></p></section>
+<section class="pv-sec"><h2>What is deleted / what is kept</h2><p><b>Deleted:</b> name, mobile, email, address, resume, photo, documents, listing and notification token.</p><p><b>Kept for legal / accounting reasons:</b> payment and invoice records (amount, date, payment ID) and the minimum information needed to prevent fraud. See the <a href="privacy.html">Privacy Policy</a>.</p></section></div>
+<script>(function(){var en=window.EKV_LANG==='en';document.getElementById('pvHI').style.display=en?'none':'';document.getElementById('pvEN').style.display=en?'':'none';})();</script>
+</main>
+
+<script>(function(){var en=window.EKV_LANG==='en';var h=document.getElementById('pvHI'),e=document.getElementById('pvEN');if(h)h.style.display=en?'none':'';if(e)e.style.display=en?'':'none';var a=document.querySelectorAll('.pv-hi'),b=document.querySelectorAll('.pv-en');for(var i=0;i<a.length;i++)a[i].style.display=en?'none':'';for(i=0;i<b.length;i++)b[i].style.display=en?'':'none';})();</script>
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="display:flex;align-items:center;gap:12px;">
+          <picture>
+            <source srcset="logo.png" type="image/webp">
+            <img src="logo.png" alt="EkVeera Placement & Services Logo" class="brand-logo" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brand-logo-fallback&quot;>EV</span>');">
+          </picture>
+          Ekveera Placement &amp; Services
+        </div>
+        <p style="max-width:280px;margin-top:10px;font-size:14px;">Call Center & Customer Service में Professional Online Training — घर बैठे सीखें।</p>
+        <div class="social-row">
+          <a href="https://www.facebook.com/share/19CHLq93iD/" target="_blank" rel="noopener" title="Facebook">📘</a>
+          <a href="#" target="_blank" rel="noopener" title="Instagram">📷</a>
+          <a href="https://wa.me/919766284669" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="resume-builder.html">Resume</a>
+        <a href="for-rent.html">For Rent</a>
+        <a href="home-service.html">Home Service</a>
+        <a href="tution.html">Ekveera Tution</a>
+        <a href="register.html">Register</a>
+        <a href="contractor.html">Contractor Payment</a>
+        <a href="help.html">Help</a>
+        <a href="training.html#course">कोर्स</a>
+        <a href="training.html#fee">फीस</a>
+        <a href="index.html#offices">Offices</a>
+      </div>
+      <div class="foot-links">
+        <a href="https://wa.me/919766284669" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:ekveeraplacement26@gmail.com">Email</a>
+        <a href="training.html#apply">Admission Form</a>
+        <a href="training.html#terms">Terms & Refund Policy</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="staff-profile.html">Staff Profile</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Ekveera Placement & Services</div>
+  </div>
+</footer>
+
+<div class="float-tools">
+  <button id="pwaInstallBtn" class="pwa-btn" onclick="installEkVeeraApp()">⬇️ App Install करें</button>
+  <button id="shareAppBtn" class="pwa-btn" onclick="shareEkVeeraApp()">🔗 Share करें</button>
+</div>
+<a class="float-wa" href="https://wa.me/919766284669" target="_blank" rel="noopener" aria-label="WhatsApp पर चैट करें">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.72.45 3.4 1.3 4.88L2 22l5.36-1.4a9.9 9.9 0 0 0 4.68 1.19h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.05c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.19-.15.31-.3.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.17.29.75 1.24 1.6 2 1.1.98 2.03 1.29 2.32 1.43.29.14.46.12.63-.07.17-.19.72-.84.92-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+
+<button id="backToTopBtn" class="float-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="ऊपर जाएं">↑</button>
+
+<script src="version.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
