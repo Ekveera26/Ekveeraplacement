@@ -52,12 +52,31 @@
                  : '<input id="ekvPushMob" type="tel" inputmode="numeric" maxlength="10" placeholder="' + T('अपना 10 अंकों का Mobile Number') + '">')
         + '<button type="button" id="ekvPushGo" class="ekv-push-btn">' + T('🔔 Notification चालू करें') + '</button>';
     var g = $('ekvPushGo'); if (g) g.onclick = enable; var o = $('ekvPushOff'); if (o) o.onclick = disable;
+    if (ADMIN && !$('ekvPushSend')) {                                                  // 📣 Admin: किसी ID / Mobile / सबको Notification भेजना
+      var sd = document.createElement('div'); sd.id = 'ekvPushSend'; sd.style.cssText = 'margin-top:12px;padding-top:10px;border-top:1px solid #dde';
+      sd.innerHTML = '<b style="font-size:13px">' + T('📣 Notification भेजें') + '</b>'
+        + '<input id="ekvSdTo" placeholder="' + T('किसे? Mobile / ID (GIV001, KAR003…) / ALL') + '" autocomplete="off">'
+        + '<input id="ekvSdTitle" maxlength="80" placeholder="' + T('Title') + '"><input id="ekvSdBody" maxlength="200" placeholder="' + T('Message') + '">'
+        + '<input id="ekvSdPw" type="password" placeholder="' + T('Admin Password') + '" autocomplete="off">'
+        + '<button type="button" id="ekvSdGo" class="ekv-push-btn">' + T('भेजें') + '</button>';
+      $('ekvPushPanel').appendChild(sd);
+      $('ekvSdGo').onclick = async function () {
+        var b = this, to = $('ekvSdTo').value.trim(), ti = $('ekvSdTitle').value.trim(), bo = $('ekvSdBody').value.trim(), pw2 = $('ekvSdPw').value.trim();
+        if (!to || !ti || !bo || !pw2) return say(T('सब खाने भरें (किसे, Title, Message, Password)।'), 'err');
+        b.disabled = true; say(T('⏳ भेजा जा रहा है...'), '');
+        try {
+          var r = await vcSecurePost({ action: 'pushsend', password: pw2, target: to, title: ti, body: bo, url: 'index.html' });
+          say((r && r.message) || T('कुछ गड़बड़ हुई।'), r && r.status === 'ok' ? 'ok' : 'err');
+        } catch (e) { say(T('भेजा नहीं जा सका — दोबारा कोशिश करें।'), 'err'); }
+        b.disabled = false; $('ekvSdPw').value = '';
+      };
+    }
   }
   function css() {
     var s = document.createElement('style');
     s.textContent = '#ekvPush{position:fixed;right:22px;bottom:96px;z-index:9990;font-family:inherit}'
       + '#ekvPushBell{width:46px;height:46px;border-radius:50%;border:0;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.22);font-size:22px;cursor:pointer}'
-      + '#ekvPushPanel{display:none;position:absolute;right:0;bottom:56px;width:min(290px,calc(100vw - 28px));background:#fff;color:#222;border-radius:14px;padding:14px;box-shadow:0 8px 28px rgba(0,0,0,.25);font-size:14px}'
+      + '#ekvPushPanel{display:none;max-height:70vh;overflow:auto;position:absolute;right:0;bottom:56px;width:min(290px,calc(100vw - 28px));background:#fff;color:#222;border-radius:14px;padding:14px;box-shadow:0 8px 28px rgba(0,0,0,.25);font-size:14px}'
       + '#ekvPush.open #ekvPushPanel{display:block}#ekvPushPanel p{margin:0 0 10px;line-height:1.5}'
       + '#ekvPushPanel input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccd;border-radius:8px;margin-bottom:8px;font-size:15px}'
       + '.ekv-push-btn{width:100%;padding:10px;border:0;border-radius:8px;background:#1a56db;color:#fff;font-size:15px;font-weight:600;cursor:pointer}.ekv-push-btn.alt{background:#64748b}.ekv-push-btn:disabled{opacity:.6}'

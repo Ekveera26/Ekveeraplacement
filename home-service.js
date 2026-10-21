@@ -147,16 +147,29 @@
     const r = await api({ action: 'hsmylisting', karigarId: kid, mobile: mob });
     if (!r || r.status !== 'ok') { $('mOut').innerHTML = ''; return say('mMsg', (r && r.message) || T('कुछ गड़बड़ हो गई।'), 'err'); }
     say('mMsg', '', '');
-    const pay = r.paid ? (r.active ? '✅ ' + esc(T('Payment हो चुकी — इस तारीख़ तक: ')) + esc(r.validTill) : '⌛ ' + esc(T('1 साल पूरा हो चुका — दोबारा Register करें'))) : '⏳ ' + esc(T('Payment बाकी — प्रोफ़ाइल अभी छुपी है'));
+    const pay = r.paid ? (r.active ? '✅ ' + esc(T('Payment हो चुकी — इस तारीख़ तक: ')) + esc(r.validTill) : '⌛ ' + esc(T('1 साल पूरा हो चुका — नीचे Renew करें (वही ID)'))) : '⏳ ' + esc(T('Payment बाकी — प्रोफ़ाइल अभी छुपी है'));
     const ap = r.rejected ? '❌ ' + esc(T('मंज़ूर नहीं हुई — हमारी टीम से WhatsApp पर संपर्क करें')) : (r.approved ? '✅ ' + esc(T('दस्तावेज़ मंज़ूर')) : '🔎 ' + esc(T('दस्तावेज़ों की जाँच जारी है')));
     $('mOut').innerHTML = '<div class="rent-detail"><h3>' + esc(r.karigarId) + ' — ' + esc(r.name) + '</h3><table><tr><td>' + esc(T('Payment')) + '</td><td>' + pay + '</td></tr><tr><td>' + esc(T('जाँच')) + '</td><td>' + ap + '</td></tr><tr><td>' + esc(T('खोज में'))
       + '</td><td>' + (r.live ? '🟢 ' + esc(T('दिख रही है')) : '⚪ ' + esc(T('अभी नहीं दिख रही'))) + '</td></tr></table>' + (!r.paid ? payBtn(r.payLink, r.amount) : '') +
-      (r.live || (r.active && r.approved) ? '<div style="margin-top:12px;padding:10px;border-radius:10px;background:' + (r.availability === 'Closed' ? '#fdecea' : '#e8f6ec') + '"><b>' + (r.availability === 'Closed' ? '🔒 ' + esc(T('Close — आप अभी किसी के काम पर हैं, खोज में चुने नहीं जा सकते')) : '🟢 ' + esc(T('Open — ग्राहक आपको चुन सकते हैं'))) + '</b><br>' +
+      (r.live || (r.active && r.approved) ? '<div style="margin-top:12px;padding:10px;border-radius:10px;background:' + (r.availability === 'Closed' ? '#fdecea' : '#e8f6ec') + '"><b>' + (r.availability === 'Closed' ? '🔒 ' + esc(T(/^auto/i.test(r.closedBy || '') ? 'Close — ग्राहक का Order पक्का होने पर आप अपने-आप Close हो गए हैं। काम से फ़्री होते ही नीचे Open दबाएँ, वरना नया Order नहीं आएगा।' : 'Close — आप अभी किसी के काम पर हैं, खोज में चुने नहीं जा सकते')) : '🟢 ' + esc(T('Open — ग्राहक आपको चुन सकते हैं'))) + '</b><br>' +
         '<button type="button" class="btn ' + (r.availability === 'Closed' ? 'btn-primary' : '') + '" style="margin-top:8px" data-kst="' + (r.availability === 'Closed' ? 'open' : 'close') + '">' + esc(T(r.availability === 'Closed' ? 'Open करें (मैं फ्री हूँ)' : 'Close करें (काम पर हूँ)')) + '</button></div>' : '') + '</div>';
+    if (r.paid && r.renewable) {
+      const rd = $('mOut').querySelector('.rent-detail');
+      if (rd) rd.insertAdjacentHTML('beforeend', '<div style="margin-top:12px;padding:12px;border-radius:10px;background:#FFF8E5;border:1px solid #f0d58a"><b>🔁 ' + esc(T('Registration Renew करें')) + '</b><p style="margin:6px 0 8px;font-size:14px">' + esc(T('वही Karigar ID एक साल और चालू — Renew फ़ीस: ₹')) + esc(r.renewAmount) + '</p><button type="button" class="btn btn-primary" id="hsRenewBtn">' + esc(T('Renew का Payment Link बनाएँ')) + '</button><div id="hsRenewOut"></div></div>');
+    }
     myK = { kid: r.karigarId, mob: mob };
   };
   let myK = null;
   $('mOut').addEventListener('click', async function (e) {
+    const rb = e.target.closest('#hsRenewBtn');
+    if (rb && myK) {
+      rb.disabled = true; $('hsRenewOut').textContent = T('⏳ देखा जा रहा है...');
+      const rr = await api({ action: 'hsrenew', karigarId: myK.kid, mobile: myK.mob });
+      rb.disabled = false;
+      if (!rr || rr.status !== 'ok') { $('hsRenewOut').innerHTML = '<p class="err">' + esc((rr && rr.message) || T('कुछ गड़बड़ हो गई।')) + '</p>'; return; }
+      $('hsRenewOut').innerHTML = payBtn(rr.payLink, rr.amount) + '<p class="rent-note" style="margin-top:8px">' + esc(T('Payment होते ही वही ID एक साल और चालू हो जाएगी; बचे दिन जुड़ जाएँगे।')) + '</p>';
+      return;
+    }
     const b = e.target.closest('[data-kst]'); if (!b || !myK) return;
     const to = b.getAttribute('data-kst');
     if (!confirm(T(to === 'open' ? 'काम पूरा हो गया? Open करने पर आप फिर से खोज में चुने जा सकेंगे।' : 'Close करने पर ग्राहक आपको चुन नहीं पाएँगे। ठीक है?'))) return;

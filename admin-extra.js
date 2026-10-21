@@ -39,10 +39,60 @@
       sec('axReg', '📝 Register हुए लोग', 'किसने, किस सेवा के लिए Register किया (Notification इन्हीं Mobile पर भेजे जाएँगे)।',
         '<select id="axRegFilter" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px"><option value="">सभी</option><option value="training">Call Center Training</option><option value="placement">Placement</option><option value="rent">For Rent</option><option value="home">Home Service</option><option value="tution">Ekveera Tution</option></select>' +
         '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axRegs()">📝 List दिखाएँ</button><div id="axRegOut" style="margin-top:10px;font-size:13.5px"></div>') +
+      sec('axRm', '🗑️ Details हटाएँ (ID और हिसाब सुरक्षित रखकर)', 'किसी की Details हटवानी हों तो उसकी ID लिखें। पहले Preview दिखेगा, फिर पक्का करना होगा। Row delete नहीं होती — Serial Number, ID और Commission का हिसाब नहीं बिगड़ता; सिर्फ़ नाम, Mobile, Email, पता, Document जैसे खाने छुप जाते हैं और Search से हट जाते हैं।',
+        '<input id="axRmId" placeholder="ID (GIV001 / KAR003 / TCH002 / Candidate ID …)" style="width:100%;padding:9px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px" autocomplete="off">' +
+        '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axRmPreview()">🔍 पहले Preview देखें</button><div id="axRmOut" style="margin-top:10px;font-size:13.5px"></div>') +
+      sec('axExp', '⏳ Registration खत्म होने वाली (For Rent / Home Service / Tution)', 'किसकी Registration कितने दिन में खत्म हो रही है — जल्दी खत्म होने वाली ऊपर। Excel में Download भी कर सकते हैं। रोज़ सुबह 9 बजे Email + Push Alert भी आता है।',
+        '<select id="axExpDays" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px"><option value="15">15 दिन में खत्म</option><option value="30" selected>30 दिन में खत्म</option><option value="60">60 दिन में खत्म</option><option value="365">पूरी List (सभी)</option></select>' +
+        '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axExpiring()">🔄 List दिखाएँ</button><div id="axExpOut" style="margin-top:10px;font-size:13.5px"></div>') +
       sec('axTest', '🧪 Admin Test — पूरी Web एक Click में जाँचें', 'हर Update के बाद यह एक बार चलाएँ: Pages, Scripts, Server, Sheets, हर नया Function — सब Pass / Fail दिखेगा। सारे पेज हाथ से खोलकर देखने की ज़रूरत नहीं।',
         '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axRunTest()">▶️ पूरा Test चलाएँ</button><button class="btn" style="width:100%;justify-content:center;margin-top:8px;border:1px solid #cfd6e0;background:#fff" onclick="axSetupSheets()">🗂️ सारी Sheets बनाएँ / ठीक करें (Home Service, Rent, Tution, Register)</button><div id="axTestOut" style="margin-top:10px;font-size:13.5px"></div>') +
       sec('axHelp', '🆘 Admin Help — कोई काम भूल जाएँ या दिक्कत आए तो', 'Admin के काम में जो दिक्कतें आ सकती हैं, उनके हल।', helpHtml());
   }
+
+  /* ---------- ⏳ Registration खत्म होने वाली ---------- */
+  var EXP_ROWS = [];
+  window.axExpiring = async function () {
+    var out = document.getElementById('axExpOut'); out.textContent = T('⏳ आ रहा है...');
+    var d = await call({ action: 'adminexpiring', days: document.getElementById('axExpDays').value });
+    if (!d || d.status !== 'ok') { out.innerHTML = '<span style="color:#a12a1f">' + esc((d && d.message) || T('कुछ गड़बड़ हुई।')) + '</span>'; return; }
+    EXP_ROWS = d.items || [];
+    if (!EXP_ROWS.length) { out.textContent = T('इस अवधि में कोई Registration खत्म नहीं हो रही। ✅'); return; }
+    var c = d.counts || {};
+    out.innerHTML = '<p>' + esc(T('खत्म हो चुकी')) + ': <b>' + (c.expired || 0) + '</b> · 7 ' + esc(T('दिन या कम')) + ': <b>' + (c.d7 || 0) + '</b> · 8–15: <b>' + (c.d15 || 0) + '</b> · 16–30: <b>' + (c.d30 || 0) + '</b></p>' +
+      '<button style="' + BTN_OK + '" onclick="axExpDownload()">⬇ Excel (CSV) Download</button>' +
+      EXP_ROWS.map(function (x) {
+        var col = x.daysLeft < 0 ? '#a12a1f' : (x.daysLeft <= 7 ? '#b4540a' : '#1b7f3b');
+        return '<div style="padding:7px 0;border-bottom:1px solid #eef1f5"><b>' + esc(x.service) + ' · ' + esc(x.id) + '</b> — ' + esc(x.name) + ' (' + esc(x.mobile) + ')<br><span style="color:' + col + ';font-weight:700">' +
+          (x.daysLeft < 0 ? esc(T('खत्म हुए ')) + (-x.daysLeft) + esc(T(' दिन हुए')) : x.daysLeft + ' ' + esc(T('दिन बचे'))) + '</span> · ' + esc(x.validTill) + '</div>';
+      }).join('');
+  };
+  window.axExpDownload = function () {
+    function q(v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+    var head = ['Service', 'ID', 'Name', 'Mobile', 'Valid Till', 'Days Left', 'Staff Code'];
+    var lines = [head.join(',')].concat(EXP_ROWS.map(function (x) { return [x.service, x.id, x.name, x.mobile, x.validTill, x.daysLeft, x.staff].map(q).join(','); }));
+    var blob = new Blob(['\ufeff' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' }), a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'EkVeera_Registration_Expiry_' + new Date().toISOString().slice(0, 10) + '.csv'; a.style.display = 'none';
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  };
+
+  /* ---------- 🗑️ Details हटाएँ ---------- */
+  window.axRmPreview = async function () {
+    var out = document.getElementById('axRmOut'), id = (document.getElementById('axRmId').value || '').trim().toUpperCase();
+    if (!id) { out.textContent = T('पहले ID लिखें।'); return; }
+    out.textContent = T('⏳ देखा जा रहा है...');
+    var d = await call({ action: 'adminremove', id: id });
+    if (!d || d.status !== 'ok') { out.innerHTML = '<span style="color:#a12a1f">' + esc((d && d.message) || T('कुछ गड़बड़ हुई।')) + '</span>'; return; }
+    out.innerHTML = '<p>' + esc(d.message) + '</p>' + (d.plan || []).map(function (x) { return '<div style="padding:6px 0;border-bottom:1px solid #eef1f5"><b>' + esc(x.sheet) + '</b> (Row ' + esc(x.row) + ')<br><span style="font-size:12.5px;color:#596579">' + esc(x.columns.join(', ') || '—') + '</span></div>'; }).join('') +
+      '<p style="margin:8px 0 0;font-size:13px">' + esc(T('छुपने वाले Saman/Skill: ')) + esc(d.hiddenItems || 0) + '</p>' +
+      '<button style="' + BTN_NO + '" onclick="axRmDo(\'' + esc(id) + '\')">' + esc(T('⚠️ पक्का हटाएँ')) + '</button>';
+  };
+  window.axRmDo = async function (id) {
+    if (!confirm(T('पक्का? Details वापस नहीं आएँगी (ID और हिसाब सुरक्षित रहेगा)।') + ' ' + id)) return;
+    var out = document.getElementById('axRmOut'); out.textContent = T('⏳ हटाया जा रहा है...');
+    var d = await call({ action: 'adminremove', id: id, confirm: '1' });
+    out.innerHTML = (d && d.status === 'ok') ? '<b style="color:#1b7f3b">' + esc(d.message) + '</b>' : '<span style="color:#a12a1f">' + esc((d && d.message) || T('कुछ गड़बड़ हुई।')) + '</span>';
+  };
 
   /* ---------- ✅ Approvals ---------- */
   var APR = {};

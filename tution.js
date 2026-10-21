@@ -157,12 +157,24 @@
     });
     h += '</table>' + (!r.paid ? payBtn(r.payLink, r.amount) : '');
     if (r.active && r.upgradeAmount) h += '<p style="margin:12px 0 0;font-size:14px">' + esc(T('Plan बढ़ाने की बाक़ी Payment (सिर्फ़ फ़र्क़):')) + '</p>' + payBtn(r.upgradeLink, r.upgradeAmount);
+    if (r.paid && r.renewable) h += '<div style="margin-top:12px;padding:12px;border-radius:10px;background:#FFF8E5;border:1px solid #f0d58a"><b>🔁 ' + esc(T('Registration Renew करें')) + '</b><p style="margin:6px 0 8px;font-size:14px">' +
+      esc(T('एक साल की फ़ीस आपकी ID की होती है, हर Skill की अलग नहीं। आज की Skill-संख्या के हिसाब से Renew फ़ीस: ₹')) + esc(r.renewAmount) + '</p><button type="button" class="btn btn-primary" id="tutRenewBtn">' + esc(T('Renew का Payment Link बनाएँ')) + '</button><div id="tutRenewOut"></div></div>';
     h += '</div>';
     $('mOut').innerHTML = h;
     if (r.active) { myCred = { tid: r.teacherId, mob: mob }; $('aBox').style.display = 'block'; aM.reset(); aM.add(); $('aPay').innerHTML = ''; say('aMsg', '', ''); }
     else { $('aBox').style.display = 'none'; myCred = null; }
   };
   $('mOut').addEventListener('click', async function (e) {
+    const rb = e.target.closest('#tutRenewBtn');
+    if (rb) {
+      const tid = $('mGid') ? $('mGid').value.trim().toUpperCase() : (myCred && myCred.tid), mob2 = $('mMob') ? digits10($('mMob').value) : (myCred && myCred.mob);
+      rb.disabled = true; $('tutRenewOut').textContent = T('⏳ देखा जा रहा है...');
+      const rr = await api({ action: 'tutrenew', teacherId: tid, mobile: mob2 });
+      rb.disabled = false;
+      if (!rr || rr.status !== 'ok') { $('tutRenewOut').innerHTML = '<p class="err">' + esc((rr && rr.message) || T('कुछ गड़बड़ हो गई।')) + '</p>'; return; }
+      $('tutRenewOut').innerHTML = payBtn(rr.payLink, rr.amount) + '<p class="rent-note" style="margin-top:8px">' + esc(T('Payment होते ही वही ID एक साल और चालू हो जाएगी; बचे दिन जुड़ जाएँगे।')) + '</p>';
+      return;
+    }
     const b = e.target.closest('[data-sst]'); if (!b || !myCred) return;
     const to = b.getAttribute('data-sst');
     if (!confirm(T(to === 'open' ? 'यह Skill फिर से Student को दिखेगी। ठीक है?' : 'Close करने पर यह Skill Student को "Close" दिखेगी और चुनी नहीं जा सकेगी। ठीक है?'))) return;

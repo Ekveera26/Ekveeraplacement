@@ -133,7 +133,7 @@
     const planName = r.plan === 'U' ? T('Unlimited (₹299)') : (r.plan === '2' ? T('2 सामान (₹89)') : T('1 सामान (₹49)'));
     let h = '<div class="rent-detail"><h3>' + esc(r.giverId) + ' — ' + esc(r.name) + '</h3><table>';
     h += '<tr><td>' + esc(T('Registration')) + '</td><td>' + (r.active ? '✅ ' + esc(T('Active — इस तारीख़ तक: ')) + esc(r.validTill)
-      : (r.paid ? '⌛ ' + esc(T('1 साल पूरा हो चुका — दोबारा Register करें')) : '⏳ ' + esc(T('Payment बाकी — सामान अभी छुपा है')))) + '</td></tr>';
+      : (r.paid ? '⌛ ' + esc(T('1 साल पूरा हो चुका — नीचे Renew करें (वही ID, सारा सामान वैसा ही)')) : '⏳ ' + esc(T('Payment बाकी — सामान अभी छुपा है')))) + '</td></tr>';
     h += '<tr><td>Plan</td><td>' + esc(planName) + ' · ' + esc(r.itemCount) + ' ' + esc(T('सामान')) + '</td></tr>';
     (r.items || []).forEach(function (it) { h += '<tr><td>' + esc(it.itemId) + '</td><td>' + esc(it.name) + ' — ₹' + esc(it.rent) + ' ' + esc(T(PER[it.per] || it.per)) + (/^pending/i.test(it.visible) ? ' <b style="color:#8a5a00">⏳ ' + esc(T('Plan बढ़ाने की Payment बाकी')) + '</b>' : '') +
       (r.active && !/^pending/i.test(it.visible) ? '<br>' + (it.itemStatus === 'Closed'
@@ -142,6 +142,8 @@
     h += '</table>';
     if (!r.paid) h += payBtn(r.payLink, r.amount);
     if (r.active && r.upgradeAmount) h += '<p style="margin:12px 0 0;font-size:14px">' + esc(T('Plan बढ़ाने की बाक़ी Payment (सिर्फ़ फ़र्क़):')) + '</p>' + payBtn(r.upgradeLink, r.upgradeAmount);
+    if (r.paid && r.renewable) h += '<div style="margin-top:12px;padding:12px;border-radius:10px;background:#FFF8E5;border:1px solid #f0d58a"><b>🔁 ' + esc(T('Registration Renew करें')) + '</b><p style="margin:6px 0 8px;font-size:14px">' +
+      esc(T('एक साल की फ़ीस आपकी ID की होती है, हर सामान की अलग नहीं। आज की सामान-संख्या के हिसाब से Renew फ़ीस: ₹')) + esc(r.renewAmount) + '</p><button type="button" class="btn btn-primary" id="rentRenewBtn">' + esc(T('Renew का Payment Link बनाएँ')) + '</button><div id="rentRenewOut"></div></div>';
     h += '</div>';
     $('mOut').innerHTML = h;
     if (r.active) {
@@ -150,6 +152,16 @@
     } else { $('aBox').style.display = 'none'; myBase = null; myCred = null; }
   };
   $('mOut').addEventListener('click', async function (e) {
+    const rb = e.target.closest('#rentRenewBtn');
+    if (rb) {
+      const gid = $('mGid').value.trim().toUpperCase(), mob = digits10($('mMob').value);
+      rb.disabled = true; $('rentRenewOut').innerHTML = esc(T('⏳ देखा जा रहा है...'));
+      const rr = await api({ action: 'rentrenew', giverId: gid, mobile: mob });
+      rb.disabled = false;
+      if (!rr || rr.status !== 'ok') { $('rentRenewOut').innerHTML = '<p class="err">' + esc((rr && rr.message) || T('कुछ गड़बड़ हो गई।')) + '</p>'; return; }
+      $('rentRenewOut').innerHTML = payBtn(rr.payLink, rr.amount) + '<p class="rent-note" style="margin-top:8px">' + esc(T('Payment होते ही वही ID एक साल और चालू हो जाएगी; बचे दिन जुड़ जाएँगे।')) + '</p>';
+      return;
+    }
     const b = e.target.closest('[data-ist]'); if (!b || !myCred) return;
     const to = b.getAttribute('data-ist');
     if (!confirm(T(to === 'open' ? 'सामान वापस आ गया है? Open करने पर यह फिर से Taker को दिखेगा।' : 'Close करने पर यह सामान किसी को चुनने के लिए नहीं दिखेगा। ठीक है?'))) return;

@@ -905,3 +905,13 @@ body.adm-lock{overflow:hidden}
 .rm-note a.rm-btn{background:#0B1F3A;color:#fff!important;text-decoration:none;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700;white-space:nowrap}
 
 @media(max-width:700px){.rent-sec{margin:24px 0}.rent-wrap{padding-top:22px}}
+
+/* ===== v19k: दाईं तरफ़ नीचे के बटन — एक के ऊपर एक, कोई overlap नहीं =====
+   WhatsApp (bottom 18, 44px) → ऊपर-जाएँ ↑ (76px) → 🔔 Notification (128px) → ? Help (184px) */
+.float-wa{right:18px !important;bottom:18px !important}
+.float-top{right:19px !important;bottom:76px !important}
+#ekvPush{right:17px !important;bottom:128px !important}
+#ekvHelpFab{position:fixed;right:19px;bottom:184px;z-index:1300;width:42px;height:42px;border-radius:50%;background:#0B1F3A;color:#fff;font:800 20px/38px "Work Sans",Arial,sans-serif;text-align:center;text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.25);border:2px solid #fff;transition:transform .2s ease}
+#ekvHelpFab:hover{transform:scale(1.1);color:#fff}
+.help-note{display:none !important}
+@media print{#ekvHelpFab,#ekvPush{display:none !important}}

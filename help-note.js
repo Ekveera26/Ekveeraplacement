@@ -1,7 +1,6 @@
-/* EkVeera — हर पेज पर "कठिनाई हो तो Help में देखें" की पट्टी (v18)
-   हर पेज के Header के ठीक नीचे एक पतली पट्टी जोड़ती है, जो Help Center (help.html) पर ले जाती है —
-   और इस पेज के काम का सीधा Help-जवाब भी खोलती है (help.html?help=<id>)।
-   भाषा: Hindi/English अपने-आप (EKV_LANG) — शब्दकोश की ज़रूरत नहीं। */
+/* EkVeera — हर पेज पर नीचे (दाईं तरफ़) छोटा "?" Help आइकन (v19k)
+   पहले Header के नीचे पट्टी थी — अब हटा दी गई है। यह आइकन WhatsApp / ऊपर-जाएँ / 🔔 के ऊपर अलग जगह पर रहता है (आपस में टकराते नहीं)।
+   दबाने पर Help Center खुलता है, और इस पेज के काम का सीधा जवाब (help.html?help=<id>) भी। */
 (function () {
   'use strict';
   var EN = window.EKV_LANG === 'en';
@@ -14,15 +13,15 @@
   };
   var id = MAP[page] || '';
   function go() {
-    if (document.getElementById('ekvHelpNote')) return;
-    var h = document.querySelector('header'); if (!h) return;
-    var d = document.createElement('div'); d.id = 'ekvHelpNote'; d.className = 'help-note notranslate';
-    d.innerHTML = '<div class="container help-note-in"><span class="hn-t">❓ ' +
-      (EN ? 'Facing difficulty in any task? Go to <b>EkVeera Help</b> to find out — every task is explained there step by step.'
-          : 'किसी काम को करने में कठिनाई हो रही है? <b>EkVeera Help</b> में जाकर पता करें — सभी कामों की Step-by-Step जानकारी वहाँ है।') +
-      '</span><span class="hn-b"><a class="hn-btn" href="help.html">💬 ' + (EN ? 'Open Help' : 'Help खोलें') + '</a>' +
-      (id ? '<a class="hn-btn hn-alt" href="help.html?help=' + id + '#help">📖 ' + (EN ? 'Help for this page' : 'इस पेज का Help') + '</a>' : '') + '</span></div>';
-    h.parentNode.insertBefore(d, h.nextSibling);
+    var old = document.getElementById('ekvHelpNote'); if (old) old.remove();          // पुरानी पट्टी (अगर कहीं cache में हो)
+    if (document.getElementById('ekvHelpFab')) return;
+    var a = document.createElement('a');
+    a.id = 'ekvHelpFab'; a.className = 'notranslate';
+    a.href = 'help.html' + (id ? '?help=' + id + '#help' : '');
+    a.setAttribute('aria-label', EN ? 'Help' : 'Help — कहाँ क्या करना है');
+    a.title = EN ? 'Help' : 'Help — कहाँ क्या करना है';
+    a.textContent = '?';
+    document.body.appendChild(a);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
