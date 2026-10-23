@@ -29,9 +29,58 @@
     return '<details id="' + id + '" style="border:1px solid #dfe5ee;border-radius:10px;padding:10px 14px;margin:10px 0;background:#fafbfd"><summary style="cursor:pointer;font-weight:800;font-size:14.5px">' + title + '</summary>' +
       '<p style="font-size:12.5px;color:#596579;margin:8px 0">' + sub + '</p>' + inner + '</details>';
   }
+  /* ---------- 🔧 Website Control ---------- */
+  var CTL_FORMS = [['training', '🎓 Admission For Training (Training Candidate)'], ['candidate', '📄 Resume For Upload (Candidate)'], ['company', '🏢 Requirement Of Candidate (Company)'], ['rent', '🏍️ For Rent'], ['home', '🏠 Home Service'], ['tution', '📚 Ekveera Tution']];
+  var CTL_PRESETS = [['', '— तैयार संदेश चुनें (या नीचे खुद लिखें) —'],
+    ['अभी इस फ़ॉर्म में सुधार का काम चल रहा है। कृपया थोड़ी देर बाद फिर कोशिश करें।', 'सुधार का काम चल रहा है'],
+    ['इस फ़ॉर्म में अभी नई Entry नहीं ली जा रही है। जल्द ही फिर शुरू होगी — जानकारी के लिए WhatsApp (9766284669) पर संपर्क करें।', 'अभी नई Entry बंद है'],
+    ['इस समय सीटें / Batch पूरे हो चुके हैं। अगला Batch शुरू होने पर यह फ़ॉर्म फिर खुलेगा।', 'Batch / सीटें पूरी'],
+    ['तकनीकी कारण से यह सेवा कुछ देर के लिए रुकी है। कृपया थोड़ी देर बाद फिर आएँ।', 'तकनीकी कारण']];
+  var CTL_MAINT_PRESETS = [['', '— तैयार संदेश चुनें (या नीचे खुद लिखें) —'],
+    ['वेबसाइट पर अभी सुधार (Maintenance) का काम चल रहा है। कृपया थोड़ी देर बाद फिर आएँ।', 'सुधार का काम चल रहा है'],
+    ['वेबसाइट में नया Update लग रहा है। लगभग 30 मिनट बाद फिर आएँ। असुविधा के लिए खेद है।', 'नया Update लग रहा है'],
+    ['तकनीकी कारण से वेबसाइट कुछ देर के लिए बंद है। हमारी टीम काम कर रही है — जल्द ही फिर चालू होगी।', 'तकनीकी कारण']];
+  function ctlOpts(arr) { return arr.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + '</option>'; }).join(''); }
+  window.axCtlLoad = async function () {
+    var out = document.getElementById('axCtlOut'); out.textContent = T('⏳ आ रहा है...');
+    var d = await vcSecurePost({ action: 'getcontrols' }).catch(function () { return null; });
+    if (!d || d.status !== 'ok') { out.innerHTML = '<span style="color:#a12a1f">' + esc(T('सेटिंग नहीं मिली — Server देखें।')) + '</span>'; return; }
+    var h = '<div style="font-weight:800;margin:4px 0">' + esc(T('फ़ॉर्म (चालू = नई Entry ले सकते हैं)')) + '</div>';
+    CTL_FORMS.forEach(function (f) {
+      var c = (d.forms && d.forms[f[0]]) || { on: 1, msg: '' };
+      h += '<div style="border:1px solid #e3e8ef;border-radius:10px;padding:9px 10px;margin:7px 0;background:#fff"><label style="display:flex;align-items:center;gap:9px;font-weight:700"><input type="checkbox" id="axCtlOn_' + f[0] + '"' + (c.on ? ' checked' : '') + ' style="width:20px;height:20px"> <span>' + esc(f[1]) + '</span></label>' +
+        '<select id="axCtlPre_' + f[0] + '" onchange="axCtlPreset(\'' + f[0] + '\')" style="width:100%;padding:7px;margin-top:7px;border:1px solid var(--line);border-radius:6px;font-size:13px">' + ctlOpts(CTL_PRESETS) + '</select>' +
+        '<textarea id="axCtlMsg_' + f[0] + '" rows="2" maxlength="400" placeholder="' + esc(T('बंद होने पर दिखने वाला संदेश (खाली = मानक संदेश)')) + '" style="width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:6px;font-size:13px">' + esc(c.msg || '') + '</textarea></div>';
+    });
+    var m = d.maint || { on: 0, msg: '' };
+    h += '<div style="border:2px solid #f0c36d;border-radius:10px;padding:10px;margin:12px 0;background:#fffaf0"><label style="display:flex;align-items:center;gap:9px;font-weight:800"><input type="checkbox" id="axCtlMaint"' + (m.on ? ' checked' : '') + ' style="width:20px;height:20px"> <span>🛠️ ' + esc(T('वेबसाइट पर काम चल रहा है (सबको पूरी स्क्रीन पर संदेश)')) + '</span></label>' +
+      '<select id="axCtlMaintPre" onchange="axCtlPreset(\'maint\')" style="width:100%;padding:7px;margin-top:7px;border:1px solid var(--line);border-radius:6px;font-size:13px">' + ctlOpts(CTL_MAINT_PRESETS) + '</select>' +
+      '<textarea id="axCtlMaintMsg" rows="2" maxlength="400" placeholder="' + esc(T('संदेश (खाली = मानक संदेश)')) + '" style="width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:6px;font-size:13px">' + esc(m.msg || '') + '</textarea>' +
+      '<div style="font-size:12px;color:#7a4b00;margin-top:6px">' + esc(T('चालू करने पर नए फ़ॉर्म Server पर भी रुक जाते हैं। आपका ?admin=1 वाला Admin पेज खुला रहता है, ताकि आप इसे वापस बंद कर सकें।')) + '</div></div>' +
+      '<button style="' + BTN_OK + 'width:100%;padding:11px" onclick="axCtlSave()">💾 ' + esc(T('सेटिंग सेव करें')) + '</button><div id="axCtlMsgOut" style="margin-top:8px;font-weight:700"></div>' +
+      (d.updated ? '<div style="font-size:12px;color:#596579;margin-top:4px">' + esc(T('आख़िरी बदलाव:')) + ' ' + esc(d.updated) + '</div>' : '');
+    out.innerHTML = h;
+  };
+  window.axCtlPreset = function (k) {
+    var sel = document.getElementById(k === 'maint' ? 'axCtlMaintPre' : 'axCtlPre_' + k), ta = document.getElementById(k === 'maint' ? 'axCtlMaintMsg' : 'axCtlMsg_' + k);
+    if (sel && ta && sel.value) ta.value = sel.value;
+  };
+  window.axCtlSave = async function () {
+    var out = document.getElementById('axCtlMsgOut'), forms = {}, anyOff = [];
+    CTL_FORMS.forEach(function (f) { var on = document.getElementById('axCtlOn_' + f[0]).checked ? 1 : 0; forms[f[0]] = { on: on, msg: document.getElementById('axCtlMsg_' + f[0]).value.trim() }; if (!on) anyOff.push(f[1]); });
+    var maint = { on: document.getElementById('axCtlMaint').checked ? 1 : 0, msg: document.getElementById('axCtlMaintMsg').value.trim() };
+    if ((maint.on || anyOff.length) && !confirm(T('पक्का? ') + (maint.on ? T('पूरी वेबसाइट पर "काम चल रहा है" संदेश दिखेगा। ') : '') + (anyOff.length ? T('ये फ़ॉर्म बंद होंगे: ') + anyOff.join(', ') : ''))) return;
+    out.textContent = T('⏳ सेव हो रहा है...');
+    var d = await call({ action: 'setcontrols', forms: JSON.stringify(forms), maint: JSON.stringify(maint) });
+    out.style.color = (d && d.status === 'ok') ? '#1b7f3b' : '#a12a1f';
+    out.textContent = (d && d.status === 'ok') ? '✅ ' + T('सेव हो गया — 1–2 मिनट में सब पर लागू।') : ((d && d.message) || T('कुछ गड़बड़ हुई।'));
+  };
+
   function mount() {
     var box = document.getElementById('adminExtraBox'); if (!box || box.dataset.ok) return; box.dataset.ok = '1';
     box.innerHTML =
+      sec('axCtl', '🔧 Website Control — फ़ॉर्म चालू/बंद + "काम चल रहा है" संदेश', 'किसी फ़ॉर्म की नई Entry रोकनी हो तो उसका स्विच बंद करें; वेबसाइट पर काम करना हो तो नीचे का Maintenance चालू करें। पहले से Register लोगों का Payment/ID/खोज चलता रहता है।',
+        '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axCtlLoad()">🔄 अभी की सेटिंग दिखाएँ</button><div id="axCtlOut" style="margin-top:10px;font-size:13.5px"></div>') +
       sec('axApr', '✅ Approvals — जहाँ Admin की मंज़ूरी चाहिए (एक ही List)', 'Staff Profile, Staff की Edit Request, नया Phone/Login, Karigar की मंज़ूरी — सब यहीं। ID याद रखने या Box में भरने की ज़रूरत नहीं, बस बटन दबाएँ।',
         '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axApprovals()">🔄 List दिखाएँ</button><div id="axAprOut" style="margin-top:10px;font-size:13.5px"></div>') +
       sec('axEnq', '📨 Enquiries — कितनी Enquiry आईं', 'Help पेज के Enquiry Form से जो भी आई, यहाँ दिखती है (नई पहले)।',

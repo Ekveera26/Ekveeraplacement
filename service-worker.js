@@ -7,7 +7,7 @@
 //
 //  ⚠️ HAR NAYE DEPLOY par neeche ki VERSION line badal dein (jaise 2026-10-15-v1). Nahi bhi badli to bhi naya Content
 //     milne par App apne-aap pata laga leta hai aur Update ka sawaal puchta hai — par VERSION badalna sabse pakka hai.
-const VERSION = '2026-10-21-v19n';
+const VERSION = '2026-10-23-v19o';
 const CACHE_NAME = 'ekveera-cache-' + VERSION;
 
 const PRECACHE_URLS = [
@@ -15,7 +15,7 @@ const PRECACHE_URLS = [
   './styles.css', './app.js', './i18n.js', './i18n-en.js', './staff-ref.js', './ekv-files.js', './ekv-scan.js',
   './company-form.js', './registration-forms.js', './help-center.js', './help-more.js', './help-note.js', './trust-notes.js', './privacy.html', './delete-data.html', './staff-link-admin.js', './staff-profile.js', './staff-profile-admin.js',
   './reviews.js', './company-details.js', './apply-job.js', './payment-log.js', './receipt.js', './staff-pay.js',
-  './training-attendance.js', './training-address.js', './my-ids.js', './party-admin.js', './rent-admin.js', './admin-extra.js', './address-admin.js', './for-rent.js', './home-service.js', './tution.js', './mp-loc.js', './swipe-nav.js', './version.js', './register.js', './contractor.js', './push.js', './resume-builder.js', './docx.min.js',
+  './training-attendance.js', './training-address.js', './my-ids.js', './party-admin.js', './rent-admin.js', './admin-extra.js', './address-admin.js', './for-rent.js', './home-service.js', './tution.js', './mp-loc.js', './site-controls.js', './staff-team.js', './swipe-nav.js', './version.js', './register.js', './contractor.js', './push.js', './resume-builder.js', './docx.min.js',
   './manifest.json', './logo.png', './icon-192.png', './icon-512.png', './icon-maskable-192.png', './icon-maskable-512.png',
   './favicon-32.png', './favicon-64.png', './EkVeera_Agreement_Form.pdf', './EkVeera_Agreement_Form.docx'
 ];

@@ -42,18 +42,52 @@
     const st = $(ids[0]), di = $(ids[1]), te = $(ids[2]), pl = $(ids[3]); let D = {};
     st.innerHTML = '<option value="">' + esc(allLabel === 'all' ? T('सभी राज्य') : T('चुनें')) + '</option>' + SHOW.map(x => opt(x[0], T(x[1]))).join('');
     const lbl = k => allLabel === 'all' ? T(k) : T('चुनें');
-    async function load() {
+    const lowS = x => String(x == null ? '' : x).toLowerCase().replace(/\s+/g, ' ').trim();
+    const keyOf = (o, n) => Object.keys(o).filter(k => lowS(k) === lowS(n))[0] || null;
+    async function addCustom(c) {                        // 📍 लोगों की "Other" में लिखी जगहें जोड़ना (EkVeera_Places.gs)
+      try {
+        const r = await api({ action: 'placesget', state: c }); if (!r || r.status !== 'ok' || !r.data) return;
+        Object.keys(r.data).forEach(cd => { if (!cd || cd === '—') return; const dk = keyOf(D, cd) || cd; if (!D[dk]) D[dk] = {};
+          Object.keys(r.data[cd]).forEach(ct => { if (!ct || ct === '—') return; const tk = keyOf(D[dk], ct) || ct; if (!D[dk][tk]) D[dk][tk] = [];
+            r.data[cd][ct].forEach(v => { if (v && !D[dk][tk].some(x => lowS(x) === lowS(v))) D[dk][tk].push(v); }); }); });
+      } catch (e) {}
+    }
+    async function load() { await loadBase(); if (st.value) await addCustom(st.value); }
+    async function loadBase() {
       D = {}; const c = st.value; if (!c) return;
       try { const r = await fetch('data/' + c + '.json'); if (!r.ok) throw 0; D = await r.json(); }
       catch (e) { D = DATA.LOC[stateName(c)] || {}; try { const w = document.getElementById('ekvLocWarn'); if (!w) { const n = document.createElement('div'); n.id = 'ekvLocWarn'; n.style.cssText = 'margin:8px 0;padding:9px 12px;border-radius:10px;background:#fdecea;color:#a12a1f;font-size:13.5px;font-weight:700'; n.textContent = T('⚠️ पूरे ज़िले/तहसील/गाँव की सूची (data/MP.json) लोड नहीं हुई, इसलिए सिर्फ़ छोटी नमूना सूची दिख रही है। Admin: GitHub पर "data" फ़ोल्डर में MP.json जाँचें।'); st.parentNode.insertBefore(n, st); } } catch (e2) {} }                    // LGD की फ़ाइल न मिले तो नमूना सूची + चेतावनी
     }
+    const pickMode = allLabel !== 'all', OTH = '__other__';
+    const othHtml = '<option value="' + OTH + '">' + esc(T('अन्य (Other) — खुद लिखें')) + '</option>';
+    const mkTxt = (sel, ph) => { const i = document.createElement('input'); i.type = 'text'; i.maxLength = 40; i.autocomplete = 'off'; i.placeholder = T(ph); i.style.cssText = 'display:none;margin-top:8px;width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);'; sel.parentNode.insertBefore(i, sel.nextSibling); return i; };
+    const tD = pickMode ? mkTxt(di, 'अपने ज़िले का नाम लिखें') : null, tT = pickMode ? mkTxt(te, 'अपनी तहसील का नाम लिखें') : null, tP = pickMode ? mkTxt(pl, 'अपना शहर / गाँव / इलाका लिखें') : null;
     function redraw() {
-      const d = di.value, t = te.value;
-      fill(di, Object.keys(D), lbl('सभी ज़िले')); di.value = D[d] ? d : '';
-      const TT = D[di.value] || {};
-      fill(te, Object.keys(TT), lbl('सभी तहसील')); te.value = TT[t] ? t : '';
-      fill(pl, TT[te.value] || [], lbl('सभी शहर/गाँव'));
+      const d = di.value, t = te.value, pv = pl.value;
+      fill(di, Object.keys(D), lbl('सभी ज़िले')); if (pickMode) di.insertAdjacentHTML('beforeend', othHtml);
+      di.value = (D[d] || (pickMode && d === OTH)) ? d : '';
+      const dOth = pickMode && di.value === OTH, TT = dOth ? {} : (D[di.value] || {});
+      fill(te, Object.keys(TT), lbl('सभी तहसील')); if (pickMode) te.insertAdjacentHTML('beforeend', othHtml);
+      te.value = dOth ? OTH : ((TT[t] || (pickMode && t === OTH)) ? t : '');
+      const tOth = pickMode && te.value === OTH, VV = tOth ? [] : (TT[te.value] || []);
+      fill(pl, VV, lbl('सभी शहर/गाँव')); if (pickMode) pl.insertAdjacentHTML('beforeend', othHtml);
+      pl.value = tOth ? OTH : ((VV.indexOf(pv) > -1 || (pickMode && pv === OTH)) ? pv : '');
+      if (pickMode) {
+        const vOth = pl.value === OTH;
+        te.style.display = dOth ? 'none' : ''; pl.style.display = tOth ? 'none' : '';
+        tD.style.display = dOth ? '' : 'none'; tT.style.display = tOth ? '' : 'none'; tP.style.display = vOth ? '' : 'none';
+        tD.required = dOth; tT.required = tOth; tP.required = vOth;
+      }
     }
+    if (pickMode) window.__hsPick = {
+      parts: () => { const dO = di.value === OTH, tO = te.value === OTH, vO = pl.value === OTH; return { d: dO ? tD.value.trim() : di.value, t: tO ? tT.value.trim() : te.value, v: vO ? tP.value.trim() : pl.value, f: { d: dO, t: tO, v: vO } }; },
+      save: async () => {                                  // फ़ॉर्म सफल भेजने के बाद: "Other" वाली जगह सबकी list में जुड़ने के लिए
+        const P = window.__hsPick.parts(); if (!P.f.d && !P.f.t && !P.f.v) return; if (!P.d || (P.v && !P.t)) return;
+        const dk = keyOf(D, P.d), tk = dk ? keyOf(D[dk], P.t) : null; if (dk && tk && P.v && D[dk][tk].some(x => lowS(x) === lowS(P.v))) return;
+        try { await api({ action: 'placesadd', state: st.value, district: P.d, tehsil: P.t || '', place: P.v || '' }); } catch (e) {}
+      }
+    };
+    [tD, tT, tP].forEach(i => { if (i) i.addEventListener('input', () => {}); });
     st.onchange = async () => { di.value = ''; te.value = ''; await load(); redraw(); };
     di.onchange = () => { te.value = ''; redraw(); };
     te.onchange = redraw;
@@ -110,6 +144,11 @@
     const obj = {};
     for (const [k, v] of new FormData(f).entries()) { if (!(v instanceof File)) obj[k] = v; }
     obj.rajya = stateName($('kSt').value); obj.terms = '1'; delete obj.rajya_code;
+    if (window.__hsPick) {                               // "Other" में लिखी जगहें
+      const P = window.__hsPick.parts();
+      if ((P.f.d && P.d.length < 2) || (P.f.t && P.t.length < 2) || (P.f.v && P.v.length < 2)) { er.textContent = T('अपनी जगह का नाम (कम से कम 2 अक्षर) लिखें।'); reset(); return; }
+      obj.jila = P.d; obj.tehsil = P.t; obj.gaon = P.v;
+    }
     if (obj.kaam1 === '__other__') { obj.kaam1 = ($('kSvOther').value || '').trim(); if (obj.kaam1.length < 2) { er.textContent = T('मुख्य काम (Other) का नाम लिखें।'); reset(); return; } }
     if (obj.kaam2 === '__other__') obj.kaam2 = ($('kSv2Other').value || '').trim();
     obj.staff = (window.ekvStaffRef && window.ekvStaffRef()) || '';
@@ -119,6 +158,7 @@
     obj.files = JSON.stringify(files); obj.action = 'hsregister';
     const r = await api(obj);
     if (!r || r.status !== 'ok') { er.textContent = (r && r.message) || T('भेजने में दिक्कत हुई। इंटरनेट देखकर दोबारा कोशिश करें।'); reset(); return; }
+    try { if (window.__hsPick) window.__hsPick.save(); } catch (x) {}
     doneBox(r, digits10(f.mobile.value)); window.scrollTo({ top: $('karigar').offsetTop - 80, behavior: 'smooth' });
   };
 
@@ -157,6 +197,13 @@
       const rd = $('mOut').querySelector('.rent-detail');
       if (rd) rd.insertAdjacentHTML('beforeend', '<div style="margin-top:12px;padding:12px;border-radius:10px;background:#FFF8E5;border:1px solid #f0d58a"><b>🔁 ' + esc(T('Registration Renew करें')) + '</b><p style="margin:6px 0 8px;font-size:14px">' + esc(T('वही Karigar ID एक साल और चालू — Renew फ़ीस: ₹')) + esc(r.renewAmount) + '</p><button type="button" class="btn btn-primary" id="hsRenewBtn">' + esc(T('Renew का Payment Link बनाएँ')) + '</button><div id="hsRenewOut"></div></div>');
     }
+    if (r.active) {                                       // 🆕 Payment के बाद और काम (service) जोड़ना — फ्री
+      const rd2 = $('mOut').querySelector('.rent-detail');
+      if (rd2) rd2.insertAdjacentHTML('beforeend', '<div id="hsWorkBox" style="margin-top:12px;padding:12px;border-radius:10px;background:#e8f6ec;border:1px solid #a9dcb8"><b>🛠️ ' + esc(T('मेरे काम (Services)')) + '</b>' +
+        '<p style="margin:6px 0;font-size:14px">' + (r.works || []).map(w => '<span style="display:inline-block;background:#fff;border:1px solid #cfe5d6;border-radius:14px;padding:2px 10px;margin:2px">' + esc(T(w)) + '</span>').join('') + '</p>' +
+        '<p style="margin:6px 0;font-size:13.5px">' + esc(T('एक बार ₹49 देने के बाद, Registration चालू रहने तक आप जितने चाहें और काम जोड़ सकते हैं (कुल 8 तक) — कोई और शुल्क नहीं। अपनी ID खोलकर ही जोड़ें।')) + '</p>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap"><select id="hsMoreSel" style="flex:1;min-width:180px;padding:9px;border:1px solid var(--line);border-radius:6px">' + catGroups('') + '</select><button type="button" class="btn btn-primary" id="hsAddWorkBtn">➕ ' + esc(T('यह काम जोड़ें')) + '</button></div><div id="hsAddWorkOut" style="margin-top:6px;font-weight:700"></div></div>');
+    }
     myK = { kid: r.karigarId, mob: mob };
   };
   let myK = null;
@@ -169,6 +216,16 @@
       if (!rr || rr.status !== 'ok') { $('hsRenewOut').innerHTML = '<p class="err">' + esc((rr && rr.message) || T('कुछ गड़बड़ हो गई।')) + '</p>'; return; }
       $('hsRenewOut').innerHTML = payBtn(rr.payLink, rr.amount) + '<p class="rent-note" style="margin-top:8px">' + esc(T('Payment होते ही वही ID एक साल और चालू हो जाएगी; बचे दिन जुड़ जाएँगे।')) + '</p>';
       return;
+    }
+    const wb = e.target.closest('#hsAddWorkBtn');
+    if (wb && myK) {
+      const kaam = ($('hsMoreSel') || {}).value, out = $('hsAddWorkOut');
+      if (!kaam) { out.style.color = '#a12a1f'; out.textContent = T('जोड़ने के लिए काम चुनें।'); return; }
+      wb.disabled = true; out.style.color = '#333'; out.textContent = T('⏳ जोड़ा जा रहा है...');
+      const wr = await api({ action: 'hsaddwork', karigarId: myK.kid, mobile: myK.mob, kaam: kaam });
+      wb.disabled = false;
+      if (!wr || wr.status !== 'ok') { out.style.color = '#a12a1f'; out.textContent = (wr && wr.message) || T('कुछ गड़बड़ हो गई।'); return; }
+      window.hsMyListing(); return;
     }
     const b = e.target.closest('[data-kst]'); if (!b || !myK) return;
     const to = b.getAttribute('data-kst');

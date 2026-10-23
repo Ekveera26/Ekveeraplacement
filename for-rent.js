@@ -89,7 +89,7 @@
     const v = id => ($(id) ? $(id).value.trim() : '');
     if (!v('gName') || v('gName').length < 2) return say('gMsg', T('अपना पूरा नाम लिखें।'), 'err');
     if (digits10(v('gMobile')).length !== 10) return say('gMsg', T('10 अंकों का सही Mobile Number लिखें।'), 'err');
-    if (!v('gLoc') || (document.getElementById('gLoc_di') && !document.getElementById('gLoc_di').value)) return say('gMsg', T('ज़िला, तहसील और शहर / गाँव चुनें (या Other में लिखें)।'), 'err');
+    if (!v('gLoc') || (window.EkvLoc && !EkvLoc.hasDistrict('gLoc'))) return say('gMsg', T('ज़िला, तहसील और शहर / गाँव चुनें (या Other में लिखें)।'), 'err');
     const list = gM.read(), ie = itemErr(list); if (ie) return say('gMsg', ie, 'err');
     if (!$('gTerms').checked) return say('gMsg', T('आगे बढ़ने के लिए शर्तों पर ✔ लगाएँ।'), 'err');
     btn.disabled = true; say('gMsg', T('⏳ दर्ज किया जा रहा है...'), '');
@@ -98,6 +98,7 @@
       staff: (window.ekvStaffRef && window.ekvStaffRef()) || '' });
     btn.disabled = false;
     if (!r || r.status !== 'ok') return say('gMsg', (r && r.message) || T('कुछ गड़बड़ हो गई — फिर कोशिश करें।'), 'err');
+    try { if (window.EkvLoc) EkvLoc.save('gLoc'); } catch (e) {}   // 📍 "Other" में लिखी जगह सबकी list में जुड़े
     say('gMsg', '', '');
     $('gDoneGid').textContent = r.giverId; $('gDoneIid').textContent = showItemIds(r);
     $('gDone').style.display = 'block';
@@ -144,6 +145,8 @@
     if (r.active && r.upgradeAmount) h += '<p style="margin:12px 0 0;font-size:14px">' + esc(T('Plan बढ़ाने की बाक़ी Payment (सिर्फ़ फ़र्क़):')) + '</p>' + payBtn(r.upgradeLink, r.upgradeAmount);
     if (r.paid && r.renewable) h += '<div style="margin-top:12px;padding:12px;border-radius:10px;background:#FFF8E5;border:1px solid #f0d58a"><b>🔁 ' + esc(T('Registration Renew करें')) + '</b><p style="margin:6px 0 8px;font-size:14px">' +
       esc(T('एक साल की फ़ीस आपकी ID की होती है, हर सामान की अलग नहीं। आज की सामान-संख्या के हिसाब से Renew फ़ीस: ₹')) + esc(r.renewAmount) + '</p><button type="button" class="btn btn-primary" id="rentRenewBtn">' + esc(T('Renew का Payment Link बनाएँ')) + '</button><div id="rentRenewOut"></div></div>';
+    if (r.active && r.plan === 'U') h += '<div style="margin-top:12px;padding:11px 12px;border-radius:10px;background:#e8f6ec;border:1px solid #a9dcb8;font-size:14px">✅ <b>' + esc(T('आपका Unlimited (₹299) Plan चालू है')) + '</b> — ' + esc(T('जितने चाहें सामान जोड़ें, कोई और शुल्क नहीं। इस तारीख़ तक:')) + ' ' + esc(r.validTill) + '. ' + esc(T('नीचे "और सामान जोड़ें" से जोड़ें।')) + '</div>';
+    else if (r.active && r.plan !== 'U') h += '<div style="margin-top:12px;padding:10px 12px;border-radius:10px;background:#fff6e5;border:1px solid #f0c36d;font-size:13.5px">💡 ' + esc(T('बार-बार एक-एक सामान जोड़ने पर हर बार Plan बढ़ाना पड़ेगा। सारा सामान एक साथ जोड़ें या ₹299 का Unlimited Plan लें।')) + '</div>';
     h += '</div>';
     $('mOut').innerHTML = h;
     if (r.active) {
