@@ -81,6 +81,8 @@
     box.innerHTML =
       sec('axCtl', '🔧 Website Control — फ़ॉर्म चालू/बंद + "काम चल रहा है" संदेश', 'किसी फ़ॉर्म की नई Entry रोकनी हो तो उसका स्विच बंद करें; वेबसाइट पर काम करना हो तो नीचे का Maintenance चालू करें। पहले से Register लोगों का Payment/ID/खोज चलता रहता है।',
         '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axCtlLoad()">🔄 अभी की सेटिंग दिखाएँ</button><div id="axCtlOut" style="margin-top:10px;font-size:13.5px"></div>') +
+      sec('axPo', '💸 Staff Payout — भुगतान / Advance (Manual + System + Excel File)', 'Staff को PhonePe/Cash/Bank से पैसे दिए तो यहाँ दर्ज करें — "बाकी" अपने-आप घटेगा और Staff को भी दिखेगा। Advance दर्ज करने पर वह कुल में से कटकर बाकी दिखता है। (System पैसा नहीं भेजता — सिर्फ़ हिसाब दर्ज करता है।)',
+        '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="poLoad()">🔄 ' + T('Staff का हिसाब दिखाएँ') + '</button><div id="poRoot" style="margin-top:10px"></div>') +
       sec('axApr', '✅ Approvals — जहाँ Admin की मंज़ूरी चाहिए (एक ही List)', 'Staff Profile, Staff की Edit Request, नया Phone/Login, Karigar की मंज़ूरी — सब यहीं। ID याद रखने या Box में भरने की ज़रूरत नहीं, बस बटन दबाएँ।',
         '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axApprovals()">🔄 List दिखाएँ</button><div id="axAprOut" style="margin-top:10px;font-size:13.5px"></div>') +
       sec('axEnq', '📨 Enquiries — कितनी Enquiry आईं', 'Help पेज के Enquiry Form से जो भी आई, यहाँ दिखती है (नई पहले)।',

@@ -14,13 +14,15 @@
 
   var DEV = /[\u0900-\u097F]/;
   var KEY = 'ekveera_lang';
+  var LANGS = ['hi', 'en', 'gu', 'mr'];            // hi = मूल (Hindi) | en = English | gu = ગુજરાતી | mr = मराठी
   var IS_BROWSER = typeof document !== 'undefined' && typeof location !== 'undefined';
 
   function readLang() {
     try {
       var q = new URLSearchParams(location.search).get('lang');
-      if (q === 'en' || q === 'hi') { localStorage.setItem(KEY, q); return q; }
-      return localStorage.getItem(KEY) === 'en' ? 'en' : 'hi';
+      if (LANGS.indexOf(q) > -1) { localStorage.setItem(KEY, q); return q; }
+      var sv = localStorage.getItem(KEY);
+      return LANGS.indexOf(sv) > -1 ? sv : 'hi';
     } catch (e) { return 'hi'; }
   }
   var LANG = IS_BROWSER ? (root.__EKV_FORCE_LANG || readLang()) : 'hi';
@@ -32,13 +34,14 @@
     for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
     return ('00000000' + h.toString(16)).slice(-8);
   }
-  function dict() { return root.EKV_EN || {}; }
+  function dict() { return root['EKV_' + LANG.toUpperCase()] || {}; }       // EKV_EN / EKV_GU / EKV_MR — हर भाषा का अपना शब्दकोश (i18n-en.js / i18n-gu.js / i18n-mr.js)
 
   /* Hinglish (Roman) WhatsApp आदि वाक्यों के लिए भी वही Dictionary चलती है */
   function needs(s) { return DEV.test(s) || /^\s*Namaste\b|\bkar raha hoon\b/.test(s); }
 
   /* ---------- Template नियम: जहाँ वाक्य के बीच में बदलने वाली संख्या/नाम हो ---------- */
   function applyRules(s) {
+    if (LANG !== 'en') return null;                       // Template नियम सिर्फ़ English के हैं
     var rules = root.EKV_RULES || [];
     for (var i = 0; i < rules.length; i++) {
       var m = rules[i][0].exec(s);
@@ -49,18 +52,18 @@
 
   /* सबसे अहम function: एक Hindi टुकड़े का English लौटाता है (न मिले तो वही टुकड़ा) */
   function tx(str) {
-    if (LANG !== 'en' || str == null) return str;
+    if (LANG === 'hi' || str == null) return str;         // जो वाक्य चुनी भाषा के शब्दकोश में नहीं है, वह Hindi में ही रहता है
     str = String(str);
     if (!needs(str)) return str;
     var lead = /^\s/.test(str) ? ' ' : '', trail = /\s$/.test(str) ? ' ' : '';
     var n = norm(str), v = dict()[hash(n)];
     if (v == null) { v = applyRules(n); }
-    if (v == null && /Placement & Services/.test(n)) {
+    if (v == null && LANG === 'en' && /Placement & Services/.test(n)) {
       // Brand ka naam badla hai: purane Dictionary-key se English dhundo
       var olds = ['Placement & Consulting Services', 'Placement Consulting & Services', 'Placement Consulting Services'];
       for (var oi = 0; oi < olds.length && v == null; oi++) v = dict()[hash(n.replace(/Placement & Services/g, olds[oi]))];
     }
-    if (v == null && /EkVeera Placement & Services/.test(n)) v = dict()[hash(n.replace(/EkVeera Placement & Services/g, 'EPCS'))];   // purana "EPCS" wala Hindi sentence
+    if (v == null && LANG === 'en' && /EkVeera Placement & Services/.test(n)) v = dict()[hash(n.replace(/EkVeera Placement & Services/g, 'EPCS'))];   // purana "EPCS" wala Hindi sentence
     if (v == null) { if (root.__EKV_MISS) root.__EKV_MISS.push(n); return str; }
     return lead + v + trail;
   }
@@ -173,7 +176,7 @@
   }
 
   function translateTree(node) {
-    if (LANG !== 'en' || !node) return;
+    if (LANG === 'hi' || !node) return;
     if (node.nodeType === 3) { trTextNode(node); return; }
     if (node.nodeType !== 1 && node.nodeType !== 9 && node.nodeType !== 11) return;
     var el = node.nodeType === 9 ? node.documentElement : node;
@@ -205,7 +208,7 @@
 
   /* ---------- भाषा बदलना ---------- */
   function setLang(l) {
-    l = l === 'en' ? 'en' : 'hi';
+    l = LANGS.indexOf(l) > -1 ? l : 'hi';
     try { localStorage.setItem(KEY, l); } catch (e) {}
     try {
       var u = new URL(location.href); u.searchParams.delete('lang');
@@ -215,7 +218,7 @@
       location.replace(u.toString());
     } catch (e) { location.reload(); }
   }
-  function toggleLang() { setLang(LANG === 'en' ? 'hi' : 'en'); }
+  function toggleLang() { setLang(LANG === 'en' ? 'hi' : 'en'); }   // पुराना: हिं <-> EN
   function markButtons() {
     var bs = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < bs.length; i++) {
@@ -230,9 +233,11 @@
       if (LANG !== 'hi' || localStorage.getItem(KEY) || localStorage.getItem('ekveera_lang_hint')) return;
       var nl = String(navigator.language || '').toLowerCase();
       if (/^hi\b/.test(nl) || !nl) return;
+      var to = /^gu\b/.test(nl) ? 'gu' : (/^mr\b/.test(nl) ? 'mr' : 'en');
+      var T = { en: ['🌐 This website is in Hindi. Read it in English?', 'Switch to English'], gu: ['🌐 આ વેબસાઇટ હિન્દીમાં છે. ગુજરાતીમાં વાંચવી છે?', 'ગુજરાતીમાં જુઓ'], mr: ['🌐 ही वेबसाइट हिंदीत आहे. मराठीत वाचायची आहे का?', 'मराठीत पहा'] }[to];
       var b = document.createElement('div'); b.className = 'lang-hint notranslate';
-      b.innerHTML = '<span>🌐 This website is in Hindi. Read it in English?</span><button type="button" class="lh-en">Switch to English</button><button type="button" class="lh-x" aria-label="Close">✕</button>';
-      b.querySelector('.lh-en').onclick = function () { setLang('en'); };
+      b.innerHTML = '<span>' + T[0] + '</span><button type="button" class="lh-en">' + T[1] + '</button><button type="button" class="lh-x" aria-label="Close">✕</button>';
+      b.querySelector('.lh-en').onclick = function () { setLang(to); };
       b.querySelector('.lh-x').onclick = function () { try { localStorage.setItem('ekveera_lang_hint', '1'); } catch (e) {} b.remove(); };
       document.body.insertBefore(b, document.body.firstChild);
     } catch (e) {}
@@ -241,8 +246,8 @@
   /* ---------- शुरुआत ---------- */
   if (IS_BROWSER) {
     var de = document.documentElement;
-    de.lang = LANG === 'en' ? 'en' : 'hi';
-    if (LANG === 'en') {
+    de.lang = LANG;
+    if (LANG !== 'hi') {
       de.classList.add('i18n-wait');
       var st = document.createElement('style'); st.textContent = 'html.i18n-wait body{visibility:hidden}'; document.head.appendChild(st);
       patchFetch();
@@ -250,8 +255,8 @@
     }
     var tries = 0;
     var run = function () {
-      if (LANG === 'en' && !root.EKV_EN && tries++ < 100) { setTimeout(run, 30); return; }   // शब्दकोश आने तक रुकें
-      if (LANG === 'en') {
+      if (LANG !== 'hi' && !root['EKV_' + LANG.toUpperCase()] && tries++ < 100) { setTimeout(run, 30); return; }   // शब्दकोश आने तक रुकें
+      if (LANG !== 'hi') {
         translateTree(document);
         document.title = tx(document.title);
         de.classList.remove('i18n-wait');
@@ -280,8 +285,8 @@
   root.EKV_I18N = { hash: hash, norm: norm, tx: tx, unitKey: unitKey, walkText: walkText, translateTree: translateTree, inlineOnly: inlineOnly, needs: needs, DEV: DEV, SKIP: SKIP, INLINE: INLINE, ATTRS: ATTRS, deepTr: deepTr, tokensOk: tokensOk };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.EKV_I18N;
 
-  /* English शब्दकोश: सिर्फ़ English चुनी हो तब (पेज को रोककर) लोड होता है */
-  if (IS_BROWSER && LANG === 'en' && !root.EKV_EN) {
-    document.write('<script src="i18n-en.js"><\/script>');
+  /* चुनी भाषा का शब्दकोश: सिर्फ़ तब (पेज को रोककर) लोड होता है जब Hindi के अलावा कोई भाषा चुनी हो */
+  if (IS_BROWSER && LANG !== 'hi' && !root['EKV_' + LANG.toUpperCase()]) {
+    document.write('<script src="i18n-' + LANG + '.js"><\/script>');
   }
 })(typeof window !== 'undefined' ? window : globalThis);

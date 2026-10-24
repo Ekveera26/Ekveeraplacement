@@ -199,6 +199,26 @@
     XLSX.writeFile(wb, 'EkVeera_Staff_Payment_' + Date.now() + '.xlsx');
   };
 
+  /* 💸 भुगतान का हिसाब (पूरे समय का): मिला / Advance / बाकी — Admin जो भुगतान दर्ज करता है वही यहाँ दिखता है */
+  function dmy(x) { var m = String(x || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '-' + m[2] + '-' + m[1] : String(x || ''); }
+  function payoutPanel(p) {
+    if (!p) return '';
+    var h = '<div style="border:2px solid #cfe5d6;border-radius:12px;padding:12px;margin:14px 0;background:#f6fbf8"><h4 style="margin:0 0 6px;">💸 ' + __t('आपके भुगतान का हिसाब (अब तक का)') + '</h4>';
+    h += '<div class="dash-grid">' + card(money(p.earned), __t('अब तक कुल बने'), '#0B1F3A') +
+      card(money(p.payoutPaid + p.paidBefore), __t('आपको मिल चुके'), '#2e7d32') +
+      (p.advance ? card(money(p.advance), __t('Advance लिया'), '#8a5a00', __t('कुल में से कटता है')) : '') +
+      card(money(p.netDue > 0 ? p.netDue : 0), __t('अभी बाकी'), p.netDue > 0 ? '#E8A33D' : '#2e7d32') + '</div>';
+    if (p.lastPayout) h += '<p style="margin:8px 0 0;font-size:13.5px;font-weight:700;color:#1b7f3b">✅ ' + __t('आपकी Payment हो चुकी है') + ' — ' + __t('आख़िरी भुगतान') + ' ' + dmy(p.lastPayout.date) + ' ' + __t('को') + ' ' + money(p.lastPayout.amount) + ' (' + esc(p.lastPayout.mode) + (p.lastPayout.ref ? ' · ' + esc(p.lastPayout.ref) : '') + ')' + (p.paidUpTo ? ' — ' + esc(p.paidUpTo) + ' ' + __t('तक की कमाई का हिसाब चुकता') : '') + '</p>';
+    if (p.advanceBalance > 0) h += '<p style="margin:6px 0 0;font-size:13px;color:#8a5a00">ℹ️ ' + __t('आपका Advance') + ' ' + money(p.advanceBalance) + ' ' + __t('अभी बाक़ी है — यह आगे की कमाई में अपने-आप कटेगा।') + '</p>';
+    else if (p.netDue <= 0 && p.earned > 0) h += '<p style="margin:6px 0 0;font-size:13px;color:#1b7f3b">' + __t('अभी आपका कुछ बाकी नहीं है।') + '</p>';
+    if (p.recent && p.recent.length) {
+      h += '<div style="overflow-x:auto;margin-top:8px"><table class="comm-tbl"><tr style="background:#D9E1F2;"><th style="padding:5px;text-align:left;">' + __t('तारीख़') + '</th><th style="padding:5px;text-align:left;">' + __t('प्रकार') + '</th><th style="padding:5px;text-align:right;">' + __t('रकम') + '</th><th style="padding:5px;text-align:left;">Mode / UTR</th></tr>';
+      p.recent.forEach(function (r) { h += '<tr style="border-bottom:1px solid #eee;"><td style="padding:5px;">' + dmy(r.date) + '</td><td style="padding:5px;">' + (r.type === 'Advance' ? 'Advance' : __t('भुगतान')) + '</td><td style="padding:5px;text-align:right;font-weight:700;">' + money(r.amount) + '</td><td style="padding:5px;">' + esc(r.mode) + (r.ref ? '<br><span style="font-size:11px;color:#596579;">' + esc(r.ref) + '</span>' : '') + '</td></tr>'; });
+      h += '</table></div>';
+    }
+    return h + '<p class="dash-note" style="margin:8px 0 0;">' + __t('बाकी = कुल बने − मिले − Advance। यह Admin के दर्ज किए भुगतान से अपने-आप बनता है।') + '</p></div>';
+  }
+
   /* =====================================================================
      👤 Staff का अपना Payment View
      ===================================================================== */
@@ -224,6 +244,7 @@
         card(money(d.money.paid), __t('आपको मिल चुके (Paid)'), '#2e7d32') +
         card(money(d.money.pending), __t('बाकी'), '#E8A33D') + '</div>';
       h += '<p class="dash-note">' + __t('सिर्फ़ तब गिना जाता है जब Company या Training Candidate ने सच में Payment किया हो — सिर्फ़ फॉर्म भरने पर नहीं।') + '</p>';
+      h += payoutPanel(d.payout);
       if (d.entries && d.entries.length) {
         var th = 'padding:5px;text-align:left;';
         h += '<div style="overflow-x:auto;"><table class="comm-tbl"><tr style="background:#D9E1F2;"><th style="' + th + '">Date</th><th style="' + th + '">Company</th><th style="' + th + '">' + __t('किस बात का') + '</th><th style="' + th + '">' + __t('भूमिका') + '</th><th style="' + th + 'text-align:right;">' + __t('आपका हिस्सा') + '</th><th style="' + th + '">Status</th></tr>';

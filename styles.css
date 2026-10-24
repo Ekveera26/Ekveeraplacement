@@ -471,7 +471,7 @@ header .pwa-btn,header .btn,header .nav .btn{white-space:nowrap}
 
 /* ===== भाषा बदलने वाला बटन (Header + Mobile Menu) ===== */
 .lang-switch{display:inline-flex;border:1.5px solid var(--navy,#0B1F3A);border-radius:10px;overflow:hidden;flex:none}
-.lang-switch button{border:0;background:#fff;color:var(--navy,#0B1F3A);padding:7px 12px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1.2}
+.lang-switch button{border:0;background:#fff;color:var(--navy,#0B1F3A);padding:7px 9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1.2}
 .lang-switch button+button{border-left:1.5px solid var(--navy,#0B1F3A)}
 .lang-switch button.is-on{background:var(--navy,#0B1F3A);color:#fff}
 .lang-switch-m{display:flex;margin:10px 16px 6px}
