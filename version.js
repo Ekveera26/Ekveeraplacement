@@ -1,5 +1,5 @@
 /* EkVeera — App ka Version (har naye Update par sirf yahi ek Number badlein, jaise 'v19') */
-window.EKV_VERSION = 'v19r';
+window.EKV_VERSION = 'v20';
 (function () {
   function paint() {
     try {

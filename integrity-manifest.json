@@ -1,5 +1,5 @@
 {
-  "made": "2026-10-24T03:34:07.841855+00:00",
+  "made": "2026-10-25T01:48:13.904807+00:00",
   "files": {
     "address-admin.js": "4f4392d67e65398c0c6283220d4510ed7dee548f3567889fb5f092b94a757e33",
     "admin-extra.js": "7d2884a28e9f2dda4ad1e63e81a40a959a03b841998df958914636b94a71f947",
@@ -20,7 +20,7 @@
     "help.html": "edf44b3a003d3228ce8b426920990084d7d5dd353422834085c4c26b2b91331b",
     "home-service.html": "1ce699de2b1696a8ede0b5f9d7bce6dde77a58cfd2c5a037ea5ef991b807014e",
     "home-service.js": "f45c1eb4c8279ffd69c1c8ca2f90fc92a1f0e83292a0cf0503f2e3d384f42034",
-    "i18n-en.js": "3bd9fda8c564984d35dd5b978bc1aa059ba04cf709d611a8aab500c26f10edae",
+    "i18n-en.js": "802184be00181193d1d5a1c4889ab5f3ac6d47011d399eec51a47bf42f213c42",
     "i18n-gu.js": "2a75f52dae11111506635b20cae9760c0b380a769cb717d3c3787e64f532771e",
     "i18n-mr.js": "efd94ab01d6a08ff3c4146e9f8169d197c7b433064d4f3880a17281aeb7f41b6",
     "i18n.js": "95a0fddd9a6ea38e3da15c7e1015cbceeba284b58d87fefee156227e689e0bb9",
@@ -32,7 +32,7 @@
     "payment-log.js": "03c0888ee06e79eaadd8ced673becb52efcc52a77b83b3250dd056a891e0abdc",
     "placement.html": "5f6de158cfe7ca6c7cf209f0b6d53350702592fae82ac7068fbb8a0c71ac46c7",
     "privacy.html": "8fca98059a09f033fb8f471a6efa1462aec4a832e94c4200fc029155418a062d",
-    "push.js": "bdfd4760634a53cc10f0a5159fef36efbfa4b20ab07ef0f2b5f1227d7fc9113f",
+    "push.js": "1b4ccca3f6bdc3d2d0ec5d2b3d15c8b09953820f043d54f4bb5f205702e94415",
     "receipt.js": "9b363e7c08879b02720406d3dd97b35de9a03b6e1cc54708a6d60445228c557c",
     "register.html": "fd5e1380de2a130546c45122b5c8e177b77327ccac861ceb286df8a568761696",
     "register.js": "9d2516c2f5d1ce67d25953a9b9c3d28ff0e86fab7ecc1fa7ed099283322714ab",
@@ -41,7 +41,7 @@
     "resume-builder.html": "a558d351090e7145643d3a56230129e333f7b215cb8d03e5f6fea2fce7db4db0",
     "resume-builder.js": "bd1fa42751735ba365563c23e352f520efcec9ce15922db2309e6f5b4dc4b02b",
     "reviews.js": "b502dbe47aed8133d842ec2d2c551573a75554b78810bd4279e657d6d39ba54b",
-    "service-worker.js": "980ff34c1f8f72f7e250f8c631ee92f0259be462a4c9f757cd92e20f3521d8ec",
+    "service-worker.js": "a08fd1846b608ca5d37be1cc90e1e83bb34a61b8977b218717971a8be1cad45d",
     "site-controls.js": "dba280fb5e6cb366ba1b9f460a980a0a7c39b9252c718b5af6f6cc86670691ae",
     "staff-link-admin.js": "5b837d3b083a5cf558c40791005a670ed9dbab3b91b7830f93b198367853c93a",
     "staff-pay.js": "fbe374e1354452aef3601ad352434f2b8ac3a09e3b9b5c052b18325adf9f06c7",
@@ -59,6 +59,6 @@
     "trust-notes.js": "4c09b5d9af9dffea2d1a320ef471252cf81a663b3677e0310bbd0a27c1113834",
     "tution.html": "095a7ccf1aafcfd280a234f0d01240e71fcc642c9bedf5379697daa15c620c2c",
     "tution.js": "c77a6ac81db9d2f65b2114e3a6ae1360d45fe7c48eaeae45c1cedec1d7c34607",
-    "version.js": "a5c49c8a8f8851473eab7685e8429474ffe0b76eb478dadf23941a9bb6038875"
+    "version.js": "461ae11e82727fbe6b26d0038913627ec1a47aba00a31029855ed59bcc17754c"
   }
 }
