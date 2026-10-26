@@ -136,7 +136,7 @@
   }
   function renderTabs() {
     var ap = state.profileStatus === 'Approved', t = [['profile', '👤 Profile'], ['docs', '📎 Documents']];
-    if (ap) { t.push(['card', '🪪 ID Card']); t.push(['money', '💰 Commission']); }
+    if (ap) { t.push(['card', '🪪 ID Card']); t.push(['hub', '📋 Registrations']); t.push(['money', '💰 Commission']); }
     t.push(['pw', '🔑 Password']); t.push(['cmp', '🚨 शिकायत']);
     $('dsTabs').innerHTML = t.map(function (x) { return '<button type="button" class="sf-tab' + (curTab === x[0] ? ' on' : '') + '" onclick="sfTab(\'' + x[0] + '\')">' + esc(__t(x[1])) + '</button>'; }).join('');
   }
@@ -168,6 +168,7 @@
         '<p class="sf-small">🔒 ' + esc(__t('यह सारी जानकारी सिर्फ़ इसी Mobile पर, Login के बाद दिखती है। इस पेज का Link दूसरों को भेजने पर उन्हें आपकी Photo या जानकारी नहीं दिखेगी।')) + '</p>';
     } else if (curTab === 'docs') renderDocs();
     else if (curTab === 'card') renderCard();
+    else if (curTab === 'hub') renderHub();
     else if (curTab === 'money') renderMoney();
     else if (curTab === 'pw') {
       b.innerHTML = '<h3>' + esc(__t('🔑 Password बदलें')) + '</h3><div class="sf-grid2"><label class="sf-l">' + esc(__t('पुराना Password')) + '<input id="pwOld" class="ap-i" type="password" autocomplete="current-password"></label><label class="sf-l">' + esc(__t('नया Password')) + '<input id="pwNew" class="ap-i" type="password" autocomplete="new-password"></label><label class="sf-l">' + esc(__t('नया Password दोबारा')) + '<input id="pwNew2" class="ap-i" type="password" autocomplete="new-password"></label></div><button type="button" class="btn btn-primary" onclick="sfChangePw()">' + esc(__t('Password बदलें')) + '</button><p id="pwMsg" class="sf-msg"></p><p class="sf-small">' + esc(__t('Password बदलते ही पुराने सभी Login बंद हो जाते हैं।')) + '</p>';
@@ -175,6 +176,70 @@
       b.innerHTML = '<h3>' + esc(__t('🚨 शिकायत')) + '</h3><p class="sf-small">' + esc(__t('किसी Staff के गलत व्यवहार या पैसे माँगने की शिकायत Admin तक पहुँचाने के लिए नीचे का बटन दबाएँ। शिकायत सिर्फ़ Admin को दिखती है।')) + '</p><button type="button" class="btn btn-primary" onclick="sfShow(\'home\');setTimeout(function(){var c=document.getElementById(\'complaint\');if(c)c.scrollIntoView({behavior:\'smooth\'})},200)">' + esc(__t('🚨 शिकायत का फॉर्म खोलें')) + '</button>';
     }
   }
+
+  /* ---------------- v21: 📋 मेरे Registrations — सभी सेवाओं की जानकारी (अपने + अपनी Team के) ---------------- */
+  var hubData = null, hubSel = 'follow', hubQ = '';
+  async function renderHub(fresh) {
+    var b = $('dsBody'); b.innerHTML = '<h3>' + esc(__t('📋 मेरे Registrations')) + '</h3><p class="sf-small">⏳ ...</p>';
+    try {
+      var r = await api('sfhub', authP(fresh ? { fresh: '1' } : {}));
+      if (relogin(r)) return;
+      if (!r || r.status !== 'ok') { b.innerHTML = '<h3>' + esc(__t('📋 मेरे Registrations')) + '</h3><p style="color:#c0392b;">' + esc((r && r.message) || __t('कुछ गड़बड़ हो गई — दोबारा कोशिश करें।')) + '</p>'; return; }
+      hubData = r; paintHub();
+    } catch (e) { b.innerHTML = '<p style="color:#c0392b;">' + esc(__t('Internet चेक करके दोबारा कोशिश करें।')) + '</p>'; }
+  }
+  function hubWa(m, text) { return 'https://wa.me/91' + m + '?text=' + encodeURIComponent(text); }
+  function hubRow(it, label, follow) {
+    var pay = it.pay ? '<span class="hb-pill ' + (it.pay === 'Paid' ? 'ok' : it.pay === 'Expired' ? 'ex' : 'no') + '">' + esc(it.pay === 'Paid' ? __t('Paid') : it.pay === 'Expired' ? __t('खत्म') : __t('Payment बाकी')) + '</span>' : '';
+    var left = (it.days !== null && it.days !== undefined && it.pay !== 'Unpaid') ? '<span class="hb-pill ' + (it.days < 0 ? 'ex' : it.days <= (hubData.soonDays || 15) ? 'no' : 'ok') + '">' + esc(it.days < 0 ? __t('खत्म हुए ') + (-it.days) + __t(' दिन') : it.days + __t(' दिन बाकी')) + '</span>' : '';
+    var sub = [it.city, it.date, it.status, it.own === false && it.by ? __t('Team') + ': ' + it.by : ''].filter(Boolean).map(esc).join(' · ');
+    var act = '';
+    if (it.mobile && it.mobile.length === 10) {
+      var msgT = follow ? 'नमस्ते' + (it.name ? ' ' + it.name : '') + ', EkVeera से: आपकी ' + String(label).replace(/^\S+\s/, '') + ' Registration (' + it.id + ') ' + (it.pay === 'Unpaid' ? 'का Payment बाकी है।' : 'की अवधि खत्म होने वाली/हो चुकी है।') + (it.link ? ' आधिकारिक Payment Link: ' + it.link : '') : 'नमस्ते' + (it.name ? ' ' + it.name : '') + ', EkVeera से बात कर रहा/रही हूँ।';
+      act = '<div class="hb-act"><a href="tel:+91' + esc(it.mobile) + '">📞 ' + esc(it.mobile) + '</a><a target="_blank" rel="noopener" href="' + esc(hubWa(it.mobile, msgT)) + '">💬 WhatsApp</a></div>';
+    }
+    return '<div class="hb-row"><div class="hb-top"><b>' + esc(it.id || '') + '</b> ' + esc(it.name || '') + ' ' + pay + ' ' + left + '</div>' + (follow ? '<div class="hb-sub">' + esc(label) + '</div>' : '') + (sub ? '<div class="hb-sub">' + sub + '</div>' : '') + act + '</div>';
+  }
+  function hubList() {
+    var host = $('hbList'); if (!host || !hubData) return;
+    var q = hubQ.toLowerCase(), html = '', n = 0;
+    if (hubSel === 'follow') {
+      (hubData.followup || []).forEach(function (f) {
+        if (q && (f.id + ' ' + f.name + ' ' + f.mobile).toLowerCase().indexOf(q) < 0) return;
+        n++; html += hubRow({ id: f.id, name: f.name, mobile: f.mobile, pay: f.pay, days: f.days, date: f.date, link: f.link, own: true }, f.label, true);
+      });
+      if (!n) html = '<p class="sf-small">' + esc(__t('🎉 अभी कोई Follow-up बाकी नहीं है।')) + '</p>';
+      else if (hubData.followupTotal > hubData.followup.length) html += '<p class="sf-small">' + esc(__t('सिर्फ़ पहले ') + hubData.followup.length + __t(' दिखाए गए हैं।')) + '</p>';
+    } else {
+      var m = (hubData.modules || []).filter(function (x) { return x.key === hubSel; })[0];
+      if (m) {
+        (m.items || []).forEach(function (it) {
+          if (q && (it.id + ' ' + it.name + ' ' + it.mobile + ' ' + it.city).toLowerCase().indexOf(q) < 0) return;
+          n++; html += hubRow(it, m.label, false);
+        });
+        if (m.note) html += '<p class="sf-small">' + esc(m.note) + '</p>';
+        if (!n && !m.note) html = '<p class="sf-small">' + esc(__t('यहाँ अभी कोई Registration नहीं है।')) + '</p>';
+      }
+    }
+    host.innerHTML = html;
+  }
+  function paintHub() {
+    var d = hubData, b = $('dsBody'), chips = '<button type="button" class="hb-chip' + (hubSel === 'follow' ? ' on' : '') + '" onclick="sfHubSel(\'follow\')">📞 ' + esc(__t('Follow-up')) + ' (' + (d.followupTotal || 0) + ')</button>';
+    var cards = '';
+    (d.modules || []).forEach(function (m) {
+      chips += '<button type="button" class="hb-chip' + (hubSel === m.key ? ' on' : '') + '" onclick="sfHubSel(\'' + m.key + '\')">' + esc(m.label) + ' (' + m.total + ')</button>';
+      cards += '<div class="sf-stat"><span>' + esc(m.label) + '</span><b>' + m.total + '</b>' + (m.hasPay ? '<small>' + esc(__t('Paid')) + ' ' + m.paid + ' · ' + esc(__t('बाकी')) + ' ' + m.unpaid + (m.soon ? ' · ' + esc(__t('जल्द खत्म')) + ' ' + m.soon : '') + '</small>' : '<small>' + esc(__t('आपके')) + ' ' + m.own + ' · ' + esc(__t('Team')) + ' ' + m.team + '</small>') + '</div>';
+    });
+    b.innerHTML = '<h3>' + esc(__t('📋 मेरे Registrations')) + '</h3><p class="sf-small">' + esc(__t('आपके और आपकी Team के सभी Registration — Candidate, Company, Training, For Rent, Tution, Home Service। नीचे से Follow-up करें: Payment बाकी या Registration खत्म होने वाले लोगों को Call / WhatsApp करें। (आधार, Documents, पासवर्ड यहाँ कभी नहीं दिखते।)')) + '</p>'
+      + '<div class="sf-grid2">' + cards + '</div><div class="hb-chips">' + chips + '</div>'
+      + '<input id="hbQ" class="ap-i" placeholder="' + esc(__t('खोजें: नाम / ID / Mobile / शहर')) + '" value="' + esc(hubQ) + '">'
+      + '<div id="hbList"></div><button type="button" class="btn" style="margin-top:10px;" onclick="sfHubRefresh()">🔄 ' + esc(__t('ताज़ा करें')) + '</button><p class="sf-small">' + esc(__t('आख़िरी बार: ')) + esc(d.at || '') + '</p>';
+    $('hbQ').oninput = function () { hubQ = this.value || ''; hubList(); };
+    hubList();
+  }
+  window.sfHubSel = function (k) { hubSel = k; if (hubData) paintHub(); };
+  window.sfHubRefresh = function () { renderHub(true); };
+
   window.sfSaveProfile = async function () {
     var g = function (id) { return ($(id).value || '').trim(); };
     msg('edMsg', __t('⏳ सहेज रहे हैं...'), '#1f3b63');

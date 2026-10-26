@@ -2017,7 +2017,12 @@ function staffRenderSecurity() {
 async function adminInit() {
   try {
     const st = await vcSecurePost({ action: 'adminstatus' });
-    if (st && st.status === 'ok' && !st.locked) {            // Password nahi laga — seedha andar
+    if (st && st.status === 'ok' && st.unset) {              // v21: Password Script Property me nahi laga — Admin band, andar nahi jaane dena
+      const m0 = document.getElementById('adminLoginMsg');
+      if (m0) { m0.style.color = '#b91c1c'; m0.textContent = __t('🔒 Admin Password अभी Set नहीं है। Apps Script → Project Settings → Script properties में ADMIN_UNLOCK_PASSWORD लगाएँ।'); }
+      return;
+    }
+    if (st && st.status === 'ok' && !st.locked) {            // (पुराना) Password nahi laga — seedha andar
       ekveeraAdminPassword = '';
       document.getElementById('adminLoginBox').style.display = 'none';
       document.getElementById('adminControlsBox').style.display = 'block';
