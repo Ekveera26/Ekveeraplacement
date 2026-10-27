@@ -1754,6 +1754,27 @@ async function checkMyId() {
   }
 }
 
+// 🤖 v22: Enquiry का अपने-आप जवाब स्क्रीन पर दिखाना (जवाब Server का Bot देता है — EkVeera_EnquiryBot.gs)
+function showEnquiryReply(data) {
+  try {
+    let box = document.getElementById('enqReply');
+    const msgEl = document.getElementById('enqMsg');
+    if (!data || !data.reply || !data.answered) { if (box) box.style.display = 'none'; return; }
+    if (!box) {
+      box = document.createElement('div'); box.id = 'enqReply';
+      box.style.cssText = 'margin-top:12px;padding:14px 16px;background:#f0faf9;border:1px solid #1F9D95;border-radius:12px;color:#1b2430;font-size:14.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word';
+      msgEl.parentNode.insertBefore(box, msgEl.nextSibling);
+    }
+    box.textContent = '🤖 ';
+    String(data.reply).split(/(https?:\/\/[^\s]+)/).forEach(function (part) {
+      if (/^https?:\/\//.test(part)) { const a = document.createElement('a'); a.href = part; a.textContent = part; a.target = '_blank'; a.rel = 'noopener'; a.style.color = '#0B5CAD'; box.appendChild(a); }
+      else box.appendChild(document.createTextNode(part));
+    });
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } catch (e) {}
+}
+
 async function sendEnquiry() {
   const name = document.getElementById('enqName').value.trim();
   const contact = document.getElementById('enqContact').value.trim();
@@ -1767,9 +1788,11 @@ async function sendEnquiry() {
   msgEl.style.color = '#1F9D95';
   msgEl.textContent = __t('भेजा जा रहा है...');
   try {
-    const data = await vcSecurePost({ action: 'sendenquiry', name: name, contact: contact, message: message });
+    let enqLang = 'hi'; try { enqLang = localStorage.getItem('ekveera_lang') === 'en' ? 'en' : 'hi'; } catch (e) {}
+    const data = await vcSecurePost({ action: 'sendenquiry', name: name, contact: contact, message: message, lang: enqLang });
     if (data.status === 'ok') {
-      msgEl.textContent = __t('✅ आपकी Enquiry भेज दी गई है, हम जल्द संपर्क करेंगे।');
+      msgEl.textContent = data.answered ? __t('✅ आपकी Enquiry भेज दी गई है — जवाब नीचे देखें। ज़रूरत हो तो हमारी Team भी संपर्क करेगी।') : __t('✅ आपकी Enquiry भेज दी गई है, हम जल्द संपर्क करेंगे।');
+      showEnquiryReply(data);
       document.getElementById('enqName').value = '';
       document.getElementById('enqContact').value = '';
       document.getElementById('enqMessage').value = '';
