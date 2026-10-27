@@ -107,10 +107,15 @@
     } catch (e) { msg('lgMsg', __t('Internet चेक करके दोबारा कोशिश करें।')); }
     btn.disabled = false;
   };
-  window.sfLogout = function () { lsDel(SESS_KEY); state = null; photoData = null; sfShow('home'); };
+  window.sfLogout = async function () {
+    if (!window.confirm(__t('क्या आप Logout करना चाहते हैं?'))) return;
+    try { await Promise.race([api('sflogout', authP({})), new Promise(function (ok) { setTimeout(ok, 3000); })]); } catch (e) {}   // Server पर भी Token बंद (Internet न हो तो भी फ़ोन से Logout)
+    lsDel(SESS_KEY); state = null; photoData = null; sfShow('login');
+  };
 
   /* ---------------- Dashboard ---------------- */
   async function loadDash(tab) {
+    if (!tab && !curTab && /#ads\b/.test(location.hash || '')) tab = 'ads';          // Notification से सीधे 📣 Advertisement
     curTab = tab || curTab || 'profile';
     sfShow('dash'); $('dsBody').innerHTML = '<p>⏳ ...</p>';
     try {
@@ -137,6 +142,7 @@
   function renderTabs() {
     var ap = state.profileStatus === 'Approved', t = [['profile', '👤 Profile'], ['docs', '📎 Documents']];
     if (ap) { t.push(['card', '🪪 ID Card']); t.push(['hub', '📋 Registrations']); t.push(['money', '💰 Commission']); }
+    t.push(['ads', '📣 Advertisement']);
     t.push(['pw', '🔑 Password']); t.push(['cmp', '🚨 शिकायत']);
     $('dsTabs').innerHTML = t.map(function (x) { return '<button type="button" class="sf-tab' + (curTab === x[0] ? ' on' : '') + '" onclick="sfTab(\'' + x[0] + '\')">' + esc(__t(x[1])) + '</button>'; }).join('');
   }
@@ -170,6 +176,7 @@
     else if (curTab === 'card') renderCard();
     else if (curTab === 'hub') renderHub();
     else if (curTab === 'money') renderMoney();
+    else if (curTab === 'ads') { b.innerHTML = ''; if (window.ekvAds) window.ekvAds.renderPosting(b, function () { return authP({}); }); else b.innerHTML = '<p>Advertisement अभी नहीं खुल सका — पेज दोबारा खोलें।</p>'; }
     else if (curTab === 'pw') {
       b.innerHTML = '<h3>' + esc(__t('🔑 Password बदलें')) + '</h3><div class="sf-grid2"><label class="sf-l">' + esc(__t('पुराना Password')) + '<input id="pwOld" class="ap-i" type="password" autocomplete="current-password"></label><label class="sf-l">' + esc(__t('नया Password')) + '<input id="pwNew" class="ap-i" type="password" autocomplete="new-password"></label><label class="sf-l">' + esc(__t('नया Password दोबारा')) + '<input id="pwNew2" class="ap-i" type="password" autocomplete="new-password"></label></div><button type="button" class="btn btn-primary" onclick="sfChangePw()">' + esc(__t('Password बदलें')) + '</button><p id="pwMsg" class="sf-msg"></p><p class="sf-small">' + esc(__t('Password बदलते ही पुराने सभी Login बंद हो जाते हैं।')) + '</p>';
     } else if (curTab === 'cmp') {
