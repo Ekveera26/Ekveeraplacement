@@ -166,7 +166,7 @@
   async function markRead() {
     try { await acCall('acread', {}); try { localStorage.setItem(SEEN, String(Date.now())); } catch (e) {} badge(0); loadInbox(); } catch (e) {}
   }
-  async function logout() { try { await acCall('aclogout', {}); } catch (e) {} acSet({}); badge(0); renderAcct(); render(); }
+  async function logout() { if (typeof window.__ekvLogout === 'function') return window.__ekvLogout(); try { await acCall('aclogout', {}); } catch (e) {} acSet({}); badge(0); renderAcct(); render(); }
   async function initBadge() {
     var a = acGet(); if (ADMIN || !a.token) return;
     try { var r = await acCall('acunread', { seen: seenGet() }); if (r && r.status === 'ok') badge(r.unread || 0); } catch (e) {}

@@ -7,7 +7,7 @@
 //
 //  ⚠️ HAR NAYE DEPLOY par neeche ki VERSION line badal dein (jaise 2026-10-15-v1). Nahi bhi badli to bhi naya Content
 //     milne par App apne-aap pata laga leta hai aur Update ka sawaal puchta hai — par VERSION badalna sabse pakka hai.
-const VERSION = '2026-10-27-v22';
+const VERSION = '2026-10-27-v22b';
 const CACHE_NAME = 'ekveera-cache-' + VERSION;
 
 const PRECACHE_URLS = [

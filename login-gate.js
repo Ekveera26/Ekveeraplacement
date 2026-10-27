@@ -74,6 +74,40 @@
   /* ---- ye sab bahar se jaanchne ke liye (tests) ---- */
   window.__ekvGate = { isInstalledApp: isInstalledApp, loggedIn: loggedIn, openPages: OPEN_PAGES, mode: function () { return MODE; } };
 
+  /* ---- v22b: 🚪 Logout बटन — Login होते ही हर पेज पर साफ़ दिखता है (पहले सिर्फ़ 🔔 पैनल के अंदर छिपा था) ---- */
+  function doLogout(btn) {
+    if (btn) { btn.disabled = true; btn.textContent = L('⏳ ...', '⏳ ...'); }
+    var a = {}; try { a = JSON.parse(lsGet(AKEY) || '{}') || {}; } catch (e) {}
+    var ps = {}; try { ps = JSON.parse(lsGet('ekv_push_v1') || '{}') || {}; } catch (e) {}
+    function wipe() {
+      try { localStorage.removeItem(AKEY); localStorage.removeItem('ekv_inbox_seen'); localStorage.removeItem('ekv_push_v1'); } catch (e) {}
+      try { sessionStorage.removeItem(SKIP); } catch (e) {}
+      location.replace((location.pathname || 'index.html') + (/[?&]gate=1\b/.test(location.search || '') ? '?gate=1' : ''));
+    }
+    var jobs = [];
+    try {
+      if (typeof vcSecurePost === 'function') {
+        jobs.push(vcSecurePost({ action: 'aclogout', mobile: a.mobile || '', token: a.token || '', deviceId: devId() }));
+        if (ps.token) jobs.push(vcSecurePost({ action: 'pushoff', token: ps.token }));
+      }
+    } catch (e) {}
+    var done = false; function fin() { if (!done) { done = true; wipe(); } }
+    Promise.all(jobs.map(function (j) { return Promise.resolve(j).catch(function () {}); })).then(fin, fin);
+    setTimeout(fin, 3500);                                  // Internet न भी हो तो भी इस फ़ोन से Logout हो जाए
+  }
+  function addLogoutBtn() {
+    if (isAdminOrStaff() || $('ekvLogoutBtn') || !loggedIn()) return;
+    var css = document.createElement('style');
+    css.textContent = '#ekvLogoutBtn{position:fixed;left:12px;bottom:96px;z-index:9991;display:flex;align-items:center;gap:6px;padding:9px 14px;border:0;border-radius:22px;background:#fff;color:#b91c1c;font:600 14px/1 inherit;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,.25);cursor:pointer}#ekvLogoutBtn:disabled{opacity:.6}';
+    document.head.appendChild(css);
+    var b = el('button', '', L('🚪 Logout', '🚪 Logout')); b.id = 'ekvLogoutBtn'; b.type = 'button';
+    b.setAttribute('aria-label', 'Logout');
+    b.onclick = function () { if (window.confirm(L('क्या आप Logout करना चाहते हैं?', 'Do you want to log out?'))) doLogout(b); };
+    document.body.appendChild(b);
+  }
+  if (MODE !== 'off') { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addLogoutBtn); else addLogoutBtn(); }
+  window.__ekvLogout = function () { doLogout(null); };
+
   if (MODE === 'off') return;
   if (!isInstalledApp()) return;
   if (isAdminOrStaff()) return;
