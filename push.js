@@ -113,38 +113,27 @@
       var rb = el('button', 'ekv-push-btn alt', T('✔ सब पढ़ लिया')); rb.type = 'button'; rb.onclick = markRead;
       var lb = el('button', 'ekv-push-btn alt', T('Logout')); lb.type = 'button'; lb.onclick = logout;
       row.appendChild(rb); row.appendChild(lb); box.appendChild(row);
-      box.appendChild(el('div', 'ekv-ac-who', '+91 ' + a.mobile + (a.level === 'sms' ? ' ✔' : '')));
+      box.appendChild(el('div', 'ekv-ac-who', (a.name ? a.name + ' · ' : '') + (a.regId ? a.regId + ' · ' : '') + '+91 ' + a.mobile));
       var ms = el('div', 'ekv-push-msg'); ms.id = 'ekvAcMsg'; box.appendChild(ms);
       loadInbox();
     } else {
       box.appendChild(el('div', 'ekv-ac-h', '🔐 ' + T('Login — अपना Inbox देखें')));
-      box.appendChild(el('p', '', T('Mobile + OTP से Login करें। आपकी सारी सूचनाएँ (Payment, ID, Order) यहाँ सुरक्षित मिलेंगी।')));
-      var im = el('input'); im.id = 'ekvAcMob'; im.type = 'tel'; im.inputMode = 'numeric'; im.maxLength = 10; im.placeholder = T('अपना 10 अंकों का Mobile Number'); box.appendChild(im);
-      var io = el('input'); io.id = 'ekvAcOtp'; io.type = 'tel'; io.inputMode = 'numeric'; io.maxLength = 6; io.placeholder = T('6 अंक का Code'); io.style.display = 'none'; box.appendChild(io);
-      var bs = el('button', 'ekv-push-btn', T('📩 Code भेजें')); bs.id = 'ekvAcSend'; bs.type = 'button'; bs.onclick = sendOtp; box.appendChild(bs);
-      var bg = el('button', 'ekv-push-btn', T('🔓 Login')); bg.id = 'ekvAcGo'; bg.type = 'button'; bg.style.display = 'none'; bg.style.marginTop = '8px'; bg.onclick = verifyOtp; box.appendChild(bg);
+      box.appendChild(el('p', '', T('User ID (REG…) या Mobile और Password से Login करें। नए हैं तो पहले Register करें।')));
+      var im = el('input'); im.id = 'ekvAcMob'; im.type = 'text'; im.maxLength = 20; im.autocomplete = 'username'; im.placeholder = T('User ID (REG012) या Mobile'); box.appendChild(im);
+      var io = el('input'); io.id = 'ekvAcPass'; io.type = 'password'; io.maxLength = 40; io.autocomplete = 'current-password'; io.placeholder = 'Password'; box.appendChild(io);
+      var bg = el('button', 'ekv-push-btn', T('🔓 Login')); bg.id = 'ekvAcGo'; bg.type = 'button'; bg.style.marginTop = '8px'; bg.onclick = pwLogin; box.appendChild(bg);
+      var lk = el('p', ''); lk.innerHTML = '<a href="register.html">' + T('🆕 नया Account बनाएँ') + '</a> · <a href="index.html?gate=1" onclick="try{localStorage.removeItem(\'ekv_acct\')}catch(e){}">' + T('🆘 Password भूल गए') + '</a>'; box.appendChild(lk);
       var ms2 = el('div', 'ekv-push-msg'); ms2.id = 'ekvAcMsg'; box.appendChild(ms2);
       box.appendChild(el('hr', 'ekv-ac-hr'));
     }
   }
-  async function sendOtp() {
-    var m = ($('ekvAcMob').value || '').replace(/\D/g, '').slice(-10);
-    if (m.length !== 10) return acSay(T('10 अंकों का सही Mobile Number लिखें।'), 'err');
-    var b = $('ekvAcSend'); b.disabled = true; acSay(T('⏳ Code भेजा जा रहा है...'), '');
-    try {
-      var r = await vcSecurePost({ action: 'acstart', mobile: m });
-      if (r && r.status === 'ok') { $('ekvAcOtp').style.display = 'block'; $('ekvAcGo').style.display = 'block'; $('ekvAcOtp').focus(); acSay(r.message || '', 'ok'); }
-      else acSay((r && r.message) || T('कुछ गड़बड़ हुई — दोबारा कोशिश करें।'), 'err');
-    } catch (e) { acSay(T('Internet चेक करके दोबारा कोशिश करें।'), 'err'); }
-    setTimeout(function () { if (b) b.disabled = false; }, 20000);   // दोबारा Code के लिए 20 सेकंड रुकें
-  }
-  async function verifyOtp() {
-    var m = ($('ekvAcMob').value || '').replace(/\D/g, '').slice(-10), o = ($('ekvAcOtp').value || '').replace(/\D/g, '');
-    if (m.length !== 10 || o.length !== 6) return acSay(T('Mobile और 6 अंक का Code सही लिखें।'), 'err');
+  async function pwLogin() {
+    var u = ($('ekvAcMob').value || '').trim(), p = $('ekvAcPass').value || '';
+    if (!u || !p) return acSay(T('User ID (या Mobile) और Password लिखें।'), 'err');
     var b = $('ekvAcGo'); b.disabled = true; acSay(T('⏳ जाँच हो रही है...'), '');
     try {
-      var r = await vcSecurePost({ action: 'acverify', mobile: m, otp: o, deviceId: devId() });
-      if (r && r.status === 'ok') { acSet({ mobile: r.mobile, token: r.token, level: r.level }); renderAcct(); render(); }
+      var r = await vcSecurePost({ action: 'aclogin', userid: u, password: p, deviceId: devId() });
+      if (r && r.status === 'ok') { acSet({ mobile: r.mobile, token: r.token, level: r.level, name: r.name || '', regId: r.regId || '' }); renderAcct(); render(); }
       else { acSay((r && r.message) || T('कुछ गड़बड़ हुई — दोबारा कोशिश करें।'), 'err'); b.disabled = false; }
     } catch (e) { acSay(T('Internet चेक करके दोबारा कोशिश करें।'), 'err'); b.disabled = false; }
   }
@@ -157,7 +146,23 @@
       if (!r.items.length) list.appendChild(el('p', 'ekv-ac-empty', T('अभी कोई सूचना नहीं है।')));
       r.items.forEach(function (it) {
         var d = el('div', 'ekv-ac-item' + (it.unread ? ' un' : '')); d.appendChild(el('b', '', it.title)); d.appendChild(el('div', 'ekv-ac-b', it.body)); d.appendChild(el('small', '', it.time));
-        if (it.url && it.url !== 'index.html') { d.style.cursor = 'pointer'; d.onclick = function () { location.href = it.url; }; }
+        if (it.choices && it.choices.length) {                       // v24: App ke andar jawab — Selected / Vacancy chalu-Close
+          var en = (localStorage.getItem('ekveera_lang') === 'en'), bx = el('div', 'ekv-ac-ans'), st = el('div', 'ekv-ac-ansmsg');
+          it.choices.forEach(function (c) {
+            var b = el('button', 'ekv-ac-ansbtn' + (/^(not_selected|closed)$/.test(c.v) ? ' no' : ''), en ? c.en : c.hi); b.type = 'button';
+            b.onclick = function (ev) {
+              ev.stopPropagation(); if (!window.confirm((en ? 'Confirm: ' : 'पक्का करें: ') + (en ? c.en : c.hi) + ' ?')) return;
+              Array.prototype.forEach.call(bx.querySelectorAll('button'), function (x) { x.disabled = true; }); st.textContent = '⏳ ...';
+              acCall('acanswer', { key: it.key, answer: c.v }).then(function (r) {
+                if (r && r.status === 'ok') { bx.style.display = 'none'; st.textContent = r.message || '✅'; st.className = 'ekv-ac-ansmsg ok'; }
+                else { st.textContent = (r && r.message) || T('कुछ गड़बड़ हुई — दोबारा कोशिश करें।'); st.className = 'ekv-ac-ansmsg err'; Array.prototype.forEach.call(bx.querySelectorAll('button'), function (x) { x.disabled = false; }); }
+              }).catch(function () { st.textContent = T('Internet चेक करके दोबारा कोशिश करें।'); st.className = 'ekv-ac-ansmsg err'; Array.prototype.forEach.call(bx.querySelectorAll('button'), function (x) { x.disabled = false; }); });
+            };
+            bx.appendChild(b);
+          });
+          d.appendChild(bx); d.appendChild(st); d.classList.add('un');
+        } else if (it.answer) { d.appendChild(el('div', 'ekv-ac-ansmsg ok', '✔ ' + it.answer)); }
+        if (!(it.choices && it.choices.length) && it.url && it.url !== 'index.html') { d.style.cursor = 'pointer'; d.onclick = function () { location.href = it.url; }; }
         list.appendChild(d);
       });
       badge(r.unread || 0);
@@ -183,6 +188,7 @@
       + '.ekv-push-msg{margin-top:8px;font-size:13px}.ekv-push-msg.err{color:#b91c1c}.ekv-push-msg.ok{color:#15803d}'
       + '#ekvPushBadge{display:none;position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;line-height:18px;padding:0 4px;border-radius:9px;background:#dc2626;color:#fff;font-size:11px;font-weight:700;text-align:center;box-sizing:border-box}'
       + '.ekv-ac-h{font-weight:700;margin-bottom:8px}.ekv-ac-list{max-height:240px;overflow:auto;margin-bottom:8px}.ekv-ac-item{padding:8px 10px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:6px;font-size:13.5px;line-height:1.45}'
+      + '.ekv-ac-ans{display:flex;flex-direction:column;gap:6px;margin:8px 0 2px}.ekv-ac-ansbtn{padding:10px;border:0;border-radius:9px;background:#16a34a;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}.ekv-ac-ansbtn.no{background:#c0392b}.ekv-ac-ansbtn:disabled{opacity:.6}.ekv-ac-ansmsg{font-size:13px;margin-top:4px}.ekv-ac-ansmsg.ok{color:#15803d}.ekv-ac-ansmsg.err{color:#b91c1c}'
       + '.ekv-ac-item.un{background:#eff6ff;border-color:#93c5fd}.ekv-ac-b{margin:2px 0;color:#334155}.ekv-ac-item small{color:#64748b}.ekv-ac-empty{color:#64748b;font-size:13px;margin:4px 0}'
       + '.ekv-ac-row{display:flex;gap:8px}.ekv-ac-row .ekv-push-btn{padding:8px;font-size:13px}.ekv-ac-who{font-size:12px;color:#64748b;margin-top:6px}.ekv-ac-hr{border:0;border-top:1px solid #dde;margin:12px 0 10px}';
     document.head.appendChild(s);

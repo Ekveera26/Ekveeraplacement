@@ -117,6 +117,12 @@
       <div class="rent-form">
         <div><label for="rgName">आपका पूरा नाम</label><input id="rgName" type="text" maxlength="60" autocomplete="name"></div>
         <div><label for="rgMobile">Mobile Number</label><input id="rgMobile" type="tel" inputmode="numeric" maxlength="15" placeholder="10 अंकों का नंबर" autocomplete="tel"></div>
+        <div id="rgPwBox" class="full" style="display:grid;gap:10px">
+          <div><label for="rgPass">Password बनाएँ (कम से कम 6 अक्षर)</label><input id="rgPass" type="password" maxlength="40" autocomplete="new-password"></div>
+          <div><label for="rgPass2">Password दोबारा लिखें</label><input id="rgPass2" type="password" maxlength="40" autocomplete="new-password"></div>
+          <label class="rent-chk"><input type="checkbox" onclick="['rgPass','rgPass2'].forEach(function(i){document.getElementById(i).type=this.checked?'text':'password'}.bind(this))"><span>👁 Password दिखाएँ</span></label>
+          <p style="margin:0;font-size:12.5px;color:#4a5568">इसी Password और आपकी User ID (REG…) से आप App में Login करेंगे। Password किसी को न बताएँ।</p>
+        </div>
         <div class="full">
           <div class="rent-lbl" style="font-size:15px;margin-bottom:6px">आप किसके लिए Register हो रहे हैं? (एक या ज़्यादा चुनें)</div>
           <div id="rgInts" style="display:grid;gap:8px">
@@ -135,8 +141,11 @@
       <div id="rgDone" class="rent-done">
         <div style="font-size:42px">✅</div>
         <h3 style="margin:4px 0;color:#11766F">आप Register हो गए</h3>
+        <div id="rgDoneName" style="font-size:18px;font-weight:700;margin:4px 0"></div>
+        <div style="font-size:13px;color:#4a5568">आपकी User ID (Login के लिए)</div>
         <div><span class="rent-id" id="rgDoneId"></span></div>
         <p id="rgDoneTxt" style="margin:8px 0"></p>
+        <a id="rgOpenApp" class="btn btn-primary" href="index.html" style="display:none;margin-bottom:8px">🚀 App खोलें</a>
         <button type="button" class="btn btn-primary" onclick="appRegNotify()">🔔 अभी Notification चालू करें</button>
         <p style="font-size:13px;color:#4a5568;margin:8px 0 0">Notification तभी आएगा जब आप इस फ़ोन पर 🔔 चालू करेंगे (वही Mobile Number डालें जिससे Register हुए हैं)। बाद में बदलाव करना हो तो इसी पेज पर दोबारा भरें।</p>
       </div>

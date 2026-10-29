@@ -13,19 +13,29 @@
     if (old.mobile) $('rgMobile').value = old.mobile;
     (old.ints || []).forEach(v => { const c = $('rgInts').querySelector('input[value="' + v + '"]'); if (c) c.checked = true; });
   } catch (e) {}
+  if (window.__ekvAuth && window.__ekvAuth.loggedIn()) { const a = window.__ekvAuth.acct(); $('rgPwBox').style.display = 'none'; if (a.mobile && !$('rgMobile').value) $('rgMobile').value = a.mobile; if (a.name && !$('rgName').value) $('rgName').value = a.name; }
   window.appRegister = async function () {
     const name = $('rgName').value.trim(), mob = digits10($('rgMobile').value), list = ints();
     if (name.length < 2) return say(T('अपना पूरा नाम लिखें।'), 'err');
     if (mob.length !== 10) return say(T('10 अंकों का सही Mobile Number लिखें।'), 'err');
     if (!list.length) return say(T('कम से कम एक चुनें कि आप किसके लिए Register हो रहे हैं।'), 'err');
+    const A = window.__ekvAuth, loggedIn = !!(A && A.loggedIn() && A.acct().mobile === mob);
+    const pw = $('rgPass').value, pw2 = $('rgPass2').value;
+    if (!loggedIn) {
+      if (pw.length < 6) return say(T('Password कम से कम 6 अक्षर का रखें।'), 'err');
+      if (pw !== pw2) return say(T('दोनों Password एक जैसे नहीं हैं।'), 'err');
+    }
     if (!$('rgTerms').checked) return say(T('आगे बढ़ने के लिए सहमति पर ✔ लगाएँ।'), 'err');
     $('rgBtn').disabled = true; say(T('⏳ Register किया जा रहा है...'), '');
-    let r; try { r = await vcSecurePost({ action: 'appregister', name: name, mobile: mob, interests: list.join(','), terms: '1', website: $('rgWebsite').value, staff: (window.ekvStaffRef && window.ekvStaffRef()) || '' }); }
+    let r; try { r = await vcSecurePost({ action: 'appregister', name: name, mobile: mob, interests: list.join(','), terms: '1', website: $('rgWebsite').value, password: pw, password2: pw2, deviceId: A ? A.devId() : '', token: loggedIn ? A.acct().token : '', staff: (window.ekvStaffRef && window.ekvStaffRef()) || '' }); }
     catch (e) { r = { status: 'error', message: T('इंटरनेट / Server की दिक्कत — थोड़ी देर बाद फिर कोशिश करें।') }; }
     $('rgBtn').disabled = false;
+    if (r && (r.code === 'EXISTS' || r.code === 'NOPASS')) return say(r.message + ' ' + T('(App का Login screen खोलकर आगे बढ़ें)'), 'err');
     if (!r || r.status !== 'ok') return say((r && r.message) || T('कुछ गड़बड़ हो गई।'), 'err');
     try { localStorage.setItem(KEY, JSON.stringify({ name: name, mobile: mob, ints: list })); } catch (e) {}
     say('', '');
+    if (r.token && A) { A.saveAcct({ mobile: r.mobile || mob, token: r.token, level: r.level || 'pw', name: r.name || name, regId: r.regId }); $('rgOpenApp').style.display = 'inline-block'; }
+    $('rgDoneName').textContent = r.name || name;
     $('rgDoneId').textContent = r.regId;
     $('rgDoneTxt').textContent = r.updated ? T('आपकी पसंद बदल दी गई है।') : T('अब आपको चुनी हुई सेवाओं की जानकारी मिलेगी।');
     $('rgDone').style.display = 'block'; $('rgDone').scrollIntoView({ behavior: 'smooth', block: 'center' });
