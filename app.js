@@ -109,7 +109,7 @@
     if (evt) evt.preventDefault();
     const sub = document.getElementById(id);
     if (!sub) return;
-    sub.style.display = (sub.style.display === 'block') ? 'none' : 'block';
+    sub.style.display = (window.getComputedStyle(sub).display === 'none') ? 'flex' : 'none';
   }
 
   // ---- Nav Dropdown (Desktop पर hover से खुलता है, Mobile/Tap पर click से) ----

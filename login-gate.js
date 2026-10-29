@@ -107,7 +107,7 @@
 
   /* ---- v22b: 🚪 Logout बटन + v23: 👤 Naam · Reg ID (Mera Account) — Login होते ही हर पेज पर साफ़ दिखते हैं ---- */
   function doLogout(btn) {
-    if (btn) { btn.disabled = true; btn.textContent = L('⏳ ...', '⏳ ...'); }
+    if (btn) { btn.textContent = L('⏳ ...', '⏳ ...'); btn.style.pointerEvents = 'none'; }
     var a = acct();
     var ps = {}; try { ps = JSON.parse(lsGet('ekv_push_v1') || '{}') || {}; } catch (e) {}
     function wipe() {
@@ -127,11 +127,13 @@
     setTimeout(fin, 3500);                                  // Internet न भी हो तो भी इस फ़ोन से Logout हो जाए
   }
   function addAccountUi() {
-    if (isAdminOrStaff() || $('ekvLogoutBtn') || !loggedIn()) return;
+    if (isAdminOrStaff() || $('ekvAcctBtn') || !loggedIn()) return;
     var css = document.createElement('style');
     css.textContent =
-      '#ekvLogoutBtn,#ekvAcctBtn{position:fixed;left:12px;z-index:9991;display:flex;align-items:center;gap:6px;padding:9px 14px;border:0;border-radius:22px;font:600 14px/1 inherit;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,.25);cursor:pointer;max-width:calc(100vw - 24px)}' +
-      '#ekvLogoutBtn{bottom:96px;background:#fff;color:#b91c1c}#ekvAcctBtn{bottom:140px;background:#0B1F3A;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ekvLogoutBtn:disabled{opacity:.6}' +
+      '#ekvAcctBar{display:flex;justify-content:center;padding:8px 12px;background:#0B1F3A}' +
+      '.page-heading #ekvAcctBar{background:none;padding:12px 0 0;position:relative;z-index:2}' +
+      '#ekvAcctBtn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1.5px solid rgba(255,255,255,.55);border-radius:22px;background:rgba(255,255,255,.12);color:#fff;font:600 14px/1 inherit;font-family:inherit;cursor:pointer;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      'footer .foot-links a#ekvLogoutBtn{color:#ffb4b4;cursor:pointer}' +
       '#ekvAcctWrap{position:fixed;inset:0;z-index:2147482000;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}' +
       '#ekvAcctWrap .ea-card{width:100%;max-width:400px;background:#fff;color:#1b2430;border-radius:18px;padding:20px 18px;box-shadow:0 18px 50px rgba(0,0,0,.4);margin:auto}' +
       '#ekvAcctWrap h2{margin:0 0 10px;font-size:19px;color:#0B1F3A;text-align:center}#ekvAcctWrap .ea-row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f5;font-size:14.5px}' +
@@ -142,19 +144,26 @@
       '#ekvAcctWrap .ea-msg{min-height:18px;margin-top:8px;font-size:13.5px;text-align:center;line-height:1.45}#ekvAcctWrap .ea-msg.err{color:#b91c1c}#ekvAcctWrap .ea-msg.ok{color:#15803d}';
     document.head.appendChild(css);
 
+    /* 👤 Naam · REG-ID — Page ke Header (neeli patti) ke andar, kisi cheez ke upar tairta nahi */
     var ab = el('button', '', ''); ab.id = 'ekvAcctBtn'; ab.type = 'button'; ab.setAttribute('aria-label', L('मेरा Account', 'My account'));
     function paintChip() {
       var a = acct(), first = String(a.name || '').trim().split(/\s+/)[0] || '';
-      ab.textContent = '👤 ' + (first || a.regId ? ((first ? first : '') + (first && a.regId ? ' · ' : '') + (a.regId || '')) : L('मेरा Account', 'My account'));
+      ab.textContent = '👤 ' + ((first || a.regId) ? (first + (first && a.regId ? ' · ' : '') + (a.regId || '')) : L('मेरा Account', 'My account'));
     }
-    paintChip(); ab.onclick = openAccount; document.body.appendChild(ab);
+    paintChip(); ab.onclick = openAccount;
+    var bar = el('div'); bar.id = 'ekvAcctBar'; bar.appendChild(ab);
+    var ph = document.querySelector('.page-heading');
+    if (ph) ph.appendChild(bar);
+    else { var hd = document.querySelector('header'); if (hd && hd.parentNode) hd.parentNode.insertBefore(bar, hd.nextSibling); else document.body.insertBefore(bar, document.body.firstChild); }
 
-    var b = el('button', '', L('🚪 Logout', '🚪 Logout')); b.id = 'ekvLogoutBtn'; b.type = 'button';
-    b.setAttribute('aria-label', 'Logout');
-    b.onclick = function () { if (window.confirm(L('क्या आप Logout करना चाहते हैं?', 'Do you want to log out?'))) doLogout(b); };
-    document.body.appendChild(b);
+    /* 🚪 Logout — Footer me "Staff Profile" ke theek neeche (saare Pages par) */
+    var b = el('a', '', L('🚪 Logout', '🚪 Logout')); b.id = 'ekvLogoutBtn'; b.href = '#'; b.setAttribute('role', 'button');
+    b.onclick = function (ev) { ev.preventDefault(); if (window.confirm(L('क्या आप Logout करना चाहते हैं?', 'Do you want to log out?'))) doLogout(b); };
+    var cols = document.querySelectorAll('footer .foot-links'), col = cols.length ? cols[cols.length - 1] : null;
+    if (col) { var sp = col.querySelector('a[href="staff-profile.html"]'); if (sp && sp.nextSibling) col.insertBefore(b, sp.nextSibling); else col.appendChild(b); }
+    else { var ft = document.querySelector('footer'); (ft || document.body).appendChild(b); }
 
-    /* Purane Login (Naam/Reg ID Storage me nahi) ya naya Token: Server se Naam + Reg ID le aao */
+    /* Purane Login (Naam/Reg ID Storage me nahi): Server se Naam + Reg ID le aao */
     var a0 = acct();
     if ((!a0.regId || !a0.name) && a0.token) {
       post({ action: 'acme', mobile: a0.mobile, token: a0.token, deviceId: devId() }).then(function (r) {

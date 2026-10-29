@@ -48,11 +48,33 @@
     <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
     <nav class="navlinks">
       <a href="index.html" style="font-weight:800;text-decoration:underline;">Home</a>
+      <div class="nav-dropdown">
+        <a href="training.html" onclick="toggleNavDropdown(this,event)">Call Center Training</a>
+        <div class="nav-dropdown-menu">
+          <a href="training.html#course">📘 कोर्स</a>
+          <a href="training.html#apply">📝 Admission Form</a>
+          <a href="training.html#fee">💰 फीस</a>
+          <a href="training.html#idcard">🪪 ID Card</a>
+          <a href="training.html#attendance">✅ Attendance &amp; Material</a>
+          <a href="training.html#certificate">🎓 Certificate</a>
+          <a href="training.html#address">🏢 Company Address</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="placement.html" onclick="toggleNavDropdown(this,event)">Placement</a>
+        <div class="nav-dropdown-menu">
+          <a href="placement.html#search">🔍 खोजें</a>
+          <a href="placement.html#apply">📝 फॉर्म भरें</a>
+          <a href="placement.html#companyinfo">📋 Company Benefits Form</a>
+        </div>
+      </div>
+      <a href="for-rent.html">🏍️ For Rent</a>
+      <a href="home-service.html">🏠 Home Service</a>
+      <a href="tution.html">🎓 Ekveera Tution</a>
+      <a href="register.html">📝 Register</a>
+      <a href="contractor.html">🤝 Contractor</a>
       <a href="resume-builder.html">📄 Resume</a>
       <a href="staff-profile.html">👤 Staff Profile</a>
-      <a href="#about">About</a>
-      <a href="#offices">Offices</a>
-      <a href="#offices">संपर्क</a>
     </nav>
     <div style="display:flex;align-items:center;gap:10px;" class="header-pwa-actions">
       <div class="lang-switch notranslate" role="group" aria-label="Language / भाषा"><button type="button" data-lang="hi" onclick="setLang('hi')">हिं</button><button type="button" data-lang="en" onclick="setLang('en')">EN</button><button type="button" data-lang="gu" onclick="setLang('gu')">ગુ</button><button type="button" data-lang="mr" onclick="setLang('mr')">मरा</button></div>
@@ -60,6 +82,27 @@
   </div>
 <div id="mobileMenu" class="mobile-menu">
   <a href="index.html" onclick="toggleMobileMenu()">🏠 Home</a>
+  <a href="#" onclick="toggleMobileSubmenu('mmTraining',event)">🎓 Call Center Training ▾</a>
+  <div id="mmTraining" class="submenu">
+    <a href="training.html#course" onclick="toggleMobileMenu()">📘 कोर्स</a>
+    <a href="training.html#apply" onclick="toggleMobileMenu()">📝 Admission Form</a>
+    <a href="training.html#fee" onclick="toggleMobileMenu()">💰 फीस</a>
+    <a href="training.html#idcard" onclick="toggleMobileMenu()">🪪 ID Card</a>
+    <a href="training.html#attendance" onclick="toggleMobileMenu()">✅ Attendance &amp; Material</a>
+    <a href="training.html#certificate" onclick="toggleMobileMenu()">🎓 Certificate</a>
+    <a href="training.html#address" onclick="toggleMobileMenu()">🏢 Company Address</a>
+  </div>
+  <a href="#" onclick="toggleMobileSubmenu('mmPlacement',event)">💼 Placement (Candidate/Company) ▾</a>
+  <div id="mmPlacement" class="submenu">
+    <a href="placement.html#search" onclick="toggleMobileMenu()">🔍 खोजें</a>
+    <a href="placement.html#apply" onclick="toggleMobileMenu()">📝 फॉर्म भरें</a>
+    <a href="placement.html#companyinfo" onclick="toggleMobileMenu()">📋 Company Benefits Form</a>
+  </div>
+  <a href="for-rent.html" onclick="toggleMobileMenu()">🏍️ For Rent</a>
+  <a href="home-service.html" onclick="toggleMobileMenu()">🏠 Home Service</a>
+  <a href="tution.html" onclick="toggleMobileMenu()">🎓 Ekveera Tution</a>
+  <a href="register.html" onclick="toggleMobileMenu()">📝 Register</a>
+  <a href="contractor.html" onclick="toggleMobileMenu()">🤝 Contractor</a>
   <a href="resume-builder.html" onclick="toggleMobileMenu()">📄 Resume</a>
   <a href="staff-profile.html" onclick="toggleMobileMenu()">👤 Staff Profile</a>
 </div>

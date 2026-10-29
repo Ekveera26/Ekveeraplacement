@@ -199,6 +199,23 @@
     XLSX.writeFile(wb, 'EkVeera_Staff_Payment_' + Date.now() + '.xlsx');
   };
 
+  /* 🏍️ For Rent / 🏠 Home Service / 🎓 Tution — Staff ka apna hisaab (v25) */
+  function servicesPanel(list) {
+    if (!list || !list.length) return '';
+    var h = '<div style="border:2px solid #dbe4f0;border-radius:12px;padding:12px;margin:14px 0;background:#fbfcfe"><h4 style="margin:0 0 8px;">🧾 ' + __t('For Rent · Home Service · Tution का हिसाब') + '</h4>';
+    list.forEach(function (x) {
+      h += '<div style="border:1px solid #e3e9f2;border-radius:10px;padding:10px;margin-bottom:10px;background:#fff"><div style="font-weight:800;color:#0B1F3A;margin-bottom:6px">' + x.icon + ' ' + esc(x.label) + '</div>' +
+        '<div class="dash-grid">' +
+        card(x.registered, __t('आपकी ID से जुड़े') + ' ' + esc(x.who), '#1F9D95') +
+        card(x.regPaid, __t('Registration Payment हुई'), '#2e7d32', __t('आपकी ID वाले')) +
+        card(x.orders, __t('Order Payment (₹29)'), '#2e7d32', __t('आपकी ID वाले की')) +
+        card(money(x.earned), __t('आपके बने'), '#0B1F3A') +
+        card(money(x.paid), __t('आपको मिल चुके'), '#2e7d32') +
+        card(money(x.pending), __t('बाकी'), '#E8A33D') + '</div></div>';
+    });
+    return h + '<p class="dash-note" style="margin:4px 0 0;">' + __t('सिर्फ़ तब गिना जाता है जब उसने सच में Payment किया हो। नीचे की सूची में हर Payment अलग दिखती है।') + '</p></div>';
+  }
+
   /* 💸 भुगतान का हिसाब (पूरे समय का): मिला / Advance / बाकी — Admin जो भुगतान दर्ज करता है वही यहाँ दिखता है */
   function dmy(x) { var m = String(x || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '-' + m[2] + '-' + m[1] : String(x || ''); }
   function payoutPanel(p) {
@@ -206,7 +223,7 @@
     var h = '<div style="border:2px solid #cfe5d6;border-radius:12px;padding:12px;margin:14px 0;background:#f6fbf8"><h4 style="margin:0 0 6px;">💸 ' + __t('आपके भुगतान का हिसाब (अब तक का)') + '</h4>';
     h += '<div class="dash-grid">' + card(money(p.earned), __t('अब तक कुल बने'), '#0B1F3A') +
       card(money(p.payoutPaid + p.paidBefore), __t('आपको मिल चुके'), '#2e7d32') +
-      (p.advance ? card(money(p.advance), __t('Advance लिया'), '#8a5a00', __t('कुल में से कटता है')) : '') +
+      card(money(p.advance || 0), __t('Advance लिया'), '#8a5a00', __t('कुल में से कटता है')) +
       card(money(p.netDue > 0 ? p.netDue : 0), __t('अभी बाकी'), p.netDue > 0 ? '#E8A33D' : '#2e7d32') + '</div>';
     if (p.lastPayout) h += '<p style="margin:8px 0 0;font-size:13.5px;font-weight:700;color:#1b7f3b">✅ ' + __t('आपकी Payment हो चुकी है') + ' — ' + __t('आख़िरी भुगतान') + ' ' + dmy(p.lastPayout.date) + ' ' + __t('को') + ' ' + money(p.lastPayout.amount) + ' (' + esc(p.lastPayout.mode) + (p.lastPayout.ref ? ' · ' + esc(p.lastPayout.ref) : '') + ')' + (p.paidUpTo ? ' — ' + esc(p.paidUpTo) + ' ' + __t('तक की कमाई का हिसाब चुकता') : '') + '</p>';
     if (p.advanceBalance > 0) h += '<p style="margin:6px 0 0;font-size:13px;color:#8a5a00">ℹ️ ' + __t('आपका Advance') + ' ' + money(p.advanceBalance) + ' ' + __t('अभी बाक़ी है — यह आगे की कमाई में अपने-आप कटेगा।') + '</p>';
@@ -244,6 +261,7 @@
         card(money(d.money.paid), __t('आपको मिल चुके (Paid)'), '#2e7d32') +
         card(money(d.money.pending), __t('बाकी'), '#E8A33D') + '</div>';
       h += '<p class="dash-note">' + __t('सिर्फ़ तब गिना जाता है जब Company या Training Candidate ने सच में Payment किया हो — सिर्फ़ फॉर्म भरने पर नहीं।') + '</p>';
+      h += servicesPanel(d.services);
       h += payoutPanel(d.payout);
       if (d.entries && d.entries.length) {
         var th = 'padding:5px;text-align:left;';
