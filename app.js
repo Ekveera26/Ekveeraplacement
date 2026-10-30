@@ -1092,7 +1092,7 @@ function updateReqPrice() {
   document.getElementById('reqPrice').textContent = price;
 }
 
-async function sendUnlockRequest() {
+async function sendUnlockRequest(ack) {
   const companyId = document.getElementById('reqCompanyId').value.trim();
   const numPosts = document.getElementById('reqNumPosts').value.trim();
   const ids = document.getElementById('reqIds').value.trim();
@@ -1106,9 +1106,20 @@ async function sendUnlockRequest() {
   msgEl.textContent = __t('भेजा जा रहा है...');
   try {
     const url = SEARCH_WEB_APP_URL + '?action=requestunlock&companyId=' + encodeURIComponent(companyId) +
-      '&numPosts=' + encodeURIComponent(numPosts) + '&ids=' + encodeURIComponent(ids) + '&_=' + Date.now();
+      '&numPosts=' + encodeURIComponent(numPosts) + '&ids=' + encodeURIComponent(ids) + (ack === true ? '&ack=1' : '') + '&_=' + Date.now();
     const res = await fetch(url);
     const data = await res.json();
+    if (data.status === 'unregistered') {
+      // v26: Register na hone ki chetavni — bina click kiye koi Payment details nahi dikhti
+      msgEl.style.color = '#ffd27a';
+      msgEl.textContent = '⚠️ ' + (data.message || '');
+      const go = document.createElement('button');
+      go.type = 'button'; go.id = 'reqUnregGo'; go.className = 'btn btn-primary'; go.style.cssText = 'display:block;margin-top:12px;';
+      go.textContent = __t('✅ समझ गया — बिना Receipt के आगे बढ़ें');
+      go.onclick = function () { go.disabled = true; sendUnlockRequest(true); };
+      msgEl.appendChild(go);
+      return;
+    }
     if (data.status === 'ok') {
       document.getElementById('checkRequestId').value = data.requestId;
       document.getElementById('checkCompanyId').value = companyId;

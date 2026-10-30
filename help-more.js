@@ -330,7 +330,7 @@
         B('पहले Internet जाँचें और पेज **Refresh** करें — सूची पहली बार थोड़ी देर में आती है।', 'First check your Internet and **refresh** the page — the list takes a moment the first time.'),
         B('क्रम से चुनें: पहले **ज़िला**, फिर **तहसील**, फिर **शहर / गाँव** — अगला डिब्बा पिछला चुनने पर ही भरता है।', 'Choose in order: first **District**, then **Tehsil**, then **City / Village** — the next box fills only after the previous one.'),
         B('आपका गाँव सूची में न हो तो **"अन्य (Other) — खुद लिखें"** चुनकर अपना गाँव / इलाका लिख दें।', 'If your village is not in the list choose **"Other — write yourself"** and type your village / area.'),
-        B('अभी सेवा सिर्फ़ **मध्य प्रदेश** के लिए है। अगर लाल चेतावनी दिखे कि "सूची लोड नहीं हुई", तो WhatsApp पर बताएँ — Admin वेबसाइट की data/MP.json फ़ाइल जाँचेंगे।', 'The service is for **Madhya Pradesh** only for now. If a red warning says "list did not load", tell us on WhatsApp — the Admin will check the website\'s data/MP.json file.')
+        B('अगर लाल चेतावनी दिखे कि "सूची लोड नहीं हुई", तो WhatsApp पर बताएँ — Admin वेबसाइट की data/MP.json फ़ाइल जाँचेंगे।', 'If a red warning says "list did not load", tell us on WhatsApp — the Admin will check the website\'s data/MP.json file.')
       ],
       go: [{ label: B('💬 WhatsApp खोलें', '💬 Open WhatsApp'), wa: WA }]
     },

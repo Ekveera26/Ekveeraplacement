@@ -132,7 +132,7 @@
     css.textContent =
       '#ekvAcctBar{display:flex;justify-content:center;padding:8px 12px;background:#0B1F3A}' +
       '.page-heading #ekvAcctBar{background:none;padding:12px 0 0;position:relative;z-index:2}' +
-      '#ekvAcctBtn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1.5px solid rgba(255,255,255,.55);border-radius:22px;background:rgba(255,255,255,.12);color:#fff;font:600 14px/1 inherit;font-family:inherit;cursor:pointer;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '#ekvAcctBtn{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border:1.5px solid rgba(255,255,255,.55);border-radius:20px;background:rgba(255,255,255,.12);color:#fff;font:700 13.5px/1.2 inherit;font-family:inherit;cursor:pointer;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       'footer .foot-links a#ekvLogoutBtn{color:#ffb4b4;cursor:pointer}' +
       '#ekvAcctWrap{position:fixed;inset:0;z-index:2147482000;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}' +
       '#ekvAcctWrap .ea-card{width:100%;max-width:400px;background:#fff;color:#1b2430;border-radius:18px;padding:20px 18px;box-shadow:0 18px 50px rgba(0,0,0,.4);margin:auto}' +
@@ -151,10 +151,13 @@
       ab.textContent = '👤 ' + ((first || a.regId) ? (first + (first && a.regId ? ' · ' : '') + (a.regId || '')) : L('मेरा Account', 'My account'));
     }
     paintChip(); ab.onclick = openAccount;
-    var bar = el('div'); bar.id = 'ekvAcctBar'; bar.appendChild(ab);
-    var ph = document.querySelector('.page-heading');
-    if (ph) ph.appendChild(bar);
-    else { var hd = document.querySelector('header'); if (hd && hd.parentNode) hd.parentNode.insertBefore(bar, hd.nextSibling); else document.body.insertBefore(bar, document.body.firstChild); }
+    /* Sirf Home page par: neeli patti me DAAYEN taraf (baayen me Staff : Anak-01). Baaki pages par chip nahi. */
+    var isHome = /(^|\/)(index\.html)?$/.test(location.pathname || '/');
+    if (isHome) {
+      var strip = (typeof window.ekvHomeStrip === 'function') ? window.ekvHomeStrip() : null;
+      if (!strip) { strip = el('div'); strip.id = 'ekvHomeStrip'; strip.style.cssText = 'display:flex;justify-content:flex-end;background:#0B1F3A;padding:8px 14px'; var rr = el('span'); rr.id = 'ekvStripR'; strip.appendChild(rr); var hd = document.querySelector('header'); if (hd && hd.parentNode) hd.parentNode.insertBefore(strip, hd.nextSibling); else document.body.insertBefore(strip, document.body.firstChild); }
+      var slot = $('ekvStripR') || strip; slot.appendChild(ab);
+    }
 
     /* 🚪 Logout — Footer me "Staff Profile" ke theek neeche (saare Pages par) */
     var b = el('a', '', L('🚪 Logout', '🚪 Logout')); b.id = 'ekvLogoutBtn'; b.href = '#'; b.setAttribute('role', 'button');

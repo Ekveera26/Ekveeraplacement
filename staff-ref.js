@@ -55,14 +55,23 @@
   }
 
   /* Home page par dikhao: kiske Staff Code ke Link se aaye (isi Code se Form / Payment ka Commission banta hai) */
+  /* Neeli patti (sirf Home page): left me "Staff : Anak-01", right me "👤 Naam · REG-ID" (login-gate.js bharta hai) — ek hi line me */
+  function homeStrip() {
+    var st = document.getElementById('ekvHomeStrip'); if (st) return st;
+    st = document.createElement('div'); st.id = 'ekvHomeStrip';
+    st.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;background:#0B1F3A;color:#fff;padding:8px 14px;font-size:13.5px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.15);';
+    var l = document.createElement('span'); l.id = 'ekvStripL'; l.style.cssText = 'min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap';
+    var r = document.createElement('span'); r.id = 'ekvStripR'; r.style.cssText = 'margin-left:auto;min-width:0;display:flex;justify-content:flex-end';
+    st.appendChild(l); st.appendChild(r);
+    var h = document.querySelector('header'); if (h && h.parentNode) h.parentNode.insertBefore(st, h.nextSibling); else document.body.insertBefore(st, document.body.firstChild);
+    return st;
+  }
+  window.ekvHomeStrip = homeStrip;
   function showBadge() {
     try {
       if (!/(^|\/)(index\.html)?$/.test(location.pathname)) return;
-      var c = window.ekvStaffRef(); if (!c || document.getElementById('ekvStaffBadge')) return;
-      var b = document.createElement('div'); b.id = 'ekvStaffBadge';
-      b.style.cssText = 'background:#e8f6ec;color:#14673a;font-weight:700;font-size:13.5px;text-align:center;padding:7px 12px;border-bottom:1px solid #cfe8d7;';
-      b.textContent = '🔗 Staff Code: ' + c;
-      var h = document.querySelector('header'); if (h && h.parentNode) h.parentNode.insertBefore(b, h.nextSibling); else document.body.insertBefore(b, document.body.firstChild);
+      var c = window.ekvStaffRef(); if (!c) return;
+      homeStrip(); var l = document.getElementById('ekvStripL'); if (l && !l.textContent) l.textContent = '🔗 Staff : ' + c;
     } catch (e) {}
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showBadge); else showBadge();
