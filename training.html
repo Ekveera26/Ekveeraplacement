@@ -254,6 +254,7 @@
       <h3 style="color:var(--navy);margin:0 0 6px;">अपनी ID यहीं तुरंत देखें</h3>
       <p style="color:var(--ink-soft);font-size:14px;margin-bottom:14px;">ईमेल का इंतज़ार करने की ज़रूरत नहीं — फॉर्म में दिया Mobile Number या Email नीचे डालें — आपकी Training से जुड़ी सारी ID (Training ID, Address Request ID) तुरंत यहीं दिख जाएँगी। (सुरक्षा के लिए Access Code यहाँ नहीं दिखता — वह Payment के बाद आपकी Email पर आता है।)</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <input id="checkIdName" type="text" autocomplete="name" maxlength="60" placeholder="आपका पूरा नाम (जैसा फॉर्म में लिखा था)" style="flex:1 1 100%;min-width:220px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-size:14.5px;">
         <input id="checkIdContact" data-scope="training" type="text" placeholder="Mobile Number या Email" style="flex:1;min-width:220px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-size:14.5px;">
         <button class="btn btn-primary" onclick="checkMyId()">ID देखें</button>
       </div>

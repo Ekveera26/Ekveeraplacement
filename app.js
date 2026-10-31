@@ -681,7 +681,8 @@ function copyUPI(){
       '<div class="row"><button type="button" class="later">' + __t('बाद में') + '</button><button type="button" class="go">' + __t('Update करें') + '</button></div></div>';
     document.body.appendChild(ov);
     var go = ov.querySelector('.go'), later = ov.querySelector('.later'), bar = ov.querySelector('.bar');
-    later.onclick = function () { ov.remove(); };            // अगली बार App खोलने पर फिर पूछेगा
+    if (window.__ekvForce) { later.style.display = 'none'; }  // v26: Zaroori Update — "Baad me" nahi
+    later.onclick = function () { ov.remove(); shown = false; window.__ekvSnooze = Date.now() + 10 * 60 * 1000; setTimeout(function () { try { navigator.serviceWorker.getRegistration().then(function (r) { r && r.update(); }); } catch (e) {} }, 10 * 60 * 1000); };            // 10 minute baad phir poochhega (ya agli bar App kholne par)
     go.onclick = function () {
       go.disabled = true; later.disabled = true; go.textContent = __t('Update हो रहा है…'); bar.style.display = 'block'; askedUpdate = true;
       if (mode === 'sw' && worker) {
@@ -705,8 +706,21 @@ function copyUPI(){
         });
       });
       var check = function () { try { reg.update().catch(function () {}); } catch (e) {} };
-      check(); setInterval(check, 15 * 60 * 1000);
-      document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
+      check(); setInterval(check, 5 * 60 * 1000);
+      /* v26: Naya Version jaldi pakadna — version.js ko seedha Server se dekho (Cache se nahi). Alag ho to turant Service Worker ko update karwao aur Dialog dikhao.
+         Admin "zaroori Update" chahe to version.js me  window.EKV_FORCE = 1;  likh de — tab "Baad me" ka button nahi dikhta. */
+      var probe = function () {
+        if (document.hidden || navigator.onLine === false || (window.__ekvSnooze && Date.now() < window.__ekvSnooze)) return;
+        fetch('version.js?probe=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
+          var m = /EKV_VERSION\s*=\s*'([^']+)'/.exec(t || '');
+          if (!m || !window.EKV_VERSION || m[1] === window.EKV_VERSION) return;
+          window.__ekvForce = /EKV_FORCE\s*=\s*(1|true)\b/.test(t); APP_VER = m[1]; check();
+          setTimeout(function () { if (!shown) { mode = 'content'; window.ekvAskUpdate(null); } }, 12000);       // Service Worker ne 12 second me khud Dialog na dikhaya to bhi dikhao
+        }).catch(function () {});
+      };
+      setTimeout(probe, 4000); setInterval(probe, 3 * 60 * 1000);
+      window.addEventListener('online', function () { check(); probe(); });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) { check(); probe(); } });
     }).catch(function () {});
   });
   navigator.serviceWorker.addEventListener('message', function (e) {
@@ -1742,14 +1756,15 @@ function downloadBatchSchedule() {
 // ---------------- 🔎 अपनी ID चेक करना (Mobile/Email से) ----------------
 async function checkMyId() {
   const contact = document.getElementById('checkIdContact').value.trim();
+  const nameEl = document.getElementById('checkIdName'), nameV = nameEl ? nameEl.value.trim() : '';
   const el = document.getElementById('checkIdResult');
-  if (!contact) {
-    el.innerHTML = __t('<p style="color:#C0392B;font-size:14px;">कृपया अपना Mobile Number या Email डालें।</p>');
+  if (!contact || nameV.split(/\s+/).filter(Boolean).length < 2) {
+    el.innerHTML = __t('<p style="color:#C0392B;font-size:14px;">कृपया अपना पूरा नाम और Mobile Number या Email दोनों डालें।</p>');
     return;
   }
   el.innerHTML = __t('<p style="color:var(--ink-soft);font-size:14px;">ढूंढा जा रहा है...</p>');
   try {
-    const data = await vcSecurePost({ action: 'checkmyid', contact: contact, scope: document.getElementById('checkIdContact').getAttribute('data-scope') || '' });   // हर पेज की अपनी IDs: placement / training
+    const data = await vcSecurePost({ action: 'checkmyid', name: nameV, contact: contact, scope: document.getElementById('checkIdContact').getAttribute('data-scope') || '' });   // हर पेज की अपनी IDs: placement / training
     if (data.status === 'ok' && data.results && data.results.length) {
       let html = '';
       data.results.forEach(r => {

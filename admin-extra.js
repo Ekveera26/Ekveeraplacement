@@ -98,11 +98,56 @@
       sec('axExp', '⏳ Registration खत्म होने वाली (For Rent / Home Service / Tution)', 'किसकी Registration कितने दिन में खत्म हो रही है — जल्दी खत्म होने वाली ऊपर। Excel में Download भी कर सकते हैं। रोज़ सुबह 9 बजे Email + Push Alert भी आता है।',
         '<select id="axExpDays" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--line);border-radius:6px"><option value="15">15 दिन में खत्म</option><option value="30" selected>30 दिन में खत्म</option><option value="60">60 दिन में खत्म</option><option value="365">पूरी List (सभी)</option></select>' +
         '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axExpiring()">🔄 List दिखाएँ</button><div id="axExpOut" style="margin-top:10px;font-size:13.5px"></div>') +
+      sec('axAud', '📜 Admin Audit — किसने कब क्या किया', 'Admin Password से हुआ हर बदलाव (Approve, Setting, Staff, Block…) और हर Login / गलत Password की कोशिश यहाँ लिखी रहती है। Sheet "Admin Audit" में भी यही है।',
+        '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axAudLoad()">📜 ताज़ा 150 दिखाएँ</button><div id="axAudOut" style="margin-top:10px;font-size:13px"></div>') +
+      sec('axAcc', '📱 Phone गुम / Account Block / नया Number', 'किसी User का Phone गुम हो जाए तो यहाँ से उसे ढूँढें: 🔒 Block (तुरंत सब Phone से Logout) · 🚪 सब Phone से Logout · 📞 नया Mobile Number। नए Phone पर वही User ID + Password से Login हो जाता है।',
+        '<input id="axAccQ" placeholder="REG ID / Mobile / नाम" style="width:100%;padding:9px;margin-bottom:8px;border:1px solid var(--line);border-radius:8px;font-size:14px">' +
+        '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axAccFind()">🔍 ढूँढें</button><div id="axAccOut" style="margin-top:10px;font-size:13px"></div>') +
       sec('axTest', '🧪 Admin Test — पूरी Web एक Click में जाँचें', 'हर Update के बाद यह एक बार चलाएँ: Pages, Scripts, Server, Sheets, हर नया Function — सब Pass / Fail दिखेगा। सारे पेज हाथ से खोलकर देखने की ज़रूरत नहीं।',
         '<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="axRunTest()">▶️ पूरा Test चलाएँ</button><button class="btn" style="width:100%;justify-content:center;margin-top:8px;border:1px solid #cfd6e0;background:#fff" onclick="axSetupSheets()">🗂️ सारी Sheets बनाएँ / ठीक करें (Home Service, Rent, Tution, Register)</button><div id="axTestOut" style="margin-top:10px;font-size:13.5px"></div>') +
       sec('axHelp', '🆘 Admin Help — कोई काम भूल जाएँ या दिक्कत आए तो', 'Admin के काम में जो दिक्कतें आ सकती हैं, उनके हल।', helpHtml());
   }
 
+
+  /* ---------- 📜 Admin Audit ---------- */
+  window.axAudLoad = async function () {
+    var out = document.getElementById('axAudOut'); out.textContent = T('⏳ आ रहा है...');
+    var d = await call({ action: 'adminaudit', limit: 150 });
+    if (!d || d.status !== 'ok') { out.innerHTML = '<span style="color:#a12a1f">' + esc((d && d.message) || T('List नहीं आ पाई — EkVeera_AdminSec.gs जोड़कर नया Deploy किया?')) + '</span>'; return; }
+    if (!d.items.length) { out.textContent = T('अभी कुछ दर्ज नहीं है।'); return; }
+    out.innerHTML = '<div style="margin-bottom:6px;font-weight:700">' + esc(T('कुल Entry:')) + ' ' + d.total + '</div>' + d.items.map(function (x) {
+      var bad = /nahi|galat|❌/i.test(x.ok + x.label);
+      return '<div style="border-bottom:1px solid #eef1f5;padding:6px 0"><b style="color:' + (bad ? '#a12a1f' : '#172033') + '">' + esc(x.label) + '</b> · <span style="color:#596579">' + esc(x.time) + '</span>' +
+        (x.details ? '<div style="color:#44506a;word-break:break-word">' + esc(x.details) + '</div>' : '') + (x.msg ? '<div style="color:#8a5a00">' + esc(x.msg) + '</div>' : '') + '</div>';
+    }).join('');
+  };
+  /* ---------- 📱 Phone gum / Account Block ---------- */
+  window.axAccFind = async function () {
+    var out = document.getElementById('axAccOut'), q = (document.getElementById('axAccQ').value || '').trim();
+    if (q.length < 3) { out.textContent = T('कम से कम 3 अक्षर / अंक लिखें।'); return; }
+    out.textContent = T('⏳ ढूँढा जा रहा है...');
+    var d = await call({ action: 'adminacctfind', q: q });
+    if (!d || d.status !== 'ok') { out.innerHTML = '<span style="color:#a12a1f">' + esc((d && d.message) || T('कुछ गड़बड़ हुई।')) + '</span>'; return; }
+    if (!d.items.length) { out.textContent = T('कोई Account नहीं मिला।'); return; }
+    out.innerHTML = d.items.map(function (x) {
+      var blocked = x.status === 'Blocked', id = esc(x.regId);
+      return '<div style="border:1px solid #e3e8ef;border-radius:10px;padding:9px 11px;margin-bottom:8px;background:#fff"><b>' + id + '</b> — ' + esc(x.name) + ' (' + esc(x.mobile) + ') · ' +
+        '<span style="font-weight:800;color:' + (blocked ? '#a12a1f' : '#1b7f3b') + '">' + esc(x.status) + '</span>' + (x.hasPassword ? '' : ' · <i>' + esc(T('Password अभी बना नहीं')) + '</i>') +
+        (x.lastLogin ? '<div style="color:#596579">' + esc(T('आख़िरी Login:')) + ' ' + esc(x.lastLogin) + '</div>' : '') +
+        (x.hasPassword ? '<div style="margin-top:6px">' +
+          '<button style="' + (blocked ? BTN_OK : BTN_NO) + '" onclick="axAccAct(\'' + id + '\',\'' + (blocked ? 'unblock' : 'block') + '\')">' + (blocked ? '▶ ' + esc(T('Unblock')) : '🔒 ' + esc(T('Block'))) + '</button>' +
+          '<button style="' + BTN + '" onclick="axAccAct(\'' + id + '\',\'logout\')">🚪 ' + esc(T('सब Phone से Logout')) + '</button>' +
+          '<button style="' + BTN + '" onclick="axAccAct(\'' + id + '\',\'mobile\')">📞 ' + esc(T('Mobile Number बदलें')) + '</button></div>' : '') + '</div>';
+    }).join('');
+  };
+  window.axAccAct = async function (id, what) {
+    var r;
+    if (what === 'block') { var note = prompt(T('Block का कारण (अपने लिए, जैसे "Phone गुम"):')) || ''; if (!confirm(T('पक्का? ') + id + T(' तुरंत सब Phone से Logout हो जाएगा।'))) return; r = await call({ action: 'adminacctblock', regId: id, block: '1', note: note }); }
+    else if (what === 'unblock') { if (!confirm(T('पक्का? ') + id)) return; r = await call({ action: 'adminacctblock', regId: id, block: '0' }); }
+    else if (what === 'logout') { if (!confirm(T('पक्का? सारे Phone से Logout होगा — ') + id)) return; r = await call({ action: 'adminacctlogout', regId: id }); }
+    else { var nm = prompt(T('नया 10 अंकों का Mobile Number:')); if (!nm) return; if (!confirm(T('पक्का? ') + id + ' → ' + nm)) return; r = await call({ action: 'adminacctmobile', regId: id, newMobile: nm }); }
+    alert((r && r.message) || T('काम नहीं हो पाया।')); window.axAccFind();
+  };
   /* ---------- ⏳ Registration खत्म होने वाली ---------- */
   var EXP_ROWS = [];
   window.axExpiring = async function () {
@@ -264,6 +309,9 @@
   /* ---------- 🆘 Admin Help ---------- */
   function helpHtml() {
     var H = [
+      ['किसी User का Phone गुम हो गया', 'ऊपर "📱 Phone गुम / Account Block" में उसकी REG ID / Mobile / नाम ढूँढें → "🔒 Block" (तुरंत सब Phone से Logout)। वह नए Phone पर वही User ID + Password से Login कर सकता है (Password भूला हो तो "Password भूल गए" → आपकी मंज़ूरी)। SIM ही गुम हो गई और नया Number चाहिए तो "📞 Mobile Number बदलें"।'],
+      ['Admin का अपना Phone गुम हो गया', 'Admin Page किसी भी Phone / Computer पर Admin Password से खुलता है — Phone से बँधा नहीं है। नए Phone में वेबसाइट खोलकर ?admin=1 से Password डालें। डर हो कि किसी के हाथ Password लग गया तो Apps Script → setPasswords (EkVeera_Maintenance.gs) में NEW_ADMIN लिखकर Run करें — पुराना Password तुरंत बंद। Password भी भूल गए तो भी यही तरीका (सिर्फ़ Script के मालिक Google Account से)।'],
+      ['किसने क्या बदला यह जानना है', 'ऊपर "📜 Admin Audit" — हर Approve / Setting / Staff / Block / Login और गलत Password की कोशिश Time के साथ लिखी रहती है।'],
       ['Admin Password गलत / "लॉक" बता रहा है', 'कई बार गलत Password डालने पर कुछ मिनट के लिए लॉक हो जाता है — संदेश में लिखे मिनट रुकें, फिर सही Password डालें।'],
       ['Payment हो गई पर Teacher / Karigar / Giver की Entry चालू नहीं हुई', '1) संबंधित Ledger Sheet (Rent Ledger / Home Service Ledger / Tution Ledger) में Payment ID देखें। 2) नहीं है तो Razorpay में Payment और Webhook देखें। 3) WhatsApp पर "Amount Mismatch" या "Duplicate" संदेश आया हो तो रकम जाँचें / Razorpay से Refund करें। 4) मजबूरी में Sheet में "Payment Status" = Paid, "Valid Till" = आज से 1 साल बाद और "Listing Status" = Active खुद भर दें।'],
       ['"Duplicate ⚠️" या "Amount Mismatch ⚠️" का संदेश आया', 'Duplicate = एक ही ID की दोबारा Payment आई — Razorpay से Refund करें। Mismatch = रकम गलत आई (Teacher/Karigar ₹49, Student/Customer ₹29, Rent Plan ₹49/₹89/₹299) — सही रकम की Payment कराएँ या Refund दें।'],
