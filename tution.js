@@ -114,10 +114,11 @@
     if (digits10(v('gMobile')).length !== 10) return say('gMsg', T('10 अंकों का सही Mobile Number लिखें।'), 'err');
     if (!v('gLoc') || (window.EkvLoc && !EkvLoc.hasDistrict('gLoc'))) return say('gMsg', T('ज़िला, तहसील और शहर / गाँव चुनें (या Other में लिखें)।'), 'err');
     const list = gM.read(), ie = skillErr(list); if (ie) return say('gMsg', ie, 'err');
+    if (!($('gC1') && $('gC1').checked && $('gC2').checked && $('gC3').checked && $('gC4').checked)) return say('gMsg', T('Teacher सहमति (Consent) के चारों बॉक्स पर ✔ लगाना ज़रूरी है।'), 'err');
     if (!$('gTerms').checked) return say('gMsg', T('आगे बढ़ने के लिए शर्तों पर ✔ लगाएँ।'), 'err');
     btn.disabled = true; say('gMsg', T('⏳ दर्ज किया जा रहा है...'), '');
     const r = await api({ action: 'tutregister', name: v('gName'), mobile: digits10(v('gMobile')), email: v('gEmail'), location: v('gLoc'), address: v('gAddr'), qualification: v('gQual'), experience: v('gExp'),
-      skills: JSON.stringify(list), terms: '1', website: v('gWebsite'), staff: (window.ekvStaffRef && window.ekvStaffRef()) || '' });
+      skills: JSON.stringify(list), terms: '1', tconsent: '1', website: v('gWebsite'), staff: (window.ekvStaffRef && window.ekvStaffRef()) || '' });
     btn.disabled = false;
     if (!r || r.status !== 'ok') return say('gMsg', (r && r.message) || T('कुछ गड़बड़ हो गई — फिर कोशिश करें।'), 'err');
     try { if (window.EkvLoc) EkvLoc.save('gLoc'); } catch (e) {}   // 📍 "Other" में लिखी जगह सबकी list में जुड़े

@@ -246,7 +246,7 @@
       'This is a computer-generated receipt issued by ' + ORG.name + ' and is valid without a physical signature.',
       'The fee is towards listing and candidate-information services only. Selection, joining and salary are decided solely by the Company; EkVeera does not guarantee any hiring outcome.',
       'Candidate information is shared for the Company\'s own direct recruitment only. It must not be resold, shared or used by any placement agency, contractor or third party. Misuse will invite legal action.',
-      'The fee is non-refundable once the candidate information has been delivered. For any query, quote the Receipt No. and Request ID above.'
+      'If you do not receive the service, the money is refunded. Once the information/address has been delivered the fee is not refunded, even if the company does not hire (we charge only for the address, not for a job). For any query, quote the Receipt No. and Request ID above.'
     ]).forEach(function (x) { kids.push(x); });
     return shell(X, K, kids, rcNo, 'Fee Receipt', 'Fee Receipt — ' + c.companyName);
   }

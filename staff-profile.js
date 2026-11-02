@@ -143,9 +143,38 @@
     var ap = state.profileStatus === 'Approved', t = [['profile', '👤 Profile'], ['docs', '📎 Documents']];
     if (ap) { t.push(['card', '🪪 ID Card']); t.push(['hub', '📋 Registrations']); t.push(['money', '💰 Commission']); }
     t.push(['ads', '📣 Advertisement']);
-    t.push(['pw', '🔑 Password']); t.push(['cmp', '🚨 शिकायत']);
+    t.push(['conduct', '📜 आचार नियम']); t.push(['pw', '🔑 Password']); t.push(['cmp', '🚨 शिकायत']);
     $('dsTabs').innerHTML = t.map(function (x) { return '<button type="button" class="sf-tab' + (curTab === x[0] ? ' on' : '') + '" onclick="sfTab(\'' + x[0] + '\')">' + esc(__t(x[1])) + '</button>'; }).join('');
   }
+  /* ---------------- Staff आचार नियम (Staff Conduct Rule) — Print हो सकता है ---------------- */
+  var CONDUCT = [
+    'मैं EkVeera का नाम, लोगो और ID सिर्फ़ ईमानदारी से काम के लिए इस्तेमाल करूँगा/करूँगी; किसी को झूठा वादा, "Guarantee" या पक्की नौकरी / पक्की कमाई का भरोसा नहीं दूँगा/दूँगी।',
+    'मैं किसी से Fee / पैसा अपने पास, अपने UPI या Cash में नहीं लूँगा/लूँगी। सारा भुगतान सिर्फ़ EkVeera के Payment Link से होगा।',
+    'किसी की निजी जानकारी (Mobile, पता, Document, फोटो) मैं किसी तीसरे को नहीं दूँगा/दूँगी, न बेचूँगा/बेचूँगी और न ग़लत इस्तेमाल करूँगा/करूँगी।',
+    'सच्ची जानकारी ही भरवाऊँगा/भरवाऊँगी — नकली नाम, नकली Document या एक ही व्यक्ति के कई Registration नहीं कराऊँगा/कराऊँगी।',
+    'सबके साथ सम्मान से बात करूँगा/करूँगी; महिलाओं और बच्चों के साथ ख़ास तौर पर सभ्य व्यवहार रखूँगा/रखूँगी। धमकी, दबाव या बदसलूकी नहीं करूँगा/करूँगी।',
+    'अपना Staff Link / Staff Code किसी और को इस्तेमाल करने नहीं दूँगा/दूँगी और Password किसी को नहीं बताऊँगा/बताऊँगी।',
+    'Candidate या Company से कोई ऐसा काम नहीं कराऊँगा/कराऊँगी जो क़ानून के ख़िलाफ़ हो; किसी का सामान / पैसा / दस्तावेज़ अपने पास नहीं रखूँगा/रखूँगी।',
+    'किसी शिकायत की जानकारी मिले तो तुरंत Office को बताऊँगा/बताऊँगी; जाँच में पूरा सहयोग करूँगा/करूँगी।',
+    'ऊपर के किसी भी नियम को तोड़ने पर मेरी ID और Commission बंद की जा सकती है, और गंभीर मामले में EkVeera क़ानूनी कार्रवाई कर सकता है। मेरे किए ग़लत काम की ज़िम्मेदारी मेरी अपनी होगी।',
+    'Staff EkVeera का कर्मचारी (Employee) नहीं, सिर्फ़ Commission पर काम करने वाला सहयोगी है; यह कोई नौकरी का Appointment नहीं है।'
+  ];
+  function renderConduct() {
+    var b = $('dsBody'), p = state.profile || {};
+    b.innerHTML = '<h3>' + esc(__t('📜 Staff आचार नियम (Staff Conduct Rule)')) + '</h3><p style="font-size:13px;color:#555;">' + esc(__t('हर Staff इन नियमों को मानकर ही काम करे। नीचे Print बटन से इसकी Copy निकालकर हस्ताक्षर करें और Office में दें।')) + '</p><ol style="line-height:1.7;">' +
+      CONDUCT.map(function (r) { return '<li>' + esc(__t(r)) + '</li>'; }).join('') + '</ol><button type="button" class="btn btn-primary" onclick="sfPrintConduct()">🖨️ ' + esc(__t('Print करें')) + '</button>';
+  }
+  window.sfPrintConduct = function () {
+    var s0 = sess() || {}, p = (state && state.profile) || {};
+    var w = window.open('', '_blank'); if (!w) { alert(__t('Pop-up खुलने दें, फिर Print दबाएँ।')); return; }
+    var d = new Date(), ds = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+    w.document.write('<!doctype html><html lang="hi"><head><meta charset="utf-8"><title>Staff Conduct Rule</title><style>body{font-family:Arial,sans-serif;margin:28px;color:#111;line-height:1.6}h1{font-size:20px;text-align:center;margin:0}h2{font-size:14px;text-align:center;font-weight:normal;margin:2px 0 14px}li{margin-bottom:6px;font-size:14px}.sg{display:flex;justify-content:space-between;margin-top:60px;font-size:13px}.sg div{border-top:1px solid #000;padding-top:4px;width:44%;text-align:center}</style></head><body>' +
+      '<h1>EkVeera Placement &amp; Services</h1><h2>Staff आचार नियम (Staff Conduct Rule) — Udyam: ' + esc((window.EKV_BIZ && window.EKV_BIZ.UDYAM) || '') + '</h2>' +
+      '<p>Staff का नाम: <b>' + esc(p.name || p.Name || '') + '</b> &nbsp; Staff ID: <b>' + esc(s0.staffId || '') + '</b> &nbsp; तारीख़: <b>' + ds + '</b></p>' +
+      '<p>मैं नीचे लिखे सभी नियमों को पढ़कर, समझकर और अपनी मर्ज़ी से मानता/मानती हूँ:</p><ol>' + CONDUCT.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ol>' +
+      '<div class="sg"><div>Staff के हस्ताक्षर</div><div>EkVeera Office (Proprietor)</div></div><script>setTimeout(function(){window.print();},400)<\/script></body></html>');
+    w.document.close();
+  };
   window.sfEditReq = async function () {
     var why = prompt(__t('क्या बदलना या जोड़ना है? (जैसे: PAN Card अभी जोड़ना है)'));
     if (!why || why.trim().length < 5) return;
@@ -177,6 +206,7 @@
     else if (curTab === 'hub') renderHub();
     else if (curTab === 'money') renderMoney();
     else if (curTab === 'ads') { b.innerHTML = ''; if (window.ekvAds) window.ekvAds.renderPosting(b, function () { return authP({}); }); else b.innerHTML = '<p>Advertisement अभी नहीं खुल सका — पेज दोबारा खोलें।</p>'; }
+    else if (curTab === 'conduct') renderConduct();
     else if (curTab === 'pw') {
       b.innerHTML = '<h3>' + esc(__t('🔑 Password बदलें')) + '</h3><div class="sf-grid2"><label class="sf-l">' + esc(__t('पुराना Password')) + '<input id="pwOld" class="ap-i" type="password" autocomplete="current-password"></label><label class="sf-l">' + esc(__t('नया Password')) + '<input id="pwNew" class="ap-i" type="password" autocomplete="new-password"></label><label class="sf-l">' + esc(__t('नया Password दोबारा')) + '<input id="pwNew2" class="ap-i" type="password" autocomplete="new-password"></label></div><button type="button" class="btn btn-primary" onclick="sfChangePw()">' + esc(__t('Password बदलें')) + '</button><p id="pwMsg" class="sf-msg"></p><p class="sf-small">' + esc(__t('Password बदलते ही पुराने सभी Login बंद हो जाते हैं।')) + '</p>';
     } else if (curTab === 'cmp') {

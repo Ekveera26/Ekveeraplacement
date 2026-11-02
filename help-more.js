@@ -293,7 +293,7 @@
         B('अपने Bank / UPI App में **Payment ID** (Razorpay / UTR / Transaction ID) का Screenshot लें।', 'Take a screenshot of the **Payment ID** (Razorpay / UTR / Transaction ID) from your Bank / UPI app.'),
         B('**7 दिन के अंदर** वह Payment ID + अपना नाम और Mobile **WhatsApp (9766284669)** पर भेजें। जाँच के बाद ID दी जाएगी या पैसा वापस होगा।', 'Within **7 days** send that Payment ID + your name and Mobile on **WhatsApp (9766284669)**. After checking we will issue the ID or refund the money.')
       ],
-      tips: [B('जानकारी दे दिए जाने के बाद फ़ीस वापस नहीं होती; पर एक ही Payment दो बार कटे या ID न मिले तो वापसी होती है।', 'Fees are not refunded after information is given; but a double deduction or a missing ID is refunded.')],
+      tips: [B('सेवा न मिले तो पैसा वापस; पर Company का Address / जानकारी मिल जाने के बाद फ़ीस वापस नहीं होती (हम Address देने का शुल्क लेते हैं, नौकरी का नहीं)।', 'If you do not get the service you are refunded; once the company address / information is given the fee is not refunded (we charge for the address, not for a job).')],
       go: [{ label: B('💬 WhatsApp पर बताएँ', '💬 Tell us on WhatsApp'), wa: B('Namaste EkVeera, meri Payment kat gayi par ID / kaam nahi hua. Payment ID: ', 'Namaste EkVeera, my payment was deducted but I did not get the ID / work done. Payment ID: ') }]
     },
     {

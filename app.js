@@ -771,11 +771,23 @@ window.addEventListener('appinstalled', () => {
 });
 
 // ---- Share App button ----
+// 🔒 v31: Share ka Link SIRF "saaf" hota hai — kabhi ?admin=1, ?staffview=, ?confirm=, ?vacancy=&t= (secret Token) jaisa kuch nahi jata.
+//         Sirf  Home/Page ka naam  +  ?staff=<us Staff ka apna Code>.  Staff Login hai to uska APNA Code, warna jis Staff ke Link se aaye wahi.
+function ekvSafeShareUrl() {
+  const PAGES = ['index.html', 'training.html', 'placement.html', 'for-rent.html', 'home-service.html', 'tution.html', 'register.html', 'help.html', 'contractor.html'];
+  let base = location.origin + location.pathname.replace(/[^\/]*$/, ''), file = (location.pathname.split('/').pop() || 'index.html');
+  if (PAGES.indexOf(file) < 0) file = 'index.html';
+  let code = '';
+  try { if (typeof ekveeraStaffName === 'string' && ekveeraStaffName) code = ekveeraStaffName; } catch (e) {}
+  if (!code) { try { code = (window.ekvStaffRef ? window.ekvStaffRef() : '') || ''; } catch (e2) {} }
+  code = String(code || '').trim();
+  return base + file + (/^[A-Za-z0-9 _.\-]{1,40}$/.test(code) ? '?staff=' + encodeURIComponent(code) : '');
+}
 function shareEkVeeraApp(){
   const shareData = {
     title: 'EkVeera Training Center',
     text: __t('EkVeera Training Center — Call Center & Customer Service Training. Admission Form, ID Card, Certificate सब यहीं से करें:'),
-    url: window.location.href.split('#')[0]
+    url: ekvSafeShareUrl()
   };
   if (navigator.share){
     navigator.share(shareData).catch(() => {});

@@ -10,7 +10,7 @@
    3) Installed App me URL ka ?staff=... kabhi Staff nahi badalta. */
 (function () {
   'use strict';
-  var KR = 'ekveera_staff_ref', KL = 'ekveera_staff_locked', OK = /^[A-Za-z0-9 _.\-]{1,40}$/;
+  var KR = 'ekveera_staff_ref', KL = 'ekveera_staff_locked', KA = 'ekveera_staff_ref_at', OK = /^[A-Za-z0-9 _.\-]{1,40}$/;
   function gs(k) { try { return (localStorage.getItem(k) || '').trim(); } catch (e) { return ''; } }
   function ss(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function standalone() {
@@ -25,7 +25,11 @@
   if (inApp) {
     if (!gs(KL)) { var first = q || gs(KR); if (first && OK.test(first)) ss(KL, first); }   // App ka pehla Staff pakka
   } else if (q) {
-    ss(KR, q);                                                                              // Browser: naya link = naya Staff
+    // 🔒 v31: PEHLA Staff pakka (first link wins). Doosre Staff ka Link kholne par Form / Commission NAHI badalta.
+    //         Sirf tab badlega jab purana Staff 30 din se purana ho (tab tak Candidate ne kisi aur ka Link shayad bhula diya).
+    var cur = gs(KR), at = parseInt(gs(KA), 10) || 0, same = cur && cur.toLowerCase().replace(/[^a-z0-9]/g, '') === q.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!cur || !OK.test(cur) || (!same && at && Date.now() - at > 30 * 86400000)) { ss(KR, q); ss(KA, String(Date.now())); }
+    else if (!at) ss(KA, String(Date.now()));
   }
 
   window.ekvIsApp = inApp;

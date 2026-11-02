@@ -15,22 +15,23 @@
     }).join('') + '<p style="color:#596579;font-size:12.5px;margin:10px 0 0;">' + esc(tail) + '</p>';
   }
   async function run(box) {
-    const kind = box.getAttribute('data-myids'), out = box.querySelector('.mi-out'), v = (box.querySelector('.mi-in').value || '').trim(), btn = box.querySelector('.mi-btn');
+    const kind = box.getAttribute('data-myids'), out = box.querySelector('.mi-out'), v = (box.querySelector('.mi-in').value || '').trim(), nm = ((box.querySelector('.mi-name') || {}).value || '').trim(), btn = box.querySelector('.mi-btn');
     if (!v) return note(out, kind === 'home' ? T('कृपया अपना मोबाइल नंबर डालें।') : T('कृपया अपना Mobile Number या Email डालें।'), '#C0392B');
+    if (nm.split(/\s+/).filter(Boolean).length < 2) return note(out, T('कृपया अपना पूरा नाम और Mobile Number या Email दोनों डालें।'), '#C0392B');
     btn.disabled = true; note(out, T('ढूंढा जा रहा है...'), '#596579');
     try {
       if (kind === 'tution') {
-        const d = await vcSecurePost({ action: 'tutmyids', contact: v });
+        const d = await vcSecurePost({ action: 'tutmyids', name: nm, contact: v });
         if (d.status !== 'ok') note(out, d.message || MSG.err, '#C0392B');
         else if (!d.results.length) note(out, T('इस Mobile/Email से Tution की कोई ID नहीं मिली। वही Mobile/Email डालें जो Register करते समय दिया था।'), '#C0392B');
         else rows(out, d.results, T('इन ID को संभालकर रखें (Screenshot ले लें)।'));
       } else if (kind === 'rent') {
-        const d = await vcSecurePost({ action: 'rentmyids', contact: v });
+        const d = await vcSecurePost({ action: 'rentmyids', name: nm, contact: v });
         if (d.status !== 'ok') note(out, d.message || MSG.err, '#C0392B');
         else if (!d.results.length) note(out, T('इस Mobile/Email से For Rent की कोई ID नहीं मिली। वही Mobile/Email डालें जो Register करते समय दिया था।'), '#C0392B');
         else rows(out, d.results, T('इन ID को संभालकर रखें (Screenshot ले लें)।'));
       } else {
-        const d = await vcSecurePost({ action: 'hsmyids', contact: v });
+        const d = await vcSecurePost({ action: 'hsmyids', name: nm, contact: v });
         if (d.status !== 'ok') note(out, d.message || MSG.err, '#C0392B');
         else if (!d.results.length) note(out, T('इस मोबाइल से Home Service की कोई ID नहीं मिली। वही मोबाइल डालें जो रजिस्ट्रेशन या Order के समय दिया था।'), '#C0392B');
         else rows(out, d.results, T('इन ID को संभालकर रखें (Screenshot ले लें)।'));

@@ -344,7 +344,7 @@
           <button class="btn btn-primary" onclick="sendUnlockRequest()">Request भेजें</button>
         </div>
         <div class="fee-note">
-          <p>💳 <strong>Fee not refundable at any reason.</strong> (किसी भी कारण से Fee वापस नहीं की जाएगी।)</p>
+          <p>💳 <strong>Refund:</strong> अगर आपको आपकी सेवा नहीं मिलती है तो आपका पैसा वापस किया जाएगा। लेकिन जिस Candidate को Company का Address मिल गया और Company उसे Job पर नहीं रखती, उसका पैसा वापस नहीं होगा — क्योंकि हम सिर्फ़ Company का Address देने का शुल्क लेते हैं, नौकरी दिलाने का नहीं।</p>
           <p>✅ आपने जिसकी जानकारी लेनी चाही थी या माँगी थी, आपको वही जानकारी Company या Candidate की दी गई है।</p>
         </div>
         <div class="tc-warn">
@@ -423,6 +423,20 @@
     </div>
 
     <div id="adminControlsBox" style="display:none;background:#fff;border-radius:12px;padding:26px;margin-top:16px;">
+      <details style="margin-bottom:16px;border:1px solid #f1b0a8;border-radius:10px;padding:10px 14px;background:#fff6f5;"><summary style="cursor:pointer;font-weight:800;color:#a8281c;">🚨 Data Breach (डेटा लीक / चोरी) — 1 पन्ने की प्रक्रिया</summary>
+        <div id="breachDoc" style="font-size:14px;line-height:1.7;margin-top:10px;">
+          <p><b>Data Breach क्या है:</b> किसी का Mobile, पता, Document, Password या Payment जानकारी बिना अनुमति किसी तीसरे के पास पहुँच जाए / खो जाए / बदल जाए (जैसे Admin Password लीक, Staff का ग़लत इस्तेमाल, Sheet ग़लती से Public, फ़ोन चोरी, Hack)।</p>
+          <ol>
+            <li><b>पहले 1 घंटे में रोकें:</b> Admin Password बदलें (Admin Panel), Apps Script के <i>Script Properties</i> में Token Secret बदलें (सब Login बाहर हो जाएँगे), संदिग्ध Staff की ID बंद करें, Google Sheet का Sharing (Anyone with link) बंद करें।</li>
+            <li><b>जाँचें:</b> Admin → Security Scan चलाएँ; Google Account → Security → Recent activity और Apps Script → Executions देखें। लिखें: क्या लीक हुआ, कितने लोगों का, कब से, कैसे।</li>
+            <li><b>सुधारें:</b> जिस खामी से लीक हुआ उसे बंद करें; Google Account का Password बदलें और 2-Step Verification चालू रखें; नया Code Deploy करें।</li>
+            <li><b>प्रभावित लोगों को बताएँ (48 घंटे में):</b> WhatsApp / App Inbox से सच्चा, सीधा संदेश: क्या जानकारी लीक हुई, उन्हें क्या सावधानी रखनी है (OTP / Password किसी को न दें), संपर्क: 9766284669।</li>
+            <li><b>सरकारी सूचना:</b> गंभीर मामले में साइबर पुलिस (Helpline <b>1930</b>, cybercrime.gov.in) में शिकायत करें; क़ानून लागू होने पर Data Protection Board को सूचना दें (सलाहकार / वकील से पूछ लें)।</li>
+            <li><b>रिकॉर्ड रखें:</b> तारीख़, क्या हुआ, किसे बताया, क्या सुधार किया — नीचे Print कर के फ़ाइल में रखें। फिर वही ग़लती न हो, इसके लिए Staff को दोबारा नियम समझाएँ।</li>
+          </ol>
+          <button type="button" class="btn" style="border:1px solid #a8281c;color:#a8281c;" onclick="ekvPrintBreach()">🖨️ Print करें</button>
+        </div>
+      </details>
       <div id="adminPendingBanner" style="display:none;background:#E8A33D;color:#152241;padding:10px 14px;border-radius:8px;font-weight:700;margin-bottom:16px;text-align:center;"></div>
       <div id="adminCfBanner" style="display:none;background:#1F9D95;color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;margin-bottom:16px;text-align:center;"></div>
 
@@ -757,7 +771,7 @@
     <h3 id="cdTitle" style="margin:0 0 4px;color:var(--navy);">🏢 Company की Details लें</h3>
     <div id="cdForm">
       <p id="cdSummary" style="margin:0 0 10px;font-size:14px;font-weight:700;color:#1f3b63;"></p>
-      <div class="ap-privacy">💳 <strong>Fees:</strong> ₹29 प्रति Company। इसमें Company का <strong>पता + Company Benefits Form</strong> (अगर Company ने भरा है) मिलेगा। <strong>Job Inquiry और Apply Free है।</strong><br>⚠️ Fee किसी भी कारण से वापस नहीं होगी (Fee not refundable at any reason)। जो जानकारी आपने माँगी है, वही Company की दी जाएगी।</div>
+      <div class="ap-privacy">💳 <strong>Fees:</strong> ₹29 प्रति Company। इसमें Company का <strong>पता + Company Benefits Form</strong> (अगर Company ने भरा है) मिलेगा। <strong>Job Inquiry और Apply Free है।</strong><br>⚠️ अगर आपको आपकी सेवा नहीं मिलती है तो आपका पैसा वापस किया जाएगा। लेकिन जिस Candidate को Company का Address मिल गया और Company उसे Job पर नहीं रखती, उसका पैसा वापस नहीं होगा — क्योंकि हम सिर्फ़ Company का Address देने का शुल्क लेते हैं, नौकरी दिलाने का नहीं। जो जानकारी आपने माँगी है, वही Company की दी जाएगी।</div>
       <label class="ap-l" for="cdId">आपकी Candidate ID</label>
       <input id="cdId" class="ap-i" type="text" placeholder="जैसे CAND001 या TRA-CAND001" autocomplete="off" autocapitalize="characters">
       <label class="ap-l" for="cdMob">फॉर्म में दिया Mobile Number</label>
@@ -816,7 +830,9 @@
 <script src="receipt.js"></script>
 <script src="staff-pay.js"></script>
 <script src="staff-team.js"></script>
+<script src="staff-outreach.js"></script>
 <script src="staff-link-admin.js"></script>
 <script src="site-controls.js" defer></script>
+<script>function ekvPrintBreach(){var w=window.open("","_blank");if(!w)return;var h=document.getElementById("breachDoc").cloneNode(true);var b=h.querySelector("button");if(b)b.remove();w.document.write("<html><head><meta charset=utf-8><title>Data Breach Process</title></head><body style=\"font-family:Arial;margin:28px;line-height:1.6\"><h2>EkVeera — Data Breach Process</h2>"+h.innerHTML+"<p>तारीख़: ________ &nbsp; घटना: ______________________ &nbsp; हस्ताक्षर: ________</p></body></html>");w.document.close();setTimeout(function(){w.print();},400);}</script>
 </body>
 </html>
