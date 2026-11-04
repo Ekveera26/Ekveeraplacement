@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EkVeera — Test Mode</title>
+<script src="test-mode.js"></script>
+<style>
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f4f6fa;margin:0;color:#14213d}
+.w{max-width:760px;margin:0 auto;padding:16px}
+.c{background:#fff;border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+h1{font-size:22px;margin:8px 0}h2{font-size:17px;margin:0 0 8px}
+input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #cfd8e1;border-radius:8px;font-size:16px;margin:6px 0}
+button,.b{display:inline-block;background:#0B1F3A;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;margin:4px 4px 4px 0}
+.b.g{background:#1b7f3b}.b.r{background:#c0392b}.b.w{background:#fff;color:#0B1F3A;border:1px solid #cfd8e1}
+.ok{color:#1b7f3b;font-weight:600}.bad{color:#c0392b;font-weight:600}.mut{color:#5b6b7f;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px solid #e5e9f0;padding:6px;text-align:left;vertical-align:top}th{background:#f0f3f8}
+label.t{display:flex;gap:8px;align-items:flex-start;padding:5px 0;font-size:15px}label.t input{width:auto;margin-top:4px}
+.grid a{display:block}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>🧪 EkVeera Test Mode</h1>
+<p class="mut">Yahan website ko asli jaisa chalakar dekhein — <b>entry ASLI Sheet me nahi jaati</b> (alag "TEST Database" me jaati hai) aur Email/WhatsApp/Push kisi ko nahi jaate. Ye sirf aapke is browser me chalu hota hai.</p>
+
+<div class="c" id="offBox">
+  <h2>1) Test Mode chalu karein</h2>
+  <p class="mut">Apps Script ke Script Properties me jo <b>TEST_MODE_KEY</b> rakha hai wahi yahan daalein.</p>
+  <input id="key" type="password" placeholder="Test Key" autocomplete="off">
+  <button type="button" id="on" class="g b">▶ Test Mode ON</button>
+  <div id="msg" class="mut"></div>
+</div>
+
+<div id="onBox" style="display:none">
+  <div class="c"><h2>✅ Test Mode ON hai</h2>
+    <div id="info" class="mut">Jaanch ho rahi hai…</div>
+    <button type="button" id="off" class="r b">⏹ Test Mode band karein</button>
+    <a class="b w" id="sheetLink" href="#" target="_blank" rel="noopener" style="display:none">📄 Test Database Sheet kholein</a>
+  </div>
+
+  <div class="c"><h2>2) Ab website ke har option ko try karein</h2>
+    <div class="grid">
+      <a class="b w" href="index.html">🏠 Home</a>
+      <a class="b w" href="placement.html">💼 Placement (Candidate / Company form, Search)</a>
+      <a class="b w" href="training.html">🎓 Training (Form + ₹99 Payment)</a>
+      <a class="b w" href="for-rent.html">🏍️ For Rent</a>
+      <a class="b w" href="tution.html">📚 Tution</a>
+      <a class="b w" href="home-service.html">🛠️ Home Service</a>
+      <a class="b w" href="register.html">📝 Register (App Login)</a>
+      <a class="b w" href="refund.html">💸 Refund Request</a>
+      <a class="b w" href="placement.html?admin=1">🔐 Admin Panel</a>
+    </div>
+    <p class="mut">💳 Payment test: Link nakli banta hai. "Payment ho gayi" dikhane ke liye Payment ID me <b>pay_TESTabc12345</b> likhein.</p>
+  </div>
+
+  <div class="c"><h2>3) Test Checklist (apne aap yaad rahegi)</h2><div id="ck"></div></div>
+
+  <div class="c"><h2>4) 📬 Jo Email / WhatsApp / Push jaane the (par gaye nahi)</h2>
+    <button type="button" id="ref" class="b w">🔄 Naya dikhayein</button>
+    <div id="ob" class="mut">—</div>
+  </div>
+
+  <div class="c"><h2>5) 🧹 Test data saaf karein</h2>
+    <p class="mut">Sirf TEST Database saaf hoti hai. Asli Sheet ko kuch nahi hota.</p>
+    <button type="button" id="rs" class="r b">🧹 Test data saaf karein</button><span id="rsm" class="mut"></span>
+  </div>
+</div>
+</div>
+<script>
+(function(){
+var URL_='https://script.google.com/macros/s/AKfycbycx5J5DMOVq3hpfbVPvyD6yDHXX2C2TEA9HdptFEEmv73g5VeiJ9Ov608hnK15AlpzHA/exec';
+var K='ekv_test_key',$=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+async function call(a,key){var b=new URLSearchParams({action:a,testmode:key});var r=await fetch(URL_,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:b});return r.json()}
+function key(){try{return localStorage.getItem(K)||''}catch(e){return ''}}
+var LIST=['Candidate Registration (Placement) + Resume','Company Registration + Benefits Form','Training Registration + ₹99 Payment Link','Payment ho gayi dikhana (pay_TEST...)','Candidate/Company Search','Job par Apply','For Rent: Register + Item','Tution / Home Service Register','Refund Request + Status','Admin Login (+2FA) + Approve / Refund / Company Verify','Staff Login'];
+function drawCk(){var st={};try{st=JSON.parse(localStorage.getItem('ekv_test_ck')||'{}')}catch(e){}
+ $('ck').innerHTML=LIST.map(function(t,i){return '<label class="t"><input type="checkbox" data-i="'+i+'"'+(st[i]?' checked':'')+'><span>'+esc(t)+'</span></label>'}).join('');
+ $('ck').onchange=function(ev){var i=ev.target.getAttribute('data-i');st[i]=ev.target.checked?1:0;try{localStorage.setItem('ekv_test_ck',JSON.stringify(st))}catch(e){}}}
+async function show(){
+ var k=key();$('offBox').style.display=k?'none':'';$('onBox').style.display=k?'':'none';if(!k)return;
+ try{var r=await call('testping',k);
+  if(r.status!=='ok'){$('info').innerHTML='<span class="bad">'+esc(r.message||'Test Key galat')+'</span>';return}
+  $('info').innerHTML='Test Database taiyar. Outbox me <b>'+r.outbox+'</b> message. '+(r.rzpTestKeys?'Razorpay TEST keys chalu.':'Razorpay: nakli Link.')+(r.mailTo?' Email aapko ([TEST]) aate hain.':'');
+  var a=$('sheetLink');a.href=r.sheetUrl;a.style.display='inline-block';drawCk();outbox()}
+ catch(e){$('info').innerHTML='<span class="bad">Server se jawab nahi aaya</span>'}}
+async function outbox(){var k=key();if(!k)return;try{var r=await call('testoutbox',k);var it=r.items||[];
+ $('ob').innerHTML=it.length?'<table><tr><th>Time</th><th>Kaun</th><th>Kisko</th><th>Message</th></tr>'+it.map(function(x){return '<tr><td>'+esc(x.t)+'</td><td>'+esc(x.ch)+'</td><td>'+esc(x.to)+'</td><td><b>'+esc(x.sub)+'</b> '+esc(x.msg)+'<br><i>'+esc(x.note)+'</i></td></tr>'}).join('')+'</table>':'Abhi kuch nahi.'}catch(e){}}
+$('on').onclick=async function(){var k=$('key').value.trim();if(!k){$('msg').textContent='Key daalein';return}
+ $('msg').textContent='Jaanch…';try{var r=await call('testping',k);if(r.status==='ok'){localStorage.setItem(K,k);location.reload()}else{$('msg').innerHTML='<span class="bad">'+esc(r.message||'Key galat')+'</span>'}}catch(e){$('msg').innerHTML='<span class="bad">Server se jawab nahi aaya</span>'}};
+$('off').onclick=function(){try{localStorage.removeItem(K)}catch(e){};location.reload()};
+$('ref').onclick=outbox;
+$('rs').onclick=async function(){if(!confirm('TEST Database ka saara data mitega (asli Sheet safe). Aage badhein?'))return;$('rsm').textContent=' ⏳';try{var r=await call('testreset',key());$('rsm').textContent=' '+(r.message||r.status);outbox()}catch(e){$('rsm').textContent=' Server se jawab nahi aaya'}};
+show();
+})();
+</script>
+</body>
+</html>

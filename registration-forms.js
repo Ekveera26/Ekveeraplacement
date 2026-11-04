@@ -127,7 +127,7 @@
   }
   function todayIso() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
 
-  // 🚪 Cloudflare Front Door ka address (Sunday ko Worker banne ke baad yahan paste karein, jaise 'https://ekveera-api.NAAM.workers.dev'). Khali = purana raasta.
+  // 🚪 Cloudflare Front Door ka address (version.js me likha jaata hai). Khali = purana raasta.
   var INTAKE_URL = String(window.EKV_INTAKE_URL || '').replace(/\/+$/, '');
   var cur = null, openedAt = 0, sending = false, saveT = null, editCtx = null, submitKey = '';
   function newKey() { try { return (crypto.randomUUID ? crypto.randomUUID() : '') || ''; } catch (e) { return ''; } }

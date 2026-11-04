@@ -1,6 +1,6 @@
 /* EkVeera — App ka Version (har naye Update par sirf yahi ek Number badlein, jaise 'v19') */
-window.EKV_VERSION = 'v36';
-// 🚪 Cloudflare Front Door (Sunday): Worker ka address yahan likhein, jaise 'https://ekveera-api.NAAM.workers.dev' (aakhir me / nahi). Khali = abhi ka tareeka (Apps Script).
+window.EKV_VERSION = 'v37';
+// 🚪 Cloudflare Front Door (Sunday): Worker ka poora address (https:// se shuru, aakhir me / nahi) yahan likhein. Khali = abhi ka tareeka (Apps Script).
 window.EKV_INTAKE_URL = '';
 (function () {
   function paint() {
