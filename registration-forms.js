@@ -127,6 +127,8 @@
   }
   function todayIso() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
 
+  // 🚪 Cloudflare Front Door ka address (Sunday ko Worker banne ke baad yahan paste karein, jaise 'https://ekveera-api.NAAM.workers.dev'). Khali = purana raasta.
+  var INTAKE_URL = String(window.EKV_INTAKE_URL || '').replace(/\/+$/, '');
   var cur = null, openedAt = 0, sending = false, saveT = null, editCtx = null, submitKey = '';
   function newKey() { try { return (crypto.randomUUID ? crypto.randomUUID() : '') || ''; } catch (e) { return ''; } }
 
@@ -329,17 +331,46 @@
     var ctrl = new AbortController(), to = setTimeout(function () { ctrl.abort(); }, 150000);
     try {
       if (file) params.fileBase64 = await fileToB64(file);
-      var res = await fetch(SEARCH_WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(params), signal: ctrl.signal });
-      var data = await res.json();
+      var data = null;
+      if (INTAKE_URL && !editCtx) {                       // 🚪 Front Door (Cloudflare) — Bheed me bhi turant; na chale to purana raasta
+        try {
+          var ir = await fetch(INTAKE_URL + '/intake', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(params), signal: ctrl.signal });
+          if (ir.status < 500) { data = await ir.json(); if (data && data.status === 'queued') data.viaD1 = true; }
+        } catch (e0) { data = null; }
+      }
+      if (!data) {
+        var res = await fetch(SEARCH_WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(params), signal: ctrl.signal });
+        data = await res.json();
+      }
       if (data && data.status === 'ok' && editCtx) { var nm0 = cur; editCtx = null; showEdited(nm0, data); return; }
       if (data && data.status === 'ok') { try { localStorage.removeItem(draftKey(cur)); } catch (e) {} showSuccess(cur, data, params); return; }
       if (data && data.status === 'duplicate') { showDuplicate(cur, data, params); return; }
+      if (data && data.status === 'queued' && data.ticket) { waitTicket(cur, data, params); return; }
       setMsg((data && data.message) || __t('कुछ गड़बड़ हो गई — दोबारा कोशिश करें।'), false);
     } catch (err) {
       setMsg(err && err.name === 'AbortError'
         ? __t('जवाब आने में ज़्यादा समय लग रहा है। कृपया दोबारा फॉर्म न भरें — 2 मिनट बाद "अपनी ID यहीं देखें" बॉक्स में अपना Mobile/Email डालकर ID देखें।')
         : __t('Internet चेक करके दोबारा कोशिश करें।'), false);
     } finally { clearTimeout(to); sending = false; btn.disabled = false; btn.textContent = old; }
+  }
+
+  // 🛟 Bheed me Form Queue me surakshit hota hai — Ticket se ID aane tak ruko (har 8 second jaanch, 5 minute tak)
+  async function waitTicket(name, q, params) {
+    var tries = 0, ticket = q.ticket;
+    setMsg(__t('✅ आपका फॉर्म सुरक्षित मिल गया है। अभी भीड़ ज़्यादा है, इसलिए ID बनने में थोड़ा समय लग रहा है — कृपया यह पेज बंद न करें और दोबारा फॉर्म न भरें।'), true);
+    try { localStorage.setItem('ekv_ticket_' + name, ticket); } catch (e) {}
+    while (tries++ < 40) {
+      await new Promise(function (r) { setTimeout(r, 8000); });
+      try {
+        var res = q.viaD1 && INTAKE_URL ? await fetch(INTAKE_URL + '/intake/status?ticket=' + encodeURIComponent(ticket))
+          : await fetch(SEARCH_WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ action: 'regticket', ticket: ticket }) });
+        var d = await res.json();
+        if (d && d.status === 'ok') { try { localStorage.removeItem(draftKey(name)); localStorage.removeItem('ekv_ticket_' + name); } catch (e) {} showSuccess(name, d, params); return; }
+        if (d && d.status === 'duplicate') { showDuplicate(name, d, params); return; }
+        if (d && d.status === 'error') { setMsg(d.message || __t('कुछ गड़बड़ हो गई — दोबारा कोशिश करें।'), false); return; }
+      } catch (e) { /* Internet atka — agli baar phir */ }
+    }
+    setMsg(__t('आपका फॉर्म सुरक्षित है। ID आने में देर हो रही है — कृपया दोबारा फॉर्म न भरें; ID आपके Email/WhatsApp पर पहुँच जाएगी, या 10 मिनट बाद "अपनी ID यहीं देखें" से देखें।'), true);
   }
 
   function showSuccess(name, data, params) {

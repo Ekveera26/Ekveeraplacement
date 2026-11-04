@@ -7,12 +7,12 @@
 //
 //  ⚠️ HAR NAYE DEPLOY par neeche ki VERSION line badal dein (jaise 2026-10-15-v1). Nahi bhi badli to bhi naya Content
 //     milne par App apne-aap pata laga leta hai aur Update ka sawaal puchta hai — par VERSION badalna sabse pakka hai.
-const VERSION = '2026-11-02-v33';
+const VERSION = '2026-11-04-v36';
 const CACHE_NAME = 'ekveera-cache-' + VERSION;
 
 const PRECACHE_URLS = [
   './', './index.html', './training.html', './placement.html', './for-rent.html', './home-service.html', './tution.html', './register.html', './contractor.html', './help.html', './resume-builder.html', './staff-profile.html',
-  './styles.css', './app.js', './login-gate.js', './owner-login.js', './ai-help.js', './ads.js', './i18n.js', './i18n-en.js', './i18n-gu.js', './i18n-mr.js', './staff-ref.js', './biz-info.js', './ekv-files.js', './ekv-scan.js',
+  './styles.css', './app.js', './login-gate.js', './owner-login.js', './ai-help.js', './ads.js', './i18n.js', './i18n-en.js', './i18n-gu.js', './i18n-mr.js', './staff-ref.js', './biz-info.js', './refund.html', './refund.js', './admin-v35.js', './ekv-files.js', './ekv-scan.js',
   './company-form.js', './registration-forms.js', './help-center.js', './help-more.js', './help-note.js', './trust-notes.js', './privacy.html', './terms.html', './delete-data.html', './staff-link-admin.js', './staff-profile.js', './staff-profile-admin.js',
   './reviews.js', './company-details.js', './apply-job.js', './payment-log.js', './receipt.js', './staff-pay.js', './staff-outreach.js', './optout.html',
   './training-attendance.js', './training-address.js', './my-ids.js', './party-admin.js', './rent-admin.js', './admin-extra.js', './address-admin.js', './for-rent.js', './home-service.js', './tution.js', './mp-loc.js', './site-controls.js', './staff-team.js', './staff-payout.js', './swipe-nav.js', './version.js', './register.js', './contractor.js', './push.js', './resume-builder.js', './docx.min.js',
@@ -91,7 +91,7 @@ self.addEventListener('fetch', (event) => {
 
   // Google Apps Script / Forms / Maps jaisi live calls kabhi Cache nahi hoti (Form, Search, Payment hamesha Internet se)
   if (url.hostname === 'script.google.com' || url.hostname === 'script.googleusercontent.com' || url.hostname === 'docs.google.com' ||
-      url.hostname.indexOf('maps.google') > -1 || url.hostname === 'wa.me' || url.hostname === 'api.whatsapp.com') return;
+      url.hostname.indexOf('maps.google') > -1 || /\.workers\.dev$/.test(url.hostname) || url.hostname === 'wa.me' || url.hostname === 'api.whatsapp.com') return;
 
   // Bahar ki library / fonts: Cache pehle, peeche se taaza kar do
   if (EXTERNAL_HOSTS.indexOf(url.hostname) > -1) {

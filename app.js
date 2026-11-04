@@ -132,9 +132,24 @@
 
   // Certificate Generator: Password browser ki file me nahi rakha jaata (koi bhi dekh leta). Asli suraksha Server par hai —
   // Reg. No. Training Database me ho + Training complete ho + Certificate pehle jaari na hua ho, tabhi Certificate banta hai.
-  function checkCertPassword(){
-    document.getElementById('certLockScreen').style.display = 'none';
-    document.getElementById('certGeneratorArea').style.display = 'block';
+  var certAdminPw = '';
+  async function checkCertPassword(){
+    const inp = document.getElementById('certPasswordInput'), er = document.getElementById('certPasswordError'), pw = (inp.value || '').trim();
+    er.style.display = 'none';
+    if (!pw){ er.textContent = '❌ Password डालें'; er.style.display = 'block'; return; }
+    try {
+      const body = new URLSearchParams({ action: 'verifyadmin', password: pw });
+      let r = await (await fetch(CERT_VERIFY_WEB_APP_URL, { method: 'POST', body: body })).json();
+      let tok = '';
+      if (r && r.status === 'otp'){   // 🔐 2FA: Email par aaya 6-ank ka Code
+        const code = (window.prompt('📧 ' + (r.message || '6-अंक का Code Email पर भेजा गया है।')) || '').replace(/\D/g, '');
+        if (code.length !== 6){ er.textContent = '❌ 6 अंक का Code डालें'; er.style.display = 'block'; return; }
+        r = await (await fetch(CERT_VERIFY_WEB_APP_URL, { method: 'POST', body: new URLSearchParams({ action: 'adminotp', password: pw, code: code }) })).json();
+        tok = (r && r.token) || '';
+      }
+      if (r && r.status === 'ok'){ certAdminPw = tok ? (pw + EKV_ADM_SEP + tok) : pw; inp.value = ''; document.getElementById('certLockScreen').style.display = 'none'; document.getElementById('certGeneratorArea').style.display = 'block'; return; }
+      er.textContent = '❌ ' + ((r && r.message) || 'गलत Password, दोबारा कोशिश करें'); er.style.display = 'block';
+    } catch (e) { er.textContent = '⚠️ अभी जाँच नहीं हो पाई — इंटरनेट देखकर दोबारा कोशिश करें।'; er.style.display = 'block'; }
   }
 
   // Dynamic Certificate generator using official transparent logo
@@ -144,8 +159,7 @@
   const CERT_VERIFY_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbycx5J5DMOVq3hpfbVPvyD6yDHXX2C2TEA9HdptFEEmv73g5VeiJ9Ov608hnK15AlpzHA/exec';
 
   async function checkTrainingCompleted(regNo){
-    const url = CERT_VERIFY_WEB_APP_URL + '?action=cert&code=' + encodeURIComponent(regNo) + '&_=' + Date.now();
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch(CERT_VERIFY_WEB_APP_URL, { method: 'POST', cache: 'no-store', body: new URLSearchParams({ action: 'cert', code: regNo, password: certAdminPw }) });   // 🔐 Admin Password Server par jaanchta hai
     if (!res.ok) throw new Error('Verify request failed');
     return await res.json(); // { status: 'ok' | 'not_completed' | 'not_found' | 'no_training_record' | 'error', ... }
   }
@@ -1335,7 +1349,9 @@ function embedGoogleForm(anchorId, evt) {
 
 // ---------------- ⚙ Admin Unlock ----------------
 // ---------------- 🔐 Admin Panel (सिर्फ ?admin=1 वाले Link से दिखता है) ----------------
-var ekveeraAdminPassword = '';   // var (let nahi) taaki window.ekveeraAdminPassword bhi mile — Party / Rent / naye Admin hisse yahi padhte hain
+var ekveeraAdminPassword = '';
+var ekveeraAdminRole = '';   // v35: super / accounts / hr / training / support
+var EKV_ADM_SEP = '\u00a7\u00a7';   // Password + §§ + 2FA-Token (Server dono jaanchta hai)   // var (let nahi) taaki window.ekveeraAdminPassword bhi mile — Party / Rent / naye Admin hisse yahi padhte hain
 
 (function () {
   const params = new URLSearchParams(window.location.search);
@@ -1359,15 +1375,13 @@ function adminLogin() {
   vcSecurePost({ action: 'verifyadmin', password: password })
     .then(data => {
       if (data.status === 'ok') {
-        ekveeraAdminPassword = password;
-        document.getElementById('adminLoginBox').style.display = 'none';
-        document.getElementById('adminControlsBox').style.display = 'block';
-        try { adminRenderSecurity(true); } catch (e) {}
-        try { adminEnterFull(); } catch (e) {}
+        adminEnterPanel(password, '', data);
+      } else if (data.status === 'otp') {
+        adminAskOtp(password, data);
       } else {
         msgEl.style.color = 'red';
         const lockMsg = /लॉक|locked/i.test(data.message || '');
-        msgEl.textContent = (data.message || __t('गलत Password।')) + (lockMsg ? '' : __t(' — यहां वही Password चलता है जो Apps Script के "ADMIN_UNLOCK_PASSWORD" में सेट है (Certificate वाला Password अलग है)। पक्का करने के लिए Apps Script में testPassword चलाएं।'));
+        msgEl.textContent = (data.message || __t('गलत Password।')) + (lockMsg ? '' : __t(' — यहां वही Password चलता है जो Apps Script के Script Properties में सेट है (Super Admin: ADMIN_UNLOCK_PASSWORD)।'));
         const pw = document.getElementById('adminLoginPassword'); if (pw) { pw.value = ''; try { pw.focus(); } catch (e) {} }
       }
     })
@@ -1377,6 +1391,38 @@ function adminLogin() {
     });
 }
 
+/* ---------- 🔐 v35: Admin 2FA (Email Code) ---------- */
+function adminEnterPanel(password, token, data) {
+  ekveeraAdminPassword = token ? (password + EKV_ADM_SEP + token) : password;
+  ekveeraAdminRole = (data && data.role) || 'super';
+  window.ekveeraAdminRole = ekveeraAdminRole;
+  document.getElementById('adminLoginBox').style.display = 'none';
+  document.getElementById('adminControlsBox').style.display = 'block';
+  const o = document.getElementById('adminOtpBox'); if (o) o.remove();
+  try { if (ekveeraAdminRole === 'super') adminRenderSecurity(true); } catch (e) {}
+  try { adminEnterFull(); } catch (e) {}
+}
+function adminAskOtp(password, data) {
+  const box = document.getElementById('adminLoginBox'), msgEl = document.getElementById('adminLoginMsg');
+  msgEl.style.color = '#1b7f3b'; msgEl.textContent = '📧 ' + (data.message || '');
+  let o = document.getElementById('adminOtpBox'); if (o) o.remove();
+  o = document.createElement('div'); o.id = 'adminOtpBox'; o.style.cssText = 'margin-top:10px;display:flex;gap:8px;flex-wrap:wrap';
+  o.innerHTML = '<input id="adminOtpInput" type="text" inputmode="numeric" maxlength="6" placeholder="' + __t('6-अंक का Code') + '" autocomplete="one-time-code" style="flex:1;min-width:140px;padding:10px;border:1px solid #cfd8e1;border-radius:8px;font-size:18px;letter-spacing:4px"><button type="button" class="btn btn-primary" id="adminOtpBtn">' + __t('Code जाँचें') + '</button>';
+  box.appendChild(o);
+  const go = () => {
+    const code = (document.getElementById('adminOtpInput').value || '').replace(/\D/g, '');
+    if (code.length !== 6) { msgEl.style.color = 'red'; msgEl.textContent = __t('6 अंक का Code डालें।'); return; }
+    msgEl.style.color = '#333'; msgEl.textContent = __t('जांचा जा रहा है...');
+    vcSecurePost({ action: 'adminotp', password: password, code: code }).then(d => {
+      if (d.status === 'ok') adminEnterPanel(password, d.token, d);
+      else { msgEl.style.color = 'red'; msgEl.textContent = d.message || __t('Code गलत है।'); }
+    }).catch(() => { msgEl.style.color = 'red'; msgEl.textContent = __t('Server से जवाब नहीं आया।'); });
+  };
+  document.getElementById('adminOtpBtn').onclick = go;
+  document.getElementById('adminOtpInput').onkeydown = ev => { if (ev.key === 'Enter') go(); };
+  try { document.getElementById('adminOtpInput').focus(); } catch (e) {}
+}
+
 /* ---------- 🖥️ Login ke baad Admin Panel poora Page ban jaata hai (patti nahi) ---------- */
 function adminEnterFull() {
   const panel = document.getElementById('adminPanelSection'), box = document.getElementById('adminControlsBox');
@@ -1384,14 +1430,15 @@ function adminEnterFull() {
   panel.classList.add('adm-full'); document.body.classList.add('adm-lock');
   if (!document.getElementById('admBar')) {
     const bar = document.createElement('div'); bar.id = 'admBar';
-    bar.innerHTML = '<span>🛠️ Admin Panel</span><button type="button" onclick="adminExitFull()">⏏ ' + __t('बाहर निकलें (Logout)') + '</button>';
+    bar.innerHTML = '<span>🛠️ Admin Panel' + ({ super: ' · 👑 Super Admin', accounts: ' · 💰 Accounts', hr: ' · 👥 HR', training: ' · 🎓 Training', support: ' · 🛟 Support' }[ekveeraAdminRole] || '') + '</span><button type="button" onclick="adminExitFull()">⏏ ' + __t('बाहर निकलें (Logout)') + '</button>';
     box.insertBefore(bar, box.firstChild);
   }
   panel.scrollTop = 0; try { window.scrollTo(0, 0); } catch (e) {}
 }
 function adminExitFull() {
   const panel = document.getElementById('adminPanelSection');
-  ekveeraAdminPassword = '';
+  try { if (ekveeraAdminPassword) vcSecurePost({ action: 'adminlogout', password: ekveeraAdminPassword }); } catch (e) {}   // v35: Server par purane Admin Token band
+  ekveeraAdminPassword = ''; ekveeraAdminRole = '';
   if (panel) panel.classList.remove('adm-full');
   document.body.classList.remove('adm-lock');
   const lb = document.getElementById('adminLoginBox'), cb = document.getElementById('adminControlsBox'), pw = document.getElementById('adminLoginPassword');
@@ -2091,7 +2138,7 @@ async function adminInit() {
     if (st && st.status === 'ok') adminRenderSecurity(!!st.locked);
     if (st && st.status === 'ok' && st.locked) {
       const m = document.getElementById('adminLoginMsg');
-      if (m) { m.style.color = '#596579'; m.textContent = __t('Password भूल गए? कोई भी गलत Password डालें — सही Password आपके Admin Email पर भेज दिया जाएगा।'); }
+      if (m) { m.style.color = '#596579'; m.textContent = __t('Password भूल गए? Apps Script → Project Settings → Script Properties में ADMIN_UNLOCK_PASSWORD देखें / बदलें।'); }
     }
   } catch (e) {}
 }
@@ -2107,8 +2154,8 @@ function adminRenderSecurity(locked) {
   sec.appendChild(_saBtn(locked ? __t('🔑 Password बदलें') : __t('🔒 Password लगाएँ'), async function () {
     const a = document.getElementById('admNewPw1').value, b = document.getElementById('admNewPw2').value, o = document.getElementById('admOldPw') ? document.getElementById('admOldPw').value : '';
     if (a !== b) return _saMsg(out, __t('दोनों Password एक जैसे नहीं हैं।'), false);
-    const d = await vcSecurePost({ action: 'adminsetpw', oldPassword: o, newPassword: a });
-    if (d.status === 'ok') { ekveeraAdminPassword = a; _saMsg(out, d.message || '', true); setTimeout(function () { adminRenderSecurity(true); }, 1500); } else _saMsg(out, d.message || '', false);
+    const d = await vcSecurePost({ action: 'adminsetpw', oldPassword: o, newPassword: a, password: ekveeraAdminPassword });
+    if (d.status === 'ok') { { const tk = (ekveeraAdminPassword.split(EKV_ADM_SEP)[1] || ''); ekveeraAdminPassword = tk ? (a + EKV_ADM_SEP + tk) : a; } _saMsg(out, d.message || '', true); setTimeout(function () { adminRenderSecurity(true); }, 1500); } else _saMsg(out, d.message || '', false);
   }, true));
   sec.appendChild(out); host.insertBefore(sec, host.firstChild);
   adminLoadResetRequests();

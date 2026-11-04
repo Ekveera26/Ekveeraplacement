@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.workers.dev https://script.google.com https://script.googleusercontent.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -150,7 +150,7 @@
     <div class="hero-candidate-card">
       <picture>
         <source srcset="call-center-training.webp" type="image/webp">
-        <img src="call-center-training.webp" alt="EkVeera Call Center Training - Candidates practicing on live calls" class="hero-candidate-img" loading="lazy">
+        <img src="call-center-training.webp" alt="EkVeera Call Center Training - Candidates practicing on live calls" class="hero-candidate-img" loading="lazy" onerror="var c=this.closest('.hero-candidate-card');if(c)c.style.display='none'">
       </picture>
     </div>
   </div>
@@ -363,14 +363,14 @@
       <p>यह tool सिर्फ Admin के इस्तेमाल के लिए है — Training पूरी होने पर student का certificate यहां से generate करें।</p>
     </div>
 
-    <div class="card reveal" id="certLockScreen" style="max-width:420px;display:none;">
+    <div class="card reveal" id="certLockScreen" style="max-width:420px;display:block;">
       <h3 style="font-size:17px;margin-bottom:12px;">🔒 Admin Access</h3>
       <input type="password" id="certPasswordInput" placeholder="Password डालें" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){checkCertPassword()}" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--body);font-size:15px;margin-bottom:12px;">
       <button class="btn btn-primary" style="border:none;cursor:pointer;width:100%;justify-content:center;" onclick="checkCertPassword()">Unlock करें</button>
       <p id="certPasswordError" style="color:#C0392B;font-size:13px;margin-top:10px;display:none;">❌ गलत Password, दोबारा कोशिश करें</p>
     </div>
 
-    <div id="certGeneratorArea" style="display:block;">
+    <div id="certGeneratorArea" style="display:none;">
       <div class="card reveal" style="max-width:640px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
           <div>

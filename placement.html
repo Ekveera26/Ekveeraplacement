@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://fcm.googleapis.com https://fcmregistrations.googleapis.com https://firebaseinstallations.googleapis.com https://www.gstatic.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.workers.dev https://script.google.com https://script.googleusercontent.com https://fcm.googleapis.com https://fcmregistrations.googleapis.com https://firebaseinstallations.googleapis.com https://www.gstatic.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; worker-src 'self'; manifest-src 'self' blob:">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -423,6 +423,13 @@
     </div>
 
     <div id="adminControlsBox" style="display:none;background:#fff;border-radius:12px;padding:26px;margin-top:16px;">
+      <details style="margin-bottom:16px;border:1px solid #cfd8e1;border-radius:10px;padding:10px 14px;background:#f7f9fc;"><summary style="cursor:pointer;font-weight:800;">💸 Refund Requests (Accounts / Super)</summary>
+        <div style="margin-top:10px"><button type="button" class="btn btn-primary" id="rfaBtn" style="padding:8px 14px">🔄 Refund Requests देखें</button> <span id="rfaMsg" style="font-weight:700;font-size:13.5px;margin-left:8px"></span><div id="rfaList"></div></div>
+      </details>
+      <details style="margin-bottom:16px;border:1px solid #cfd8e1;border-radius:10px;padding:10px 14px;background:#f7f9fc;"><summary style="cursor:pointer;font-weight:800;">✅ Company Verify / Reject (HR / Super)</summary>
+        <div style="margin-top:10px"><select id="cvaFilter" style="padding:8px;border:1px solid #cfd8e1;border-radius:8px"><option value="pending">Pending</option><option value="verified">Verified</option><option value="rejected">Rejected</option><option value="all">सभी</option></select>
+        <button type="button" class="btn btn-primary" id="cvaBtn" style="padding:8px 14px">🔄 Companies देखें</button> <span id="cvaMsg" style="font-weight:700;font-size:13.5px;margin-left:8px"></span><div id="cvaList"></div></div>
+      </details>
       <details style="margin-bottom:16px;border:1px solid #f1b0a8;border-radius:10px;padding:10px 14px;background:#fff6f5;"><summary style="cursor:pointer;font-weight:800;color:#a8281c;">🚨 Data Breach (डेटा लीक / चोरी) — 1 पन्ने की प्रक्रिया</summary>
         <div id="breachDoc" style="font-size:14px;line-height:1.7;margin-top:10px;">
           <p><b>Data Breach क्या है:</b> किसी का Mobile, पता, Document, Password या Payment जानकारी बिना अनुमति किसी तीसरे के पास पहुँच जाए / खो जाए / बदल जाए (जैसे Admin Password लीक, Staff का ग़लत इस्तेमाल, Sheet ग़लती से Public, फ़ोन चोरी, Hack)।</p>
@@ -812,6 +819,7 @@
 <script src="app.js"></script>
 <script src="login-gate.js"></script>
 <script src="address-admin.js"></script>
+<script src="admin-v35.js"></script>
 <script src="party-admin.js"></script>
 <script src="rent-admin.js"></script>
 <script src="ads.js"></script>
