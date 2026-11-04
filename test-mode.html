@@ -74,7 +74,12 @@ label.t{display:flex;gap:8px;align-items:flex-start;padding:5px 0;font-size:15px
 var URL_='https://script.google.com/macros/s/AKfycbycx5J5DMOVq3hpfbVPvyD6yDHXX2C2TEA9HdptFEEmv73g5VeiJ9Ov608hnK15AlpzHA/exec';
 var K='ekv_test_key',$=function(i){return document.getElementById(i)};
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-async function call(a,key){var b=new URLSearchParams({action:a,testmode:key});var r=await fetch(URL_,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:b});return r.json()}
+async function call(a,key){var b=new URLSearchParams({action:a,testmode:key}),r,t;
+ try{r=await fetch(URL_,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:b});t=await r.text()}
+ catch(e){return {status:'error',message:'Internet/Server tak pahunch nahi paye (ya Apps Script ka Web App address galat/band hai). Net check karein.'}}
+ try{return JSON.parse(t)}catch(e){
+  var hint=/<html|<!doctype/i.test(t)?'Apps Script ne Google ka Error page diya — matlab Script me koi Error hai ya Deploy → New version nahi hua. Apps Script me ⚡ Executions dekhein.':'Server ne ajeeb jawab diya: '+t.slice(0,80);
+  return {status:'error',message:hint}}}
 function key(){try{return localStorage.getItem(K)||''}catch(e){return ''}}
 var LIST=['Candidate Registration (Placement) + Resume','Company Registration + Benefits Form','Training Registration + ₹99 Payment Link','Payment ho gayi dikhana (pay_TEST...)','Candidate/Company Search','Job par Apply','For Rent: Register + Item','Tution / Home Service Register','Refund Request + Status','Admin Login (+2FA) + Approve / Refund / Company Verify','Staff Login'];
 function drawCk(){var st={};try{st=JSON.parse(localStorage.getItem('ekv_test_ck')||'{}')}catch(e){}
