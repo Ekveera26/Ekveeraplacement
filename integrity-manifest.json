@@ -1,5 +1,5 @@
 {
-  "made": "2026-11-04T16:35:37.828812+00:00",
+  "made": "2026-11-06T10:17:50.480933+00:00",
   "files": {
     "address-admin.js": "4f4392d67e65398c0c6283220d4510ed7dee548f3567889fb5f092b94a757e33",
     "admin-extra.js": "5ef6721ea1693e0d731a84c51c71edf81e1dfcd83ff9d92869b61882b761853d",
@@ -48,7 +48,7 @@
     "resume-builder.html": "182bfd7970ef0bb0a8415a6cb7cd750f8da902e73d6da6c11ac452f7a7e55ce4",
     "resume-builder.js": "bd1fa42751735ba365563c23e352f520efcec9ce15922db2309e6f5b4dc4b02b",
     "reviews.js": "b502dbe47aed8133d842ec2d2c551573a75554b78810bd4279e657d6d39ba54b",
-    "service-worker.js": "2eb4a7d18217c5354c971792ccabf06aa41f63266bace1379a9ffc7a6ec9d6ee",
+    "service-worker.js": "e26720b169e829aa7eb122ddb98f2e2a22cc1df1759cbcd8809578da6202bf33",
     "site-controls.js": "dba280fb5e6cb366ba1b9f460a980a0a7c39b9252c718b5af6f6cc86670691ae",
     "staff-link-admin.js": "5b837d3b083a5cf558c40791005a670ed9dbab3b91b7830f93b198367853c93a",
     "staff-outreach.js": "3a5e31ee5fa19ba64e81656a6b56e540ed1369a233766536ad02a44f040e8d5e",
@@ -69,6 +69,6 @@
     "trust-notes.js": "4c09b5d9af9dffea2d1a320ef471252cf81a663b3677e0310bbd0a27c1113834",
     "tution.html": "67a3ed4200be93afba7bd5816319b6c84a407972a24022c81c95a42c893285fa",
     "tution.js": "52f24065d0687da73e07218ae20ab8842910c1a1e99df9c44d188f7bb5358bb1",
-    "version.js": "b5bba230d9a5d7d98119b0420a582282f236349b3eaf2a68c20c1c63dacc7917"
+    "version.js": "31613e7e84726ab294c034fc0ac6c8904f08008f2bbc6832f76d32331112d86e"
   }
 }
