@@ -434,7 +434,99 @@
     } catch (err) { out(__t('Word file नहीं बन पाई — Internet चेक करके दोबारा कोशिश करें।'), false); return false; }
   }
 
+  /* ---------- v40: Giver / Taker / Karigar / Customer / Teacher / Student ki Payment Slip (action: payslip) ---------- */
+  var SLIP_KIND = {
+    giver:    { t: 'Rent Giver',            idL: 'Giver ID (जैसे GIV001)',          idReq: true,  mobL: 'Registration में दिया Mobile', svc: 'For Rent — Giver Registration' },
+    taker:    { t: 'Rent Taker',            idL: 'Order ID (खाली छोड़ें तो सब Orders)', idReq: false, mobL: 'Order में दिया Mobile',        svc: 'For Rent — Taker Order Fee' },
+    karigar:  { t: 'Home Service Karigar',  idL: 'Karigar ID (जैसे KAR001)',        idReq: true,  mobL: 'Registration में दिया Mobile', svc: 'Home Service — Karigar Registration' },
+    customer: { t: 'Home Service Customer', idL: 'Order ID (खाली छोड़ें तो सब Orders)', idReq: false, mobL: 'Order में दिया Mobile',        svc: 'Home Service — Customer Order Fee' },
+    teacher:  { t: 'Tution Teacher',        idL: 'Teacher ID (जैसे TCH001)',        idReq: true,  mobL: 'Registration में दिया Mobile', svc: 'Tution — Teacher Registration' },
+    student:  { t: 'Tution Student',        idL: 'Order ID (खाली छोड़ें तो सब Orders)', idReq: false, mobL: 'Order में दिया Mobile',        svc: 'Tution — Student Order Fee' }
+  };
+  function buildSlipDoc(X, d, it, logo) {
+    var K = kit(X), W = K.W, run = K.run, para = K.para, cell = K.cell, R = K.R, Cn = K.Cn, allB = K.allB, shade = K.shade, SK = SLIP_KIND[d.kind] || {};
+    var amount = Number(it.amount) || 0, paidAt = parseDate(it.paidAt) || new Date();
+    var rcNo = ORG.short + '/SLIP/' + finYear(paidAt) + '/' + (it.paymentId || it.ref || 'NA').replace(/[^A-Za-z0-9_\-]/g, '');
+    var kids = header(X, K, logo, 'PAYMENT SLIP — ' + String(d.title).toUpperCase());
+    kids.push(K.detail([
+      ['Slip No.', rcNo, 'Slip Date', fmtDate(paidAt)],
+      [(d.kind === 'taker' || d.kind === 'customer' || d.kind === 'student') ? 'Order ID' : 'ID', it.ref || d.id, 'Payment Date & Time', fmtDate(paidAt, true)],
+      ['Payment Reference ID', it.paymentId || '—', 'Payment Mode', 'Online (Razorpay: UPI / Card / Net Banking)']
+    ]));
+    kids.push(K.sp(110));
+    kids.push(para([run('RECEIVED FROM', { bold: true, size: 21, color: TEAL })], { spacing: { after: 40 }, keepNext: true }));
+    kids.push(K.detail([
+      ['Name', d.name, 'Mobile', d.mobile],
+      ['Category', d.title, 'Payment Status', K.cell([para([run('PAID / RECEIVED', { bold: true, size: 20, color: '1B7F3B' })])], K.vw2, { borders: allB })]
+    ]));
+    kids.push(K.sp(110));
+    kids.push(para([run('PARTICULARS', { bold: true, size: 21, color: TEAL })], { spacing: { after: 40 }, keepNext: true }));
+    var cw = [700, W - 700 - 1900, 1900];
+    var rows = [new X.TableRow({ tableHeader: true, children: [K.th('S.No', cw[0], Cn), K.th('Description', cw[1]), K.th('Amount (₹)', cw[2], R)] })];
+    rows.push(new X.TableRow({ cantSplit: true, children: [K.td('1', cw[0], Cn),
+      cell([para([run((SK.svc || 'EkVeera Service') + ' — ' + (it.type || 'Fee'), { bold: true, size: 20 })]), para([run(it.detail || ('Reference: ' + (it.ref || d.id)), { size: 17, color: GREY })])], cw[1], { borders: allB }),
+      K.td(money(amount), cw[2], R)] }));
+    rows.push(new X.TableRow({ children: [cell([para([run('TOTAL AMOUNT RECEIVED', { bold: true, size: 22, color: NAVY })], { alignment: R })], W - cw[2], { borders: allB, shading: shade(LIGHT) }),
+      cell([para([run('₹ ' + money(amount), { bold: true, size: 22, color: NAVY })], { alignment: R })], cw[2], { borders: allB, shading: shade(LIGHT) })] }));
+    kids.push(K.tbl(cw, rows));
+    kids.push(para([run('Amount in words: ', { bold: true, size: 20 }), run('Rupees ' + words(amount) + ' Only', { size: 20 })], { spacing: { before: 80, after: 140 } }));
+    closing(X, K, [
+      'This is a computer-generated payment slip issued by ' + ORG.name + ' and is valid without a physical signature.',
+      'EkVeera is only a platform that connects people; it is not a party to any deal, service or rental between users, and does not guarantee any job, order or outcome.',
+      'Refund / cancellation is as per the Terms & Refund Policy on our website.',
+      'For any query, quote the Slip No. and Payment Reference ID above.'
+    ]).forEach(function (x) { kids.push(x); });
+    return shell(X, K, kids, rcNo, 'Payment Slip', 'Payment Slip — ' + d.name, 'Payment Slip');
+  }
+  async function slipDownload(d, i, btn, say) {
+    var it = d.items[i], old = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = __t('⏳ Word file बन रही है...'); }
+    try {
+      await loadDocx(); var logo = await loadLogo();
+      await saveDoc(buildSlipDoc(window.docx, d, it, logo), 'EkVeera_Payment_Slip_' + String(it.paymentId || it.ref || d.id).replace(/[^A-Za-z0-9_\-]/g, '') + '.docx');
+      say(__t('✅ Slip (Word .docx) Download हो गई — "Downloads" folder में देखें।'), true);
+    } catch (err) { say(__t('Word file नहीं बन पाई — Internet चेक करके दोबारा कोशिश करें।'), false); }
+    if (btn) { btn.disabled = false; btn.textContent = old; }
+  }
+  function mountSlipBox(host) {
+    var kind = host.getAttribute('data-slip'), SK = SLIP_KIND[kind]; if (!SK || host.getAttribute('data-ready')) return;
+    host.setAttribute('data-ready', '1');
+    host.style.cssText = 'margin-top:18px;padding:14px;border:1px dashed #12968D;border-radius:12px;background:#F4FBFA';
+    var uid = 'slip_' + kind;
+    host.innerHTML = '<h3 style="margin:0 0 6px;font-size:16px;color:#0B1F3A">🧾 ' + esc(__t('अपनी Payment Slip (Word) Download करें')) + '</h3>' +
+      '<p style="margin:0 0 8px;font-size:13px;color:#444">' + esc(__t('Payment हो चुकी है तो यहाँ से अपनी Slip ले सकते हैं (' + SK.t + ')।')) + '</p>' +
+      '<input id="' + uid + '_id" type="text" placeholder="' + esc(__t(SK.idL)) + '" autocomplete="off" style="width:100%;margin:3px 0;padding:9px;border:1px solid #bbb;border-radius:8px">' +
+      '<input id="' + uid + '_m" type="tel" inputmode="numeric" maxlength="14" placeholder="' + esc(__t(SK.mobL)) + '" autocomplete="off" style="width:100%;margin:3px 0;padding:9px;border:1px solid #bbb;border-radius:8px">' +
+      '<button type="button" id="' + uid + '_b" style="margin-top:6px;padding:10px 14px;border:0;border-radius:8px;background:#12968D;color:#fff;font-weight:700;cursor:pointer">' + esc(__t('मेरी Payments देखें')) + '</button>' +
+      '<div id="' + uid + '_msg" style="margin-top:8px;font-size:13px"></div><div id="' + uid + '_list" style="margin-top:6px"></div>';
+    function say(t, ok) { var m = $(uid + '_msg'); m.style.color = ok ? 'green' : '#C0392B'; m.textContent = t; }
+    $(uid + '_b').onclick = async function () {
+      var id = ($(uid + '_id').value || '').trim(), mob = ($(uid + '_m').value || '').replace(/\D/g, ''), L = $(uid + '_list'); L.innerHTML = '';
+      if (SK.idReq && !id) return say(__t('कृपया अपनी ID डालें।'), false);
+      if (mob.length < 10) return say(__t('10 अंकों का Mobile Number डालें।'), false);
+      var b = this; b.disabled = true; say(__t('⏳ खोज रहे हैं...'), true);
+      try {
+        var d = await vcSecurePost({ action: 'payslip', kind: kind, id: id, mobile: mob });
+        if (d.status !== 'ok') say(d.message || __t('Slip नहीं मिली।'), false);
+        else {
+          say(__t('✅ ' + d.items.length + ' Payment मिली — जिसकी Slip चाहिए उसके आगे Download दबाएँ।'), true);
+          d.items.forEach(function (it, i) {
+            var row = document.createElement('div'); row.style.cssText = 'display:flex;gap:8px;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid #dde';
+            row.innerHTML = '<div style="font-size:13px"><b>₹' + esc(money(it.amount)) + '</b> — ' + esc(it.type) + '<br><span style="color:#666">' + esc(it.ref || '') + ' · ' + esc(it.paidAt || '') + '</span></div>';
+            var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = __t('⬇ Slip (Word)');
+            bt.style.cssText = 'padding:8px 10px;border:0;border-radius:8px;background:#0B1F3A;color:#fff;font-weight:700;cursor:pointer;white-space:nowrap';
+            bt.onclick = function () { slipDownload(d, i, bt, say); }; row.appendChild(bt); L.appendChild(row);
+          });
+        }
+      } catch (err) { say(__t('अभी जवाब नहीं आया — Internet चेक करके दोबारा कोशिश करें।'), false); }
+      b.disabled = false;
+    };
+  }
+  function mountAllSlipBoxes() { Array.prototype.forEach.call(document.querySelectorAll('[data-slip]'), mountSlipBox); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mountAllSlipBoxes); else mountAllSlipBoxes();
+
   window.loadReceipts = loadReceipts;
+  window.EKV_SLIP_UI = { mount: mountSlipBox, mountAll: mountAllSlipBoxes, buildSlipDoc: buildSlipDoc };
   window.ekvDownloadPartyInvoicePublic = downloadPartyInvoicePublic;
   window.downloadReceipt = downloadReceipt;
   window.downloadTrainingReceipt = downloadTrainingReceipt;

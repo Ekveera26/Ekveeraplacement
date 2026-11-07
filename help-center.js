@@ -49,7 +49,7 @@
         __t('अगर आप **Job ढूंढ रहे हैं** और सिर्फ Resume जमा करना है → Placement page पर "📄 Resume For Upload" फॉर्म भरें।'),
         __t('अगर आपको **Call Center Training** सीखनी है → Training page पर "🎓 Admission For Training" फॉर्म भरें (₹99 Fee)।'),
         __t('अगर आप **Company** हैं और Candidate चाहिए → Placement page पर "🏢 Requirement Of Candidate" फॉर्म भरें।'),
-        __t('फॉर्म भरते ही आपकी **ID ईमेल पर** आ जाती है (Candidate: CAND001, Training: TRA-CAND001, Company: COMP001)। इस ID को संभालकर रखें।'),
+        __t('फॉर्म भरते ही आपकी **ID स्क्रीन पर** दिख जाती है (Candidate: CAND001, Training: TRA-CAND001, Company: COMP001)। इस ID को संभालकर रखें।'),
         __t('हर काम के लिए इसी Help में नीचे Step-by-Step बताया गया है — ऊपर खोज-बॉक्स में अपना सवाल लिखें।')
       ],
       go: [{ label: __t('📝 फॉर्म वाला हिस्सा दिखाएं'), sel: '#apply' }, { label: '🎓 Training Admission', href: 'training.html#apply' }]
@@ -64,10 +64,10 @@
         __t('अपनी जानकारी भरें: नाम, Mobile Number, Email, योग्यता, अनुभव, Skills, शहर, कैसी Job चाहिए, Salary। (जिन पर लाल तारा ✱ लगा है, वह जानकारी ज़रूरी है)'),
         __t('**"अपना Resume Upload करें"** में अपना Resume चुनें (PDF या Word, 3 MB तक)।'),
         __t('सबसे नीचे **सहमति (✔)** पर टिक करके **"✅ जमा करें"** दबाएं।'),
-        __t('कुछ सेकंड में स्क्रीन पर आपकी **Candidate ID (जैसे CAND001)** दिख जाएगी — वही ID आपके Email पर भी आ जाएगी (Spam/Promotions folder भी देखें)।')
+        __t('कुछ सेकंड में स्क्रीन पर आपकी **Candidate ID (जैसे CAND001)** दिख जाएगी — उसे लिखकर या Screenshot लेकर रख लें। वही ID App के Inbox में भी मिलेगी।')
       ],
       tips: [
-        __t('Mobile Number और Email बिल्कुल सही डालें — ID इसी पर आती है, और Company आपसे इसी से संपर्क करेगी।'),
+        __t('Mobile Number और Email बिल्कुल सही डालें — Company आपसे इसी से संपर्क करेगी, और Login Code इसी Email पर आता है।'),
         __t('अगर Dropdown में आपका विकल्प नहीं है (जैसे योग्यता) तो **"Other"** चुनें — नीचे एक खाली बॉक्स खुलेगा, उसमें खुद लिखें।'),
         __t('Resume सिर्फ़ PDF या Word (.doc/.docx) चलेगा, 3 MB से छोटा। फ़ाइल न खुले तो PDF बनाकर दोबारा चुनें।'),
         __t('फॉर्म अधूरा छोड़ दें तो आपकी भरी जानकारी उसी Phone में सुरक्षित रहती है — दोबारा खोलने पर वापस मिल जाती है।'),
@@ -98,7 +98,7 @@
       steps: [
         __t('Search में Company को आपका **नाम, Mobile और Email नहीं दिखता** — सिर्फ शहर, योग्यता, अनुभव, Skills जैसी बातें और आपकी ID दिखती है।'),
         __t('आपकी पूरी जानकारी Company को तभी मिलती है जब वह आपकी ID चुनकर **Payment** करती है और Request Approve होती है।'),
-        __t('Company के Interview के लिए बुलाने पर आपको Email आता है — Selected हुए या नहीं, आप खुद बताते हैं।')
+        __t('Company के Interview के लिए बुलाने पर आपको App के Inbox में संदेश आता है — Selected हुए या नहीं, आप खुद बताते हैं।')
       ],
       tips: [__t('Job की कोई गारंटी नहीं है — Selection Interview और Company की ज़रूरत पर निर्भर करता है।')]
     },
@@ -129,7 +129,7 @@
       ],
       tips: [
         __t('🔒 **Company को सिर्फ़ यह दिखता है:** आपकी ID, शहर, योग्यता, अनुभव, Skills, उम्र, Salary और Job का प्रकार। **आपका नाम, Mobile, Email और Resume नहीं दिखते।**'),
-        __t('Company को आपकी पूरी जानकारी तभी मिलती है जब वह आपकी ID चुनकर EkVeera को Payment करे — तब आपको Email भी आता है।'),
+        __t('Company को आपकी पूरी जानकारी तभी मिलती है जब वह आपकी ID चुनकर EkVeera को Payment करे — तब आपको App के Inbox में संदेश आता है।'),
         __t('एक Vacancy पर एक बार ही Apply होता है। आख़िरी तारीख निकली या भर चुकी Vacancy पर Apply नहीं होता।'),
         __t('ID और Mobile मेल न खाएं तो वही Mobile डालें जो फॉर्म में दिया था। ID भूल गए तो "अपनी ID यहीं देखें" बॉक्स से देखें।')
       ],
@@ -140,7 +140,7 @@
       title: __t('मेरी Vacancy पर किन Candidate ने Apply किया — कैसे देखूं?'),
       kw: 'applications applicants aaye apply kiya candidate vacancy par kisne apply kiya dekhna list company applicants incoming',
       steps: [
-        __t('जब कोई Candidate आपकी Vacancy पर Apply करता है, तो आपके Email पर सूचना आती है (उसमें Candidate की सिर्फ़ Job Master वाली जानकारी होती है)।'),
+        __t('जब कोई Candidate आपकी Vacancy पर Apply करता है, तो आपके App Inbox में सूचना आती है (उसमें Candidate की सिर्फ़ Job Master वाली जानकारी होती है)।'),
         __t('Placement page → **"🔍 खोजें"** → **"👤 मुझे Candidate चाहिए"** में खोज के नतीजों के ठीक नीचे **"📨 आपकी Vacancy पर आए Applications"** बॉक्स है।'),
         __t('अपनी **Company ID** और Requirement फॉर्म में दिया **Contact Mobile** डालकर **"Applications देखें"** दबाएं।'),
         __t('Table में शहर, योग्यता, अनुभव, उम्र, Skills और Salary दिखेंगे। जो Candidate पसंद आएं उन्हें **चुनें (टिक)** करें।'),
@@ -169,13 +169,13 @@
       title: __t('Interview का नतीजा (Selected / Not Selected) कैसे बताऊं?'),
       kw: 'interview result natija selected select nahi hua not selected email button confirm placed job mil gayi reply jawab',
       steps: [
-        __t('जब कोई Company आपकी जानकारी लेती है, तो आपके Email पर **"आपके Interview का नतीजा बताइए — EkVeera"** नाम का Email आता है।'),
+        __t('जब कोई Company आपकी जानकारी लेती है, तो आपके App Inbox में **"आपके Interview का नतीजा बताइए — EkVeera"** नाम का संदेश आता है।'),
         __t('Email खोलकर दो में से एक बटन दबाएं: **"✅ हां, Selected हुआ"** या **"❌ नहीं, Selected नहीं हुआ"**।'),
         __t('बटन दबाते ही वेबसाइट खुलेगी और **"✅ धन्यवाद!"** दिखेगा — आपका जवाब दर्ज हो गया।')
       ],
       tips: [
         __t('जवाब ज़रूर दें: "Selected नहीं हुआ" बताने पर आप फिर से Companies की Search में आ जाते हैं, और नई Job के मौके मिलते हैं।'),
-        __t('Email न मिले तो Spam/Promotions folder देखें।')
+        __t('संदेश न दिखे तो App का Inbox खोलकर देखें।')
       ]
     },
     {
@@ -185,12 +185,12 @@
       steps: [
         __t('Training page खोलें और **"अभी Admission लें"** दबाएं (या Training page पर नीचे "📝 Admission फॉर्म भरें" बटन)।'),
         __t('**"🎓 Admission For Training"** कार्ड में **"📝 Admission फॉर्म भरें"** दबाएं। नाम, Mobile, Email, योग्यता, शहर भरें, सहमति (✔) दें और **"✅ जमा करें"** दबाएं।'),
-        __t('स्क्रीन पर आपकी **Training ID (जैसे TRA-CAND001)**, **Batch No.** और **"💳 अभी ₹99 Pay करें"** बटन दिख जाएगा — यही सब Email पर भी आता है।'),
-        __t('Fee भरने के बाद WhatsApp या Email पर मिले **Access Code** से Student ID Card बना सकते हैं (अलग Help देखें: "Student ID Card")।')
+        __t('स्क्रीन पर आपकी **Training ID (जैसे TRA-CAND001)**, **Batch No.** और **"💳 अभी ₹99 Pay करें"** बटन दिख जाएगा — इसे लिखकर या Screenshot लेकर रख लें।'),
+        __t('Fee भरने के बाद App के Inbox में मिले **Access Code** से Student ID Card बना सकते हैं (अलग Help देखें: "Student ID Card")।')
       ],
       tips: [
         __t('योग्यता: 12वीं पास या Graduate। Training 15 दिन की, रोज़ 1 घंटे की Live Class (Google Meet) — मोबाइल/लैपटॉप और इंटरनेट काफ़ी है।'),
-        __t('Email न मिले तो Spam/Promotions देखें, या "ID देखें" वाले बॉक्स में अपना Mobile/Email डालें।')
+        __t('ID न दिखे तो "ID देखें" वाले बॉक्स में अपना Mobile/Email डालें।')
       ],
       go: [{ label: __t('🎓 Admission फॉर्म खोलें'), href: 'training.html?open=training#apply' }]
     },
@@ -199,7 +199,7 @@
       title: __t('Training की ₹99 Fee कैसे भरूं?'),
       kw: 'training fee fees phees paisa paise payment pay bhugtan 99 rupay razorpay upi card netbanking screenshot kaise bharu jama',
       steps: [
-        __t('Admission Form भरते ही स्क्रीन पर **"💳 अभी ₹99 Pay करें"** बटन आ जाता है (यही Link Email/SMS पर भी आता है) — उसे खोलकर Pay करें (UPI / Card / Netbanking)।'),
+        __t('Admission Form भरते ही स्क्रीन पर **"💳 अभी ₹99 Pay करें"** बटन आ जाता है (बटन खो जाए तो "Link दोबारा पाएँ" वाले बॉक्स से फिर मिल जाएगा) — उसे खोलकर Pay करें (UPI / Card / Netbanking)।'),
         __t('Payment Link खो गया या पेज बंद हो गया? Training page → **"💰 फीस"** वाले हिस्से में अपनी **Training ID + Mobile Number** डालकर **"मेरा Payment Link पाएं"** दबाएं — Link फिर से मिल जाएगा।'),
         __t('Payment होते ही आपका नाम अपने-आप दर्ज हो जाता है (Payment Status "Paid")। **Screenshot भेजना ज़रूरी नहीं।**'),
         __t('ID Card का **Access Code (जैसे EKV-001)** पाने के लिए WhatsApp (9766284669) पर अपनी Training ID लिखकर भेजें।')
@@ -218,7 +218,7 @@
       steps: [
         __t('इसी Help section में नीचे **"📅 अपना Batch कब शुरू होगा?"** वाला बॉक्स देखें।'),
         __t('**"Batch Schedule देखें"** बटन दबाएं — सभी Batch की Date/Time की List दिखेगी।'),
-        __t('अपना **Batch No.** (जो Admission Email में लिखा आया था, जैसे "Batch 1") ढूंढें और उसकी Date/Time देखें।'),
+        __t('अपना **Batch No.** (जो Admission के बाद स्क्रीन पर दिखा था, जैसे "Batch 1") ढूंढें और उसकी Date/Time देखें।'),
         __t('पूरी List चाहिए तो **"⬇ Excel Download करें"** दबाएं।')
       ],
       tips: [__t('Home और Training page के ऊपर भी "नया Batch शुरू हो रहा है" का Countdown दिखता है।')],
@@ -306,7 +306,7 @@
       title: __t('मेरी ID Email पर नहीं आई / ID भूल गया'),
       kw: 'id nahi aayi nahi mili bhool gaya bhul gayi lost missing email spam promotions check dekhna candidate id company id training id mobile se',
       steps: [
-        __t('पहले Email का **Spam / Promotions folder** देखें — कभी-कभी वहां चला जाता है।'),
+        __t('पहले App का Inbox देखें, फिर "ID देखें" वाला बॉक्स आज़माएँ।'),
         __t('Placement (या Training) page पर **"अपनी ID यहीं तुरंत देखें"** वाला बॉक्स खोलें।'),
         __t('फॉर्म भरते वक्त जो **Mobile Number या Email** दिया था, वही डालें।'),
         __t('**"ID देखें"** दबाएं — आपकी ID (Candidate / Company / Training) तुरंत दिख जाएगी।')
@@ -323,7 +323,7 @@
         __t('**"02 🏢 Requirement Of Candidate"** कार्ड में **"📝 Requirement फॉर्म भरें"** दबाएं।'),
         __t('Company का नाम, Contact Person, Mobile, Email, पता, शहर और **Job की जानकारी** (पद, कितने Candidate, Salary, योग्यता, अनुभव, Skills, Closing Date) भरें।'),
         __t('**सहमति (✔)** पर टिक करके **"✅ जमा करें"** दबाएं।'),
-        __t('स्क्रीन पर आपकी **Company ID (जैसे COMP001)** दिख जाएगी और Email पर भी आएगी।'),
+        __t('स्क्रीन पर आपकी **Company ID (जैसे COMP001)** दिख जाएगी — उसे लिखकर या Screenshot लेकर रख लें।'),
         __t('उसी स्क्रीन पर **"अभी Benefits Form भरें"** बटन भी मिलेगा — Candidate को क्या-क्या मिलेगा (अलग Help देखें)।')
       ],
       tips: [__t('आपकी Job Candidates को Search में दिखने लगती है, पर Company की निजी जानकारी (नाम/Mobile) नहीं दिखती।')],
@@ -360,7 +360,7 @@
       tips: [
         __t('उदाहरण: 2 Post + 20 Candidate = ₹99×2 + ₹29×20 = **₹778**।'),
         __t('Amount **बिल्कुल उतना ही** भरें जितना दिखा — कम या ज़्यादा होने पर Download अपने-आप नहीं खुलेगा।'),
-        __t('Download के बाद उन Candidates को Interview का Email जाता है और वे किसी और की Search में नहीं आते।')
+        __t('Download के बाद उन Candidates को Interview का संदेश (App Inbox) जाता है और वे किसी और की Search में नहीं आते।')
       ],
       go: [{ label: __t('📍 Request वाला बॉक्स'), sel: '#reqCompanyId', pre: "switchSearchTab('candidate')" }]
     },
@@ -412,7 +412,7 @@
       title: __t('Candidate को क्या-क्या मिलेगा (Salary, Duty Time, खाना) वाला Form कैसे भरूं?'),
       kw: 'benefits form salary tankhwah vetan duty time shift khana chai nashta lunch dinner rehna room transport chutti suvidha candidate ko kya milega excel upload online hindi english',
       steps: [
-        __t('पहले अपनी **Company ID** तैयार रखें (जैसे COMP001) — यह Requirement Form भरने पर Email में मिलती है।'),
+        __t('पहले अपनी **Company ID** तैयार रखें (जैसे COMP001) — यह Requirement Form भरने पर स्क्रीन पर मिलती है।'),
         __t('Placement page पर **"📋 Candidate को क्या-क्या मिलेगा — Company Benefits Form"** वाले हिस्से में जाएं। यहां तीन तरीके हैं:'),
         __t('**तरीका 1 – Excel Download:** "📥 हिंदी Format" या "📥 English Format" दबाकर खाली Excel Download करें, भरें, फिर तरीका 3 से भेज दें।'),
         __t('**तरीका 2 – यहीं Online भरें:** "Online Form खोलें" दबाएं → **Company की पहचान** (Company ID, नाम, Mobile) भरें → **हिंदी / English** चुनें → हर हिस्सा (Duty Time, Salary, चाय-नाश्ता-खाना, रहना, Transport…) खोलकर जानकारी भरें → **"✅ Form जमा करें"**।'),
@@ -445,7 +445,7 @@
       steps: [
         __t('EkVeera **Job की गारंटी नहीं देता** — Selection आपके Interview Performance और Company की ज़रूरत पर निर्भर करता है।'),
         __t('Training पूरी करने वालों को **Interview की तैयारी** (Mock Call, Personality Development) और उपलब्ध **Placement मौकों की जानकारी** दी जाती है।'),
-        __t('Training Candidate भी Companies की Search में दिखते हैं (नाम/Mobile छुपे रहते हैं) — Company पसंद करे तो आपको Interview का Email आता है।'),
+        __t('Training Candidate भी Companies की Search में दिखते हैं (नाम/Mobile छुपे रहते हैं) — Company पसंद करे तो आपको Interview का संदेश (App Inbox) आता है।'),
         __t('हम WhatsApp से लगातार संपर्क में रहते हैं।')
       ]
     },
@@ -476,7 +476,7 @@
       kw: 'contact sampark baat call phone number whatsapp email address office enquiry madad help sahayata dikkat problem shikayat complaint puchna',
       steps: [
         __t('**WhatsApp:** 9766284669 (Head Office, Maihar) — सबसे तेज़ जवाब यहीं मिलता है।'),
-        __t('**इसी Page पर Enquiry:** नीचे **"अपनी बात सीधे हमें बताइए"** में नाम, Mobile/Email और अपना सवाल लिखकर **"Enquiry भेजें"** दबाएं। Email दिया हो तो तुरंत पुष्टि का Email भी आता है।'),
+        __t('**इसी Page पर Enquiry:** नीचे **"अपनी बात सीधे हमें बताइए"** में नाम, Mobile/Email और अपना सवाल लिखकर **"Enquiry भेजें"** दबाएं। जवाब App के Inbox में भी आता है।'),
         '**Email:** ekveeraplacement26@gmail.com',
         '**Sub Office (Panna):** 9174777074'
       ],

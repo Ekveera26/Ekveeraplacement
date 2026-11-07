@@ -23,7 +23,7 @@
     if (!pw) { host.textContent = __t('पहले Admin Login करें।'); return; }
     host.textContent = __t('लोड हो रहा है...');
     try {
-      var d = await vcSecurePost({ action: 'getpaymentlog', password: pw });
+      var d = await vcSecurePost({ action: 'getpaymentlog', password: pw, limit: ($('payLogLimit') && $('payLogLimit').value) || '200' });
       if (d.status !== 'ok') { host.textContent = (/code missing/i.test(d.message || '') ? __t('Apps Script में EkVeera_Payments file अभी नहीं जुड़ी है।') : (d.message || __t('लोड नहीं हो पाया।'))); return; }
       rows = d.items || [];
       payLogRender();
@@ -51,12 +51,19 @@
     });
   };
 
+  function svc(m) {                                       // Matched To (ID) se Service ka naam
+    m = String(m || '').toUpperCase();
+    if (/^COMP|^PAY/.test(m)) return 'Company (Candidate Request)'; if (/^TRA/.test(m)) return 'Training ₹99'; if (/^GIV/.test(m)) return 'Rent Giver (Registration)';
+    if (/^TKR/.test(m)) return 'Rent Taker (Order)'; if (/^KAR/.test(m)) return 'Home Service Karigar'; if (/^HSO/.test(m)) return 'Home Service Customer (Order)';
+    if (/^TCH/.test(m)) return 'Tution Teacher'; if (/^STU/.test(m)) return 'Tution Student (Order)'; if (/^DUE|^PTY|^PPY/.test(m)) return 'Contractor / Party';
+    if (/^CAND/.test(m)) return 'Candidate'; return m ? 'Other' : '';
+  }
   window.payLogDownload = function () {
     if (!rows.length || typeof XLSX === 'undefined') return;
-    var data = [['Date', 'Payment ID', 'Amount (₹)', 'Payer Name', 'Payer Mobile', 'Payer Email', 'Method / UPI', 'Matched To', 'How Matched', 'Result']]
-      .concat(rows.map(function (r) { return [fmt(r.at), r.paymentId, r.amount, r.name, r.mobile, r.email, r.method, r.matched, r.how, r.result]; }));
+    var data = [['Date', 'Payment ID', 'Amount (₹)', 'Service', 'Payer Name', 'Payer Mobile', 'Payer Email', 'Method / UPI', 'Matched To', 'How Matched', 'Result']]
+      .concat(rows.map(function (r) { return [fmt(r.at), r.paymentId, r.amount, svc(r.matched), r.name, r.mobile, r.email, r.method, r.matched, r.how, r.result]; }));
     var ws = XLSX.utils.aoa_to_sheet(data);
-    ws['!cols'] = [{ wch: 20 }, { wch: 22 }, { wch: 12 }, { wch: 20 }, { wch: 14 }, { wch: 26 }, { wch: 22 }, { wch: 16 }, { wch: 34 }, { wch: 26 }];
+    ws['!cols'] = [{ wch: 20 }, { wch: 22 }, { wch: 12 }, { wch: 22 }, { wch: 20 }, { wch: 14 }, { wch: 26 }, { wch: 22 }, { wch: 16 }, { wch: 34 }, { wch: 26 }];
     var wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Payments');
     XLSX.writeFile(wb, 'EkVeera_Payment_Log_' + Date.now() + '.xlsx');
   };

@@ -18,13 +18,13 @@
   var FORMS = {
     candidate: {
       title: '📄 Resume For Upload — Candidate Registration',
-      intro: __t('अपनी जानकारी और Resume भरें। जमा करते ही आपकी <strong>Candidate ID (जैसे CAND001)</strong> यहीं स्क्रीन पर दिख जाएगी और Email पर भी आएगी।'),
+      intro: __t('अपनी जानकारी और Resume भरें। जमा करते ही आपकी <strong>Candidate ID (जैसे CAND001)</strong> यहीं स्क्रीन पर दिख जाएगी — उसे लिखकर या Screenshot लेकर रख लें।'),
       consent: __t('मैं अपनी जानकारी सभी प्रकार की Company को देने के लिए EkVeera Placement & Services को अनुमति देता/देती हूं।'),
       groups: [
         [__t('👤 आपकी जानकारी'), [
           { k: 'name', l: __t('पूरा नाम'), t: 'text', req: 1, max: 80, ph: __t('जैसे: Ramesh Kumar') },
           { k: 'mobile number', l: 'Mobile Number', t: 'tel', req: 1, ph: __t('10 अंकों का नंबर'), mob: 1 },
-          { k: 'email id', l: 'Email ID', t: 'email', req: 1, max: 120, ph: 'name@gmail.com', help: __t('ID और जानकारी इसी Email पर आएगी — सही Email डालें') },
+          { k: 'email id', l: 'Email ID', t: 'email', req: 1, max: 120, ph: 'name@gmail.com', help: __t('Login Code इसी Email पर आएगा — सही Email डालें') },
           { k: 'gender', l: __t('लिंग (Gender)'), t: 'select', opts: GENDER },
           { k: 'age', l: __t('उम्र (Age)'), t: 'number', min: 14, max: 70, ph: __t('जैसे: 24') },
           { k: 'city', l: __t('शहर / गांव (City)'), t: 'text', req: 1, max: 60, ph: __t('जैसे: Satna') }
@@ -53,7 +53,7 @@
         [__t('👤 आपकी जानकारी'), [
           { k: 'name', l: __t('पूरा नाम'), t: 'text', req: 1, max: 80, ph: __t('जैसे: Ramesh Kumar'), help: __t('ID Card और Certificate पर यही नाम आएगा') },
           { k: 'mobile number', l: 'Mobile Number', t: 'tel', req: 1, ph: __t('10 अंकों का नंबर'), mob: 1 },
-          { k: 'email id', l: 'Email ID', t: 'email', req: 1, max: 120, ph: 'name@gmail.com', help: __t('ID, Batch और Payment Link इसी Email पर आएगा') },
+          { k: 'email id', l: 'Email ID', t: 'email', req: 1, max: 120, ph: 'name@gmail.com', help: __t('Login Code इसी Email पर आएगा — सही Email डालें (ID, Batch और Payment बटन स्क्रीन पर दिखेंगे)') },
           { k: 'gender', l: __t('लिंग (Gender)'), t: 'select', opts: GENDER },
           { k: 'age', l: __t('उम्र (Age)'), t: 'number', min: 14, max: 70, ph: __t('जैसे: 20') },
           { k: 'city', l: __t('शहर / गांव (City)'), t: 'text', req: 1, max: 60, ph: __t('जैसे: Maihar') }
@@ -66,7 +66,7 @@
     },
     company: {
       title: '🏢 Requirement Of Candidate — Company Registration',
-      intro: __t('अपनी Company और Job की Requirement भरें। जमा करते ही आपकी <strong>Company ID (जैसे COMP001)</strong> यहीं दिख जाएगी और Email पर भी आएगी।'),
+      intro: __t('अपनी Company और Job की Requirement भरें। जमा करते ही आपकी <strong>Company ID (जैसे COMP001)</strong> यहीं दिख जाएगी — उसे लिखकर या Screenshot लेकर रख लें।'),
       consent: __t('मैं अपनी जानकारी सभी प्रकार के Candidate को देने के लिए EkVeera Placement & Services को अनुमति देता/देती हूं।'),
       groups: [
         [__t('🏢 Company की जानकारी'), [
@@ -74,7 +74,7 @@
           { k: 'industry type', l: __t('Industry का प्रकार'), t: 'select', opts: INDUSTRY },
           { k: 'contact person', l: __t('संपर्क व्यक्ति का नाम'), t: 'text', req: 1, max: 80 },
           { k: 'contact number', l: 'Contact Number (Mobile)', t: 'tel', req: 1, ph: __t('10 अंकों का नंबर'), mob: 1 },
-          { k: 'email id', l: 'Email ID', t: 'email', req: 1, max: 120, ph: 'hr@company.com', help: __t('Company ID इसी Email पर आएगी') },
+          { k: 'email id', l: 'Email ID', t: 'email', req: 1, max: 120, ph: 'hr@company.com', help: __t('Login Code इसी Email पर आएगा — सही Email डालें') },
           { k: 'city', l: __t('शहर (City)'), t: 'text', req: 1, max: 60 },
           { k: 'address', l: __t('पूरा पता'), t: 'textarea', max: 250, full: 1 }
         ]],
@@ -370,7 +370,7 @@
         if (d && d.status === 'error') { setMsg(d.message || __t('कुछ गड़बड़ हो गई — दोबारा कोशिश करें।'), false); return; }
       } catch (e) { /* Internet atka — agli baar phir */ }
     }
-    setMsg(__t('आपका फॉर्म सुरक्षित है। ID आने में देर हो रही है — कृपया दोबारा फॉर्म न भरें; ID आपके Email/WhatsApp पर पहुँच जाएगी, या 10 मिनट बाद "अपनी ID यहीं देखें" से देखें।'), true);
+    setMsg(__t('आपका फॉर्म सुरक्षित है। ID आने में देर हो रही है — कृपया दोबारा फॉर्म न भरें; ID थोड़ी देर में बन जाएगी, या 10 मिनट बाद "अपनी ID यहीं देखें" से देखें।'), true);
   }
 
   function showSuccess(name, data, params) {
@@ -385,7 +385,7 @@
     cpb.onclick = function () { try { navigator.clipboard.writeText(data.id); cpb.textContent = __t('✅ Copy हो गई'); } catch (e) { window.prompt(__t('ID Copy करें:'), data.id); } };
     if (data.id) { cp.appendChild(cpb); ok.appendChild(cp); }
     if (data.resumeWarn) ok.appendChild(el('div', 'rf-tip', '⚠️ ' + esc(data.resumeWarn)));
-    ok.appendChild(el('p', null, __t('📧 यह ID आपके Email (<strong>') + esc(params['email id']) + __t('</strong>) पर भी भेजी गई है — Spam/Promotions folder भी देखें। इसे संभालकर रखें।')));
+    ok.appendChild(el('p', null, __t('📌 यह ID लिखकर या Screenshot लेकर रख लें। खो जाए तो इसी Mobile से "अपनी ID यहीं देखें" में फिर मिल जाएगी।')));
     if (data.id) {
       ok.appendChild(el('div', 'rf-tip', __t('✏️ कोई गलती हो गई? फॉर्म जमा होने के 12 घंटे के अंदर आप अपनी जानकारी Edit कर सकते हैं।')));
       var eb0 = el('button', 'btn', __t('✏️ जानकारी Edit करें')); eb0.type = 'button'; eb0.style.cssText = 'background:#fff;border:1px solid #cfd6e0;color:#0B1F3A;';
@@ -397,7 +397,7 @@
         ok.appendChild(el('div', 'rf-tip', __t('💳 <strong>अगला कदम — ₹99 Training Fee:</strong> नीचे बटन से Pay करें (UPI / Card / Netbanking)। Payment के बाद अपना नाम + Payment Screenshot WhatsApp पर भेजें — तब आपको ID Card का Access Code मिलेगा।')));
         var pb = el('a', 'btn btn-primary', __t('💳 अभी ₹99 Pay करें')); pb.href = data.payLink; pb.target = '_blank'; pb.rel = 'noopener'; ok.appendChild(pb);
       } else {
-        ok.appendChild(el('div', 'rf-tip', __t('💳 ₹99 Fee का Payment Link आपके Email में आएगा। अगर न आए तो नीचे WhatsApp बटन से हमें बताएं।')));
+        ok.appendChild(el('div', 'rf-tip', __t('💳 ₹99 Fee का Payment बटन अभी नहीं बन पाया — नीचे WhatsApp बटन से हमें बताएं, हम Link भेज देंगे।')));
       }
       var wa = el('a', 'btn', __t('💬 Screenshot WhatsApp पर भेजें')); wa.style.cssText = 'background:#25D366;color:#fff;';
       wa.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(__t('Namaste EkVeera, maine ₹99 training fee pay ki hai. Meri Training ID: ') + (data.id || '') + __t('. Payment screenshot share kar raha hoon.'));
@@ -417,7 +417,7 @@
       var sb = el('button', 'btn btn-primary', __t('🏢 अब Company / Job खोजें')); sb.type = 'button';
       sb.onclick = function () { host.style.display = 'none'; if (window.switchSearchTab) switchSearchTab('company'); var s = $('search'); if (s) s.scrollIntoView({ behavior: 'smooth' }); };
       ok.appendChild(sb);
-      ok.appendChild(el('div', 'rf-tip', __t('💡 आपकी जानकारी Companies को Search में दिखेगी (आपका नाम/Mobile/Email छुपा रहता है)। Company पसंद करेगी तो आपको Email आएगा।')));
+      ok.appendChild(el('div', 'rf-tip', __t('💡 आपकी जानकारी Companies को Search में दिखेगी (आपका नाम/Mobile/Email छुपा रहता है)। Company पसंद करेगी तो आपसे संपर्क किया जाएगा।')));
     }
     var again = el('button', 'btn', __t('नया फॉर्म भरें')); again.type = 'button'; again.style.cssText = 'background:#fff;border:1px solid #cfd6e0;color:#0B1F3A;';
     again.onclick = function () { regOpen(name); }; ok.appendChild(again);

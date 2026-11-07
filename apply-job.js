@@ -37,7 +37,7 @@
         try { localStorage.setItem('ekveera_apply_me', JSON.stringify({ id: id.toUpperCase().replace(/\s+/g, ''), mob: mob })); } catch (e) {}
         $('apForm').style.display = 'none'; $('apDone').style.display = 'block';
         $('apDoneId').textContent = d.applicationId;
-        $('apDoneTxt').textContent = '"' + (d.title || cur.title) + '" (' + d.companyId + __t(') के लिए आपका Application भेज दिया गया है।') + (d.mailed ? __t(' Company को Email से सूचना भी चली गई है।') : '');
+        $('apDoneTxt').textContent = '"' + (d.title || cur.title) + '" (' + d.companyId + __t(') के लिए आपका Application भेज दिया गया है।') + (d.mailed ? __t(' Company को सूचना भेज दी गई है।') : '');
       } else { msg.style.color = '#c0392b'; msg.textContent = d.message || __t('Apply नहीं हो पाया।'); }
     } catch (e) { msg.style.color = '#c0392b'; msg.textContent = __t('Internet चेक करके दोबारा कोशिश करें।'); }
     btn.disabled = false; btn.textContent = old;
@@ -55,7 +55,7 @@
       var d = await vcSecurePost({ action: 'getcompanyapplicants', companyId: cid, mobile: mob });
       if (d.status !== 'ok') { msg.style.color = '#ffb4a8'; msg.textContent = d.message || __t('लोड नहीं हो पाया।'); return; }
       appRows = d.items || []; msg.textContent = '';
-      if (!appRows.length) { box.innerHTML = __t('<p style="color:#c9d6e8;font-size:13.5px;">अभी तक आपकी Vacancy पर किसी Candidate ने Apply नहीं किया है। (नया Application आने पर आपको Email भी आएगा।)</p>'); return; }
+      if (!appRows.length) { box.innerHTML = __t('<p style="color:#c9d6e8;font-size:13.5px;">अभी तक आपकी Vacancy पर किसी Candidate ने Apply नहीं किया है। (नया Application आने पर वह यहीं इस सूची में दिख जाएगा।)</p>'); return; }
       var h = '<p style="color:#c9d6e8;font-size:13px;margin:0 0 8px;">✅ ' + esc(d.companyName || cid) + ' — ' + appRows.length + __t(' Application। 🔒 Candidate का नाम / Mobile / Email / Resume यहां नहीं दिखते।</p><div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:12.5px;"><tr style="background:var(--navy);color:#fff;"><th style="padding:7px;">चुनें</th><th style="padding:7px;text-align:left;">ID</th><th style="padding:7px;text-align:left;">Vacancy</th><th style="padding:7px;text-align:left;">शहर</th><th style="padding:7px;text-align:left;">योग्यता</th><th style="padding:7px;">अनुभव</th><th style="padding:7px;">उम्र</th><th style="padding:7px;text-align:left;">Skills</th><th style="padding:7px;text-align:left;">Salary / Job</th><th style="padding:7px;text-align:left;">Status</th></tr>');
       appRows.forEach(function (r, i) {
         var p = r.profile || {}, off = /Placed/.test(r.status);

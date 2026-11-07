@@ -1335,7 +1335,7 @@ function embedGoogleForm(anchorId, evt) {
 
   wrap.innerHTML =
     '<div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;">' +
-    __t('<p style="font-size:13px;color:#596579;margin:0 0 8px;">👇 नीचे फॉर्म भरें — Submit करते ही यहीं "Your response has been recorded" दिखेगा, कहीं जाना नहीं पड़ेगा। आपकी ID कुछ ही मिनट में ईमेल पर आ जाएगी।</p>') +
+    __t('<p style="font-size:13px;color:#596579;margin:0 0 8px;">👇 नीचे फॉर्म भरें — Submit करते ही यहीं "Your response has been recorded" दिखेगा, कहीं जाना नहीं पड़ेगा। आपकी ID यहीं स्क्रीन पर दिखेगी और App के Inbox में भी मिलेगी — उसे लिखकर या Screenshot लेकर रख लें।</p>') +
     '<iframe src="' + url + '" width="100%" height="1100" frameborder="0" style="border-radius:10px;">Loading…</iframe>' +
     '</div>';
   wrap.style.display = 'block';
