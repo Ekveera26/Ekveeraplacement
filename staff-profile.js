@@ -141,7 +141,7 @@
   }
   function renderTabs() {
     var ap = state.profileStatus === 'Approved', t = [['profile', '👤 Profile'], ['docs', '📎 Documents']];
-    if (ap) { t.push(['card', '🪪 ID Card']); t.push(['hub', '📋 Registrations']); t.push(['money', '💰 Commission']); }
+    if (ap) { t.push(['card', '🪪 ID Card']); t.push(['hub', '📋 Registrations']); t.push(['visits', '👁️ Visits']); t.push(['money', '💰 Commission']); }
     t.push(['ads', '📣 Advertisement']);
     t.push(['conduct', '📜 आचार नियम']); t.push(['pw', '🔑 Password']); t.push(['cmp', '🚨 शिकायत']);
     $('dsTabs').innerHTML = t.map(function (x) { return '<button type="button" class="sf-tab' + (curTab === x[0] ? ' on' : '') + '" onclick="sfTab(\'' + x[0] + '\')">' + esc(__t(x[1])) + '</button>'; }).join('');
@@ -204,6 +204,7 @@
     } else if (curTab === 'docs') renderDocs();
     else if (curTab === 'card') renderCard();
     else if (curTab === 'hub') renderHub();
+    else if (curTab === 'visits') renderVisits();
     else if (curTab === 'money') renderMoney();
     else if (curTab === 'ads') { b.innerHTML = ''; if (window.ekvAds) window.ekvAds.renderPosting(b, function () { return authP({}); }); else b.innerHTML = '<p>Advertisement अभी नहीं खुल सका — पेज दोबारा खोलें।</p>'; }
     else if (curTab === 'conduct') renderConduct();
@@ -213,6 +214,32 @@
       b.innerHTML = '<h3>' + esc(__t('🚨 शिकायत')) + '</h3><p class="sf-small">' + esc(__t('किसी Staff के गलत व्यवहार या पैसे माँगने की शिकायत Admin तक पहुँचाने के लिए नीचे का बटन दबाएँ। शिकायत सिर्फ़ Admin को दिखती है।')) + '</p><button type="button" class="btn btn-primary" onclick="sfShow(\'home\');setTimeout(function(){var c=document.getElementById(\'complaint\');if(c)c.scrollIntoView({behavior:\'smooth\'})},200)">' + esc(__t('🚨 शिकायत का फॉर्म खोलें')) + '</button>';
     }
   }
+
+  /* ---------------- v41: 👁️ मेरे Link की Visits (सिर्फ़ अपनी) ---------------- */
+  async function renderVisits(fresh) {
+    var b = $('dsBody'), H = '<h3>' + esc(__t('👁️ मेरे Link की Visits')) + '</h3>';
+    b.innerHTML = H + '<p class="sf-small">⏳ ...</p>';
+    try {
+      var r = await api('vstaff', authP(fresh ? { fresh: '1' } : {}));
+      if (relogin(r)) return;
+      if (!r || r.status !== 'ok') { b.innerHTML = H + '<p style="color:#c0392b;">' + esc((r && r.message) || __t('कुछ गड़बड़ हुई — दोबारा कोशिश करें।')) + '</p>'; return; }
+      var box = function (t, o) { return '<div class="hb-chip on" style="flex:1;min-width:92px;text-align:center;cursor:default;padding:10px 6px"><div style="font-size:12px">' + esc(t) + '</div><div style="font-size:22px;font-weight:800">' + o.opens + '</div><div style="font-size:11.5px">' + esc(__t('अलग Device')) + ': ' + o.uniq + '</div></div>'; };
+      var tbl = function (title, arr) {
+        if (!arr.length) return '<p class="sf-small">' + esc(title) + ': ' + esc(__t('अभी कोई Visit नहीं।')) + '</p>';
+        return '<p style="font-weight:700;margin:14px 0 4px">' + esc(title) + '</p><table style="width:100%;border-collapse:collapse;font-size:13px"><tr style="background:#eef3f8"><th style="text-align:left;padding:5px">' + esc(__t('नाम')) + '</th><th style="padding:5px">' + esc(__t('खुला')) + '</th><th style="padding:5px">' + esc(__t('अलग Device')) + '</th></tr>' +
+          arr.map(function (x) { return '<tr><td style="padding:5px;border-top:1px solid #e3e9ef">' + esc(x.name) + '</td><td style="padding:5px;text-align:center;border-top:1px solid #e3e9ef">' + x.opens + '</td><td style="padding:5px;text-align:center;border-top:1px solid #e3e9ef">' + x.uniq + '</td></tr>'; }).join('') + '</table>';
+      };
+      var mx = Math.max.apply(null, r.daily.map(function (d) { return d.opens; }).concat([1]));
+      var bars = '<div style="display:flex;align-items:flex-end;gap:3px;height:70px;margin:8px 0">' + r.daily.map(function (d) { return '<div title="' + esc(d.d) + ': ' + d.opens + '" style="flex:1;background:#2b5fd9;border-radius:3px 3px 0 0;min-height:2px;height:' + Math.max(3, Math.round(d.opens / mx * 68)) + 'px"></div>'; }).join('') + '</div>';
+      b.innerHTML = H + '<div style="display:flex;gap:8px;flex-wrap:wrap">' + box(__t('आज'), r.today) + box(__t('7 दिन'), r.d7) + box(__t('30 दिन'), r.d30) + '</div>' +
+        '<p class="sf-small" style="margin-top:8px">' + esc(__t('अब तक कुल बार खुला')) + ': <b>' + r.total + '</b></p>' +
+        '<p style="font-weight:700;margin:14px 0 0">' + esc(__t('पिछले 14 दिन')) + '</p>' + bars +
+        tbl(__t('📄 कौन सा Page खुला (30 दिन)'), r.pages) + tbl(__t('📍 किस जगह से आए — src (30 दिन)'), r.srcs) +
+        '<p class="sf-small" style="margin-top:12px">ℹ️ ' + esc(__t('सिर्फ़ आपके Link (?staff=...) से खुले Page गिने जाते हैं। एक Device एक दिन में एक Page / src के लिए एक बार गिना जाता है। जगह पहचानने के लिए Link के अंत में &src=fb1 जैसा नाम जोड़ें। किसी का नाम / Mobile नहीं दिखता।')) + '</p>' +
+        '<button type="button" class="btn" style="margin-top:10px;" onclick="sfVisRefresh()">🔄 ' + esc(__t('ताज़ा करें')) + '</button>';
+    } catch (e) { b.innerHTML = H + '<p style="color:#c0392b;">' + esc(__t('Internet चेक करके दोबारा कोशिश करें।')) + '</p>'; }
+  }
+  window.sfVisRefresh = function () { renderVisits(true); };
 
   /* ---------------- v21: 📋 मेरे Registrations — सभी सेवाओं की जानकारी (अपने + अपनी Team के) ---------------- */
   var hubData = null, hubSel = 'follow', hubQ = '';

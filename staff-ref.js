@@ -79,4 +79,34 @@
     } catch (e) {}
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showBadge); else showBadge();
+
+  /* 👁️ v41 — Link Visit Counter: Staff ke Link (?staff= / ?src=) ka khulna Server ko chupchap batana.
+     Naam / Mobile / IP kuch nahi jaata — sirf Staff Code, Page, Src aur ek random Device-ID. Kabhi koi kaam nahi rokta. */
+  function trackVisit() {
+    try {
+      var path = location.pathname || '', page = (path.split('/').pop() || 'index').replace(/\.html$/i, '') || 'index';
+      if (/^(staff-profile|test-mode)$/.test(page)) return;
+      if (inApp || navigator.webdriver || /bot|crawl|spider|preview|facebookexternalhit/i.test(navigator.userAgent || '')) return;
+      var sp = new URLSearchParams(location.search);
+      if (sp.get('app') || sp.get('admin') || sp.get('staffview')) return;
+      var st = (sp.get('staff') || '').trim(), src = (sp.get('src') || '').trim().toLowerCase();
+      if (st && !OK.test(st)) st = '';
+      if (!/^[a-z0-9_\-]{1,20}$/.test(src)) src = '';
+      if (!st && !src) return;                                   // Link se nahi aaya (seedha khola) — ginti nahi
+      var day = new Date().toISOString().slice(0, 10), key = 'ekveera_vt_' + day + '_' + st + '_' + page + '_' + src;
+      if (gs(key)) return;
+      var vid = gs('ekveera_vid');
+      if (!/^[A-Za-z0-9\-]{16,64}$/.test(vid)) {
+        vid = ''; for (var i = 0; i < 24; i++) vid += 'abcdefghijklmnopqrstuvwxyz0123456789'.charAt(Math.floor(Math.random() * 36));
+        ss('ekveera_vid', vid);
+      }
+      if (gs('ekveera_vid') !== vid) return;                     // Storage band hai — gino mat (warna har baar nayi ID banegi)
+      ss(key, '1');
+      for (var j = localStorage.length - 1; j >= 0; j--) { var kk = localStorage.key(j); if (kk && kk.indexOf('ekveera_vt_') === 0 && kk.indexOf('ekveera_vt_' + day) !== 0) localStorage.removeItem(kk); }
+      var url = (typeof SEARCH_WEB_APP_URL !== 'undefined') ? SEARCH_WEB_APP_URL : '';
+      if (!url || !window.fetch) return;
+      fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true, body: new URLSearchParams({ action: 'vtrack', vid: vid, staff: st, src: src, page: page, kind: 'link' }) }).catch(function () {});
+    } catch (e) {}
+  }
+  if (document.readyState === 'complete') setTimeout(trackVisit, 1500); else window.addEventListener('load', function () { setTimeout(trackVisit, 1500); });
 })();

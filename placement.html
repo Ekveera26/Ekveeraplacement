@@ -581,6 +581,13 @@
       <div id="slList" style="margin-top:8px;font-size:13px;max-height:520px;overflow:auto;"></div>
 
       <hr>
+      <p style="font-size:14px;font-weight:700;margin:16px 0 8px;">👁️ Link Visits — कितने लोगों ने Staff का Link खोला</p>
+      <p style="font-size:12.5px;color:#596579;margin:0 0 8px;">हर Staff के Link की गिनती: आज / 7 दिन / 30 दिन, कौन सा Page खुला और किस जगह (src) से आए। किसी का नाम / Mobile सेव नहीं होता।</p>
+      <button type="button" class="btn btn-primary" style="width:100%;justify-content:center;" onclick="visLoad(true)">👁️ Visits दिखाएँ</button>
+      <p id="visMsg" style="font-size:13px;margin-top:8px;font-weight:700;"></p>
+      <div id="visOut" style="margin-top:8px;"></div>
+
+      <hr>
       <p style="font-size:14px;font-weight:700;margin:16px 0 8px;">🏍️ For Rent + 🏠 Home Service — आज का हिसाब</p>
       <p style="font-size:12.5px;color:#596579;margin:0 0 8px;">आज कितने लोगों ने सामान दर्ज किया (Giver) और कितने ने सामान लिया (Taker), और कितनी कमाई हुई।</p>
       <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="rentAdminStats()">📊 हिसाब दिखाएँ</button>
@@ -842,6 +849,7 @@
 <script src="staff-team.js"></script>
 <script src="staff-outreach.js"></script>
 <script src="staff-link-admin.js"></script>
+<script src="visit-admin.js"></script>
 <script src="site-controls.js" defer></script>
 <script>function ekvPrintBreach(){var w=window.open("","_blank");if(!w)return;var h=document.getElementById("breachDoc").cloneNode(true);var b=h.querySelector("button");if(b)b.remove();w.document.write("<html><head><meta charset=utf-8><title>Data Breach Process</title></head><body style=\"font-family:Arial;margin:28px;line-height:1.6\"><h2>EkVeera — Data Breach Process</h2>"+h.innerHTML+"<p>तारीख़: ________ &nbsp; घटना: ______________________ &nbsp; हस्ताक्षर: ________</p></body></html>");w.document.close();setTimeout(function(){w.print();},400);}</script>
 </body>
