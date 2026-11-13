@@ -588,6 +588,18 @@
       <div id="visOut" style="margin-top:8px;"></div>
 
       <hr>
+      <p style="font-size:14px;font-weight:700;margin:16px 0 8px;">🛠️ Repair Center — कोई काम नहीं कर रहा?</p>
+      <p style="font-size:12.5px;color:#596579;margin:0 0 8px;">जब आप बताएँगे तभी चलता है, अपने-आप कभी नहीं। पहले Problem लिखें → 🔍 जाँच → 👀 देखो (कुछ नहीं बदलता) → 🛠️ Repair। कोई Data Delete नहीं होता। जो इन सुरक्षित उपायों से न सुधरे, उसकी Report कॉपी करके Developer को दें।</p>
+      <select id="rpArea" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);margin-bottom:6px;"></select>
+      <textarea id="rpNote" rows="3" maxlength="600" placeholder="क्या काम नहीं कर रहा और पहले कैसे चलता था? जैसे: Candidate की ID Search में नहीं दिख रही, पहले दिखती थी।" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);margin-bottom:6px;"></textarea>
+      <input id="rpEx" maxlength="40" placeholder="उदाहरण ID या Mobile (हो तो) — जैसे CAND007 / 98XXXXXX12" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);margin-bottom:6px;">
+      <button type="button" class="btn btn-primary" style="width:100%;justify-content:center;" onclick="rpSubmit()">📨 Problem दर्ज करें</button>
+      <button type="button" class="btn" style="width:100%;justify-content:center;border:1px solid var(--line);margin-top:6px;" onclick="rpLoad()">🔄 Problems की सूची दिखाएँ</button>
+      <button type="button" class="btn" style="width:100%;justify-content:center;border:1px solid var(--line);margin-top:6px;" onclick="rpClearBrowser()">🧹 इस Browser का पुराना Cache साफ़ करें</button>
+      <p id="rpMsg" style="font-size:13px;margin-top:8px;font-weight:700;"></p>
+      <div id="rpList" style="margin-top:6px;"></div>
+
+      <hr>
       <p style="font-size:14px;font-weight:700;margin:16px 0 8px;">🏍️ For Rent + 🏠 Home Service — आज का हिसाब</p>
       <p style="font-size:12.5px;color:#596579;margin:0 0 8px;">आज कितने लोगों ने सामान दर्ज किया (Giver) और कितने ने सामान लिया (Taker), और कितनी कमाई हुई।</p>
       <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="rentAdminStats()">📊 हिसाब दिखाएँ</button>
@@ -850,6 +862,7 @@
 <script src="staff-outreach.js"></script>
 <script src="staff-link-admin.js"></script>
 <script src="visit-admin.js"></script>
+<script src="repair-admin.js"></script>
 <script src="site-controls.js" defer></script>
 <script>function ekvPrintBreach(){var w=window.open("","_blank");if(!w)return;var h=document.getElementById("breachDoc").cloneNode(true);var b=h.querySelector("button");if(b)b.remove();w.document.write("<html><head><meta charset=utf-8><title>Data Breach Process</title></head><body style=\"font-family:Arial;margin:28px;line-height:1.6\"><h2>EkVeera — Data Breach Process</h2>"+h.innerHTML+"<p>तारीख़: ________ &nbsp; घटना: ______________________ &nbsp; हस्ताक्षर: ________</p></body></html>");w.document.close();setTimeout(function(){w.print();},400);}</script>
 </body>
