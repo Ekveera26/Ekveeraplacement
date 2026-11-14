@@ -379,6 +379,7 @@
     var label = name === 'training' ? 'Training ID' : name === 'company' ? 'Company ID' : 'Candidate ID';
     ok.appendChild(el('div', null, '<div style="font-size:46px">✅</div>'));
     ok.appendChild(el('h3', null, __t('धन्यवाद! आपका फॉर्म जमा हो गया')));
+    if (window.ekvThanks) ekvThanks(ok, { name: (params && (params['name'] || params['contact person'] || params['company name'])) || '', kind: name });
     ok.appendChild(el('p', null, __t('आपकी <strong>') + label + '</strong>:'));
     ok.appendChild(el('div', 'rf-id', esc(data.id || __t('— (Email देखें)'))));
     var cp = el('div', null, ''); var cpb = el('button', 'btn', __t('📋 ID Copy करें')); cpb.type = 'button'; cpb.style.cssText = 'background:#fff;border:1px solid #cfd6e0;color:#0B1F3A;';

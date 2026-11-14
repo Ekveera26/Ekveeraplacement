@@ -119,7 +119,7 @@
     return { name: file.name.replace(/\.\w+$/, '') + '.jpg', mime: 'image/jpeg', data: c.toDataURL('image/jpeg', .72).split(',')[1] };
   }
   function doneBox(r, mob) {
-    $('kDoneId').textContent = r.karigarId; $('kDone').style.display = 'block'; $('kForm').style.display = 'none';
+    $('kDoneId').textContent = r.karigarId; $('kDone').style.display = 'block'; $('kForm').style.display = 'none'; if (window.ekvThanks) ekvThanks($('kDone'), { name: ($('kNaam') || {}).value || '', kind: 'home' });
     $('kDonePay').innerHTML = payBtn(r.payLink, r.amount);
     $('kDoneTxt').textContent = T('⏰ आप 1 घंटे में Payment नहीं करते हैं तो आपकी Entry छुपा (Hide) दी जाएगी। Payment के बाद हमारी टीम आपके दस्तावेज़ जाँचेगी और फिर आपकी प्रोफ़ाइल खोज में दिखने लगेगी।');
     poll('karigar', () => api({ action: 'hsmylisting', karigarId: r.karigarId, mobile: mob }), function (s) {
@@ -330,8 +330,9 @@
     if (!r || r.status !== 'ok') return say('oMsg', (r && r.message) || T('कुछ गड़बड़ हो गई।'), 'err');
     say('oMsg', '', '');
     $('oPay').innerHTML = '<div class="rent-done" style="display:block"><div><span class="rent-id">' + esc(r.orderId) + '</span></div><p style="margin:8px 0">' + esc(T('यह Order ID संभालकर रखें। Payment के बाद Details यहीं अपने-आप दिख जाएँगी।')) + '</p>' + payBtn(r.payLink, r.amount) + '</div>';
+    if (window.ekvThanks) ekvThanks($('oPay').querySelector('.rent-done'), { name: name, kind: 'customer', after: '.rent-id' });
     poll('order', () => api({ action: 'hsgetorder', orderId: r.orderId, mobile: mob }), function (s) {
-      if (s.status === 'ok' && s.paid) { lastOrder = { oid: r.orderId, mob: mob }; $('oPay').innerHTML = ''; $('oBox').style.display = 'none'; showDetail($('oDetail'), s); $('oDetail').scrollIntoView({ behavior: 'smooth', block: 'center' }); return true; }
+      if (s.status === 'ok' && s.paid) { lastOrder = { oid: r.orderId, mob: mob }; $('oPay').innerHTML = ''; $('oBox').style.display = 'none'; showDetail($('oDetail'), s); if (window.ekvThanks) ekvThanks($('oDetail'), { name: name, kind: 'customer', after: 'h3' }); $('oDetail').scrollIntoView({ behavior: 'smooth', block: 'center' }); return true; }
       return false;
     });
   };

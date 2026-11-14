@@ -124,7 +124,7 @@
     try { if (window.EkvLoc) EkvLoc.save('gLoc'); } catch (e) {}   // 📍 "Other" में लिखी जगह सबकी list में जुड़े
     say('gMsg', '', '');
     $('gDoneGid').textContent = r.teacherId; $('gDoneIid').textContent = (r.skillIds || [r.skillId]).join(' , ');
-    $('gDone').style.display = 'block';
+    $('gDone').style.display = 'block'; if (window.ekvThanks) ekvThanks($('gDone'), { name: v('gName'), kind: 'tution' });
     if (r.alreadyPaid || !r.amount) {
       $('gDonePay').innerHTML = '<div style="font-weight:800;color:#11766F;font-size:16px">✅ ' + esc(T('आपकी Registration पहले से Active है — यह Skill तुरंत दिखने लगी, कोई नई Payment नहीं।')) + '</div>';
       $('gDoneTxt').textContent = r.validTill ? T('आपकी Registration इस तारीख़ तक चलेगी: ') + r.validTill : '';
@@ -244,8 +244,9 @@
     if (!r || r.status !== 'ok') return say('oMsg', (r && r.message) || T('कुछ गड़बड़ हो गई।'), 'err');
     say('oMsg', '✅ ' + T('Order ID:') + ' ' + r.orderId + ' — ' + T('इसे संभालकर रखें।'), 'ok');
     $('oPay').innerHTML = payBtn(r.payLink, r.amount);
+    if (window.ekvThanks) ekvThanks($('oPay'), { name: v('oName'), kind: 'student' });
     const mob = digits10(v('oMobile'));
-    poll('order', () => api({ action: 'tutgetorder', orderId: r.orderId, mobile: mob }), function (s) { if (s.status === 'ok' && s.paid) { showOrder(s, 'oDetail'); return true; } return false; });
+    poll('order', () => api({ action: 'tutgetorder', orderId: r.orderId, mobile: mob }), function (s) { if (s.status === 'ok' && s.paid) { showOrder(s, 'oDetail'); if (window.ekvThanks) ekvThanks($('oDetail'), { name: v('oName'), kind: 'student', after: 'h3' }); return true; } return false; });
   };
   function showOrder(r, target) {
     const k = r.skill || {}, t = r.teacher || {};

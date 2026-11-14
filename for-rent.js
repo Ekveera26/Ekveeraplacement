@@ -101,7 +101,7 @@
     try { if (window.EkvLoc) EkvLoc.save('gLoc'); } catch (e) {}   // 📍 "Other" में लिखी जगह सबकी list में जुड़े
     say('gMsg', '', '');
     $('gDoneGid').textContent = r.giverId; $('gDoneIid').textContent = showItemIds(r);
-    $('gDone').style.display = 'block';
+    $('gDone').style.display = 'block'; if (window.ekvThanks) ekvThanks($('gDone'), { name: v('gName'), kind: 'rent' });
     if (r.alreadyPaid || !r.amount) {
       $('gDonePay').innerHTML = '<div style="font-weight:800;color:#11766F;font-size:16px">✅ ' + esc(T('आपकी Registration पहले से Active है — यह सामान तुरंत दिखने लगा, कोई नई Payment नहीं।')) + '</div>';
       $('gDoneTxt').textContent = r.validTill ? T('आपकी Registration इस तारीख़ तक चलेगी: ') + r.validTill : '';
@@ -254,8 +254,9 @@
     say('oMsg', '', '');
     $('oPay').innerHTML = '<div class="rent-done" style="display:block"><div><span class="rent-id">' + esc(r.orderId) + '</span></div>' +
       '<p style="margin:8px 0">' + esc(T('यह Order ID संभालकर रखें। Payment के बाद Details यहीं अपने-आप दिख जाएँगी।')) + '</p>' + payBtn(r.payLink, r.amount) + '</div>';
+    if (window.ekvThanks) ekvThanks($('oPay').querySelector('.rent-done'), { name: name, kind: 'taker', after: '.rent-id' });
     poll('order', () => api({ action: 'rentgetorder', orderId: r.orderId, mobile: mob }), function (s) {
-      if (s.status === 'ok' && s.paid) { $('oPay').innerHTML = ''; $('oBox').style.display = 'none'; $('oDetail').innerHTML = detailHtml(s); $('oDetail').scrollIntoView({ behavior: 'smooth', block: 'center' }); return true; }
+      if (s.status === 'ok' && s.paid) { $('oPay').innerHTML = ''; $('oBox').style.display = 'none'; $('oDetail').innerHTML = detailHtml(s); if (window.ekvThanks) ekvThanks($('oDetail'), { name: name, kind: 'taker', after: 'h3' }); $('oDetail').scrollIntoView({ behavior: 'smooth', block: 'center' }); return true; }
       return false;
     });
   };

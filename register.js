@@ -38,7 +38,7 @@
     $('rgDoneName').textContent = r.name || name;
     $('rgDoneId').textContent = r.regId;
     $('rgDoneTxt').textContent = r.updated ? T('आपकी पसंद बदल दी गई है।') : T('अब आपको चुनी हुई सेवाओं की जानकारी मिलेगी।');
-    $('rgDone').style.display = 'block'; $('rgDone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    $('rgDone').style.display = 'block'; if (window.ekvThanks) ekvThanks($('rgDone'), { name: r.name || name, kind: 'app' }); $('rgDone').scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
   window.appRegNotify = function () {                      // push.js का 🔔 खोलकर Mobile भर देना
     const bell = $('ekvPushBell'); if (!bell) return alert(T('इस Browser में Notification उपलब्ध नहीं है।'));
